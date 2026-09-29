@@ -4,6 +4,7 @@ A single-page portfolio site. Plain HTML/CSS/JS — no build step, no dependenci
 
 ## Files
 - `index.html` — the whole site
+- `files/CV_Guy_Peretz_2026.pdf` — the resume behind the Resume / Open / Download buttons (replace this file to update it)
 - `images/` — put image files here (reference them like `images/clalit-1.png`)
 
 ---
