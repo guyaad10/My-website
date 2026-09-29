@@ -644,6 +644,11 @@ html,body{overflow-x:clip;overscroll-behavior-x:none}
             mask-image:linear-gradient(90deg,transparent,#000 12px,#000 calc(100% - 12px),transparent)}
   .qa-row::-webkit-scrollbar{display:none}
   .qa-row > .chip{flex:none}
+  /* home screen: all four pills visible at once, as a 2x2 grid */
+  .state-intro .qa-row{display:grid;grid-template-columns:1fr 1fr;overflow:visible;margin:0;padding:0;
+    -webkit-mask-image:none;mask-image:none}
+  .state-intro .qa-row > .chip{justify-content:center}
+  .state-intro .dock{translate:-50% calc(-50% + 24px)}   /* the grid's extra row grows downward, clear of the intro */
 }
 @media (max-width:480px){
   #bgBtn{top:calc(12px + env(safe-area-inset-top,0px));right:12px}
@@ -1148,12 +1153,12 @@ const REPLIES = {
     <div class="reply-chips"><a class="btn" href="#/ledger" data-open="ledger">Read the Ledger case study</a></div></div>`,
   contact: () => `${who("The best way to reach me is email. I usually reply within a day.")}
     <div class="reply-body"><div class="contact"><a class="btn pri" href="mailto:guyaad10@gmail.com?subject=Hey%20Guy%2C%20just%20saw%20your%20portfolio">Email me</a><a class="btn" href="${CONTACT.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn" href="${CONTACT.whatsapp}">WhatsApp me</a></div></div>`,
-  fallback: () => `${who("This thread only knows about my work. These are the questions it can answer:")}
+  fallback: () => `${who("I can only answer questions about my portfolio. Pick one of these, or type a project name like Clalit or Ledger.")}
     <div class="reply-body"><div class="reply-chips">
-      <button type="button" class="chip" data-nav="work">Check Guy's work</button>
+      <button type="button" class="chip" data-nav="work">Guy's work</button>
       <button type="button" class="chip" data-nav="about">About Guy</button>
+      <button type="button" class="chip" data-nav="cv">Resume</button>
       <button type="button" class="chip" data-nav="contact">Get in touch</button>
-      <button type="button" class="chip" data-nav="home">I'm lost</button>
     </div></div>`
 };
 function route(q){
@@ -1354,8 +1359,18 @@ composer.addEventListener('submit', e => {
   const q = prompt.value.trim(); if (!q) return;
   jelly.hop(); jelly.happy();
   if (!started && view !== 'chat'){
-    start(q);
-    prompt.value = ''; syncPrompt(); prompt.blur();   // sent: the box moves on to the next suggestion
+    const r = route(q);
+    prompt.value = ''; prompt.blur();
+    const later = fn => setTimeout(fn, reduced.matches ? 60 : 1000);
+    if (r.home || r.top){ syncPrompt(); return; }                 // already home
+    if (r.work || r.open || r.jump){                                 // these live in the projects feed
+      start(q); syncPrompt();                                        // sent: the box moves on to the next suggestion
+      if (r.open) later(() => openCase(r.open, document.querySelector(`#m-${r.open} [data-visual="${r.open}"]`)));
+      if (r.jump) later(() => scrollToEl(document.getElementById(r.jump)));
+      return;
+    }
+    if (r.reply === 'process' || r.reply === 'fallback'){ enterChat(q, REPLIES[r.reply]()); syncPrompt(); return; }
+    ask(q); syncPrompt();                                            // about, resume, contact
     return;
   }
   prompt.value = ''; ask(q); syncPrompt();
