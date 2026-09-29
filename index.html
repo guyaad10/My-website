@@ -1353,9 +1353,11 @@ function autosize(){ prompt.style.height='auto'; prompt.style.height = Math.min(
 function updateSend(){ sendBtn.disabled = !prompt.value.trim(); }
 prompt.addEventListener('input', ()=>{ autosize(); updateSend(); });
 addEventListener('resize', autosize);
-prompt.addEventListener('keydown', e => { if (e.key==='Enter' && !e.shiftKey && !e.isComposing){ e.preventDefault(); composer.requestSubmit(); } });
-composer.addEventListener('submit', e => {
-  e.preventDefault();
+/* Send is called directly (not via form submit), so it also works where forms are blocked, e.g. sandboxed previews */
+prompt.addEventListener('keydown', e => { if (e.key==='Enter' && !e.shiftKey && !e.isComposing){ e.preventDefault(); send(); } });
+sendBtn.addEventListener('click', e => { e.preventDefault(); send(); });
+composer.addEventListener('submit', e => { e.preventDefault(); send(); });
+function send(){
   const q = prompt.value.trim(); if (!q) return;
   jelly.hop(); jelly.happy();
   if (!started && view !== 'chat'){
@@ -1373,8 +1375,8 @@ composer.addEventListener('submit', e => {
     ask(q); syncPrompt();                                            // about, resume, contact
     return;
   }
-  prompt.value = ''; ask(q); syncPrompt();
-});
+  prompt.value = ''; ask(q); syncPrompt(); updateSend();
+}
 autosize(); updateSend();
 
 document.addEventListener('click', e => {
