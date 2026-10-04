@@ -372,7 +372,7 @@ body.chat-view #thread{display:none}
 .shot figcaption{color:var(--ink-3);font-size:.9375rem;line-height:1.5;margin:14px auto 0;max-width:968px;text-wrap:pretty}
 .shot.in figcaption{margin-left:0}
 .g-critical .pn-pain{background:linear-gradient(135deg,#FDE8E6,#FEF1EF);color:#B3261E}
-.anno{--gut:224px;max-width:1232px;margin:0 auto 104px;padding:0 var(--gut)}
+.anno{--gut:224px;max-width:1232px;margin:0 auto 104px;padding:0 var(--gut) 24px}
 .cs + .anno{margin-top:-48px}
 .anno-img{position:relative}
 .anno .shot-img:hover{transform:none}
@@ -405,15 +405,6 @@ body.chat-view #thread{display:none}
 .toc small{display:block;font-size:.75rem;color:var(--ink-3);margin-bottom:4px}
 .ui-hero{position:relative;max-width:1100px;margin:0 auto 40px;container-type:inline-size;cursor:zoom-in}
 .ui-hero img{display:block;width:100%;height:auto}
-.ui-live{position:absolute;height:4.4%;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;gap:.25cqw;padding:0 .9cqw 0 .6cqw;direction:rtl;
-  border-radius:.35cqw;background:#E4F3F8;border:1px solid #BFE0EA;font:500 .88cqw/1 system-ui,sans-serif;color:#17414D;opacity:0;pointer-events:none;
-  animation:uiLive 12s var(--ease) infinite both}
-.ui-live em{font:500 .62cqw/1 system-ui,sans-serif;font-style:normal;padding:.18cqw .45cqw;border-radius:.25cqw;background:#D6EEF2;color:#1F6E7E}
-.ui-live.c-new{background:#FBEAEA;border-color:#F0CFCF}
-.ui-live.c-alert em{background:#FDE3E1;color:#C62A1F}
-.ui-live.c-loc,.ui-live.c-alert{height:4.6%}
-@keyframes uiLive{0%,6%{opacity:0;transform:translateY(.4cqw)} 12%{opacity:1;transform:none;box-shadow:0 0 0 .35cqw rgba(23,161,186,.28)} 20%,62%{opacity:1;transform:none;box-shadow:0 0 0 0 rgba(23,161,186,0)} 70%,100%{opacity:0;transform:none}}
-@media (prefers-reduced-motion:reduce){.ui-live{display:none}}
 .chap{scroll-margin-top:96px}
 .chap{max-width:968px;margin:0 auto 72px;display:flex;align-items:baseline;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
 .chap span{font-size:1rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
@@ -426,17 +417,21 @@ body.chat-view #thread{display:none}
 .tline b{display:block;font-weight:500;font-size:1.0625rem;letter-spacing:-.015em}
 .tline p{margin:2px 0 0!important;font-size:.9375rem!important;color:var(--ink-2)!important;line-height:1.5!important}
 .cs-body .plain + p{margin-top:1em}
-.kd{list-style:none;margin:0;padding:0;counter-reset:kd;display:grid;gap:12px}
-.kd li{counter-increment:kd;position:relative;border-radius:20px;padding:24px 24px 22px 72px;background:#EEF4FF}
-.kd li:nth-child(4n+2){background:#E9F6F3}
-.kd li:nth-child(4n+3){background:#F3EEFF}
-.kd li:nth-child(4n+4){background:#FFF2E8}
-.kd li::before{content:counter(kd,decimal-leading-zero);position:absolute;left:24px;top:22px;font:500 1.25rem/1 var(--sans);letter-spacing:-.03em;color:var(--ink-3)}
-.kd b{display:block;font:500 1.1875rem/1.3 var(--sans);letter-spacing:-.02em;color:var(--ink);margin-bottom:8px}
-.kd p{margin:0 0 .75em!important;font-size:.9375rem!important;line-height:1.55!important}
-.kd p:last-child{margin:0!important}
-.kd .kd-why{color:var(--ink-2)!important;padding-top:10px;border-top:1px solid rgba(0,0,0,.07)}
-.kd small{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:3px}
+.kd{list-style:none;max-width:1232px;margin:-48px auto 104px;padding:56px 24px;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));background:#0B0B0D;border-radius:28px;color:#F4F4F5}
+.kd li{display:flex;flex-direction:column;padding:4px 28px;border-left:1px solid rgba(255,255,255,.12)}
+.kd li:first-child{border-left:0}
+.kd-n{font-size:.8125rem;color:rgba(255,255,255,.4);margin-bottom:20px;font-variant-numeric:tabular-nums}
+.kd b{font:500 1.375rem/1.2 var(--sans);letter-spacing:-.03em;color:#fff;margin-bottom:16px;text-wrap:balance}
+.kd p{margin:0 0 24px;font-size:.9375rem;line-height:1.55;color:rgba(255,255,255,.72);text-wrap:pretty}
+.kd .kd-why{margin:auto 0 0;color:rgba(255,255,255,.5);font-size:.875rem}
+.kd small{display:block;font-size:.875rem;color:rgba(255,255,255,.85);margin-bottom:6px}
+@media (max-width:1100px){.kd{grid-template-columns:repeat(2,minmax(0,1fr));row-gap:40px}.kd li:nth-child(3){border-left:0}}
+@media (max-width:760px){.kd{grid-template-columns:1fr;padding:32px 8px;margin-top:-24px;row-gap:32px}.kd li{border-left:0;padding:0 20px}.kd li + li{border-top:1px solid rgba(255,255,255,.12);padding-top:28px}}
+.anno .shot-img{position:relative}
+.anno .drawer{position:absolute;inset:0;width:100%;height:100%;animation:drawer 9s var(--ease) infinite}
+@keyframes drawer{0%,30%{clip-path:inset(100% 0 0 0);opacity:.6} 42%,82%{clip-path:inset(0 0 0 0);opacity:1} 94%,100%{clip-path:inset(100% 0 0 0);opacity:.6}}
+@media (prefers-reduced-motion:reduce){.anno .drawer{display:none}}
+.anno.bare .shot-img{background:none;box-shadow:none;border-radius:0}
 .iter{display:grid;grid-template-columns:1fr 28px 1fr;gap:8px;align-items:stretch;margin-top:20px}
 .iter-col{border-radius:18px;padding:18px 20px}
 .iter-col.fb{background:linear-gradient(135deg,#FFF1EF,#FFF7F4)}
@@ -482,8 +477,6 @@ body.chat-view #thread{display:none}
   .learn{grid-template-columns:1fr}
   .iter{grid-template-columns:1fr}
   .iter-arrow{transform:rotate(90deg);height:24px}
-  .kd li{padding:20px 20px 20px 60px}
-  .kd li::before{left:20px;top:20px}
   .toc{grid-template-columns:repeat(2,1fr);margin-bottom:72px}
   .chap{margin-bottom:40px}
   .pn-row{grid-template-columns:1fr}
@@ -1018,18 +1011,21 @@ const PROJECTS = [
     observeIntro:'I accompanied the nursing teams in their daily work, across youth, adult, internal and surgical departments at Geha and Carmel hospitals.',
     workflows:'After the research and observations I compiled a document summarising the workflows around the patient record: the essential information, the use cases and the users\' needs. From it I classified which information each department\'s record should display.',
     hifiNotes:[
-      ['Room','The bed capacity indicator was cancelled.'],
-      ['Patient','Gender icon, ready for discharge marker and severity badges.'],
-      ['Location status','In a different department, in surgery, or on leave.'],
-      ['Same name','An alert when two patients in the department share a name.'],
-      ['Summary footer','Available beds, total patients hospitalised, number of discharges, and an expanded reports drawer.']
+      {side:'r', x:.968, y:.129, t:'Room', d:'Number in the header. The bed capacity indicator was cancelled.'},
+      {side:'r', x:.975, y:.515, t:'Ready for discharge', d:'A marker beside the bed number.'},
+      {side:'r', x:.965, y:.734, t:'Location status', d:'Out of the room, bed still reserved.'},
+      {side:'r', x:.945, y:.894, t:'Same name', d:'Highlighted when two patients share a name.'},
+      {side:'l', x:.05, y:.345, t:'Patient', d:'Gender icon, clinical icons and severity badges.'},
+      {side:'l', x:.04, y:.969, t:'Summary footer', d:'Beds, patients and discharges. Opens a reports drawer.'}
     ],
     states:['Room number','Empty bed','Ready to discharge','Special room','Exceeding the defined number of beds in a room','Same name','Not in department','24h before release','Critical badge','Location','Status'],
-    components:[
-      ['Room','Room header and card container, sized to the number of beds.'],
-      ['Patient','Patient card with name, ID, bed number, statuses and location.'],
-      ['Badges','Severity, discharge and location badges.'],
-      ['Icons','Clinical icons grouped by colour: fall risk, medication from home, feeding tube, treatment, sensitivities (food, medication, other), respiratory support (CPAP, ventilation), isolation (general, protective, airborne, droplet, contact), mobility, IV, hard to heal wound, blood drug level, nursing care and confidential.']
+    compNotes:[
+      {side:'l', x:.10, y:.14, t:'Icons', d:'Clinical icons grouped by colour.'},
+      {side:'l', x:.096, y:.79, t:'Isolation', d:'One symbol, with a marker per type.'},
+      {side:'r', x:.642, y:.16, t:'Patient', d:'Name, ID, location and icons.'},
+      {side:'r', x:.63, y:.36, t:'Badges', d:'Severity, care level and leave.'},
+      {side:'r', x:.985, y:.56, t:'Room', d:'Sized to its beds. Empty beds stay visible.'},
+      {side:'r', x:.95, y:.945, t:'Ready for discharge', d:'Marked beside the bed number.'}
     ]
   },
   {
@@ -1651,21 +1647,15 @@ function renderClalitCase(p){
   const pains = p.pains.map(g => { const k = g.lvl.toLowerCase().startsWith('crit') ? 'critical' : g.lvl.toLowerCase().startsWith('use') ? 'useful' : 'nice';
     return `<div class="pn-group g-${k}"><span class="pn-lvl pn-${k}">${g.lvl}</span>${g.items.map(([a,b])=>`<div class="pn-row"><div class="pn-pain">${a}</div><div class="pn-arrow" aria-hidden="true">→</div><div class="pn-need">${b}</div></div>`).join('')}</div>`; }).join('');
   const kv = arr => `<div class="learn">${arr.map(([t,d])=>`<div><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
-  const decisions = `<ol class="kd">${p.decisions.map(d=>`<li><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why</small>${d.w}</p></li>`).join('')}</ol>`;
+  const decisions = `<ol class="kd">${p.decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>`;
   const iteration = `<p>I tested the low fidelity board in feedback sessions with nursing teams. On the left is what they told me about it, and on the right is what I took into the next version.</p>
     <div class="iter"><div class="iter-col fb"><small>Feedback on the low fidelity board</small><b>From the nursing team</b><ul>${p.fromTeam.map(x=>`<li>${x}</li>`).join('')}</ul></div>
     <div class="iter-arrow" aria-hidden="true">→</div>
     <div class="iter-col me"><small>What I learned</small><b>My understandings</b><ul>${p.mine.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
-  /* Hero: the final UI, with a few cards changing status on a loop (admissions, location, alerts). */
-  const live = [
-    ['c-new',   25.0, 19.4, 21.0, 'דנה לוי', ''],
-    ['c-loc',   49.4, 15.6, 21.0, 'אור כחלון', 'בחדר ניתוח'],
-    ['c-fill',  49.4, 72.2, 21.0, 'נועה כהן', ''],
-    ['c-alert', 49.4, 46.8, 21.0, 'רומי מרומי', 'תשומת לב מוגברת']
-  ].map(([k,x,y,w,n,b],j)=>`<div class="ui-live ${k}" style="left:${x}%;top:${y}%;width:${w}%;animation-delay:${j*3}s"><span>${n}</span>${b?`<em>${b}</em>`:''}</div>`).join('');
+  const anno = (imgs, notes, cls='') => `<figure class="anno ${cls}"><div class="anno-img"><div class="shot-img">${imgs}</div>${notes.map((n,k)=>`<span class="pin ${n.side}" data-n="${k+1}" style="--x:${n.x*100}%;--y:${n.y*100}%"><span class="lbl"><b>${n.t}</b>${n.d}</span></span>`).join('')}</div><ol class="anno-list">${notes.map(n=>`<li><b>${n.t}.</b> ${n.d}</li>`).join('')}</ol></figure>`;
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.summary}</p>${metaDL(p)}</header>
-    <div class="ui-hero" id="case-hero"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system">${live}</div>
+    <div class="ui-hero" id="case-hero"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
     <nav class="toc" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
     ${section('The project', paras(p.context))}
@@ -1682,13 +1672,14 @@ function renderClalitCase(p){
     ${shot('clalit-lofi.png','Low fidelity patient board')}
     ${section('What the first iteration taught me', iteration)}
     ${chapter(4)}
-    ${section('High fidelity', kv(p.hifiNotes))}
-    ${shot('clalit-hifi.png','High fidelity patient board')}
+    ${section('High fidelity', '<p>The board after the first round of feedback. The summary footer opens into a reports drawer.</p>')}
+    ${anno('<img src="images/clalit-hifi.png" alt="High fidelity patient board"><img class="drawer" src="images/clalit-hifi-drawer.png" alt="" aria-hidden="true">', p.hifiNotes)}
     ${section('Card states', '<p>Every state a room or patient card can be in, from an empty bed to a patient who is out of the department.</p>')}
     ${shot('clalit-states.png','Patient and room card states','bare')}
-    ${section('Key decisions', decisions)}
-    ${section('UI components', kv(p.components))}
-    ${shot('clalit-components.png','UI component set: rooms, patients, badges and icons','bare')}
+    ${section('Key decisions', '<p>Four decisions shaped the final board.</p>')}
+    ${decisions}
+    ${section('UI components', '<p>Delivered as a component set in the Clalit design system: icons, badges, patient cards and room cards.</p>')}
+    ${anno('<img src="images/clalit-components.png" alt="UI component set: rooms, patients, badges and icons">', p.compNotes, 'bare')}
     ${chapter(5)}
     ${section('What I took away', `<ol class="tk">${p.takeaways.map(t=>`<li>${rich(t)}</li>`).join('')}</ol>`)}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
@@ -1711,7 +1702,8 @@ function renderCase(p){
     ${section('Problem', paras(p.problem))}
     ${section('My role', paras(p.myRole))}
     ${section('Constraints', p.constraints ? `<ul class="plain">${p.constraints.map(c=>`<li>${c}</li>`).join('')}</ul>` : '')}
-    ${section('Key decisions', decisions)}
+    ${section('Key decisions', '<p>Four decisions shaped the final board.</p>')}
+    ${decisions}
     ${figs ? section('Product and interaction design', '<p>The flows below show how the decisions above changed the product.</p>') + `<div class="figs">${figs}</div>` : ''}
     ${section('Outcome', p.outcome ? `<ul class="plain">${p.outcome.map(o=>`<li>${rich(o)}</li>`).join('')}</ul>` : '')}
     ${section('Reflection', paras(p.reflection))}
