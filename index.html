@@ -653,17 +653,6 @@ body.chat-view #thread{display:none}
 .tg::after{content:"";position:absolute;right:.2em;top:.2em;width:1.2em;height:1.2em;border-radius:50%;background:#fff}
 .tg.off{background:var(--surface-3)}.tg.off::after{right:auto;left:.2em}
 
-.mk-tempo{background:linear-gradient(160deg, #1B1D2A, #2A2447 60%, #4A3552);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5em}
-.mk-tempo .t{font:300 17em/1 var(--sans);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
-.mk-tempo .keys{display:flex;gap:1.4em;align-items:center;font-size:5em}
-.kc{display:inline-grid;place-items:center;min-width:1.8em;height:1.8em;padding:0 .4em;border-radius:.5em;background:rgba(255,255,255,.12);color:#fff}
-.mk-spec{background:linear-gradient(180deg, #FFF1E8, #FFE4F0);display:grid;grid-template-rows:1fr 1fr;align-items:center}
-.mk-spec div{text-align:center;font-size:30em;line-height:1;letter-spacing:-.06em;font-weight:300}
-.mk-spec .s2{font-weight:600;font-family:Georgia, "Times New Roman", serif;font-style:italic;letter-spacing:-.03em;color:#6B4FC7}
-.mk-motion{background:linear-gradient(135deg, #DDEBFF, #E8E0FF)}
-.mk-motion .m1{position:absolute;left:10%;top:66%;width:34%;height:14%;border-radius:4em;background:#fff}
-.mk-motion .m2{position:absolute;right:10%;top:10%;width:52%;height:50%;border-radius:6em;background:#fff;box-shadow:0 4em 8em -4em rgba(40,50,120,.4)}
-.mk-motion svg{position:absolute;inset:0;width:100%;height:100%;color:var(--ink-2)}
 .mk-way{background:linear-gradient(170deg, #D9ECFF, #FFE9DC);display:grid;place-items:center}
 .mk-way svg{position:absolute;left:0;top:0;width:100%;height:46%;color:#7C8CB8}
 .mk-way .pass{width:70%;margin-top:22%;background:#fff;border-radius:4em;padding:5em 5.5em;box-shadow:0 4em 8em -4em rgba(40,50,120,.35);color:#1B1D2A}
@@ -1110,22 +1099,6 @@ const PROJECTS = [
     ]
   },
   {
-    id:'experiments', kind:'group',
-    line:"A few things I've built on my own time, mostly to learn something.",
-    items:[
-      {id:'tempo', mock:'tempo', ar:'4/5', title:'Tempo', summary:'A keyboard-first time tracker, built to learn SwiftUI.', role:'Design and build', company:'Side project', year:'2025', tags:['macOS','Keyboard UX'],
-       context:["I wanted a timer I could start, switch and stop without touching the mouse or leaving the app I was in."],
-       decisions:[{t:'One shortcut does everything', c:'Separate shortcuts for start, pause and switch.', y:'A single shortcut that opens a command line with smart defaults.', w:'Remembering one shortcut beats memorising four, and the command line made switching projects as fast as starting.'}],
-       reflection:["Building it myself taught me more about the cost of animation on real hardware than any spec I've written."]},
-      {id:'specimen', mock:'spec', ar:'4/5', title:'Specimen', summary:'A tool for testing typeface pairings against real product UI instead of pangrams.', role:'Design and build', company:'Side project', year:'2024', tags:['Typography','Tooling'],
-       context:["Type specimens show fonts at their best. I wanted to see them in a dense table, a settings page and an error state."],
-       reflection:["The most useful view turned out to be the ugliest one: a 13px data table. It rules out more pairings than anything else."]},
-      {id:'motion', mock:'motion', ar:'4/5', title:'Motion studies', summary:'Prototypes exploring shared-element transitions between lists and detail views.', role:'Prototyping', company:'Side project', year:'2025', tags:['Motion','Prototyping'],
-       context:["A set of small studies on how an object can carry context from a list into its detail view, and back."],
-       reflection:["This portfolio's project transitions came directly out of these studies."]}
-    ]
-  },
-  {
     id:'archive', kind:'archive',
     line:"Older work. I'd design most of it differently today, which is part of the point.",
     items:[
@@ -1224,12 +1197,9 @@ const MOCKS = {
         <div class="fd-row"><span class="pill ok">Active</span><span class="pill rv">In review</span><span class="pill op">Draft</span></div></div>
     </div>`;
   },
-  tempo(){ return `<div class="mk-stage mk-tempo"><div class="t">0:42:17</div><div class="keys"><span class="kc">⌘</span><span class="kc">T</span></div></div>`; },
-  spec(){ return `<div class="mk-stage mk-spec"><div class="s1">Aa</div><div class="s2">Aa</div></div>`; },
   wayfare(){ return `<div class="mk-stage mk-way"><svg viewBox="0 0 100 46" preserveAspectRatio="none" fill="none"><path d="M14 40 C 34 6, 66 6, 86 30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg><div class="pass"><div class="rt">TLV<span>→</span>LIS</div><div class="ln"></div><div class="ln"></div></div></div>`; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
   studio(){ return `<div class="mk-stage mk-studio"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>`; },
-  motion(){ return `<div class="mk-stage mk-motion"><i class="m1"></i><i class="m2"></i><svg viewBox="0 0 100 75" preserveAspectRatio="none" fill="none"><path d="M28 70 C 34 50, 40 44, 50 42" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg></div>`; }
 };
 
 /* ================== Helpers ================== */
@@ -1322,7 +1292,6 @@ function route(q){
   if (/\b(go to top|back to top|to the top|scroll to top|top of (the )?page)\b/.test(s)) return {top:true};
   if (/\b(lost|home|start over|go back)\b/.test(s)) return {home:true};
   if (/contact|email|hire|reach|touch|talk|call|whatsapp|linkedin/.test(s)) return {reply:'contact'};
-  if (/experiment|side project|hobby/.test(s)) return {jump:'m-experiments'};
   if (/archive|older|earlier/.test(s)) return {jump:'m-archive'};
   if (/process|approach|how does|how do|method/.test(s)) return {reply:'process'};
   if (/resume|résumé|\bcv\b/.test(s)) return {cv:true};
