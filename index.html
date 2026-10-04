@@ -144,6 +144,18 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
   border:1.5px solid #111B21;opacity:0;pointer-events:none;animation:jf-bubble 1.4s var(--ease) var(--d) forwards}
 @keyframes jf-bubble{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:.7}100%{opacity:0;transform:translate(var(--dx),-46px) scale(1)}}
 
+/* Psycho: the jellyfish goes wobbly, its edges ripple like it's underwater on a trip */
+@media (prefers-reduced-motion:no-preference){
+  .bg-psycho .intro-avatar .ghost,.bg-psycho .home-mark .ghost{transform-origin:50% 15%;animation:jf-trip 2.8s ease-in-out infinite}
+  .bg-psycho .intro-avatar .g-body,.bg-psycho .home-mark .g-body{filter:url(#jfWave)}
+}
+@keyframes jf-trip{
+  0%,100%{transform:rotate(0) skewX(0) scale(1,1)}
+  20%{transform:rotate(-7deg) skewX(9deg) scale(1.05,.95)}
+  45%{transform:rotate(2deg) skewX(-3deg) scale(.95,1.06)}
+  70%{transform:rotate(7deg) skewX(-9deg) scale(1.04,.96)}
+  85%{transform:rotate(-2deg) skewX(3deg) scale(.98,1.03)}}
+
 /* Intro */
 .intro{position:fixed;left:50%;bottom:calc(40vh + 150px * var(--z));transform:translateX(-50%);width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
   opacity:calc(1 - var(--p, 0) * 1.8);transform:translate(-50%, calc(var(--p, 0) * -56px))}
@@ -779,6 +791,7 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 </div>
 </div>
 
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><filter id="jfWave" x="-20%" y="-20%" width="140%" height="140%"><feTurbulence type="fractalNoise" baseFrequency="0.012 0.03" numOctaves="1" seed="4"><animate attributeName="baseFrequency" dur="5s" values="0.012 0.03;0.02 0.045;0.012 0.03" repeatCount="indefinite"/></feTurbulence><feDisplacementMap in="SourceGraphic" scale="14"/></filter></svg>
 <a class="home-mark" id="home" href="#" aria-label="Guy — back to top">
   <span class="avatar" aria-hidden="true"><svg class="ghost" viewBox="0 0 200 200" aria-hidden="true" focusable="false"><g class="g-bob"><g class="g-squish"><path class="g-body" d="M44 0C19.6995 0 0 19.6995 0 44V184C0 192.837 7.16344 200 16 200H17C25.2843 200 32 193.284 32 185V182C32 175.373 37.3726 170 44 170C50.6274 170 56 175.373 56 182V185C56 193.284 62.7157 200 71 200H73C81.2843 200 88 193.284 88 185V182C88 175.373 93.3726 170 100 170C106.627 170 112 175.373 112 182V185C112 193.284 118.716 200 127 200H129C137.284 200 144 193.284 144 185V182C144 175.373 149.373 170 156 170C162.627 170 168 175.373 168 182V185C168 193.284 174.716 200 183 200H184C192.837 200 200 192.837 200 184V44C200 19.6995 180.301 0 156 0H44Z"/><g class="g-eyes"><g class="g-dots"><circle cx="115" cy="77" r="6"/><circle cx="172" cy="77" r="6"/></g><g class="g-smile"><path d="M99 83Q110 72 121 83"/><path d="M153 83Q164 72 175 83"/></g></g></g></g></svg></span>
 </a>
@@ -1534,7 +1547,7 @@ const SKIES = [
   {name:'Haze',     seed:73, angle:1.3,  fx:1.8, fy:1.6, warp:1.15, contrast:1.0,  tilt:0,    fg:'#141A12', veil:.84,
    stops:[[0,'#4A6C9C'],[.25,'#6B89AE'],[.42,'#7F9B7E'],[.58,'#A3A98B'],[.72,'#D3BE8C'],[.86,'#EAD9A4'],[1,'#F5ECCD']]},
   // colours cycle several times (cycle) so the bands ripple and swirl like a lava lamp
-  {name:'Psycho', seed:88, angle:.4, fx:1.5, fy:1.7, warp:1.7, contrast:1.9, tilt:0, cycle:2.4, fg:'#FFFFFF', veil:.9, lift:.03, darkPills:true, blur:9,
+  {name:'Psycho', seed:88, angle:.4, fx:1.5, fy:1.7, warp:1.7, contrast:1.9, tilt:0, cycle:2.4, fg:'#FFFFFF', veil:.9, lift:.03, darkPills:true, trip:true, blur:9,
    tshadow:'0 2px 28px rgba(28,0,70,.6), 0 0 3px rgba(28,0,70,.4)', pshadow:'0 1px 14px rgba(28,0,70,.6)',
    stops:[[0,'#2A0A72'],[.14,'#7B22D6'],[.28,'#FF2E9A'],[.42,'#FF8A1F'],[.55,'#FFE13A'],[.68,'#2EE6A6'],[.82,'#22B8FF'],[1,'#5B2BFF']]},
   // no artwork at all: a plain, flat page
@@ -1624,7 +1637,7 @@ function paintSky(P){
     root.style.setProperty('--skyblur', (P.blur == null ? 16 : P.blur) + 'px');
     P.tshadow ? root.style.setProperty('--tshadow', P.tshadow) : root.style.removeProperty('--tshadow');
     P.pshadow ? root.style.setProperty('--pshadow', P.pshadow) : root.style.removeProperty('--pshadow');
-    root.classList.toggle('bg-flat', !!P.flat); root.classList.toggle('theme-dark', !!P.dark); root.classList.toggle('bg-dark-pills', !!P.darkPills);
+    root.classList.toggle('bg-flat', !!P.flat); root.classList.toggle('theme-dark', !!P.dark); root.classList.toggle('bg-dark-pills', !!P.darkPills); root.classList.toggle('bg-psycho', !!P.trip);
     queueVeil();
     label.textContent = P.name; setOrb(n);
     const show = () => { const cv = sky(n); setOrb(n); if (!cv){ box.querySelectorAll('.fx-sky').forEach(c => c.classList.remove('on')); return; } requestAnimationFrame(() => requestAnimationFrame(() => {
