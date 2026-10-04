@@ -399,8 +399,10 @@ body.chat-view #thread{display:none}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
 .ui-hero.hs-hero{border-radius:20px;overflow:hidden}
-.hs-quote{margin-bottom:48px}
-.ui-hero.hs-sky{margin-bottom:104px}
+.hs-sky{max-width:968px;margin:0 auto 104px;border-radius:20px;overflow:hidden;background:#0B50FF url(images/headspace-sky.png) center bottom/100% auto no-repeat;aspect-ratio:968/600;display:flex;justify-content:center;padding:64px 7% 0}
+.hs-sky .hs-quote{margin:0;color:#fff}
+.hs-sky .hs-quote cite{color:rgba(255,255,255,.75)}
+@media (max-width:760px){.hs-sky{aspect-ratio:auto;padding:32px 20px 44vw;background-size:160% auto}.hs-sky .hs-quote p{font-size:1.375rem}}
 .hs-cap{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;margin-top:14px;color:var(--ink-3);font-size:.9375rem;text-align:center}
 .hs-cap.one{grid-template-columns:46%;justify-content:center}
 .hs-quote{max-width:760px;margin:0 auto 104px;text-align:center}
@@ -1792,8 +1794,7 @@ function renderHeadspaceCase(p, next){
     ${chapter(1)}
     ${section('About', paras(p.context))}
     ${section('So why Headspace?', `<p>${p.why}</p>`)}
-    <blockquote class="hs-quote"><p>“${p.quote[0]}”</p><cite>${p.quote[1]}</cite></blockquote>
-    <div class="ui-hero hs-hero hs-sky"><img src="images/headspace-sky.png" alt="A smiling Headspace sun rising over clouds" loading="lazy"></div>
+    <figure class="hs-sky" role="img" aria-label="A smiling Headspace sun rising over clouds"><blockquote class="hs-quote"><p>“${p.quote[0]}”</p><cite>${p.quote[1]}</cite></blockquote></figure>
     ${chapter(2)}
     <ol class="kd hs-steps">${p.process.map((t,k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b></li>`).join('')}</ol>
     ${chapter(3)}
