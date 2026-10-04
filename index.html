@@ -394,6 +394,7 @@ body.chat-view #thread{display:none}
 .anno figcaption{color:var(--ink-3);font-size:.9375rem;margin:14px 0 0}
 /* Clalit × Headspace case study */
 .hs-pair{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;align-items:start}
+.hs-pair[style*="--n:3"],.hs-cap[style*="--n:3"]{gap:0 5%}
 .hs-pair.one{grid-template-columns:46%;justify-content:center}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
@@ -1193,8 +1194,8 @@ const PROJECTS = [
          {t:'My medical file', imgs:[['headspace-file-original.png','Original medical file screen',541],['headspace-file-ui.png','Medical file in the Headspace style',541]],
           notes:[{on:1, side:'r', x:.55, y:.09, t:'Clearer heading', d:'A better heading for orientation.'},{on:1, side:'r', x:.8, y:.3, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
          {t:'Categories', wide:true, deco:['headspace-virus.png','Two smiling Headspace-style virus characters'], imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
-         {t:'Test results', imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-ui.png','Test results in the Headspace style',950]],
-          notes:[{on:1, side:'r', x:.9, y:.16, t:'Hide notes', d:'An option to hide notification notes.'},{on:1, side:'r', x:.9, y:.47, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
+         {t:'Test results', imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-ui.png','Test results in the Headspace style',950],['headspace-results-sheet.png','Test details open in a bottom sheet',541]], cap3:'Bottom sheet',
+          notes:[{on:2, side:'r', x:.92, y:.335, t:'Hide notes', d:'An option to hide notification notes.'},{on:2, side:'r', x:.92, y:.65, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
          {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
@@ -1830,10 +1831,10 @@ function renderHeadspaceCase(p, next){
   const CH = ['Overview','Process','Screens'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
-  const pair = sc => { const n = sc.imgs.length, off = n === 1 ? [.27] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
-    const notes = sc.notes.map(o => ({...o, x: off[o.on] + .46*o.x, y: o.y * sc.imgs[o.on][2] / H}));
+  const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
+    const notes = sc.notes.map(o => ({...o, x: off[o.on] + w*o.x, y: o.y * sc.imgs[o.on][2] / H}));
     return `<figure class="anno${sc.wide?' wide':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt])=>`<div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
-      <div class="hs-cap${n===1?' one':''}" style="--n:${n}">${n===1 ? '<span>Headspace UI</span>' : '<span>Original</span><span>Headspace UI</span>'}</div>
+      <div class="hs-cap${n===1?' one':''}" style="--n:${n}">${(n===1 ? ['Headspace UI'] : ['Original','Headspace UI',...(sc.cap3?[sc.cap3]:[])]).map(t=>`<span>${t}</span>`).join('')}</div>
       ${notes.length ? `<ol class="anno-list">${notes.map(o=>`<li><b>${o.t}.</b> ${o.d}</li>`).join('')}</ol>` : ''}</figure>`; };
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.intro}</p>${metaDL(p)}</header>
