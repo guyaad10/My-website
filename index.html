@@ -410,8 +410,9 @@ body.chat-view #thread{display:none}
 .og-chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 1.2em;padding:0;list-style:none}
 .og-chips li{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;padding:4px 12px 4px 4px;border-radius:99px;background:var(--surface-2);color:var(--ink-2)}
 .og-chips img{width:24px;height:24px;border-radius:50%;display:block}
-.og-persona{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px;align-items:start}
-.og-sticker{width:calc(100% + 56px);max-width:none;height:auto;display:block;transform:rotate(4deg);margin:-30px 0 0 0;order:2;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
+.og-persona{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px 24px;align-items:start}
+.og-persona blockquote{grid-column:1/-1;order:3}
+.og-sticker{width:calc(100% + 40px);max-width:none;height:auto;display:block;transform:rotate(4deg);margin:-30px 0 0 0;order:2;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
 .shot.og-flow{max-width:840px}
 .shot.og-flow .shot-img{background:#1A1B1E;padding:56px 64px}
 .shot.og-canvas .shot-img{background:none;box-shadow:none;border-radius:0}
@@ -1829,8 +1830,8 @@ function renderOffgridCase(p, next){
     ${section('User interviews', '<p>I interviewed seven people from the target audience. All travel at least twice a year, and all had been abroad in the six months before the interview.</p>')}
     ${section('What I heard', kv(findings))}
     ${section('Persona', `<div class="og-persona"><img class="og-sticker" src="images/offgrid-persona.webp" alt="Photo of Roni, the persona, taped on like a polaroid" loading="lazy"><div><b>Roni Klein</b><small>29, Tel Aviv. Legal consultant at a tech company.</small><p>Roni travels twice a year for work. In her free time she looks for new food and art places and avoids tourist sites.</p>
-      <dl><div><dt>Needs</dt><dd>To track her trip and see each day's agenda in an easy, visual way.</dd></div><div><dt>Wants</dt><dd>To find new places that match her interests.</dd></div><div><dt>Expects</dt><dd>An efficient itinerary, optimised for distance, opening hours, crowds and budget.</dd></div></dl>
-      <blockquote>“I'm sluggish when planning a trip overseas, especially on tourist websites that recommend the same places I don't care about.”</blockquote></div></div>`)}
+      <dl><div><dt>Needs</dt><dd>To track her trip and see each day's agenda in an easy, visual way.</dd></div><div><dt>Wants</dt><dd>To find new places that match her interests.</dd></div><div><dt>Expects</dt><dd>An efficient itinerary, optimised for distance, opening hours, crowds and budget.</dd></div></dl></div>
+      <blockquote>“I'm sluggish when planning a trip overseas, especially on tourist websites that recommend the same places I don't care about.”</blockquote></div>`)}
     ${section('Competitive research', `<p>I ran a heuristic evaluation of eight trip planning products.</p><ul class="og-chips">${[['Lambus','lambus'],['Maps.me','mapsme'],['Sygic Travel','sygic'],['Tripadvisor','tripadvisor'],['Visit a City','visitacity'],['TripIt','tripit'],['Pluto','pluto'],['Wanderlog','wanderlog']].map(([c,f])=>`<li><img src="images/offgrid-logos/${f}.webp" alt="" width="24" height="24">${c}</li>`).join('')}</ul><p>Most have an explore section for inspiration, but the content is the same touristic "must-see" list. None lets you browse trips from people who share your interests.</p>`)}
     <div class="og-quote"><small>Value proposition</small><p>A trip planner that builds an itinerary from your interests and your available time, on the best route for each day.</p></div>
     ${chapter(3)}
