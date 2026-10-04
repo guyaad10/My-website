@@ -1215,8 +1215,9 @@ function stamp(p){
   const latest = +PROJECTS[0].year;
   if (p.kind === 'group') return {rel:'Ongoing', abs:'Side projects'};
   if (p.kind === 'archive'){ const ys = p.items.flatMap(i => i.year.split('–').map(Number)); return {rel:'Archived', abs:`${Math.min(...ys)}–${Math.max(...ys)}`}; }
-  const d = latest - +p.year;
-  return {rel: d === 0 ? 'Now' : d === 1 ? 'Last year' : `${d} years ago`, abs: d === 0 ? `${p.year}, present` : p.year, live: d === 0};
+  if (+p.year === latest) return {rel:'Now', abs:`${p.year}, present`, live:true};
+  const d = new Date().getFullYear() - +p.year;
+  return {rel: d <= 1 ? 'Last year' : `${d} years ago`, abs: p.year};
 }
 function groupLabel(p){ return p.kind==='feature' ? p.year : p.kind==='group' ? 'Side projects' : 'Earlier work'; }
 function projectMsg(p){
