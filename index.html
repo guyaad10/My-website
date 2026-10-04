@@ -234,7 +234,7 @@ body.chat-view #thread{display:none}
 
 .tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin:32px 0 0 42px}
 .tile .visual{--ar:4/5;margin:0 0 14px;border-radius:24px}
-.tile b{display:block;font-weight:500;font-size:1.1875rem;letter-spacing:-.03em}
+.tile b{display:block;font-weight:500;font-size:1.125rem;letter-spacing:-.03em}
 .tile span{display:block;color:var(--ink-2);font-size:.9375rem;line-height:1.45;margin-top:4px}
 .tile:hover b{text-decoration:underline;text-underline-offset:3px;text-decoration-thickness:1px}
 
@@ -276,7 +276,7 @@ body.chat-view #thread{display:none}
 .m-head b{font-weight:500;font-size:.9375rem;letter-spacing:-.01em}
 .m-head time{color:var(--ink-3);font-size:.875rem}
 .m-body,.reply-body{padding-left:38px}
-.m-text{margin:0 0 16px;font-size:1.1875rem;line-height:1.45;letter-spacing:-.02em;max-width:52ch;text-wrap:pretty}
+.m-text{margin:0 0 16px;font-size:1.125rem;line-height:1.45;letter-spacing:-.02em;max-width:52ch;text-wrap:pretty}
 .msg:hover .g-dots circle{transform:translateX(-4px) scaleY(.15);opacity:0}
 .msg:hover .g-smile path{stroke-dashoffset:0;opacity:1}
 
@@ -303,6 +303,8 @@ body.chat-view #thread{display:none}
 .art.sm .art-foot{padding:12px 14px 14px}
 .art.sm b{display:block;font-weight:500;font-size:.9375rem;letter-spacing:-.015em}
 .art.sm .art-foot p{margin:2px 0 0;font-size:.8125rem;line-height:1.4}
+.art.sm .tags{margin-top:12px;flex-wrap:nowrap;gap:5px}
+.art.sm .tags li{font-size:.75rem;padding:3px 9px;white-space:nowrap}
 .art-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .art-h time{flex:none;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){
@@ -335,7 +337,7 @@ body.chat-view #thread{display:none}
 .case-hero{margin:0 auto 128px;border-radius:32px;max-width:968px}
 .cs{display:grid;grid-template-columns:260px minmax(0,660px);gap:48px;justify-content:center;margin:0 0 104px}
 .cs > h2{margin:0;font:400 1.75rem/1.1 var(--sans);letter-spacing:-.04em;position:sticky;top:88px;align-self:start}
-.cs-body p{font-size:1.1875rem;line-height:1.6;color:var(--body);letter-spacing:-.012em;margin:0 0 1em;text-wrap:pretty}
+.cs-body p{font-size:1.125rem;line-height:1.6;color:var(--body);letter-spacing:-.012em;margin:0 0 1em;text-wrap:pretty}
 .cs-body p:last-child{margin-bottom:0}
 .plain{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .plain li{padding:12px 0;border-bottom:1px solid var(--line);font-size:.9375rem;line-height:1.5;color:var(--body);letter-spacing:-.01em}
@@ -621,9 +623,9 @@ body.chat-view #thread{display:none}
 .mk-clalit figure{position:absolute;margin:0;transition:transform .9s var(--ease)}
 .mk-clalit img{display:block;width:100%;height:auto;border:.6cqw solid #fff;border-radius:1.1cqw;box-shadow:0 0 0 1px rgba(31,193,213,.25),0 .4cqw 1cqw rgba(10,96,110,.08),0 3cqw 6cqw rgba(10,96,110,.18)}
 .mk-clalit figcaption{position:absolute;top:-3.4cqw;left:.2cqw;font-size:1.25cqw;font-weight:500;letter-spacing:.01em;color:#0E6E7A;background:rgba(255,255,255,.75);padding:.35cqw .9cqw;border-radius:99px}
-.ck-before{left:6%;top:28%;width:24%;transform:rotate(-5deg)}
-.ck-after{left:27%;top:48%;width:68%;z-index:1}
-.art:hover .ck-after{transform:translateY(-36%)}
+.ck-before{left:6%;top:17%;width:28%;transform:rotate(-5deg)}
+.ck-after{left:23%;top:31%;width:74%;z-index:1}
+.art:hover .ck-after{transform:translateY(-22%)}
 .art:hover .ck-before{transform:rotate(-7deg) translate(-4%,-12%)}
 @media (prefers-reduced-motion:reduce){.mk-clalit figure{transition:none}}
 .av{display:inline-block;width:1.8em;height:1.8em;border-radius:50%;border:.18em solid #fff;flex:none;vertical-align:middle}
@@ -729,10 +731,10 @@ body.chat-view #thread{display:none}
 .tg::after{content:"";position:absolute;right:.2em;top:.2em;width:1.2em;height:1.2em;border-radius:50%;background:#fff}
 .tg.off{background:var(--surface-3)}.tg.off::after{right:auto;left:.2em}
 
-.mk-og{background:radial-gradient(110% 90% at 50% 20%,#F4F3FF 0%,#DCDBFF 55%,#BCBBFF 100%);display:grid;place-items:center}
+.mk-og{background:#2F6B1F}
+.mk-og img{display:block;width:100%;height:100%;object-fit:cover}
 .mk-hs{background:#1749D1;display:grid;place-items:center}
 .mk-hs img{display:block;width:100%;height:100%;object-fit:cover}
-.mk-og img{display:block;max-width:94%;max-height:94%;width:auto;height:auto}
 .mk-way{background:linear-gradient(170deg, #D9ECFF, #FFE9DC);display:grid;place-items:center}
 .mk-way svg{position:absolute;left:0;top:0;width:100%;height:46%;color:#7C8CB8}
 .mk-way .pass{width:70%;margin-top:22%;background:#fff;border-radius:4em;padding:5em 5.5em;box-shadow:0 4em 8em -4em rgba(40,50,120,.35);color:#1B1D2A}
@@ -1180,9 +1182,9 @@ const PROJECTS = [
   },
   {
     id:'archive', kind:'archive',
-    line:"Older work. I'd design most of it differently today, which is part of the point.",
+    line:"Work from my student days. I’d design most of it differently today — and I think that’s a good thing 😅",
     items:[
-      {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
+      {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
        why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
@@ -1201,8 +1203,8 @@ const PROJECTS = [
          {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
-      {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2023', tags:['B2C','Mobile app']},
-      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
+      {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2022', tags:['B2C','Mobile','UX/UI']},
+      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2022', tags:['Agency','Branding'],
        context:['[[Short context and a few highlight clients]]'], reflection:['[[What studio work taught you]]']}
     ]
   }
@@ -1295,7 +1297,7 @@ const MOCKS = {
   },
   wayfare(){ return `<div class="mk-stage mk-way"><svg viewBox="0 0 100 46" preserveAspectRatio="none" fill="none"><path d="M14 40 C 34 6, 66 6, 86 30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg><div class="pass"><div class="rt">TLV<span>→</span>LIS</div><div class="ln"></div><div class="ln"></div></div></div>`; },
   headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
-  offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-hero.webp" alt="" draggable="false"></div>'; },
+  offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-card.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
   studio(){ return `<div class="mk-stage mk-studio"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>`; },
 };
@@ -1366,7 +1368,7 @@ function projectMsg(p){
   if (p.kind === 'group') return `<article class="msg" id="m-${p.id}">${who(p.line)}
     <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><b>${i.title}</b><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
   return `<article class="msg" id="m-${p.id}">${who(p.line)}
-    <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><div class="art-h"><b>${i.title}</b><time>${i.year}</time></div><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
+    <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><div class="art-h"><b>${i.title}</b><time>${i.year}</time></div><p>${i.summary}</p>${i.tags?.length?`<ul class="tags">${i.tags.map(t=>`<li>${t}</li>`).join('')}</ul>`:''}</div></a>`).join('')}</div></div></article>`;
 }
 
 const REPLIES = {
