@@ -392,6 +392,32 @@ body.chat-view #thread{display:none}
 .pin .lbl b{display:block;color:var(--ink);font-weight:500;font-size:.9375rem;letter-spacing:-.01em;margin-bottom:2px}
 .anno-list{display:none}
 .anno figcaption{color:var(--ink-3);font-size:.9375rem;margin:14px 0 0}
+/* Clalit × Headspace case study */
+.hs-pair{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;align-items:start}
+.hs-pair[style*="--n:3"]{gap:0 5%}
+.anno.rgut{max-width:1160px;padding:24px var(--gut) 24px 0}
+.hs-pair{margin-bottom:48px}
+.hs-col{position:relative}
+.hs-c{position:absolute;top:100%;left:0;right:0;margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
+.hs-pair.one{grid-template-columns:46%;justify-content:center}
+.hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
+.hs-pair .shot-img:hover{box-shadow:none}
+.ui-hero.hs-hero{border-radius:20px;overflow:hidden}
+.hs-sky{max-width:968px;margin:0 auto 104px;border-radius:20px;overflow:hidden;background:#0B50FF url(images/headspace-sky.png) center bottom/100% auto no-repeat;aspect-ratio:968/600;display:flex;justify-content:center;padding:64px 7% 0}
+.hs-sky .hs-quote{margin:0;color:#fff}
+.hs-rainbow{max-width:968px;margin:0 auto 104px;aspect-ratio:2880/1556;background:#fff url(images/headspace-rainbow.png) center/100% auto no-repeat;display:flex;justify-content:center;padding:7.5% 18% 0}
+.hs-rainbow p{margin:0;max-width:560px;text-align:center;font:500 clamp(1.25rem,.9rem + 1.3vw,2rem)/1.2 var(--sans);letter-spacing:-.03em;color:#2a2a2a;text-wrap:balance}
+.anno.wide{--gut:0px;padding:24px 0}
+.hs-deco{display:block;width:180px;height:auto;margin:-24px 0 0 auto}
+@media (max-width:760px){.hs-rainbow{padding:5% 10% 0}.hs-rainbow p{font-size:1.05rem}.hs-deco{width:120px;margin-top:0}}
+.hs-sky .hs-quote cite{color:rgba(255,255,255,.75)}
+@media (max-width:760px){.hs-sky{aspect-ratio:auto;padding:32px 20px 44vw;background-size:160% auto}.hs-sky .hs-quote p{font-size:1.375rem}}
+.hs-quote{max-width:760px;margin:0 auto 104px;text-align:center}
+.hs-quote p{margin:0 0 16px;font:400 clamp(1.5rem,1.1rem + 1.4vw,2.25rem)/1.25 var(--sans);letter-spacing:-.035em;text-wrap:balance}
+.hs-quote cite{font-style:normal;color:var(--ink-3);font-size:.9375rem}
+.toc.c3{grid-template-columns:repeat(3,1fr)}
+.kd.hs-steps{margin-top:0;grid-template-columns:repeat(3,minmax(0,1fr))}
+.kd.hs-steps b{margin-bottom:0}
 /* Off Grid case */
 .toc.c4{grid-template-columns:repeat(4,1fr)}
 .kd.og-kd{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr}
@@ -704,6 +730,8 @@ body.chat-view #thread{display:none}
 .tg.off{background:var(--surface-3)}.tg.off::after{right:auto;left:.2em}
 
 .mk-og{background:radial-gradient(110% 90% at 50% 20%,#F4F3FF 0%,#DCDBFF 55%,#BCBBFF 100%);display:grid;place-items:center}
+.mk-hs{background:#1749D1;display:grid;place-items:center}
+.mk-hs img{display:block;width:100%;height:100%;object-fit:cover}
 .mk-og img{display:block;max-width:94%;max-height:94%;width:auto;height:auto}
 .mk-way{background:linear-gradient(170deg, #D9ECFF, #FFE9DC);display:grid;place-items:center}
 .mk-way svg{position:absolute;left:0;top:0;width:100%;height:46%;color:#7C8CB8}
@@ -1154,8 +1182,25 @@ const PROJECTS = [
     id:'archive', kind:'archive',
     line:"Older work. I'd design most of it differently today, which is part of the point.",
     items:[
-      {id:'wayfare', mock:'wayfare', ar:'4/5', title:'Wayfare', summary:'Booking flow for a travel app', role:'Product designer', company:'Wayfare', year:'2021', tags:['Consumer','Mobile'],
-       context:['[[Short context for this project]]'], reflection:["[[What you'd do differently now]]"]},
+      {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
+       intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
+       context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
+       why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
+       quote:['Physical health is inseparable from emotional and mental health. In nurturing one, we fortify the others, creating a harmonious symphony of well-being.','World Health Organization'],
+       process:['Original UX wireframes','UX tweaks and improvements','Headspace design system implementation'],
+       screens:[
+         {t:'Onboarding', imgs:[['headspace-onboarding-ui.png','Headspace onboarding screen',541]],
+          notes:[{on:0, side:'l', x:.2, y:.45, t:'Secondary button', d:'A clearer visual appearance.'},{on:0, side:'r', x:.92, y:.11, t:'Logo', d:'A subtler, logo-like appearance.'},{on:0, side:'r', x:.92, y:.7, t:'Carousel', d:'Users must log in before any action, so cards can’t be quick actions. A carousel of uplifting content replaces the horizontal scroll.'}]},
+         {t:'Home', imgs:[['headspace-home-original.png','Original Clalit home screen',541],['headspace-home-ui.png','Home screen in the Headspace style',541]],
+          notes:[{on:1, side:'r', x:.95, y:.55, t:'One page', d:'All main sections on one page, with no horizontal scrolling.'}]},
+         {t:'My medical file', imgs:[['headspace-file-original.png','Original medical file screen',541],['headspace-file-ui.png','Medical file in the Headspace style',541]],
+          notes:[{on:1, side:'r', x:.55, y:.09, t:'Clearer heading', d:'A better heading for orientation.'},{on:1, side:'r', x:.8, y:.3, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
+         {t:'Categories', wide:true, deco:['headspace-virus.png','Two smiling Headspace-style virus characters'], imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
+         {t:'Test results', caps:['Original','Bottom sheet','Headspace UI'], rgut:true, imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-sheet.png','Test details open in a bottom sheet',541],['headspace-results-ui.png','Test results in the Headspace style',950]],
+          notes:[{on:2, side:'r', x:.965, y:.155, t:'Hide notes', d:'An option to hide notification notes.'},{on:1, side:'r', x:.97, y:.5, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
+         {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
+          notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
+       ]},
       {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2023', tags:['B2C','Mobile app']},
       {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
        context:['[[Short context and a few highlight clients]]'], reflection:['[[What studio work taught you]]']}
@@ -1249,6 +1294,7 @@ const MOCKS = {
     </div>`;
   },
   wayfare(){ return `<div class="mk-stage mk-way"><svg viewBox="0 0 100 46" preserveAspectRatio="none" fill="none"><path d="M14 40 C 34 6, 66 6, 86 30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg><div class="pass"><div class="rt">TLV<span>→</span>LIS</div><div class="ln"></div><div class="ln"></div></div></div>`; },
+  headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
   offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-hero.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
   studio(){ return `<div class="mk-stage mk-studio"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>`; },
@@ -1783,6 +1829,32 @@ function renderClalitCase(p){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
+function renderHeadspaceCase(p, next){
+  const CH = ['Overview','Process','Screens'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
+  const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
+    const caps = sc.caps || (n===1 ? ['Headspace UI'] : ['Original','Headspace UI']);
+    const notes = sc.notes.map(o => ({...o, x: off[o.on] + w*o.x, y: o.y * sc.imgs[o.on][2] / H}));
+    return `<figure class="anno${sc.wide?' wide':''}${sc.rgut?' rgut':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt],k)=>`<div class="hs-col"><div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div><span class="hs-c">${caps[k]}</span></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
+      ${notes.length ? `<ol class="anno-list">${notes.map(o=>`<li><b>${o.t}.</b> ${o.d}</li>`).join('')}</ol>` : ''}</figure>`; };
+  caseInner.innerHTML = `
+    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.intro}</p>${metaDL(p)}</header>
+    <div class="ui-hero hs-hero"><img src="images/headspace-hero.png" alt="Headspace-style illustrations around a Clalit app screen"></div>
+    <nav class="toc c3" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
+    ${chapter(1)}
+    ${section('About', paras(p.context))}
+    ${section('So why Headspace?', `<p>${p.why}</p>`)}
+    <figure class="hs-sky" role="img" aria-label="A smiling Headspace sun rising over clouds"><blockquote class="hs-quote"><p>“${p.quote[0]}”</p><cite>${p.quote[1]}</cite></blockquote></figure>
+    ${chapter(2)}
+    <ol class="kd hs-steps">${p.process.map((t,k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b></li>`).join('')}</ol>
+    ${chapter(3)}
+    ${p.screens.map(sc => `<section class="cs"><h2>${sc.t}</h2><div class="cs-body">${sc.deco?`<img class="hs-deco" src="images/${sc.deco[0]}" alt="${sc.deco[1]}" loading="lazy">`:''}</div></section>` + pair(sc)).join('')}
+    <figure class="hs-rainbow" role="img" aria-label="A smiling Headspace character on a rope bridge under a rainbow"><p>Your path to feeling better is just a click away with our healthcare solutions!</p></figure>
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+}
 function renderOffgridCase(p, next){
   const CH = ['Overview','Research','Design','Interface'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
@@ -1860,6 +1932,7 @@ function renderOffgridCase(p, next){
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
+  if (p.__case === 'headspace') return renderHeadspaceCase(p, next);
   if (p.__case === 'offgrid') return renderOffgridCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
