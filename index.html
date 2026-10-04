@@ -401,8 +401,11 @@ body.chat-view #thread{display:none}
 .ui-hero.hs-hero{border-radius:20px;overflow:hidden}
 .hs-sky{max-width:968px;margin:0 auto 104px;border-radius:20px;overflow:hidden;background:#0B50FF url(images/headspace-sky.png) center bottom/100% auto no-repeat;aspect-ratio:968/600;display:flex;justify-content:center;padding:64px 7% 0}
 .hs-sky .hs-quote{margin:0;color:#fff}
-.hs-rainbow{max-width:968px;margin:0 auto 104px;border-radius:20px;overflow:hidden;background:#fff}
-.hs-rainbow img{display:block;width:100%;height:auto}
+.hs-rainbow{max-width:968px;margin:0 auto 104px;aspect-ratio:2880/1556;background:#fff url(images/headspace-rainbow.png) center/100% auto no-repeat;display:flex;justify-content:center;padding:13% 18% 0}
+.hs-rainbow p{margin:0;max-width:560px;text-align:center;font:500 clamp(1.25rem,.9rem + 1.3vw,2rem)/1.2 var(--sans);letter-spacing:-.03em;color:#5a5a5a;text-wrap:balance}
+.anno.wide{--gut:0px;padding:24px 0}
+.hs-deco{display:block;width:180px;height:auto;margin:-24px 0 0 auto}
+@media (max-width:760px){.hs-rainbow{padding:10% 10% 0}.hs-rainbow p{font-size:1.05rem}.hs-deco{width:120px;margin-top:0}}
 .hs-sky .hs-quote cite{color:rgba(255,255,255,.75)}
 @media (max-width:760px){.hs-sky{aspect-ratio:auto;padding:32px 20px 44vw;background-size:160% auto}.hs-sky .hs-quote p{font-size:1.375rem}}
 .hs-cap{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;margin-top:14px;color:var(--ink-3);font-size:.9375rem;text-align:center}
@@ -1129,7 +1132,7 @@ const PROJECTS = [
     id:'archive', kind:'archive',
     line:"Older work. I'd design most of it differently today, which is part of the point.",
     items:[
-      {id:'headspace', __case:'headspace', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UI and UX designer', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
+      {id:'headspace', __case:'headspace', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
        why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
@@ -1141,12 +1144,12 @@ const PROJECTS = [
          {t:'Home', imgs:[['headspace-home-original.png','Original Clalit home screen',541],['headspace-home-ui.png','Home screen in the Headspace style',541]],
           notes:[{on:0, side:'l', x:.68, y:.45, t:'One page', d:'All main sections on one page, with no horizontal scrolling.'}]},
          {t:'My medical file', imgs:[['headspace-file-original.png','Original medical file screen',541],['headspace-file-ui.png','Medical file in the Headspace style',541]],
-          notes:[{on:0, side:'l', x:.5, y:.29, t:'Clearer heading', d:'A better heading for orientation.'},{on:0, side:'l', x:.5, y:.6, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
-         {t:'Categories', imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
+          notes:[{on:1, side:'r', x:.55, y:.09, t:'Clearer heading', d:'A better heading for orientation.'},{on:1, side:'r', x:.8, y:.3, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
+         {t:'Categories', wide:true, deco:['headspace-virus.png','Two smiling Headspace-style virus characters'], imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
          {t:'Test results', imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-ui.png','Test results in the Headspace style',950]],
-          notes:[{on:0, side:'l', x:.27, y:.29, t:'Hide notes', d:'An option to hide notification notes.'},{on:0, side:'l', x:.22, y:.67, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
+          notes:[{on:1, side:'r', x:.9, y:.16, t:'Hide notes', d:'An option to hide notification notes.'},{on:1, side:'r', x:.9, y:.47, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
          {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
-          notes:[{on:0, side:'l', x:.08, y:.58, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:0, side:'l', x:.18, y:.83, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
+          notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
       {id:'mercato', title:'Mercato', summary:'Checkout redesign for an online marketplace', role:'Product designer', company:'Mercato', year:'2020', tags:['E-commerce','Conversion'],
        context:['[[Short context for this project]]'], reflection:["[[What you'd do differently now]]"]},
@@ -1786,7 +1789,7 @@ function renderHeadspaceCase(p, next){
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
   const pair = sc => { const n = sc.imgs.length, off = n === 1 ? [.27] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
     const notes = sc.notes.map(o => ({...o, x: off[o.on] + .46*o.x, y: o.y * sc.imgs[o.on][2] / H}));
-    return `<figure class="anno"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt])=>`<div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
+    return `<figure class="anno${sc.wide?' wide':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt])=>`<div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
       <div class="hs-cap${n===1?' one':''}" style="--n:${n}">${n===1 ? '<span>Headspace UI</span>' : '<span>Original</span><span>Headspace UI</span>'}</div>
       ${notes.length ? `<ol class="anno-list">${notes.map(o=>`<li><b>${o.t}.</b> ${o.d}</li>`).join('')}</ol>` : ''}</figure>`; };
   caseInner.innerHTML = `
@@ -1800,8 +1803,8 @@ function renderHeadspaceCase(p, next){
     ${chapter(2)}
     <ol class="kd hs-steps">${p.process.map((t,k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b></li>`).join('')}</ol>
     ${chapter(3)}
-    ${p.screens.map(sc => `<section class="cs"><h2>${sc.t}</h2><div class="cs-body"></div></section>` + pair(sc)).join('')}
-    <figure class="hs-rainbow"><img src="images/headspace-rainbow.png" alt="Your path to feeling better is just a click away with our healthcare solutions!" loading="lazy"></figure>
+    ${p.screens.map(sc => `<section class="cs"><h2>${sc.t}</h2><div class="cs-body">${sc.deco?`<img class="hs-deco" src="images/${sc.deco[0]}" alt="${sc.deco[1]}" loading="lazy">`:''}</div></section>` + pair(sc)).join('')}
+    <figure class="hs-rainbow" role="img" aria-label="A smiling Headspace character on a rope bridge under a rainbow"><p>Your path to feeling better is just a click away with our healthcare solutions!</p></figure>
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
