@@ -284,6 +284,8 @@ body.chat-view #thread{display:none}
 .art-bar{display:flex;align-items:center;gap:12px;padding:12px 12px 12px 14px}
 .art-ico{width:38px;height:38px;border-radius:11px;background:var(--surface-2);display:grid;place-items:center;flex:none;color:var(--ink-2)}
 .art-ico svg{width:18px;height:18px}
+.art-ico.img{background:none;overflow:hidden}
+.art-ico.img img{width:100%;height:100%;display:block}
 .art-t{min-width:0}
 .art-t b{display:block;font-weight:500;font-size:.9375rem;letter-spacing:-.01em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .art-t small{display:block;color:var(--ink-3);font-size:.8125rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
@@ -335,7 +337,7 @@ body.chat-view #thread{display:none}
 .cs-body p{font-size:1.1875rem;line-height:1.6;color:var(--body);letter-spacing:-.012em;margin:0 0 1em;text-wrap:pretty}
 .cs-body p:last-child{margin-bottom:0}
 .plain{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
-.plain li{padding:16px 0;border-bottom:1px solid var(--line);font-size:1.0625rem;line-height:1.5;color:var(--body);letter-spacing:-.01em}
+.plain li{padding:12px 0;border-bottom:1px solid var(--line);font-size:.9375rem;line-height:1.5;color:var(--body);letter-spacing:-.01em}
 .dec{border-top:1px solid var(--line);padding:32px 0 8px}
 .tl{display:grid;grid-template-columns:1fr;gap:0;margin:0}
 .tl-item{display:grid;grid-template-columns:60px 1fr;gap:0 20px;align-items:start;position:relative}
@@ -365,11 +367,14 @@ body.chat-view #thread{display:none}
   box-shadow:0 1px 2px rgba(15,15,30,.06), 0 20px 50px -28px rgba(40,50,110,.35);transition:transform .35s var(--ease), box-shadow .35s var(--ease)}
 .shot-img:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(15,15,30,.06), 0 28px 60px -26px rgba(40,50,110,.42)}
 .shot-img img{display:block;width:100%;height:auto}
+.shot.sq{max-width:760px}
+.shot.bare .shot-img{background:none;box-shadow:none;border-radius:0}
+.shot.bare .shot-img:hover{transform:none;box-shadow:none}
 .shot.dark .shot-img{background:#04252A}
 .shot figcaption{color:var(--ink-3);font-size:.9375rem;line-height:1.5;margin:14px auto 0;max-width:968px;text-wrap:pretty}
 .shot.in figcaption{margin-left:0}
 .g-critical .pn-pain{background:linear-gradient(135deg,#FDE8E6,#FEF1EF);color:#B3261E}
-.anno{--gut:224px;max-width:1232px;margin:0 auto 104px;padding:0 var(--gut)}
+.anno{--gut:196px;max-width:968px;margin:0 auto 104px;padding:24px var(--gut)}
 .cs + .anno{margin-top:-48px}
 .anno-img{position:relative}
 .anno .shot-img:hover{transform:none}
@@ -386,7 +391,7 @@ body.chat-view #thread{display:none}
 .pin .lbl b{display:block;color:var(--ink);font-weight:500;font-size:.9375rem;letter-spacing:-.01em;margin-bottom:2px}
 .anno-list{display:none}
 .anno figcaption{color:var(--ink-3);font-size:.9375rem;margin:14px 0 0}
-@media (max-width:1180px){
+@media (max-width:1020px){
   .anno{padding:0;max-width:968px}
   .pin{border:0;right:auto!important;left:var(--x)!important;width:0;filter:none}
   .pin::before{content:attr(data-n);width:22px;height:22px;top:-11px;left:-11px!important;right:auto!important;font:600 .75rem/22px var(--sans);color:#fff;text-align:center}
@@ -396,16 +401,71 @@ body.chat-view #thread{display:none}
   .anno-list li::before{content:counter(an);position:absolute;left:0;top:14px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 .75rem/22px var(--sans);text-align:center}
   .anno-list b{font-weight:500;color:var(--ink)}
 }
-.learn{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.learn > div{background:var(--surface-2);border-radius:16px;padding:18px 20px}
-.learn b{display:block;font-weight:500;font-size:1.0625rem;letter-spacing:-.015em;margin-bottom:6px}
-.learn p{margin:0!important;font-size:.9375rem!important;line-height:1.5!important;color:var(--ink-2)!important}
+.toc{max-width:968px;margin:0 auto 128px;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;border-top:1px solid var(--line);padding-top:12px}
+.toc button{text-align:left;font:inherit;font-size:.9375rem;color:var(--ink-2);letter-spacing:-.01em;padding:8px 10px;margin-left:-10px;border-radius:12px;cursor:pointer;transition:background .2s,color .2s}
+.toc button:hover{background:var(--surface-2);color:var(--ink)}
+.toc small{display:block;font-size:.75rem;color:var(--ink-3);margin-bottom:4px}
+.ui-hero{position:relative;max-width:968px;margin:0 auto 40px;container-type:inline-size;cursor:zoom-in}
+.ui-hero img{display:block;width:100%;height:auto}
+.ui-hero.final{margin-bottom:104px}
+.chap{scroll-margin-top:96px}
+.chap{max-width:968px;margin:0 auto 72px;display:flex;align-items:baseline;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
+.chap span{font-size:1rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.chap h2{margin:0;font:400 clamp(2rem,1.4rem + 2.6vw,3.5rem)/1 var(--sans);letter-spacing:-.05em}
+.tline{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.tline li{position:relative;padding:0 0 22px 28px;border-left:1px solid var(--line);margin-left:5px}
+.tline li:last-child{border-left-color:transparent;padding-bottom:0}
+.tline li::before{content:'';position:absolute;left:-6px;top:4px;width:11px;height:11px;border-radius:50%;background:var(--ink)}
+.tline small{display:block;font-size:.8125rem;color:var(--ink-3);margin-bottom:2px}
+.tline b{display:block;font-weight:500;font-size:1.0625rem;letter-spacing:-.015em}
+.tline p{margin:2px 0 0!important;font-size:.9375rem!important;color:var(--ink-2)!important;line-height:1.5!important}
+.cs-body .plain + p{margin-top:1em}
+.kd{list-style:none;max-width:968px;margin:-40px auto 104px;padding:8px 0;display:grid;grid-template-columns:repeat(4,minmax(0,1fr));grid-template-rows:auto auto 1fr auto;color:var(--ink)}
+.kd li{display:grid;grid-row:span 4;grid-template-rows:subgrid;row-gap:0;padding:4px 24px;border-left:1px solid var(--line)}
+.kd li:first-child{padding-left:0}
+.kd li:first-child{border-left:0}
+.kd-n{font-size:.8125rem;color:var(--ink-3,#9a9aa0);margin-bottom:20px;font-variant-numeric:tabular-nums}
+.kd b{font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em;color:var(--ink);margin-bottom:14px;text-wrap:balance}
+.kd p{margin:0 0 20px;font-size:.875rem;line-height:1.55;color:var(--body);text-wrap:pretty}
+.kd .kd-why{margin:0}
+.kd small{display:block;font-size:.8125rem;font-weight:500;color:var(--ink);margin-bottom:6px}
+.kd.light{background:none;color:var(--ink);grid-template-rows:auto 1fr;padding:8px 0;border-radius:0}
+.kd.light li{grid-row:span 2;border-left-color:var(--line)}
+.kd.light li:first-child{padding-left:0}
+.kd.light .kd-n{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;font-size:.875rem;font-weight:600;margin-bottom:20px}
+.kd.light p{margin:0;font-size:1.0625rem;line-height:1.5;color:var(--body);letter-spacing:-.01em}
+@media (max-width:1100px){.kd{grid-template-columns:repeat(2,minmax(0,1fr));grid-template-rows:auto auto 1fr auto auto auto 1fr auto;row-gap:40px}.kd.light{grid-template-rows:auto 1fr auto 1fr}.kd li:nth-child(3){border-left:0;padding-left:0}.kd.light li:nth-child(3){padding-left:0}}
+@media (max-width:760px){.kd,.kd.light{display:block;padding:8px 0;margin-top:-40px}.kd li{display:block;border-left:0;padding:0}.kd .kd-n,.kd b{display:block}.kd.light .kd-n{display:grid}.kd li + li{border-top:1px solid var(--line);padding-top:28px;margin-top:28px}.kd.light li{padding:0}.kd.light li + li{border-top-color:var(--line)}}
+.anno .shot-img{position:relative}
+.anno .drawer{position:absolute;inset:0;width:100%;height:100%;animation:drawer 9s var(--ease) infinite}
+@keyframes drawer{0%,30%{clip-path:inset(100% 0 0 0);opacity:.6} 42%,82%{clip-path:inset(0 0 0 0);opacity:1} 94%,100%{clip-path:inset(100% 0 0 0);opacity:.6}}
+@media (prefers-reduced-motion:reduce){.anno .drawer{display:none}}
+.anno.bare .shot-img{background:none;box-shadow:none;border-radius:0}
+.iter{display:grid;grid-template-columns:1fr 28px 1fr;gap:8px;align-items:stretch;margin-top:20px}
+.iter-col{border-radius:18px;padding:18px 20px}
+.iter-col.fb{background:linear-gradient(135deg,#FFF1EF,#FFF7F4)}
+.iter-col.me{background:linear-gradient(135deg,#EAF7F8,#F2FBF9)}
+.iter-col small{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:4px}
+.iter-col b{display:block;font-weight:500;font-size:1.0625rem;letter-spacing:-.015em;margin-bottom:10px}
+.iter-col ul{margin:0;padding:0 0 0 1.1em;font-size:.9375rem;line-height:1.5;color:var(--body)}
+.iter-col li{margin-bottom:6px}
+.iter-arrow{display:grid;place-items:center;color:var(--ink-3);font-size:1.25rem}
+.zoom img{cursor:zoom-out}
+.dots{margin:0;padding:0 0 0 1.1em;font-size:.9375rem;line-height:1.5;color:var(--ink-2)}
+.dots li{margin-bottom:6px}
+.chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.chips li{padding:7px 14px;border-radius:999px;background:var(--surface-2);font-size:.9375rem;color:var(--body)}
+.learn{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.learn > div{padding:4px 28px 32px}
+.learn > div:nth-child(odd){padding-left:0}
+.learn > div:nth-child(even){border-left:1px solid var(--line)}
+.learn > div:nth-child(n+3){padding-top:32px;border-top:1px solid var(--line)}
+.learn .kd-n{display:block;font-size:.8125rem;color:var(--ink-3);margin-bottom:16px;font-variant-numeric:tabular-nums}
+.learn b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em;color:var(--ink);margin-bottom:12px;text-wrap:balance}
+.learn p{margin:0!important;font-size:.875rem!important;line-height:1.55!important;color:var(--body)!important;text-wrap:pretty}
 .pn-group{margin:0 0 28px}
 .pn-group:last-child{margin-bottom:0}
-.pn-lvl{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:12px}
-.pn-critical{background:#FDE8E6;color:#B3261E}
-.pn-useful{background:#FBF0DE;color:#8A5210}
-.pn-nice{background:#EEF7C8;color:#4F6410}
+.pn-lvl{display:block;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--ink-2);margin-bottom:12px}
 .g-useful .pn-pain{background:linear-gradient(135deg,#FBF0DE,#FDF6EA);color:#8A5210}
 .g-nice .pn-pain{background:linear-gradient(135deg,#EEF7C8,#F6FADF);color:#4F6410}
 .pn-row{display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:stretch;margin-bottom:8px}
@@ -424,7 +484,11 @@ body.chat-view #thread{display:none}
 .zoom img{max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .zoom-x{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:16px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:1.6rem;line-height:1}
 @media (max-width:760px){
-  .learn{grid-template-columns:1fr}
+  .learn{grid-template-columns:1fr}.learn > div{padding:24px 0!important;border-left:0!important;border-top:1px solid var(--line)}.learn > div:first-child{border-top:0;padding-top:4px!important}
+  .iter{grid-template-columns:1fr}
+  .iter-arrow{transform:rotate(90deg);height:24px}
+  .toc{grid-template-columns:repeat(2,1fr);margin-bottom:72px}
+  .chap{margin-bottom:40px}
   .pn-row{grid-template-columns:1fr}
   .pn-arrow{transform:rotate(90deg);height:18px}
   .shot{margin-bottom:72px}
@@ -476,6 +540,15 @@ body.chat-view #thread{display:none}
 /* ——— Product mockups ——— */
 .mk-stage{position:absolute;inset:0;font-size:1cqw;line-height:1.35;color:var(--ink);letter-spacing:-.01em;transform-origin:50% 60%}
 .mk-stage small{font-size:.95em;color:var(--ink-3)}
+.mk-clalit{background:radial-gradient(120% 100% at 50% 0%,#F1FBFC 0%,#D3F1F5 50%,#A8E2EA 100%);overflow:hidden}
+.mk-clalit figure{position:absolute;margin:0;transition:transform .9s var(--ease)}
+.mk-clalit img{display:block;width:100%;height:auto;border:.6cqw solid #fff;border-radius:1.1cqw;box-shadow:0 0 0 1px rgba(31,193,213,.25),0 .4cqw 1cqw rgba(10,96,110,.08),0 3cqw 6cqw rgba(10,96,110,.18)}
+.mk-clalit figcaption{position:absolute;top:-3.4cqw;left:.2cqw;font-size:1.25cqw;font-weight:500;letter-spacing:.01em;color:#0E6E7A;background:rgba(255,255,255,.75);padding:.35cqw .9cqw;border-radius:99px}
+.ck-before{left:6%;top:28%;width:24%;transform:rotate(-5deg)}
+.ck-after{left:27%;top:48%;width:68%;z-index:1}
+.art:hover .ck-after{transform:translateY(-36%)}
+.art:hover .ck-before{transform:rotate(-7deg) translate(-4%,-12%)}
+@media (prefers-reduced-motion:reduce){.mk-clalit figure{transition:none}}
 .av{display:inline-block;width:1.8em;height:1.8em;border-radius:50%;border:.18em solid #fff;flex:none;vertical-align:middle}
 .a1{background:#AFC4FF}.a2{background:#F4C9A8}.a3{background:#AEDCC4}.a4{background:#D6C2F6}
 .mb{display:inline-flex;align-items:center;justify-content:center;padding:.6em 1.2em;border-radius:99em;background:var(--surface-2);font-weight:500;font-size:1em;white-space:nowrap}
@@ -860,80 +933,81 @@ const PROJECTS = [
   {
     id:'clalit', kind:'feature', wide:true, mock:'clalit', ar:'16/9',
     __customCase:true,
-    line:'I spent time on the wards before I opened Figma.',
-    said:'Clalit asked me to design a patient record platform for nursing teams in hospital departments — a real-time board replacing physical whiteboards that created life-threatening information gaps.',
-    title:'Clalit Health Care — Patient Record',
-    summary:'A patient record platform for nursing staff that gives the whole department a clear, up-to-date overview of every patient.',
-    role:'UX Designer', company:'Clalit Health Care', year:'2024',
+    icon:'images/clalit-icon.png',
+    line:'At Clalit, nurses relied on handwritten boards disconnected from the hospital’s digital records, making critical information easy to miss.',
+    said:'I spent time on the wards observing and interviewing nurses to understand how different departments work and what each one needs. Those insights shaped a flexible system that adapts to different workflows while maintaining one consistent foundation. The result is a scalable, real-time patient record designed to work across medical teams, departments, and hospitals nationwide.',
+    title:'Clalit Innovation — Patient Record',
+    summary:'A patient record platform for nursing staff that gives the whole department a clear, current overview of every patient.',
+    role:'UX Designer', company:'Clalit Innovation', year:'2023',
     tags:['Healthcare','User research','Product design'],
     context:[
-      'Nursing teams keep track of who is in every bed on a physical board on the ward wall. It is a separate system from the hospital\'s digital records, updated by hand, and every department has built its own version with its own stickers, colours and codes.',
-      'The goal was a digital patient record board: one clear, up-to-date overview of the department, synchronised in real time with the other health data systems.'
+      'Nursing teams track who is in every bed on a physical board on the ward wall. The board is separate from the hospital\'s digital records and updated by hand, and every department has built its own version with its own stickers, colours and codes.',
+      'The goal was a digital patient record board: one clear, current overview of the department, synchronised in real time with the other health data systems.'
     ],
     myRole:[
-      'Conducted observations in hospitals and user interviews.',
-      'Created low- and high-fidelity wireframes.',
-      'Held user feedback sessions with nursing teams.',
-      'Collaborated with user focus groups, project managers and UI designers.'
+      'Led the research: observed nursing teams on the wards and interviewed them about their daily work.',
+      'Designed the board from low fidelity wireframes to a high fidelity prototype.',
+      'Validated each iteration in feedback sessions with nursing teams and Clalit Innovation project stakeholders.',
+      'Worked closely with project managers and UI designers to bring the design into the Clalit design system.'
     ],
     questions:[
-      'In which situations do they use the patient record, and how?',
-      'What is their work environment?',
-      'At what attention level and workload do they operate the record?',
-      'What does the team\'s interface with the record look like?',
-      'What indicators has each department adopted?',
-      'What is common to all the patient records?'
+      'When and how do they use the patient record?',
+      'What is their work environment like?',
+      'How much attention and workload do they have when they use the record?',
+      'How does the team interact with the record?',
+      'Which indicators has each department adopted?',
+      'What do all the patient records have in common?'
     ],
     learned:[
-      ['Rotating shifts','Flexible environments covering morning, evening and night hours.'],
-      ['Constant interruption','A dynamic, fast-paced flow of information with frequent distractions.'],
-      ['Every unit is different','Each nursing team tailored its work method to its own unit\'s requirements.'],
-      ['The record is safety-critical','All teams depend on the patient record for practical and safety reasons.']
+      ['Rotating shifts','Teams work flexible shifts covering mornings, evenings and nights.'],
+      ['Constant interruption','Information moves fast, with frequent distractions.'],
+      ['Every unit is different','Each nursing team has adapted its way of working to its own unit.'],
+      ['Safety depends on it','Every team relies on the patient record for practical and safety reasons.']
     ],
     pains:[
       {lvl:'Critical', items:[
-        ['There is no effective solution for intermediate patient locations, which decreases the visibility of the department status.','Track patient locations both within and outside the department (e.g. discharged patients).'],
-        ['The physical board is a separate system, which leads to outdated information and potentially life-threatening situations.','A digital board that gives a clear overview and synchronises in real time with other health data systems.'],
-        ['Vital medical information is not presented.','Display clinical information of various types, customisable to each department\'s preferences.']
+        ['There is no good way to show patients who are temporarily elsewhere, so the department status is hard to see.','Track patient locations both inside and outside the department, for example discharged patients.'],
+        ['The physical board is a separate system, so information goes out of date and can lead to life threatening situations.','A digital board that gives a clear overview and syncs in real time with other health data systems.'],
+        ['Vital medical information is missing.','Show different types of clinical information, customisable for each department.']
       ]},
       {lvl:'Useful', items:[
-        ['The bed order and room layout are not presented.','Display the room type, bed count and patient location (e.g. isolation).']
+        ['The bed order and room layout are not shown.','Show the room type, number of beds and patient location, for example isolation.']
       ]},
       {lvl:'Nice to have', items:[
-        ['The room arrangement on the board does not visually match the department layout.','A structural representation closely aligned with the department\'s units.']
+        ['The room arrangement on the board does not match the layout of the department.','A layout that closely follows the department\'s physical units.']
       ]}
     ],
     decisions:[
       {t:'A Kanban board, organised by room',
-       y:'Rooms are columns of cards and each patient is a card, much like the boards the teams already hang on the wall. A Kanban layout is structured but flexible, can be customised per department, and has a clear hierarchy: department, room, bed, patient.',
-       w:'The medical team has established workflows. For the digital system to be adopted, it had to closely resemble the process they already trust.'},
+       y:'Rooms are columns and each patient is a card, like the boards the teams already hang on the wall. The layout is structured but flexible, with a clear hierarchy: department, room, bed, patient.',
+       w:'The medical team has established workflows. To be adopted, the digital board had to resemble the process they already trust.'},
       {t:'Horizontal space over vertical',
-       y:'After the first round of feedback I moved information side by side instead of stacking it: fewer lines per card, with status carried by icons and badges.',
-       w:'The board is read-only and has to show a full department on one screen, with no scrolling or zooming.'},
-      {t:'Colour-coded icon groups',
-       y:'Clinical icons are grouped into categories (sensitivities, treatment, respiratory support, mobility, isolation, privacy), each with its own colour.',
-       w:'When space is limited, many icons create clutter. Colour lets the eye find the right group before reading the icon.'},
+       y:'After the first round of feedback, I placed information side by side instead of stacking it: fewer lines per card, with status shown by icons and badges.',
+       w:'The board is read only and must show a whole department on one screen, with no scrolling or zooming.'},
+      {t:'Icons grouped by colour',
+       y:'Clinical icons are grouped into categories, such as sensitivities, treatment, breathing support, mobility, isolation and privacy, each with its own colour.',
+       w:'With limited space, many icons create clutter. Colour helps the eye find the right group before reading the icon.'},
       {t:'Every patient has a known location',
-       y:'The low-fidelity board had a separate "Not in department" column. In the final design the patient keeps their bed and the card shows where they are: in surgery, in imaging, in another department, on leave, or ready for discharge.',
-       w:'A patient who is out of the room is not a missing patient. Keeping their reserved bed visible was one of the clearest requests from the nursing teams.'}
+       y:'The low fidelity board had a separate "Not in department" column. In the final design, patients keep their bed and the card shows where they are: in surgery, in imaging, in another department, on leave or ready for discharge.',
+       w:'A patient who is out of the room is not missing. Keeping their reserved bed visible was one of the nursing teams\' clearest requests.'}
     ],
     lofiNotes:[
-      {side:'r', x:.79, y:.08, t:'Header', d:'Hospital and department, switchable by permission.'},
-      {side:'r', x:.925, y:.378, t:'Room', d:'Room number or name, number of beds and bed capacity.'},
-      {side:'r', x:.935, y:.74, t:'Patient', d:'Name, gender and medical statuses shown as icons.'},
-      {side:'l', x:.12, y:.17, t:'Not in department', d:'A separate column for patients in another department, in surgery, or discharged.'},
-      {side:'l', x:.30, y:.80, t:'Kanban layout', d:'Rooms as columns: structured but flexible, customisable per department, with a clear hierarchy.'}
+      {side:'r', x:.945, y:.063, t:'Header', d:'Hospital and department switcher.'},
+      {side:'r', x:.975, y:.43, t:'Patient', d:'Name, gender and status icons.'},
+      {side:'r', x:.976, y:.69, t:'Room', d:'Number, beds and capacity.'},
+      {side:'l', x:.02, y:.161, t:'Not in department', d:'Patients elsewhere or discharged.'},
+      {side:'l', x:.216, y:.6, t:'Kanban layout', d:'Rooms as columns.'}
     ],
     fromTeam:[
-      'A real-time summary of department data.',
-      'Different information on each patient card, per department.',
+      'A live summary of department data.',
+      'Different information on patient cards for each department.',
       'Show patients who have a reserved bed but are not in the department.',
-      'Differentiate patients who are ready for discharge.'
+      'Make patients who are ready for discharge stand out.'
     ],
     mine:[
-      'Horizontal space is more valuable than vertical.',
-      'Colour coding alone is not enough to show gender, so it needs an icon.',
-      'Include the bed number on every row.',
+      'Horizontal space is more valuable than vertical space.',
+      'Colour alone is not enough to show gender, so it needs an icon.',
+      'Show the bed number on every row.',
       'Show empty beds instead of hiding them.'
     ],
     outcome:[
@@ -942,10 +1016,36 @@ const PROJECTS = [
       'Delivered as a UI component set (icons, badges, patient and room cards) and final screens in the Clalit design system.'
     ],
     takeaways:[
-      'The medical team has established workflows, so the digital system must closely resemble familiar processes to ensure successful adoption.',
-      'I need to see how a read-only screen looks in extreme situations to ensure accessibility. No scroll, no zoom.',
+      'The medical team has established workflows, so the digital system must closely resemble familiar processes to be adopted.',
+      'To ensure accessibility, I need to see how a read only screen looks in extreme situations, with no scrolling or zooming.',
       'When space is limited, many icons create clutter. Colour coding organises them into groups and makes them easier to tell apart.',
-      'The medical team is a diverse audience, often less familiar with digital tools. What seems trivial has to be carefully considered.'
+      'The medical team is a diverse audience, often less familiar with digital tools. Details that seem trivial need careful thought.'
+    ],
+    timeline:[
+      ['Dec 2023','Kick-off',''],
+      ['Dec 2023','Research','User interviews and observations.'],
+      ['Jan 2024','Concept','Low fidelity wireframes and iterations.'],
+      ['Jan 2024','Prototype and team confirmation','High fidelity wireframes.'],
+      ['Feb 2024','UI design','Implementation in the Clalit design system.']
+    ],
+    observeIntro:'I joined nursing teams in their daily work across youth, adult, internal and surgical departments at Geha and Carmel hospitals.',
+    workflows:'After the research and observations, I wrote a document summarising the workflows around the patient record: the essential information, the use cases and the users\' needs. I then used it to decide which information each department\'s record should show.',
+    hifiNotes:[
+      {side:'r', x:.968, y:.129, t:'Room', d:'Bed capacity indicator removed.'},
+      {side:'r', x:.975, y:.515, t:'Ready for discharge', d:'Marked beside the bed number.'},
+      {side:'r', x:.965, y:.734, t:'Location status', d:'Out of the room, bed still reserved.'},
+      {side:'l', x:.05, y:.345, t:'Patient', d:'Gender, clinical icons and severity badges.'},
+      {side:'l', x:.506, y:.653, t:'Same name', d:'Highlighted when two patients share a name.'},
+      {side:'l', x:.04, y:.969, t:'Summary footer', d:'Opens a reports drawer.'}
+    ],
+    states:['Room number','Empty bed','Ready to discharge','Special room','Exceeding the defined number of beds in a room','Same name','Not in department','24h before release','Critical badge','Location','Status'],
+    compNotes:[
+      {side:'l', x:.10, y:.14, t:'Icons', d:'Grouped by colour.'},
+      {side:'l', x:.096, y:.79, t:'Isolation', d:'One symbol, a marker per type.'},
+      {side:'r', x:.642, y:.16, t:'Patient', d:'Name, ID, location.'},
+      {side:'r', x:.63, y:.36, t:'Badges', d:'Severity and leave.'},
+      {side:'r', x:.985, y:.56, t:'Room', d:'Empty beds stay visible.'},
+      {side:'r', x:.95, y:.945, t:'Ready for discharge', d:'Beside the bed number.'}
     ]
   },
   {
@@ -1041,13 +1141,7 @@ const MOCKS = {
   },
 
   clalit(){
-    return '<div class="mk-stage" style="background:linear-gradient(135deg,#EEF4FF 0%,#F6F0FF 55%,#FFF2FA);padding:3em 2.5em;font-size:1.25cqw;display:flex;flex-direction:column;justify-content:center">'
-    + '<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2em">'
-    + '<div class="kroom"><div class="kroom-head"><b>Room 201</b><span style="color:var(--ink-3);font-size:.85em">2 beds</span></div><div class="kcard"><span class="kname">Y. Cohen</span><span class="kmeta">Bed 1</span><div class="kicons"><i class="kicon"></i><i class="kicon"></i></div></div></div>'
-    + '<div class="kroom"><div class="kroom-head"><b>Room 202</b><span style="color:var(--ink-3);font-size:.85em">3 beds</span></div><div class="kcard"><span class="kname">D. Levi</span><span class="kmeta">Bed 2</span><span class="kbadge green">Ready</span></div><div class="kcard"><span class="kname">M. Shapiro</span><span class="kmeta">Bed 3</span></div></div>'
-    + '<div class="kroom"><div class="kroom-head"><b>Room 203</b><span style="color:var(--ink-3);font-size:.85em">2 beds</span></div><div class="kcard"><span class="kname">A. Ben-David</span><span class="kmeta">Bed 1</span></div><div class="kcard ghost"><span style="color:var(--ink-3)">Empty</span></div></div>'
-    + '<div class="kroom"><div class="kroom-head"><b style="color:var(--ink-2)">Not in dept</b></div><div class="kcard ghost"><span class="kname" style="color:var(--ink-2)">N. Mizrahi</span><span class="kmeta" style="font-size:.8em">In surgery</span></div><div class="kcard ghost"><span class="kname" style="color:var(--ink-2)">S. Peretz</span><span class="kmeta" style="font-size:.8em">Discharged</span></div></div>'
-    + '</div><div style="display:flex;gap:2em;margin-top:1.8em;font-size:.85em;color:var(--ink-3);padding-top:1em;border-top:1px solid var(--line)"><span>&#x1F6CF;&#xFE0F; 10 beds</span><span>&#x1F3E5; 7 patients</span><span>&#x2705; 1 ready</span></div></div>';
+    return '<div class="mk-stage mk-clalit"><figure class="ck-before"><img src="images/clalit-thumb-board.jpg" alt="" draggable="false"><figcaption>Before</figcaption></figure><figure class="ck-after"><img src="images/clalit-ui.png" alt="" draggable="false"><figcaption>After</figcaption></figure></div>';
   },
   found(){
     return `<div class="mk-stage mk-found">
@@ -1121,8 +1215,9 @@ function stamp(p){
   const latest = +PROJECTS[0].year;
   if (p.kind === 'group') return {rel:'Ongoing', abs:'Side projects'};
   if (p.kind === 'archive'){ const ys = p.items.flatMap(i => i.year.split('–').map(Number)); return {rel:'Archived', abs:`${Math.min(...ys)}–${Math.max(...ys)}`}; }
-  const d = latest - +p.year;
-  return {rel: d === 0 ? 'Now' : d === 1 ? 'Last year' : `${d} years ago`, abs: d === 0 ? `${p.year}, present` : p.year, live: d === 0};
+  if (+p.year === latest) return {rel:'Now', abs:`${p.year}, present`, live:true};
+  const d = new Date().getFullYear() - +p.year;
+  return {rel: d <= 1 ? 'Last year' : `${d} years ago`, abs: p.year};
 }
 function groupLabel(p){ return p.kind==='feature' ? p.year : p.kind==='group' ? 'Side projects' : 'Earlier work'; }
 function projectMsg(p){
@@ -1130,7 +1225,7 @@ function projectMsg(p){
     ${who(`${p.line} ${p.said || ''}`, p.company.replace(/\s*\(.*\)/,''))}
     <div class="m-body">
       <a class="art" href="#/${p.id}" data-open="${p.id}" aria-label="Open ${p.title} case study">
-        <div class="art-bar"><span class="art-ico" aria-hidden="true">${ICO_DOC}</span>
+        <div class="art-bar"><span class="art-ico${p.icon?' img':''}" aria-hidden="true">${p.icon?`<img src="${p.icon}" alt="">`:ICO_DOC}</span>
           <span class="art-t"><b>${p.title}</b><small>Case study, ${p.role.toLowerCase()}</small></span>
           <span class="art-open" aria-hidden="true">Open <span>→</span></span></div>
         ${visual(p)}
@@ -1560,19 +1655,49 @@ let current = null, returnFocus = null;
 function section(title, inner){ return inner ? `<section class="cs"><h2>${title}</h2><div class="cs-body">${inner}</div></section>` : ''; }
 function renderClalitCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
+  /* Real screens live in images/; a figure whose file is missing removes itself. */
+  const shot = (src, alt, cls='', cap='') => `<figure class="shot ${cls}"><div class="shot-img"><img src="images/${src}" alt="${alt}"  onerror="this.closest('figure').remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const CH = ['Overview','User research','Wireframes','User interface','Takeaways'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  const pains = p.pains.map(g => { const k = g.lvl.toLowerCase().startsWith('crit') ? 'critical' : g.lvl.toLowerCase().startsWith('use') ? 'useful' : 'nice';
+    return `<div class="pn-group g-${k}"><span class="pn-lvl pn-${k}">${g.lvl}</span>${g.items.map(([a,b])=>`<div class="pn-row"><div class="pn-pain">${a}</div><div class="pn-arrow" aria-hidden="true">→</div><div class="pn-need">${b}</div></div>`).join('')}</div>`; }).join('');
+  const kv = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
+  const decisions = `<ol class="kd">${p.decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>`;
+  const takeaways = `<ol class="kd light">${p.takeaways.map((t,k)=>`<li><span class="kd-n">${k+1}</span><p>${rich(t)}</p></li>`).join('')}</ol>`;
+  const iteration = `<p>I tested the low fidelity board in feedback sessions with nursing teams. On the left is what they told me, and on the right is what I took into the next version.</p>
+    <div class="iter"><div class="iter-col fb"><small>Feedback on the low fidelity board</small><b>From the nursing team</b><ul>${p.fromTeam.map(x=>`<li>${x}</li>`).join('')}</ul></div>
+    <div class="iter-arrow" aria-hidden="true">→</div>
+    <div class="iter-col me"><small>What I learned</small><b>My understandings</b><ul>${p.mine.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
+  const anno = (imgs, notes, cls='') => `<figure class="anno ${cls}"><div class="anno-img"><div class="shot-img">${imgs}</div>${notes.map((n,k)=>`<span class="pin ${n.side}" data-n="${k+1}" style="--x:${n.x*100}%;--y:${n.y*100}%"><span class="lbl"><b>${n.t}</b>${n.d}</span></span>`).join('')}</div><ol class="anno-list">${notes.map(n=>`<li><b>${n.t}.</b> ${n.d}</li>`).join('')}</ol></figure>`;
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.summary}</p>${metaDL(p)}</header>
-    ${section('Context', paras(p.context))}
-    ${section('Problem', paras(p.problem))}
-    ${section('My role', paras(p.myRole))}
-    ${section('Constraints', p.constraints ? `<ul class="plain">${p.constraints.map(c=>`<li>${c}</li>`).join('')}</ul>` : '')}
-    ${section('Outcome', `<ul class="plain">${p.outcome.map(o=>`<li>${rich(o)}</li>`).join('')}</ul>`)}
-    <div class="timeline">
-      <div class="tl-item"><div class="tl-dot"><i></i></div><div class="tl-label">Dec 2023</div><div class="tl-body"><b>Research & discovery</b><p>Analyzed patient workflows and identified key pain points across different user groups.</p></div></div>
-      <div class="tl-item"><div class="tl-dot"><i></i></div><div class="tl-label">Jan 2024</div><div class="tl-body"><b>Design & iteration</b><p>Created wireframes and high-fidelity designs, tested with users, and iterated based on feedback.</p></div></div>
-      <div class="tl-item"><div class="tl-dot"><i></i></div><div class="tl-label">Feb 2024</div><div class="tl-body"><b>UI implementation</b><p>Handed off for build within the Clalit design system.</p></div></div>
-    </div>
-    ${section('Takeaways', p.takeaways ? `<ol class="tk">${p.takeaways.map(t=>`<li>${rich(t)}</li>`).join('')}</ol>` : '')}
+    <nav class="toc" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
+    ${chapter(1)}
+    ${section('The project', paras(p.context))}
+    ${section('Role', `<p>As the UX designer of the project I:</p><ul class="plain">${p.myRole.map(r=>`<li>${r}</li>`).join('')}</ul>`)}
+    ${section('Timeline', `<ol class="tline">${p.timeline.map(([d,t,b])=>`<li><small>${d}</small><b>${t}</b>${b?`<p>${b}</p>`:''}</li>`).join('')}</ol>`)}
+    ${chapter(2)}
+    ${section('Observations', `<p>${p.observeIntro}</p><ul class="plain">${p.questions.map(q=>`<li>${q}</li>`).join('')}</ul><p>The information gathered gave me valuable insight into the challenges and needs of the nursing teams.</p>`)}
+    ${shot('clalit-boards.jpg','Physical patient boards on the wards at Geha and Carmel','sq', 'The physical boards each department had built for itself.')}
+    ${section('What I learned as a fly on the wall', kv(p.learned))}
+    ${section('Pain points and needs', pains)}
+    ${chapter(3)}
+    ${section('Workflows', `<p>${p.workflows}</p>`)}
+    ${section('Low fidelity', '<p>A Kanban layout: structured but flexible, customisable per department, with a clear hierarchy.</p>')}
+    ${anno('<img src="images/clalit-lofi.png" alt="Low fidelity patient board">', p.lofiNotes)}
+    ${section('What the first iteration taught me', iteration)}
+    ${chapter(4)}
+    ${section('High fidelity', '<p>The board after the first round of feedback. The summary footer opens a reports drawer.</p>')}
+    ${anno('<img src="images/clalit-hifi.png" alt="High fidelity patient board"><img class="drawer" src="images/clalit-hifi-drawer.png" alt="" aria-hidden="true">', p.hifiNotes)}
+    ${section('Card states', '<p>Every state a room or patient card can be in, from an empty bed to a patient who is out of the department.</p>')}
+    ${shot('clalit-states.png','Patient and room card states','bare')}
+    ${section('Key decisions', '<p>Four decisions shaped the final board.</p>')}
+    ${decisions}
+    ${section('UI components', '<p>Delivered as a component set in the Clalit design system: icons, badges, patient cards and room cards.</p>')}
+    ${anno('<img src="images/clalit-components.png" alt="UI component set: rooms, patients, badges and icons">', p.compNotes, 'bare')}
+    <div class="ui-hero final"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
+    ${chapter(5)}
+    ${takeaways}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
@@ -1642,7 +1767,19 @@ function goBack(){
   else { history.replaceState(null,'',location.pathname+location.search); closeCase(); }
 }
 caseBack.addEventListener('click', goBack);
+/* Lightbox for case-study images */
+const zoomEl = document.createElement('div');
+zoomEl.className = 'zoom'; zoomEl.hidden = true;
+zoomEl.innerHTML = '<button class="zoom-x" type="button" aria-label="Close">×</button><img alt="">';
+document.body.appendChild(zoomEl);
+const closeZoom = () => { zoomEl.hidden = true; zoomEl.querySelector('img').src = ''; };
+zoomEl.addEventListener('click', closeZoom);
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !zoomEl.hidden){ e.stopImmediatePropagation(); closeZoom(); } }, true);
 caseEl.addEventListener('click', e => {
+  const z = e.target.closest('.shot-img, .ui-hero');
+  if (z){ const im = z.querySelector('img'); if (im){ zoomEl.querySelector('img').src = im.currentSrc || im.src; zoomEl.querySelector('img').alt = im.alt; zoomEl.hidden = false; } return; }
+  const g = e.target.closest('[data-goto]');
+  if (g){ const t = document.getElementById(g.dataset.goto); if (t) t.scrollIntoView({behavior: reduced.matches ? 'auto' : 'smooth', block:'start'}); return; }
   if (e.target.closest('[data-back]')) goBack();
   const n = e.target.closest('[data-next]'); if (n){ e.preventDefault(); openCase(n.dataset.next, null, true); }
 });
