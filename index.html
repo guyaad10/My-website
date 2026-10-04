@@ -743,11 +743,12 @@ html.theme-dark{
   --veilcol:#0F1318; --fadecol:#0F1318;
   color-scheme:dark;
 }
-/* mockups and zoomed shots are artwork: keep them in their light palette */
-html.theme-dark .visual{
+/* mockups are artwork and case studies stay light: both keep the light palette */
+html.theme-dark .visual,html.theme-dark .case{
   --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#F4F4F5; --surface-3:#E7E7EA;
   --ink:#0E0E10; --ink-2:#66666E; --ink-3:#A0A0A8; --line:#ECECEF; --body:#34343A;
   --accent:#3B5BFD; --accent-soft:#EEF1FF; --ok:#1F8A5B; --ok-soft:#E4F4EC; --warn:#B26A12; --warn-soft:#FBF0DE;
+  --on-ink:#FFFFFF; --ink-hover:#2a2a2e;
   color:var(--ink); color-scheme:light;
 }
 html.theme-dark .fx-veil{background:var(--veilcol)}
@@ -769,24 +770,6 @@ html.theme-dark .view:hover,html.theme-dark .btn.pri:hover{background:var(--ink-
 html.theme-dark .divider.stuck .stamp{background:rgba(15,19,24,.95);box-shadow:0 6px 18px -10px rgba(0,0,0,.6)}
 html.theme-dark .art{background:var(--surface);box-shadow:none}
 @media (hover:hover){html.theme-dark .art:hover{border-color:var(--surface-3);box-shadow:0 22px 50px -26px rgba(0,0,0,.7)}}
-html.theme-dark .case-bar{background:rgba(15,19,24,.96)}
-html.theme-dark .pin{filter:drop-shadow(0 0 1.5px rgba(0,0,0,.9))}
-html.theme-dark .pin::before{box-shadow:0 0 0 2px var(--bg)}
-html.theme-dark .shot-img{box-shadow:0 1px 2px rgba(0,0,0,.3), 0 20px 50px -28px rgba(0,0,0,.7)}
-html.theme-dark .pp.crit,html.theme-dark .iter-col.fb,html.theme-dark .pn-pain{background:linear-gradient(135deg,#2A1A1A,#261C19)}
-html.theme-dark .pn-pain{color:#F2B4A8}
-html.theme-dark .pp.nice{background:linear-gradient(135deg,#16261C,#22241A)}
-html.theme-dark .iter-col.me,html.theme-dark .pn-need{background:linear-gradient(135deg,#132629,#162724)}
-html.theme-dark .pn-need{color:#9ED9DE}
-html.theme-dark .g-critical .pn-pain{background:linear-gradient(135deg,#341A18,#2C1B19);color:#FF9C90}
-html.theme-dark .g-useful .pn-pain{background:linear-gradient(135deg,#2E2414,#2A2318);color:#EDBE7A}
-html.theme-dark .g-nice .pn-pain{background:linear-gradient(135deg,#232A12,#242818);color:#C5D97A}
-html.theme-dark .dec-grid div.chose{background:linear-gradient(135deg,#1E2542,#251F40)}
-html.theme-dark .dec-grid .chose small{color:#A9ABFF}
-html.theme-dark .flow{background:linear-gradient(135deg,#171C2B,#1C1A2B 55%,#271E1C)}
-html.theme-dark .flow li{background:rgba(255,255,255,.05)}
-html.theme-dark .flow .after li{background:var(--surface-3);box-shadow:0 8px 20px -12px rgba(0,0,0,.6)}
-html.theme-dark .todo{color:#B5B8FF;background:#22244A}
 </style>
 </head>
 <body class="state-intro">
