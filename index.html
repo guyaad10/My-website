@@ -399,6 +399,8 @@ body.chat-view #thread{display:none}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
 .ui-hero.hs-hero{border-radius:20px;overflow:hidden}
+.hs-quote{margin-bottom:48px}
+.ui-hero.hs-sky{margin-bottom:104px}
 .hs-cap{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;margin-top:14px;color:var(--ink-3);font-size:.9375rem;text-align:center}
 .hs-cap.one{grid-template-columns:46%;justify-content:center}
 .hs-quote{max-width:760px;margin:0 auto 104px;text-align:center}
@@ -1126,7 +1128,6 @@ const PROJECTS = [
       {id:'headspace', __case:'headspace', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UI and UX designer', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
-       scope:[['Scope','Redesign an existing digital service'],['Role','UI design, illustration, UX design'],['Duration','1 week']],
        why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
        quote:['Physical health is inseparable from emotional and mental health. In nurturing one, we fortify the others, creating a harmonious symphony of well-being.','World Health Organization'],
        process:['Original UX wireframes','UX tweaks and improvements','Headspace design system implementation'],
@@ -1789,10 +1790,10 @@ function renderHeadspaceCase(p, next){
     <div class="ui-hero hs-hero"><img src="images/headspace-hero.png" alt="Headspace-style illustrations around a Clalit app screen"></div>
     <nav class="toc c3" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
-    ${section('The project', paras(p.context))}
-    ${section('Scope', `<ol class="tline">${p.scope.map(([k,v])=>`<li><small>${k}</small><b>${v}</b></li>`).join('')}</ol>`)}
+    ${section('About', paras(p.context))}
     ${section('So why Headspace?', `<p>${p.why}</p>`)}
     <blockquote class="hs-quote"><p>“${p.quote[0]}”</p><cite>${p.quote[1]}</cite></blockquote>
+    <div class="ui-hero hs-hero hs-sky"><img src="images/headspace-sky.png" alt="A smiling Headspace sun rising over clouds" loading="lazy"></div>
     ${chapter(2)}
     <ol class="kd hs-steps">${p.process.map((t,k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b></li>`).join('')}</ol>
     ${chapter(3)}
