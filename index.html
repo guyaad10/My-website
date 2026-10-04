@@ -398,7 +398,7 @@ body.chat-view #thread{display:none}
 .hs-pair.one{grid-template-columns:46%;justify-content:center}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
-.ui-hero.hs-hero{max-width:839px}
+.ui-hero.hs-hero{border-radius:20px;overflow:hidden}
 .hs-cap{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;margin-top:14px;color:var(--ink-3);font-size:.9375rem;text-align:center}
 .hs-cap.one{grid-template-columns:46%;justify-content:center}
 .hs-quote{max-width:760px;margin:0 auto 104px;text-align:center}
@@ -1786,7 +1786,7 @@ function renderHeadspaceCase(p, next){
       ${notes.length ? `<ol class="anno-list">${notes.map(o=>`<li><b>${o.t}.</b> ${o.d}</li>`).join('')}</ol>` : ''}</figure>`; };
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.intro}</p>${metaDL(p)}</header>
-    <div class="ui-hero hs-hero"><img src="images/headspace-hero.png" alt="Three Clalit screens redesigned in the Headspace style"></div>
+    <div class="ui-hero hs-hero"><img src="images/headspace-hero.png" alt="Headspace-style illustrations around a Clalit app screen"></div>
     <nav class="toc c3" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
     ${section('The project', paras(p.context))}
