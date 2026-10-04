@@ -395,14 +395,7 @@ body.chat-view #thread{display:none}
 /* Clalit × Headspace case study */
 .hs-pair{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;align-items:start}
 .hs-pair[style*="--n:3"],.hs-cap[style*="--n:3"]{gap:0 5%}
-.anno.num .pin{border:0;right:auto;left:var(--x);width:0;filter:none}
-.anno.num .pin::before{content:attr(data-n);width:22px;height:22px;top:-11px;left:-11px;font:600 .75rem/22px var(--sans);color:#fff;text-align:center}
-.anno.num .pin .lbl{display:none}
-.anno.num .anno-list{display:grid;grid-template-columns:1fr 1fr;gap:0 32px;list-style:none;margin:28px 0 0;padding:0;counter-reset:an}
-.anno.num .anno-list li{counter-increment:an;position:relative;padding:14px 0 14px 38px;border-top:1px solid var(--line);font-size:1rem;line-height:1.5;color:var(--body)}
-.anno.num .anno-list li::before{content:counter(an);position:absolute;left:0;top:14px;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 .75rem/22px var(--sans);text-align:center}
-.anno.num .anno-list b{font-weight:500;color:var(--ink)}
-@media (max-width:760px){.anno.num .anno-list{grid-template-columns:1fr}}
+.anno.rgut{max-width:1160px;padding:24px var(--gut) 24px 0}
 .hs-pair.one{grid-template-columns:46%;justify-content:center}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
@@ -1202,8 +1195,8 @@ const PROJECTS = [
          {t:'My medical file', imgs:[['headspace-file-original.png','Original medical file screen',541],['headspace-file-ui.png','Medical file in the Headspace style',541]],
           notes:[{on:1, side:'r', x:.55, y:.09, t:'Clearer heading', d:'A better heading for orientation.'},{on:1, side:'r', x:.8, y:.3, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
          {t:'Categories', wide:true, deco:['headspace-virus.png','Two smiling Headspace-style virus characters'], imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
-         {t:'Test results', imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-ui.png','Test results in the Headspace style',950],['headspace-results-sheet.png','Test details open in a bottom sheet',541]], cap3:'Bottom sheet', wide:true, num:true,
-          notes:[{on:1, side:'r', x:.965, y:.155, t:'Hide notes', d:'An option to hide notification notes.'},{on:1, side:'r', x:.965, y:.44, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
+         {t:'Test results', caps:['Original','Bottom sheet','Headspace UI'], rgut:true, imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-sheet.png','Test details open in a bottom sheet',541],['headspace-results-ui.png','Test results in the Headspace style',950]],
+          notes:[{on:2, side:'r', x:.965, y:.155, t:'Hide notes', d:'An option to hide notification notes.'},{on:2, side:'r', x:.965, y:.44, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
          {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
@@ -1841,8 +1834,8 @@ function renderHeadspaceCase(p, next){
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
   const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
     const notes = sc.notes.map(o => ({...o, x: off[o.on] + w*o.x, y: o.y * sc.imgs[o.on][2] / H}));
-    return `<figure class="anno${sc.wide?' wide':''}${sc.num?' num':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt])=>`<div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
-      <div class="hs-cap${n===1?' one':''}" style="--n:${n}">${(n===1 ? ['Headspace UI'] : ['Original','Headspace UI',...(sc.cap3?[sc.cap3]:[])]).map(t=>`<span>${t}</span>`).join('')}</div>
+    return `<figure class="anno${sc.wide?' wide':''}${sc.rgut?' rgut':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt])=>`<div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
+      <div class="hs-cap${n===1?' one':''}" style="--n:${n}">${(sc.caps || (n===1 ? ['Headspace UI'] : ['Original','Headspace UI'])).map(t=>`<span>${t}</span>`).join('')}</div>
       ${notes.length ? `<ol class="anno-list">${notes.map(o=>`<li><b>${o.t}.</b> ${o.d}</li>`).join('')}</ol>` : ''}</figure>`; };
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.intro}</p>${metaDL(p)}</header>
