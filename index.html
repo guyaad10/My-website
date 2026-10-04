@@ -407,14 +407,28 @@ body.chat-view #thread{display:none}
 .og-persona dd{margin:2px 0 0;font-size:.9375rem;line-height:1.5;color:var(--body)}
 .og-persona blockquote{margin:18px 0 0;padding-top:14px;border-top:1px solid rgba(0,0,0,.08);font-size:1rem;line-height:1.5;color:var(--ink);font-style:italic}
 .og-chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 1.2em;padding:0;list-style:none}
-.og-chips li{font-size:.875rem;padding:6px 12px;border-radius:99px;background:var(--surface-2);color:var(--ink-2)}
-.og-hero{max-width:720px;margin:0 auto 72px}
+.og-chips li{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;padding:4px 12px 4px 4px;border-radius:99px;background:var(--surface-2);color:var(--ink-2)}
+.og-chips img{width:24px;height:24px;border-radius:50%;display:block}
+.og-persona{display:grid;grid-template-columns:170px minmax(0,1fr);gap:28px;align-items:start}
+.og-sticker{width:100%;height:auto;display:block;transform:rotate(-3deg);margin-top:-6px;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
+.shot.og-flow{max-width:840px}
+.shot.og-flow .shot-img{background:#1A1B1E;padding:56px 64px}
+.shot.og-canvas .shot-img{background:none;box-shadow:none;border-radius:0}
+.shot.og-canvas .shot-img:hover{transform:none;box-shadow:none}
+.shot.og-s{max-width:600px}.shot.og-m{max-width:700px}.shot.og-l{max-width:860px}
+.og-pair{max-width:520px;margin:-48px auto 104px}
+.og-pair-row{display:grid;grid-template-columns:1fr 1fr;gap:40px}
+.og-pair .shot-img{background:none;box-shadow:none;border-radius:0}
+.og-pair .shot-img:hover{transform:none;box-shadow:none}
+.og-pair span{display:block;text-align:center;margin-top:12px;font-size:.9375rem;font-weight:500;color:var(--ink)}
+.og-pair figcaption{color:var(--ink-3);font-size:.9375rem;line-height:1.5;margin:20px 0 0;text-align:center;text-wrap:pretty}
+.ui-hero.og-hero{max-width:520px;margin:0 auto 72px}
 .og-pal{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:16px 12px}
 .og-pal li{font-size:.8125rem;color:var(--ink-2)}
 .og-pal i{display:block;aspect-ratio:1;border-radius:14px;margin-bottom:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
 .og-pal small{display:block;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .og-icons{display:block;width:100%;height:auto;margin-top:32px}
-@media (max-width:760px){.toc.c4{grid-template-columns:repeat(2,1fr)}.og-pal{grid-template-columns:repeat(4,1fr)}}
+@media (max-width:760px){.og-persona{grid-template-columns:1fr}.og-sticker{width:150px}.shot.og-flow .shot-img{padding:24px}.og-pair-row{gap:20px}.toc.c4{grid-template-columns:repeat(2,1fr)}.og-pal{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:1020px){
   .anno{padding:0;max-width:968px}
   .pin{border:0;right:auto!important;left:var(--x)!important;width:0;filter:none}
@@ -1791,23 +1805,23 @@ function renderOffgridCase(p, next){
     ${chapter(2)}
     ${section('User interviews', '<p>I interviewed seven people from the target audience. All travel at least twice a year, and all had been abroad in the six months before the interview.</p>')}
     ${section('What I heard', kv(findings))}
-    ${section('Persona', `<div class="og-persona"><b>Roni Klein</b><small>29, Tel Aviv. Legal consultant at a tech company.</small><p>Roni travels twice a year for work. In her free time she looks for new food and art places and avoids tourist sites.</p>
+    ${section('Persona', `<div class="og-persona"><img class="og-sticker" src="images/offgrid-persona.webp" alt="Photo of Roni, the persona, taped on like a polaroid" loading="lazy"><div><b>Roni Klein</b><small>29, Tel Aviv. Legal consultant at a tech company.</small><p>Roni travels twice a year for work. In her free time she looks for new food and art places and avoids tourist sites.</p>
       <dl><div><dt>Needs</dt><dd>To track her trip and see each day's agenda in an easy, visual way.</dd></div><div><dt>Wants</dt><dd>To find new places that match her interests.</dd></div><div><dt>Expects</dt><dd>An efficient itinerary, optimised for distance, opening hours, crowds and budget.</dd></div></dl>
-      <blockquote>“I'm sluggish when planning a trip overseas, especially on tourist websites that recommend the same places I don't care about.”</blockquote></div>`)}
-    ${section('Competitive research', `<p>I ran a heuristic evaluation of eight trip planning products.</p><ul class="og-chips">${['Lambus','Maps.me','Sygic Travel','Tripadvisor','Visit a City','TripIt','Pluto','Wanderlog'].map(c=>`<li>${c}</li>`).join('')}</ul><p>Most have an explore section for inspiration, but the content is the same touristic "must-see" list. None lets you browse trips from people who share your interests.</p>`)}
+      <blockquote>“I'm sluggish when planning a trip overseas, especially on tourist websites that recommend the same places I don't care about.”</blockquote></div></div>`)}
+    ${section('Competitive research', `<p>I ran a heuristic evaluation of eight trip planning products.</p><ul class="og-chips">${[['Lambus','lambus'],['Maps.me','mapsme'],['Sygic Travel','sygic'],['Tripadvisor','tripadvisor'],['Visit a City','visitacity'],['TripIt','tripit'],['Pluto','pluto'],['Wanderlog','wanderlog']].map(([c,f])=>`<li><img src="images/offgrid-logos/${f}.webp" alt="" width="24" height="24">${c}</li>`).join('')}</ul><p>Most have an explore section for inspiration, but the content is the same touristic "must-see" list. None lets you browse trips from people who share your interests.</p>`)}
     <div class="og-quote"><small>Value proposition</small><p>A trip planner that builds an itinerary from your interests and your available time, on the best route for each day.</p></div>
     ${chapter(3)}
     ${section('User flows', '<p>Two core flows came out of the research: creating a new trip and editing it.</p>')}
-    ${shot('userflow','User flows for creating and editing a trip')}
+    ${shot('userflow','User flows for creating and editing a trip','','og-flow')}
     ${section('Wireframes', '<p>I kept the structure simple and familiar: a trip wizard, a home page and My trips, with drill down navigation from a trip to a day to a single stop. More than 50 mid fidelity screens covered every flow.</p>')}
     ${shot('wireframes','Mid fidelity wireframes')}
     ${section('Usability testing', '<p>I tested a prototype with six participants from the target audience, across eight sets of tasks. The focus was efficiency, anxiety and discoverability, and the results drove a round of fixes.</p>')}
-    ${shot('ut','Interest picker before and after testing','Before and after: interests grouped into cards, an icon beside each title for quicker scanning, and "Show less" moved to the end of each card for clearer progressive disclosure.')}
+    <figure class="og-pair"><div class="og-pair-row"><div><div class="shot-img"><img src="images/offgrid-ut-before.webp" alt="Interest picker before testing" loading="lazy"></div><span>Before</span></div><div><div class="shot-img"><img src="images/offgrid-ut-after.webp" alt="Interest picker after testing" loading="lazy"></div><span>After</span></div></div><figcaption>Before and after: interests grouped into cards, an icon beside each title for quicker scanning, and "Show less" moved to the end of each card for clearer progressive disclosure.</figcaption></figure>
     ${chapter(4)}
     ${section('Look and feel', `<p>Youthful but informative. The app is full of photos, so black is the primary colour to balance the visual load, with bright accents to keep discovering new places fun. Type is set in Poppins.</p>
       <ul class="og-pal">${[['Primary','#27272A'],['Neutral','#72747B'],['Neutral','#F2F2F6'],['Accent','#DCED59'],['Accent','#FF471A'],['Accent','#BCBBFF'],['Accent','#0A5748']].map(([n,c])=>`<li><i style="background:${c}"></i>${n}<small>${c}</small></li>`).join('')}</ul>
       <img class="og-icons" src="images/offgrid-icons.webp" alt="The Off Grid icon set: line icons and colourful category icons" loading="lazy">`)}
-    ${screens.map(([t,d,src,alt]) => section(t, `<p>${d}</p>`) + shot(src, alt, '', src==='home'?'sq':'')).join('')}
+    ${screens.map(([t,d,src,alt]) => section(t, `<p>${d}</p>`) + shot(src, alt, '', {home:'og-canvas og-s',trip:'og-canvas og-m',edit:'og-canvas og-l',newtrip:'og-canvas og-l',map:'og-canvas'}[src]||'')).join('')}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
