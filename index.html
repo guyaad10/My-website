@@ -538,6 +538,9 @@ body.chat-view #thread{display:none}
 /* ——— Product mockups ——— */
 .mk-stage{position:absolute;inset:0;font-size:1cqw;line-height:1.35;color:var(--ink);letter-spacing:-.01em;transform-origin:50% 60%}
 .mk-stage small{font-size:.95em;color:var(--ink-3)}
+.mk-clalit{background:radial-gradient(120% 90% at 50% 0%,#F4FBFF 0%,#DDF0FA 55%,#C9E7F6 100%);overflow:hidden}
+.mk-clalit img{position:absolute;left:4%;top:13%;width:92%;height:auto;border-radius:1.2cqw 1.2cqw 0 0;box-shadow:0 .4cqw 1cqw rgba(9,73,110,.08),0 3cqw 6cqw rgba(9,73,110,.16);transition:transform .8s var(--ease)}
+.art:hover .mk-clalit img{transform:translateY(-1%)}
 .av{display:inline-block;width:1.8em;height:1.8em;border-radius:50%;border:.18em solid #fff;flex:none;vertical-align:middle}
 .a1{background:#AFC4FF}.a2{background:#F4C9A8}.a3{background:#AEDCC4}.a4{background:#D6C2F6}
 .mb{display:inline-flex;align-items:center;justify-content:center;padding:.6em 1.2em;border-radius:99em;background:var(--surface-2);font-weight:500;font-size:1em;white-space:nowrap}
@@ -927,7 +930,7 @@ const PROJECTS = [
     said:'I spent time on the wards observing and interviewing nurses before I opened Figma, then designed a real-time patient record board around the way they already work. The result gives the whole department one clear, current view of every room, bed and patient at a glance.',
     title:'Clalit Health Care — Patient Record',
     summary:'A patient record platform for nursing staff that gives the whole department a clear, current overview of every patient.',
-    role:'UX Designer', company:'Clalit Health Care', year:'2024',
+    role:'UX Designer', company:'Clalit Health Care', year:'2023',
     tags:['Healthcare','User research','Product design'],
     context:[
       'Nursing teams track who is in every bed on a physical board on the ward wall. The board is separate from the hospital\'s digital records and updated by hand, and every department has built its own version with its own stickers, colours and codes.',
@@ -1130,13 +1133,7 @@ const MOCKS = {
   },
 
   clalit(){
-    return '<div class="mk-stage" style="background:linear-gradient(135deg,#EEF4FF 0%,#F6F0FF 55%,#FFF2FA);padding:3em 2.5em;font-size:1.25cqw;display:flex;flex-direction:column;justify-content:center">'
-    + '<div style="display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:1.2em">'
-    + '<div class="kroom"><div class="kroom-head"><b>Room 201</b><span style="color:var(--ink-3);font-size:.85em">2 beds</span></div><div class="kcard"><span class="kname">Y. Cohen</span><span class="kmeta">Bed 1</span><div class="kicons"><i class="kicon"></i><i class="kicon"></i></div></div></div>'
-    + '<div class="kroom"><div class="kroom-head"><b>Room 202</b><span style="color:var(--ink-3);font-size:.85em">3 beds</span></div><div class="kcard"><span class="kname">D. Levi</span><span class="kmeta">Bed 2</span><span class="kbadge green">Ready</span></div><div class="kcard"><span class="kname">M. Shapiro</span><span class="kmeta">Bed 3</span></div></div>'
-    + '<div class="kroom"><div class="kroom-head"><b>Room 203</b><span style="color:var(--ink-3);font-size:.85em">2 beds</span></div><div class="kcard"><span class="kname">A. Ben-David</span><span class="kmeta">Bed 1</span></div><div class="kcard ghost"><span style="color:var(--ink-3)">Empty</span></div></div>'
-    + '<div class="kroom"><div class="kroom-head"><b style="color:var(--ink-2)">Not in dept</b></div><div class="kcard ghost"><span class="kname" style="color:var(--ink-2)">N. Mizrahi</span><span class="kmeta" style="font-size:.8em">In surgery</span></div><div class="kcard ghost"><span class="kname" style="color:var(--ink-2)">S. Peretz</span><span class="kmeta" style="font-size:.8em">Discharged</span></div></div>'
-    + '</div><div style="display:flex;gap:2em;margin-top:1.8em;font-size:.85em;color:var(--ink-3);padding-top:1em;border-top:1px solid var(--line)"><span>&#x1F6CF;&#xFE0F; 10 beds</span><span>&#x1F3E5; 7 patients</span><span>&#x2705; 1 ready</span></div></div>';
+    return '<div class="mk-stage mk-clalit"><img src="images/clalit-ui.png" alt="" draggable="false"></div>';
   },
   found(){
     return `<div class="mk-stage mk-found">
