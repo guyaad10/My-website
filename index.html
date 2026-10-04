@@ -303,16 +303,15 @@ body.chat-view #thread{display:none}
 .art.sm .art-foot{padding:12px 14px 14px}
 .art.sm b{display:block;font-weight:500;font-size:.9375rem;letter-spacing:-.015em}
 .art.sm .art-foot p{margin:2px 0 0;font-size:.8125rem;line-height:1.4}
-.art-list{list-style:none;margin:0;padding:0 8px 8px}
-.art-list a{display:grid;grid-template-columns:1fr auto;gap:0 16px;padding:12px 10px;border-radius:12px;align-items:baseline}
-.art-list a:hover{background:var(--surface-2)}
-.art-list b{font-weight:500;font-size:.9375rem}
-.art-list small{grid-column:1;color:var(--ink-3);font-size:.8125rem}
-.art-list time{grid-column:2;grid-row:1;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
+.art-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.art-h time{flex:none;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){
   .m-body,.reply-body{padding-left:0}
   .art-grid{grid-template-columns:1fr}
   .art.sm .visual{--ar:16/10 !important}
+  .art.sm .mk-merc{font-size:.5cqw;padding:0 26%}
+  .art.sm .mk-way .pass{width:52%;margin-top:14%;font-size:.7cqw}
+  .art.sm .mk-studio{grid-template-columns:repeat(4,1fr);padding:22% 8%;gap:3em}
   .art .visual{margin:0 6px;border-radius:12px}
   .art-bar{padding:10px 10px 10px 12px}
   .divider{top:18px}
@@ -665,6 +664,27 @@ body.chat-view #thread{display:none}
 .mk-motion .m1{position:absolute;left:10%;top:66%;width:34%;height:14%;border-radius:4em;background:#fff}
 .mk-motion .m2{position:absolute;right:10%;top:10%;width:52%;height:50%;border-radius:6em;background:#fff;box-shadow:0 4em 8em -4em rgba(40,50,120,.4)}
 .mk-motion svg{position:absolute;inset:0;width:100%;height:100%;color:var(--ink-2)}
+.mk-way{background:linear-gradient(170deg, #D9ECFF, #FFE9DC);display:grid;place-items:center}
+.mk-way svg{position:absolute;left:0;top:0;width:100%;height:46%;color:#7C8CB8}
+.mk-way .pass{width:70%;margin-top:22%;background:#fff;border-radius:4em;padding:5em 5.5em;box-shadow:0 4em 8em -4em rgba(40,50,120,.35);color:#1B1D2A}
+.mk-way .rt{display:flex;justify-content:space-between;align-items:baseline;font-size:10em;font-weight:500;letter-spacing:-.05em}
+.mk-way .rt span{font-size:.5em;color:#9AA3BF}
+.mk-way .ln{height:1.6em;margin-top:3.5em;border-radius:1em;background:#E7EBF4}
+.mk-way .ln+.ln{width:60%;margin-top:2em}
+.mk-merc{background:linear-gradient(180deg, #EAF6EE, #FFF6E5);display:flex;flex-direction:column;justify-content:center;gap:3em;padding:0 13%}
+.mk-merc .row{display:flex;align-items:center;gap:3em;background:#fff;border-radius:3em;padding:3em;box-shadow:0 3em 6em -4em rgba(30,70,50,.3)}
+.mk-merc .row i{width:12em;height:12em;border-radius:2.2em;flex:none}
+.mk-merc .row div{flex:1}
+.mk-merc .row span{display:block;height:2.4em;width:70%;border-radius:1em;background:#DDE5DF}
+.mk-merc .row span+span{width:40%;margin-top:2.4em;background:#EEF2EF}
+.mk-merc .pay{margin-top:2em;background:#1B1D2A;color:#fff;border-radius:99em;text-align:center;padding:.6em 0;font-size:5.5em;font-weight:500;letter-spacing:-.02em}
+.mk-studio{background:linear-gradient(150deg, #F4EFE8, #ECE6F7);display:grid;grid-template-columns:1fr 1fr;gap:5em;padding:16% 13%}
+.mk-studio i{border-radius:3em;background:#fff;display:grid;place-items:center;box-shadow:0 3em 6em -4em rgba(60,40,90,.3)}
+.mk-studio i::after{content:"";width:40%;aspect-ratio:1}
+.mk-studio .c1::after{border-radius:50%;background:#F08A5D}
+.mk-studio .c2::after{border-radius:1.5em;background:#6B4FC7}
+.mk-studio .c3::after{clip-path:polygon(50% 0,100% 100%,0 100%);background:#2E9E7A}
+.mk-studio .c4::after{border-radius:50% 50% 0 0;background:#1B1D2A}
 
 @media (max-width:760px){
   .home-mark{left:18px;top:calc(14px + env(safe-area-inset-top,0px))}
@@ -1109,11 +1129,11 @@ const PROJECTS = [
     id:'archive', kind:'archive',
     line:"Older work. I'd design most of it differently today, which is part of the point.",
     items:[
-      {id:'wayfare', title:'Wayfare', summary:'Booking flow for a travel app', role:'Product designer', company:'Wayfare', year:'2021', tags:['Consumer','Mobile'],
+      {id:'wayfare', mock:'wayfare', ar:'4/5', title:'Wayfare', summary:'Booking flow for a travel app', role:'Product designer', company:'Wayfare', year:'2021', tags:['Consumer','Mobile'],
        context:['[[Short context for this project]]'], reflection:["[[What you'd do differently now]]"]},
-      {id:'mercato', title:'Mercato', summary:'Checkout redesign for an online marketplace', role:'Product designer', company:'Mercato', year:'2020', tags:['E-commerce','Conversion'],
+      {id:'mercato', mock:'mercato', ar:'4/5', title:'Mercato', summary:'Checkout redesign for an online marketplace', role:'Product designer', company:'Mercato', year:'2020', tags:['E-commerce','Conversion'],
        context:['[[Short context for this project]]'], reflection:["[[What you'd do differently now]]"]},
-      {id:'studio', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
+      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
        context:['[[Short context and a few highlight clients]]'], reflection:['[[What studio work taught you]]']}
     ]
   }
@@ -1206,6 +1226,9 @@ const MOCKS = {
   },
   tempo(){ return `<div class="mk-stage mk-tempo"><div class="t">0:42:17</div><div class="keys"><span class="kc">⌘</span><span class="kc">T</span></div></div>`; },
   spec(){ return `<div class="mk-stage mk-spec"><div class="s1">Aa</div><div class="s2">Aa</div></div>`; },
+  wayfare(){ return `<div class="mk-stage mk-way"><svg viewBox="0 0 100 46" preserveAspectRatio="none" fill="none"><path d="M14 40 C 34 6, 66 6, 86 30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg><div class="pass"><div class="rt">TLV<span>→</span>LIS</div><div class="ln"></div><div class="ln"></div></div></div>`; },
+  mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
+  studio(){ return `<div class="mk-stage mk-studio"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>`; },
   motion(){ return `<div class="mk-stage mk-motion"><i class="m1"></i><i class="m2"></i><svg viewBox="0 0 100 75" preserveAspectRatio="none" fill="none"><path d="M28 70 C 34 50, 40 44, 50 42" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg></div>`; }
 };
 
@@ -1251,7 +1274,6 @@ function el(markup){ const t=document.createElement('template'); t.innerHTML=mar
 function who(text, meta){ return `<div class="m-head"><span class="avatar" aria-hidden="true">${GHOST}</span><b>Guy</b>${typeof meta==='string'?`<time>${meta}</time>`:''}</div><div class="m-body"><p class="m-text"><span class="sr">Guy: </span>${text}</p></div>`; }
 
 const ICO_DOC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`;
-const ICO_BOX = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1.5"/><path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4"/></svg>`;
 function stamp(p){
   const latest = +PROJECTS[0].year;
   if (p.kind === 'group') return {rel:'Ongoing', abs:'Side projects'};
@@ -1276,10 +1298,7 @@ function projectMsg(p){
   if (p.kind === 'group') return `<article class="msg" id="m-${p.id}">${who(p.line)}
     <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><b>${i.title}</b><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
   return `<article class="msg" id="m-${p.id}">${who(p.line)}
-    <div class="m-body"><div class="art">
-      <div class="art-bar"><span class="art-ico" aria-hidden="true">${ICO_BOX}</span><span class="art-t"><b>Archive</b><small>${p.items.length} older projects</small></span></div>
-      <ul class="art-list">${p.items.map(i=>`<li><a href="#/${i.id}" data-open="${i.id}"><b>${i.title}</b><small>${i.summary}</small><time>${i.year}</time></a></li>`).join('')}</ul>
-    </div></div></article>`;
+    <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><div class="art-h"><b>${i.title}</b><time>${i.year}</time></div><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
 }
 
 const REPLIES = {
