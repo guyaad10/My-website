@@ -538,9 +538,16 @@ body.chat-view #thread{display:none}
 /* ——— Product mockups ——— */
 .mk-stage{position:absolute;inset:0;font-size:1cqw;line-height:1.35;color:var(--ink);letter-spacing:-.01em;transform-origin:50% 60%}
 .mk-stage small{font-size:.95em;color:var(--ink-3)}
-.mk-clalit{background:radial-gradient(120% 100% at 50% 0%,#F1FBFC 0%,#D3F1F5 50%,#A8E2EA 100%);overflow:hidden;display:grid;place-items:center}
-.mk-clalit img{width:74%;height:auto;border-radius:1.1cqw;border:.7cqw solid #BDEAEF;box-shadow:0 0 0 1px rgba(31,193,213,.25),0 .4cqw 1cqw rgba(10,96,110,.08),0 3cqw 6cqw rgba(10,96,110,.18);transition:transform .8s var(--ease)}
-.art:hover .mk-clalit img{transform:translateY(-1%) scale(1.01)}
+.mk-clalit{background:radial-gradient(120% 100% at 50% 0%,#F1FBFC 0%,#D3F1F5 50%,#A8E2EA 100%);overflow:hidden}
+.mk-clalit figure{position:absolute;margin:0;transition:transform .9s var(--ease)}
+.mk-clalit img{display:block;width:100%;height:auto;border:.7cqw solid #BDEAEF;border-radius:1.1cqw;box-shadow:0 0 0 1px rgba(31,193,213,.25),0 .4cqw 1cqw rgba(10,96,110,.08),0 3cqw 6cqw rgba(10,96,110,.18)}
+.mk-clalit figcaption{position:absolute;top:-3.4cqw;left:.2cqw;font-size:1.25cqw;font-weight:500;letter-spacing:.01em;color:#0E6E7A;background:rgba(255,255,255,.75);padding:.35cqw .9cqw;border-radius:99px}
+.ck-before{left:7%;top:30%;width:21%;transform:rotate(-5deg)}
+.ck-before img{border-color:#fff;border-width:.6cqw}
+.ck-after{left:32%;top:50%;width:62%;z-index:1}
+.art:hover .ck-after{transform:translateY(-34%)}
+.art:hover .ck-before{transform:rotate(-7deg) translate(-4%,-12%)}
+@media (prefers-reduced-motion:reduce){.mk-clalit figure{transition:none}}
 .av{display:inline-block;width:1.8em;height:1.8em;border-radius:50%;border:.18em solid #fff;flex:none;vertical-align:middle}
 .a1{background:#AFC4FF}.a2{background:#F4C9A8}.a3{background:#AEDCC4}.a4{background:#D6C2F6}
 .mb{display:inline-flex;align-items:center;justify-content:center;padding:.6em 1.2em;border-radius:99em;background:var(--surface-2);font-weight:500;font-size:1em;white-space:nowrap}
@@ -1133,7 +1140,7 @@ const MOCKS = {
   },
 
   clalit(){
-    return '<div class="mk-stage mk-clalit"><img src="images/clalit-ui.png" alt="" draggable="false"></div>';
+    return '<div class="mk-stage mk-clalit"><figure class="ck-before"><img src="images/clalit-thumb-board.jpg" alt="" draggable="false"><figcaption>Before</figcaption></figure><figure class="ck-after"><img src="images/clalit-ui.png" alt="" draggable="false"><figcaption>After</figcaption></figure></div>';
   },
   found(){
     return `<div class="mk-stage mk-found">
