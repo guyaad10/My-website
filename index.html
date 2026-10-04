@@ -401,6 +401,8 @@ body.chat-view #thread{display:none}
 .ui-hero.hs-hero{border-radius:20px;overflow:hidden}
 .hs-sky{max-width:968px;margin:0 auto 104px;border-radius:20px;overflow:hidden;background:#0B50FF url(images/headspace-sky.png) center bottom/100% auto no-repeat;aspect-ratio:968/600;display:flex;justify-content:center;padding:64px 7% 0}
 .hs-sky .hs-quote{margin:0;color:#fff}
+.hs-rainbow{max-width:968px;margin:0 auto 104px;border-radius:20px;overflow:hidden;background:#fff}
+.hs-rainbow img{display:block;width:100%;height:auto}
 .hs-sky .hs-quote cite{color:rgba(255,255,255,.75)}
 @media (max-width:760px){.hs-sky{aspect-ratio:auto;padding:32px 20px 44vw;background-size:160% auto}.hs-sky .hs-quote p{font-size:1.375rem}}
 .hs-cap{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;margin-top:14px;color:var(--ink-3);font-size:.9375rem;text-align:center}
@@ -1799,6 +1801,7 @@ function renderHeadspaceCase(p, next){
     <ol class="kd hs-steps">${p.process.map((t,k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b></li>`).join('')}</ol>
     ${chapter(3)}
     ${p.screens.map(sc => `<section class="cs"><h2>${sc.t}</h2><div class="cs-body"></div></section>` + pair(sc)).join('')}
+    <figure class="hs-rainbow"><img src="images/headspace-rainbow.png" alt="Your path to feeling better is just a click away with our healthcare solutions!" loading="lazy"></figure>
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
