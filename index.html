@@ -303,16 +303,15 @@ body.chat-view #thread{display:none}
 .art.sm .art-foot{padding:12px 14px 14px}
 .art.sm b{display:block;font-weight:500;font-size:.9375rem;letter-spacing:-.015em}
 .art.sm .art-foot p{margin:2px 0 0;font-size:.8125rem;line-height:1.4}
-.art-list{list-style:none;margin:0;padding:0 8px 8px}
-.art-list a{display:grid;grid-template-columns:1fr auto;gap:0 16px;padding:12px 10px;border-radius:12px;align-items:baseline}
-.art-list a:hover{background:var(--surface-2)}
-.art-list b{font-weight:500;font-size:.9375rem}
-.art-list small{grid-column:1;color:var(--ink-3);font-size:.8125rem}
-.art-list time{grid-column:2;grid-row:1;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
+.art-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
+.art-h time{flex:none;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){
   .m-body,.reply-body{padding-left:0}
   .art-grid{grid-template-columns:1fr}
   .art.sm .visual{--ar:16/10 !important}
+  .art.sm .mk-merc{font-size:.5cqw;padding:0 26%}
+  .art.sm .mk-way .pass{width:52%;margin-top:14%;font-size:.7cqw}
+  .art.sm .mk-studio{grid-template-columns:repeat(4,1fr);padding:22% 8%;gap:3em}
   .art .visual{margin:0 6px;border-radius:12px}
   .art-bar{padding:10px 10px 10px 12px}
   .divider{top:18px}
@@ -416,6 +415,56 @@ body.chat-view #thread{display:none}
 .toc.c3{grid-template-columns:repeat(3,1fr)}
 .kd.hs-steps{margin-top:0;grid-template-columns:repeat(3,minmax(0,1fr))}
 .kd.hs-steps b{margin-bottom:0}
+/* Off Grid case */
+.toc.c4{grid-template-columns:repeat(4,1fr)}
+.kd.og-kd{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr}
+.kd.og-kd li{grid-row:span 3}
+.og-quote{max-width:820px;margin:0 auto 104px;text-align:center}
+.og-quote small{display:block;font-size:.8125rem;color:var(--ink-3);margin-bottom:16px}
+.og-quote p{margin:0;font:400 clamp(1.5rem,1.1rem + 1.4vw,2.25rem)/1.25 var(--sans);letter-spacing:-.035em;text-wrap:balance}
+.og-persona{border-radius:20px;background:linear-gradient(135deg,#F1F0FF,#F7F7FA);padding:22px 24px}
+.og-persona b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em}
+.og-persona small{display:block;color:var(--ink-3);font-size:.875rem;line-height:1.4;margin:4px 0 16px}
+.og-persona p{margin:0;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.og-persona dl{margin:20px 0 0;display:grid;gap:12px}
+.og-persona dt{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.og-persona dd{margin:2px 0 0;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.og-persona blockquote{margin:20px 0 0;padding-top:16px;border-top:1px solid rgba(0,0,0,.08);font-size:.9375rem;line-height:1.55;color:var(--ink);font-style:normal;font-weight:500}
+.og-chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 1.2em;padding:0;list-style:none}
+.og-chips li{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;padding:4px 12px 4px 4px;border-radius:99px;background:var(--surface-2);color:var(--ink-2)}
+.og-chips img{width:24px;height:24px;border-radius:50%;display:block}
+.og-persona{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px 24px;align-items:start}
+.og-persona blockquote{grid-column:1/-1;order:3}
+.og-sticker{width:calc(100% + 40px);max-width:none;height:auto;display:block;transform:rotate(4deg);margin:-30px 0 0 0;order:2;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
+.shot.og-flow{max-width:840px}
+.shot.og-flow .shot-img{background:#1A1B1E;padding:56px 64px}
+.shot.og-canvas .shot-img{background:none;box-shadow:none;border-radius:0}
+.shot.og-canvas .shot-img:hover{transform:none;box-shadow:none}
+.shot.og-s{max-width:600px}.shot.og-m{max-width:700px}.shot.og-l{max-width:860px}
+.og-car{position:relative;max-width:968px;margin:-48px auto 104px;padding:8px 0 0}
+.og-car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
+.og-car-track::-webkit-scrollbar{display:none}
+.og-slide{flex:0 0 100%;scroll-snap-align:start;padding:0 96px;box-sizing:border-box}
+.og-ba{display:flex;justify-content:center;gap:48px}
+.og-ba figure{margin:0;width:min(220px,40%);text-align:center}
+.og-ba img{display:block;width:100%;height:auto}
+.og-ba figcaption{display:inline-block;margin-top:18px;padding:5px 18px;border:1px solid currentColor;border-radius:99px;font-size:.9375rem}
+.og-slide ul{max-width:560px;margin:28px auto 0;padding-left:1.1em;font-size:.9375rem;line-height:1.55;opacity:.8}
+.og-slide li{margin-bottom:6px}
+.og-car-btn{position:absolute;top:calc(50% - 40px);width:44px;height:44px;border-radius:50%;background:rgba(0,0,0,.06);color:inherit;font-size:1.75rem;line-height:1;cursor:pointer;display:grid;place-items:center;transition:background .2s,opacity .2s}
+.og-car-btn:hover{background:rgba(0,0,0,.12)}
+.og-car-btn:disabled{opacity:.3;cursor:default}
+.og-car-btn.prev{left:24px}.og-car-btn.next{right:24px}
+.og-car-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
+.og-car-dots i{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.2);transition:background .2s}
+.og-car-dots i.on{background:currentColor}
+.ui-hero.og-hero{max-width:520px;margin:0 auto 72px}
+.og-pal{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:16px 12px}
+.og-pal li{font-size:.8125rem;color:var(--ink-2)}
+.og-pal i{display:block;aspect-ratio:1;border-radius:14px;margin-bottom:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
+.og-pal small{display:block;color:var(--ink-3);font-variant-numeric:tabular-nums}
+.og-icons{display:block;width:100%;height:auto;margin-top:32px}
+@media (max-width:760px){.og-persona{grid-template-columns:1fr}.og-sticker{width:160px;margin:-56px -8px 0 0;order:0;justify-self:end}.og-car{padding-top:0}.og-slide{padding:0 20px}.og-ba{gap:20px}.og-car-btn{display:none}.shot.og-flow .shot-img{padding:24px}.og-pair-row{gap:20px}.toc.c4{grid-template-columns:repeat(2,1fr)}.og-pal{grid-template-columns:repeat(4,1fr)}}
 @media (max-width:1020px){
   .anno{padding:0;max-width:968px}
   .pin{border:0;right:auto!important;left:var(--x)!important;width:0;filter:none}
@@ -677,17 +726,31 @@ body.chat-view #thread{display:none}
 .tg::after{content:"";position:absolute;right:.2em;top:.2em;width:1.2em;height:1.2em;border-radius:50%;background:#fff}
 .tg.off{background:var(--surface-3)}.tg.off::after{right:auto;left:.2em}
 
-.mk-tempo{background:linear-gradient(160deg, #1B1D2A, #2A2447 60%, #4A3552);color:#fff;display:flex;flex-direction:column;justify-content:center;align-items:center;gap:5em}
-.mk-tempo .t{font:300 17em/1 var(--sans);letter-spacing:-.06em;font-variant-numeric:tabular-nums}
-.mk-tempo .keys{display:flex;gap:1.4em;align-items:center;font-size:5em}
-.kc{display:inline-grid;place-items:center;min-width:1.8em;height:1.8em;padding:0 .4em;border-radius:.5em;background:rgba(255,255,255,.12);color:#fff}
-.mk-spec{background:linear-gradient(180deg, #FFF1E8, #FFE4F0);display:grid;grid-template-rows:1fr 1fr;align-items:center}
-.mk-spec div{text-align:center;font-size:30em;line-height:1;letter-spacing:-.06em;font-weight:300}
-.mk-spec .s2{font-weight:600;font-family:Georgia, "Times New Roman", serif;font-style:italic;letter-spacing:-.03em;color:#6B4FC7}
-.mk-motion{background:linear-gradient(135deg, #DDEBFF, #E8E0FF)}
-.mk-motion .m1{position:absolute;left:10%;top:66%;width:34%;height:14%;border-radius:4em;background:#fff}
-.mk-motion .m2{position:absolute;right:10%;top:10%;width:52%;height:50%;border-radius:6em;background:#fff;box-shadow:0 4em 8em -4em rgba(40,50,120,.4)}
-.mk-motion svg{position:absolute;inset:0;width:100%;height:100%;color:var(--ink-2)}
+.mk-og{background:radial-gradient(110% 90% at 50% 20%,#F4F3FF 0%,#DCDBFF 55%,#BCBBFF 100%);display:grid;place-items:center}
+.mk-hs{background:#FFF4E6;display:grid;place-items:center}
+.mk-hs img{display:block;width:100%;height:100%;object-fit:cover}
+.mk-og img{display:block;max-width:94%;max-height:94%;width:auto;height:auto}
+.mk-way{background:linear-gradient(170deg, #D9ECFF, #FFE9DC);display:grid;place-items:center}
+.mk-way svg{position:absolute;left:0;top:0;width:100%;height:46%;color:#7C8CB8}
+.mk-way .pass{width:70%;margin-top:22%;background:#fff;border-radius:4em;padding:5em 5.5em;box-shadow:0 4em 8em -4em rgba(40,50,120,.35);color:#1B1D2A}
+.mk-way .rt{display:flex;justify-content:space-between;align-items:baseline;font-size:10em;font-weight:500;letter-spacing:-.05em}
+.mk-way .rt span{font-size:.5em;color:#9AA3BF}
+.mk-way .ln{height:1.6em;margin-top:3.5em;border-radius:1em;background:#E7EBF4}
+.mk-way .ln+.ln{width:60%;margin-top:2em}
+.mk-merc{background:linear-gradient(180deg, #EAF6EE, #FFF6E5);display:flex;flex-direction:column;justify-content:center;gap:3em;padding:0 13%}
+.mk-merc .row{display:flex;align-items:center;gap:3em;background:#fff;border-radius:3em;padding:3em;box-shadow:0 3em 6em -4em rgba(30,70,50,.3)}
+.mk-merc .row i{width:12em;height:12em;border-radius:2.2em;flex:none}
+.mk-merc .row div{flex:1}
+.mk-merc .row span{display:block;height:2.4em;width:70%;border-radius:1em;background:#DDE5DF}
+.mk-merc .row span+span{width:40%;margin-top:2.4em;background:#EEF2EF}
+.mk-merc .pay{margin-top:2em;background:#1B1D2A;color:#fff;border-radius:99em;text-align:center;padding:.6em 0;font-size:5.5em;font-weight:500;letter-spacing:-.02em}
+.mk-studio{background:linear-gradient(150deg, #F4EFE8, #ECE6F7);display:grid;grid-template-columns:1fr 1fr;gap:5em;padding:16% 13%}
+.mk-studio i{border-radius:3em;background:#fff;display:grid;place-items:center;box-shadow:0 3em 6em -4em rgba(60,40,90,.3)}
+.mk-studio i::after{content:"";width:40%;aspect-ratio:1}
+.mk-studio .c1::after{border-radius:50%;background:#F08A5D}
+.mk-studio .c2::after{border-radius:1.5em;background:#6B4FC7}
+.mk-studio .c3::after{clip-path:polygon(50% 0,100% 100%,0 100%);background:#2E9E7A}
+.mk-studio .c4::after{border-radius:50% 50% 0 0;background:#1B1D2A}
 
 @media (max-width:760px){
   .home-mark{left:18px;top:calc(14px + env(safe-area-inset-top,0px))}
@@ -1113,26 +1176,10 @@ const PROJECTS = [
     ]
   },
   {
-    id:'experiments', kind:'group',
-    line:"A few things I've built on my own time, mostly to learn something.",
-    items:[
-      {id:'tempo', mock:'tempo', ar:'4/5', title:'Tempo', summary:'A keyboard-first time tracker, built to learn SwiftUI.', role:'Design and build', company:'Side project', year:'2025', tags:['macOS','Keyboard UX'],
-       context:["I wanted a timer I could start, switch and stop without touching the mouse or leaving the app I was in."],
-       decisions:[{t:'One shortcut does everything', c:'Separate shortcuts for start, pause and switch.', y:'A single shortcut that opens a command line with smart defaults.', w:'Remembering one shortcut beats memorising four, and the command line made switching projects as fast as starting.'}],
-       reflection:["Building it myself taught me more about the cost of animation on real hardware than any spec I've written."]},
-      {id:'specimen', mock:'spec', ar:'4/5', title:'Specimen', summary:'A tool for testing typeface pairings against real product UI instead of pangrams.', role:'Design and build', company:'Side project', year:'2024', tags:['Typography','Tooling'],
-       context:["Type specimens show fonts at their best. I wanted to see them in a dense table, a settings page and an error state."],
-       reflection:["The most useful view turned out to be the ugliest one: a 13px data table. It rules out more pairings than anything else."]},
-      {id:'motion', mock:'motion', ar:'4/5', title:'Motion studies', summary:'Prototypes exploring shared-element transitions between lists and detail views.', role:'Prototyping', company:'Side project', year:'2025', tags:['Motion','Prototyping'],
-       context:["A set of small studies on how an object can carry context from a list into its detail view, and back."],
-       reflection:["This portfolio's project transitions came directly out of these studies."]}
-    ]
-  },
-  {
     id:'archive', kind:'archive',
     line:"Older work. I'd design most of it differently today, which is part of the point.",
     items:[
-      {id:'headspace', __case:'headspace', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
+      {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
        why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
@@ -1142,7 +1189,7 @@ const PROJECTS = [
          {t:'Onboarding', imgs:[['headspace-onboarding-ui.png','Headspace onboarding screen',541]],
           notes:[{on:0, side:'l', x:.2, y:.45, t:'Secondary button', d:'A clearer visual appearance.'},{on:0, side:'r', x:.92, y:.11, t:'Logo', d:'A subtler, logo-like appearance.'},{on:0, side:'r', x:.92, y:.7, t:'Carousel', d:'Users must log in before any action, so cards can’t be quick actions. A carousel of uplifting content replaces the horizontal scroll.'}]},
          {t:'Home', imgs:[['headspace-home-original.png','Original Clalit home screen',541],['headspace-home-ui.png','Home screen in the Headspace style',541]],
-          notes:[{on:0, side:'l', x:.68, y:.45, t:'One page', d:'All main sections on one page, with no horizontal scrolling.'}]},
+          notes:[{on:1, side:'r', x:.95, y:.55, t:'One page', d:'All main sections on one page, with no horizontal scrolling.'}]},
          {t:'My medical file', imgs:[['headspace-file-original.png','Original medical file screen',541],['headspace-file-ui.png','Medical file in the Headspace style',541]],
           notes:[{on:1, side:'r', x:.55, y:.09, t:'Clearer heading', d:'A better heading for orientation.'},{on:1, side:'r', x:.8, y:.3, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
          {t:'Categories', wide:true, deco:['headspace-virus.png','Two smiling Headspace-style virus characters'], imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
@@ -1151,9 +1198,8 @@ const PROJECTS = [
          {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
-      {id:'mercato', title:'Mercato', summary:'Checkout redesign for an online marketplace', role:'Product designer', company:'Mercato', year:'2020', tags:['E-commerce','Conversion'],
-       context:['[[Short context for this project]]'], reflection:["[[What you'd do differently now]]"]},
-      {id:'studio', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
+      {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2023', tags:['B2C','Mobile app']},
+      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
        context:['[[Short context and a few highlight clients]]'], reflection:['[[What studio work taught you]]']}
     ]
   }
@@ -1244,9 +1290,11 @@ const MOCKS = {
         <div class="fd-row"><span class="pill ok">Active</span><span class="pill rv">In review</span><span class="pill op">Draft</span></div></div>
     </div>`;
   },
-  tempo(){ return `<div class="mk-stage mk-tempo"><div class="t">0:42:17</div><div class="keys"><span class="kc">⌘</span><span class="kc">T</span></div></div>`; },
-  spec(){ return `<div class="mk-stage mk-spec"><div class="s1">Aa</div><div class="s2">Aa</div></div>`; },
-  motion(){ return `<div class="mk-stage mk-motion"><i class="m1"></i><i class="m2"></i><svg viewBox="0 0 100 75" preserveAspectRatio="none" fill="none"><path d="M28 70 C 34 50, 40 44, 50 42" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg></div>`; }
+  wayfare(){ return `<div class="mk-stage mk-way"><svg viewBox="0 0 100 46" preserveAspectRatio="none" fill="none"><path d="M14 40 C 34 6, 66 6, 86 30" stroke="currentColor" stroke-width="1" stroke-dasharray="4 4" vector-effect="non-scaling-stroke"/></svg><div class="pass"><div class="rt">TLV<span>→</span>LIS</div><div class="ln"></div><div class="ln"></div></div></div>`; },
+  headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-hero.png" alt="" draggable="false"></div>'; },
+  offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-hero.webp" alt="" draggable="false"></div>'; },
+  mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
+  studio(){ return `<div class="mk-stage mk-studio"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>`; },
 };
 
 /* ================== Helpers ================== */
@@ -1291,7 +1339,6 @@ function el(markup){ const t=document.createElement('template'); t.innerHTML=mar
 function who(text, meta){ return `<div class="m-head"><span class="avatar" aria-hidden="true">${GHOST}</span><b>Guy</b>${typeof meta==='string'?`<time>${meta}</time>`:''}</div><div class="m-body"><p class="m-text"><span class="sr">Guy: </span>${text}</p></div>`; }
 
 const ICO_DOC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`;
-const ICO_BOX = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1.5"/><path d="M5 9v9a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V9M10 13h4"/></svg>`;
 function stamp(p){
   const latest = +PROJECTS[0].year;
   if (p.kind === 'group') return {rel:'Ongoing', abs:'Side projects'};
@@ -1316,10 +1363,7 @@ function projectMsg(p){
   if (p.kind === 'group') return `<article class="msg" id="m-${p.id}">${who(p.line)}
     <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><b>${i.title}</b><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
   return `<article class="msg" id="m-${p.id}">${who(p.line)}
-    <div class="m-body"><div class="art">
-      <div class="art-bar"><span class="art-ico" aria-hidden="true">${ICO_BOX}</span><span class="art-t"><b>Archive</b><small>${p.items.length} older projects</small></span></div>
-      <ul class="art-list">${p.items.map(i=>`<li><a href="#/${i.id}" data-open="${i.id}"><b>${i.title}</b><small>${i.summary}</small><time>${i.year}</time></a></li>`).join('')}</ul>
-    </div></div></article>`;
+    <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><div class="art-h"><b>${i.title}</b><time>${i.year}</time></div><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
 }
 
 const REPLIES = {
@@ -1343,7 +1387,6 @@ function route(q){
   if (/\b(go to top|back to top|to the top|scroll to top|top of (the )?page)\b/.test(s)) return {top:true};
   if (/\b(lost|home|start over|go back)\b/.test(s)) return {home:true};
   if (/contact|email|hire|reach|touch|talk|call|whatsapp|linkedin/.test(s)) return {reply:'contact'};
-  if (/experiment|side project|hobby/.test(s)) return {jump:'m-experiments'};
   if (/archive|older|earlier/.test(s)) return {jump:'m-archive'};
   if (/process|approach|how does|how do|method/.test(s)) return {reply:'process'};
   if (/resume|résumé|\bcv\b/.test(s)) return {cv:true};
@@ -1809,10 +1852,85 @@ function renderHeadspaceCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
+function renderOffgridCase(p, next){
+  const CH = ['Overview','Research','Design','Interface'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  const shot = (src, alt, cap='', cls='') => `<figure class="shot ${cls}"><div class="shot-img"><img src="images/offgrid-${src}.webp" alt="${alt}" loading="lazy"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const kv = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
+  const problems = [
+    ['Time consuming','Planning a trip means pulling information and recommendations together from many different platforms.'],
+    ['Lack of customisation','It is hard to discover places that suit you, especially if you avoid heavily touristed areas.'],
+    ['Optimising a route','Learning a new city and its surroundings well enough to plan sensible days is frustrating.']
+  ];
+  const findings = [
+    ['Research before the trip','Deciding where to go is hard. Most people build their list from friends\' recommendations and social media.'],
+    ['Planning the itinerary','Building a logical route is tedious. Most skip ordering stops by distance and splitting the days, and pay for it in time.'],
+    ['Unforeseen circumstances','Weather or a closed venue can break the plan. Flexibility keeps those moments small.'],
+    ['Finding hidden gems','Most do not care about the tourist "must-sees". They avoid busy spots in favour of unique places.']
+  ];
+  const screens = [
+    ['Home and My trips','Pick up where you left off, and get inspired by trips other users have shared.','home','Home screen with ongoing trips and featured trips from other users'],
+    ['Create a new trip','Six short steps: destination and dates, trip purpose, interests, transport, day intensity and free time. Then the app builds a daily itinerary.','newtrip','The six steps of the new trip wizard'],
+    ['Trip, day agenda and stop','Drill down from the whole trip to a single day, then to one stop with its details and nearby suggestions.','trip','Trip screen, day agenda and stop screen'],
+    ['Edit the itinerary','Drag stops to any hour or day, delete them, or swap them for similar places the system suggests.','edit','Editing the day agenda'],
+    ['Map view','Every day as a route on the map, with live navigation between stops.','map','Daily routes on a map'],
+    ['Onboarding','A short, playful introduction before sign up.','onboarding','Onboarding screens']
+  ];
+  const slides = [
+    ['ut','Interest picker',['Chips are grouped into cards.','An icon beside each title makes scanning quicker.','"Show less" moved to the end of each card for clearer progressive disclosure.']],
+    ['ut2','Day agenda',['Arrows show that you can swipe to change the mode of transport.','A new card sets your stay address as the starting point.','Swipe between days without going back to the itinerary.']],
+    ['ut3','Available travel time',['The toggle split the two options and raised anxiety. Cards with radio buttons now show both on one screen, each with progressive disclosure.','The copy was rewritten because the difference between the options was unclear.']]
+  ];
+  const utCarousel = `<div class="og-car" aria-roledescription="carousel" aria-label="Usability test changes">
+    <div class="og-car-track">${slides.map(([f,t,pts],k)=>`<div class="og-slide" role="group" aria-label="${k+1} of ${slides.length}: ${t}">
+      <div class="og-ba">${['before','after'].map(x=>`<figure><img src="images/offgrid-${f}-${x}.webp" alt="${t}, ${x} testing" loading="lazy"><figcaption>${x[0].toUpperCase()+x.slice(1)}</figcaption></figure>`).join('')}</div>
+      <ul>${pts.map(t=>`<li>${t}</li>`).join('')}</ul></div>`).join('')}</div>
+    <button type="button" class="og-car-btn prev" aria-label="Previous change">‹</button><button type="button" class="og-car-btn next" aria-label="Next change">›</button>
+    <div class="og-car-dots">${slides.map((_,k)=>`<i${k?'':' class="on"'}></i>`).join('')}</div></div>`;
+  caseInner.innerHTML = `
+    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A trip planning app that helps you travel your way: it gets you to the places you care about and arranges each day around your time and the distances between stops.</p>${metaDL(p)}</header>
+    <div class="og-hero ui-hero"><img src="images/offgrid-hero.webp" alt="Off Grid map and explore screens"></div>
+    <nav class="toc c4" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
+    ${chapter(1)}
+    ${section('About', '<p>Off Grid is a B2C mobile app for travellers who want to tour like a local. You tell it what you are into and how much time you have, and it plans an optimal route for every day of the trip.</p>')}
+    ${section('The problem', '<p>Three things make planning a trip harder than it should be.</p>')}
+    <ol class="kd og-kd">${problems.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
+    ${chapter(2)}
+    ${section('User interviews', '<p>I interviewed seven people from the target audience. All travel at least twice a year, and all had been abroad in the six months before the interview.</p>')}
+    ${section('What I heard', kv(findings))}
+    ${section('Persona', `<div class="og-persona"><img class="og-sticker" src="images/offgrid-persona.webp" alt="Photo of Roni, the persona, taped on like a polaroid" loading="lazy"><div><b>Roni Klein</b><small>29, Tel Aviv. Legal consultant at a tech company.</small><p>Roni travels twice a year for work. In her free time she looks for new food and art places and avoids tourist sites.</p>
+      <dl><div><dt>Needs</dt><dd>To track her trip and see each day's agenda in an easy, visual way.</dd></div><div><dt>Wants</dt><dd>To find new places that match her interests.</dd></div><div><dt>Expects</dt><dd>An efficient itinerary, optimised for distance, opening hours, crowds and budget.</dd></div></dl></div>
+      <blockquote>“I'm sluggish when planning a trip overseas, especially on tourist websites that recommend the same places I don't care about.”</blockquote></div>`)}
+    ${section('Competitive research', `<p>I ran a heuristic evaluation of eight trip planning products.</p><ul class="og-chips">${[['Lambus','lambus'],['Maps.me','mapsme'],['Sygic Travel','sygic'],['Tripadvisor','tripadvisor'],['Visit a City','visitacity'],['TripIt','tripit'],['Pluto','pluto'],['Wanderlog','wanderlog']].map(([c,f])=>`<li><img src="images/offgrid-logos/${f}.webp" alt="" width="24" height="24">${c}</li>`).join('')}</ul><p>Most have an explore section for inspiration, but the content is the same touristic "must-see" list. None lets you browse trips from people who share your interests.</p>`)}
+    <div class="og-quote"><small>Value proposition</small><p>A trip planner that builds an itinerary from your interests and your available time, on the best route for each day.</p></div>
+    ${chapter(3)}
+    ${section('User flows', '<p>Two core flows came out of the research: creating a new trip and editing it.</p>')}
+    ${shot('userflow','User flows for creating and editing a trip','','og-flow')}
+    ${section('Wireframes', '<p>I kept the structure simple and familiar: a trip wizard, a home page and My trips, with drill down navigation from a trip to a day to a single stop. More than 50 mid fidelity screens covered every flow.</p>')}
+    ${shot('wireframes','Mid fidelity wireframes')}
+    ${section('Usability testing', '<p>I tested a prototype with six participants from the target audience, across eight sets of tasks. The focus was efficiency, anxiety and discoverability, and the results drove a round of fixes.</p>')}
+    ${utCarousel}
+    ${chapter(4)}
+    ${section('Look and feel', `<p>Youthful but informative. The app is full of photos, so black is the primary colour to balance the visual load, with bright accents to keep discovering new places fun. Type is set in Poppins.</p>
+      <ul class="og-pal">${[['Primary','#27272A'],['Neutral','#72747B'],['Neutral','#F2F2F6'],['Accent','#DCED59'],['Accent','#FF471A'],['Accent','#BCBBFF'],['Accent','#0A5748']].map(([n,c])=>`<li><i style="background:${c}"></i>${n}<small>${c}</small></li>`).join('')}</ul>
+      <img class="og-icons" src="images/offgrid-icons.webp" alt="The Off Grid icon set: line icons and colourful category icons" loading="lazy">`)}
+    ${screens.map(([t,d,src,alt]) => section(t, `<p>${d}</p>`) + shot(src, alt, '', {home:'og-canvas og-s',trip:'og-canvas og-m',edit:'og-canvas og-l',newtrip:'og-canvas og-l',map:'og-canvas',onboarding:'og-canvas'}[src]||'')).join('')}
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+  const car = caseInner.querySelector('.og-car'), track = car.querySelector('.og-car-track'), dots = [...car.querySelectorAll('.og-car-dots i')];
+  const idx = () => Math.round(track.scrollLeft / track.clientWidth);
+  const go = n => track.scrollTo({left: Math.max(0, Math.min(dots.length-1, n)) * track.clientWidth, behavior: reduced.matches ? 'auto' : 'smooth'});
+  car.querySelector('.prev').onclick = () => go(idx()-1);
+  car.querySelector('.next').onclick = () => go(idx()+1);
+  track.addEventListener('scroll', () => { const i = idx(); dots.forEach((d,k)=>d.classList.toggle('on', k===i)); car.querySelector('.prev').disabled = i===0; car.querySelector('.next').disabled = i===dots.length-1; }, {passive:true});
+  car.querySelector('.prev').disabled = true;
+}
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
   if (p.__case === 'headspace') return renderHeadspaceCase(p, next);
+  if (p.__case === 'offgrid') return renderOffgridCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
   const figs = (p.figures||[]).map(f => f.type==='flow' ? `<figure class="fig"><div class="flow">
