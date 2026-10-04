@@ -455,10 +455,14 @@ body.chat-view #thread{display:none}
 .dots li{margin-bottom:6px}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .chips li{padding:7px 14px;border-radius:999px;background:var(--surface-2);font-size:.9375rem;color:var(--body)}
-.learn{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.learn > div{background:var(--surface-2);border-radius:16px;padding:18px 20px}
-.learn b{display:block;font-weight:500;font-size:1.0625rem;letter-spacing:-.015em;margin-bottom:6px}
-.learn p{margin:0!important;font-size:.9375rem!important;line-height:1.5!important;color:var(--ink-2)!important}
+.learn{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.learn > div{padding:4px 28px 32px}
+.learn > div:nth-child(odd){padding-left:0}
+.learn > div:nth-child(even){border-left:1px solid var(--line)}
+.learn > div:nth-child(n+3){padding-top:32px;border-top:1px solid var(--line)}
+.learn .kd-n{display:block;font-size:.8125rem;color:var(--ink-3);margin-bottom:16px;font-variant-numeric:tabular-nums}
+.learn b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em;color:var(--ink);margin-bottom:12px;text-wrap:balance}
+.learn p{margin:0!important;font-size:.875rem!important;line-height:1.55!important;color:var(--body)!important;text-wrap:pretty}
 .pn-group{margin:0 0 28px}
 .pn-group:last-child{margin-bottom:0}
 .pn-lvl{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.04em;text-transform:uppercase;padding:4px 10px;border-radius:999px;margin-bottom:12px}
@@ -483,7 +487,7 @@ body.chat-view #thread{display:none}
 .zoom img{max-width:100%;max-height:100%;border-radius:12px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
 .zoom-x{position:fixed;top:calc(16px + env(safe-area-inset-top,0px));right:16px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.14);color:#fff;font-size:1.6rem;line-height:1}
 @media (max-width:760px){
-  .learn{grid-template-columns:1fr}
+  .learn{grid-template-columns:1fr}.learn > div{padding:24px 0!important;border-left:0!important;border-top:1px solid var(--line)}.learn > div:first-child{border-top:0;padding-top:4px!important}
   .iter{grid-template-columns:1fr}
   .iter-arrow{transform:rotate(90deg);height:24px}
   .toc{grid-template-columns:repeat(2,1fr);margin-bottom:72px}
@@ -1659,7 +1663,7 @@ function renderClalitCase(p){
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   const pains = p.pains.map(g => { const k = g.lvl.toLowerCase().startsWith('crit') ? 'critical' : g.lvl.toLowerCase().startsWith('use') ? 'useful' : 'nice';
     return `<div class="pn-group g-${k}"><span class="pn-lvl pn-${k}">${g.lvl}</span>${g.items.map(([a,b])=>`<div class="pn-row"><div class="pn-pain">${a}</div><div class="pn-arrow" aria-hidden="true">→</div><div class="pn-need">${b}</div></div>`).join('')}</div>`; }).join('');
-  const kv = arr => `<div class="learn">${arr.map(([t,d])=>`<div><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
+  const kv = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
   const decisions = `<ol class="kd">${p.decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>`;
   const takeaways = `<ol class="kd light">${p.takeaways.map((t,k)=>`<li><span class="kd-n">${k+1}</span><p>${rich(t)}</p></li>`).join('')}</ol>`;
   const iteration = `<p>I tested the low fidelity board in feedback sessions with nursing teams. On the left is what they told me, and on the right is what I took into the next version.</p>
