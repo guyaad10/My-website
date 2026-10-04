@@ -394,8 +394,11 @@ body.chat-view #thread{display:none}
 .anno figcaption{color:var(--ink-3);font-size:.9375rem;margin:14px 0 0}
 /* Clalit × Headspace case study */
 .hs-pair{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;align-items:start}
-.hs-pair[style*="--n:3"],.hs-cap[style*="--n:3"]{gap:0 5%}
+.hs-pair[style*="--n:3"]{gap:0 5%}
 .anno.rgut{max-width:1160px;padding:24px var(--gut) 24px 0}
+.hs-pair{margin-bottom:48px}
+.hs-col{position:relative}
+.hs-c{position:absolute;top:100%;left:0;right:0;margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
 .hs-pair.one{grid-template-columns:46%;justify-content:center}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
@@ -409,8 +412,6 @@ body.chat-view #thread{display:none}
 @media (max-width:760px){.hs-rainbow{padding:5% 10% 0}.hs-rainbow p{font-size:1.05rem}.hs-deco{width:120px;margin-top:0}}
 .hs-sky .hs-quote cite{color:rgba(255,255,255,.75)}
 @media (max-width:760px){.hs-sky{aspect-ratio:auto;padding:32px 20px 44vw;background-size:160% auto}.hs-sky .hs-quote p{font-size:1.375rem}}
-.hs-cap{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;margin-top:14px;color:var(--ink-3);font-size:.9375rem;text-align:center}
-.hs-cap.one{grid-template-columns:46%;justify-content:center}
 .hs-quote{max-width:760px;margin:0 auto 104px;text-align:center}
 .hs-quote p{margin:0 0 16px;font:400 clamp(1.5rem,1.1rem + 1.4vw,2.25rem)/1.25 var(--sans);letter-spacing:-.035em;text-wrap:balance}
 .hs-quote cite{font-style:normal;color:var(--ink-3);font-size:.9375rem}
@@ -1833,9 +1834,9 @@ function renderHeadspaceCase(p, next){
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
   const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
+    const caps = sc.caps || (n===1 ? ['Headspace UI'] : ['Original','Headspace UI']);
     const notes = sc.notes.map(o => ({...o, x: off[o.on] + w*o.x, y: o.y * sc.imgs[o.on][2] / H}));
-    return `<figure class="anno${sc.wide?' wide':''}${sc.rgut?' rgut':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt])=>`<div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
-      <div class="hs-cap${n===1?' one':''}" style="--n:${n}">${(sc.caps || (n===1 ? ['Headspace UI'] : ['Original','Headspace UI'])).map(t=>`<span>${t}</span>`).join('')}</div>
+    return `<figure class="anno${sc.wide?' wide':''}${sc.rgut?' rgut':''}"><div class="anno-img"><div class="hs-pair${n===1?' one':''}" style="--n:${n}">${sc.imgs.map(([src,alt],k)=>`<div class="hs-col"><div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy"></div><span class="hs-c">${caps[k]}</span></div>`).join('')}</div>${notes.map((o,k)=>`<span class="pin ${o.side}" data-n="${k+1}" style="--x:${o.x*100}%;--y:${o.y*100}%"><span class="lbl"><b>${o.t}</b>${o.d}</span></span>`).join('')}</div>
       ${notes.length ? `<ol class="anno-list">${notes.map(o=>`<li><b>${o.t}.</b> ${o.d}</li>`).join('')}</ol>` : ''}</figure>`; };
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.intro}</p>${metaDL(p)}</header>
