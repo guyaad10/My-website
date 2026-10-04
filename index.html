@@ -365,6 +365,7 @@ body.chat-view #thread{display:none}
   box-shadow:0 1px 2px rgba(15,15,30,.06), 0 20px 50px -28px rgba(40,50,110,.35);transition:transform .35s var(--ease), box-shadow .35s var(--ease)}
 .shot-img:hover{transform:translateY(-2px);box-shadow:0 1px 2px rgba(15,15,30,.06), 0 28px 60px -26px rgba(40,50,110,.42)}
 .shot-img img{display:block;width:100%;height:auto}
+.shot.dark{max-width:640px}
 .shot.dark .shot-img{background:#04252A}
 .shot figcaption{color:var(--ink-3);font-size:.9375rem;line-height:1.5;margin:14px auto 0;max-width:968px;text-wrap:pretty}
 .shot.in figcaption{margin-left:0}
@@ -1604,7 +1605,7 @@ function section(title, inner){ return inner ? `<section class="cs"><h2>${title}
 function renderClalitCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   /* Real screens live in images/; a figure whose file is missing removes itself. */
-  const shot = (src, alt, cap='') => `<figure class="shot"><div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy" onerror="this.closest('figure').remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const shot = (src, alt, cap='', dark=false) => `<figure class="shot${dark?' dark':''}"><div class="shot-img"><img src="images/${src}" alt="${alt}" loading="lazy" onerror="this.closest('figure').remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
   const chapter = (n, t) => `<div class="chap"><span>${n}</span><h2>${t}</h2></div>`;
   const pains = p.pains.map(g => { const k = g.lvl.toLowerCase().startsWith('crit') ? 'critical' : g.lvl.toLowerCase().startsWith('use') ? 'useful' : 'nice';
     return `<div class="pn-group g-${k}"><span class="pn-lvl pn-${k}">${g.lvl}</span>${g.items.map(([a,b])=>`<div class="pn-row"><div class="pn-pain">${a}</div><div class="pn-arrow" aria-hidden="true">→</div><div class="pn-need">${b}</div></div>`).join('')}</div>`; }).join('');
@@ -1620,7 +1621,7 @@ function renderClalitCase(p){
     ${section('Timeline', `<ol class="tline">${p.timeline.map(([d,t,b])=>`<li><small>${d}</small><b>${t}</b><p>${b}</p></li>`).join('')}</ol>`)}
     ${chapter('02','User research')}
     ${section('Observations', `<p>${p.observeIntro}</p><ul class="plain">${p.questions.map(q=>`<li>${q}</li>`).join('')}</ul><p>The information gathered gave me valuable insight into the challenges and needs of the nursing teams.</p>`)}
-    ${shot('clalit-boards.jpg','Physical patient boards on the wards at Geha and Carmel','The physical boards each department had built for itself.')}
+    ${shot('clalit-boards.jpg','Physical patient boards on the wards at Geha and Carmel','The physical boards each department had built for itself.', true)}
     ${section('What I learned as a fly on the wall', kv(p.learned))}
     ${section('Pain points and needs', pains)}
     ${chapter('03','Wireframes')}
@@ -1632,7 +1633,7 @@ function renderClalitCase(p){
     ${chapter('04','User interface')}
     ${section('High fidelity', kv(p.hifiNotes))}
     ${shot('clalit-hifi.png','High-fidelity patient board')}
-    ${section('Card states', `<ul class="chips">${p.states.map(x=>`<li>${x}</li>`).join('')}</ul>`)}
+    ${section('Card states', '<p>Every state a room or patient card can be in, from an empty bed to a patient who is out of the department.</p>')}
     ${shot('clalit-states.png','Patient and room card states')}
     ${section('Key decisions', decisions)}
     ${section('UI components', kv(p.components))}
