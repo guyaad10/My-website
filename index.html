@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Guy — Senior Product Designer</title>
 <meta name="description" content="Guy is a senior product designer working on B2B and AI-native products.">
+<!-- set dark mode before first paint when the saved background is Overcast (SKIES[1]) -->
+<script>try{if(localStorage.getItem('portfolio-sky-2')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
@@ -729,6 +731,62 @@ html,body{overflow-x:clip;overscroll-behavior-x:none}
   .chip.bg-btn .t{display:none}
   .case-bar{gap:10px}
 }
+
+/* ——— Dark mode: switched on by the Overcast background ——— */
+html.theme-dark{
+  --bg:#0F1318; --surface:#161B22; --surface-2:#1C222B; --surface-3:#28303B;
+  --ink:#ECEEF2; --ink-2:#A4AAB6; --ink-3:#6F7683; --line:#252C36; --body:#C8CCD4;
+  --accent:#7D93FF; --accent-soft:#1D2442;
+  --ok:#5BC48F; --ok-soft:#14291F; --warn:#E3A250; --warn-soft:#2E2414;
+  --shadow:0 2px 6px rgba(0,0,0,.25), 0 24px 60px -24px rgba(0,0,0,.6);
+  --on-ink:#0F1318; --ink-hover:#FFFFFF;
+  --veilcol:#0F1318; --fadecol:#0F1318;
+  color-scheme:dark;
+}
+/* mockups and zoomed shots are artwork: keep them in their light palette */
+html.theme-dark .visual{
+  --bg:#FFFFFF; --surface:#FFFFFF; --surface-2:#F4F4F5; --surface-3:#E7E7EA;
+  --ink:#0E0E10; --ink-2:#66666E; --ink-3:#A0A0A8; --line:#ECECEF; --body:#34343A;
+  --accent:#3B5BFD; --accent-soft:#EEF1FF; --ok:#1F8A5B; --ok-soft:#E4F4EC; --warn:#B26A12; --warn-soft:#FBF0DE;
+  color:var(--ink); color-scheme:light;
+}
+html.theme-dark .fx-veil{background:var(--veilcol)}
+html.theme-dark .g-body{fill:#E8EBF0}
+html.theme-dark .jf-bubble{border-color:#E8EBF0}
+html.theme-dark .state-intro .g-body{fill:#111B21}
+html.theme-dark .state-intro .intro-avatar .g-dots circle,html.theme-dark .state-intro .intro-avatar .g-smile path{fill:#fff;stroke:#fff}
+html.theme-dark .state-intro .intro-avatar .g-smile path{fill:none}
+html.theme-dark .composer{background:rgba(22,27,34,.62);border-color:rgba(255,255,255,.08)}
+html.theme-dark .composer:focus-within{background:rgba(22,27,34,.8);box-shadow:0 2px 6px rgba(0,0,0,.3), 0 28px 70px -24px rgba(0,0,0,.7)}
+html.theme-dark .state-thread .composer{background:rgba(22,27,34,.86);border-color:rgba(255,255,255,.07)}
+html.theme-dark .chip{color:var(--ink);background:rgba(255,255,255,.06)}
+html.theme-dark .chip:hover{background:rgba(255,255,255,.11)}
+html.theme-dark .state-intro .chip{color:var(--fg);background:rgba(255,255,255,.12)}
+html.theme-dark .state-intro .chip:hover{background:rgba(255,255,255,.22)}
+html.theme-dark .c-send,html.theme-dark .view,html.theme-dark .btn.pri,html.theme-dark .art:hover .art-open,
+html.theme-dark .kd.light .kd-n,html.theme-dark .tk li::before,html.theme-dark .anno-list li::before,html.theme-dark .pin::before{color:var(--on-ink)}
+html.theme-dark .view:hover,html.theme-dark .btn.pri:hover{background:var(--ink-hover)}
+html.theme-dark .divider.stuck .stamp{background:rgba(15,19,24,.95);box-shadow:0 6px 18px -10px rgba(0,0,0,.6)}
+html.theme-dark .art{background:var(--surface);box-shadow:none}
+@media (hover:hover){html.theme-dark .art:hover{border-color:var(--surface-3);box-shadow:0 22px 50px -26px rgba(0,0,0,.7)}}
+html.theme-dark .case-bar{background:rgba(15,19,24,.96)}
+html.theme-dark .pin{filter:drop-shadow(0 0 1.5px rgba(0,0,0,.9))}
+html.theme-dark .pin::before{box-shadow:0 0 0 2px var(--bg)}
+html.theme-dark .shot-img{box-shadow:0 1px 2px rgba(0,0,0,.3), 0 20px 50px -28px rgba(0,0,0,.7)}
+html.theme-dark .pp.crit,html.theme-dark .iter-col.fb,html.theme-dark .pn-pain{background:linear-gradient(135deg,#2A1A1A,#261C19)}
+html.theme-dark .pn-pain{color:#F2B4A8}
+html.theme-dark .pp.nice{background:linear-gradient(135deg,#16261C,#22241A)}
+html.theme-dark .iter-col.me,html.theme-dark .pn-need{background:linear-gradient(135deg,#132629,#162724)}
+html.theme-dark .pn-need{color:#9ED9DE}
+html.theme-dark .g-critical .pn-pain{background:linear-gradient(135deg,#341A18,#2C1B19);color:#FF9C90}
+html.theme-dark .g-useful .pn-pain{background:linear-gradient(135deg,#2E2414,#2A2318);color:#EDBE7A}
+html.theme-dark .g-nice .pn-pain{background:linear-gradient(135deg,#232A12,#242818);color:#C5D97A}
+html.theme-dark .dec-grid div.chose{background:linear-gradient(135deg,#1E2542,#251F40)}
+html.theme-dark .dec-grid .chose small{color:#A9ABFF}
+html.theme-dark .flow{background:linear-gradient(135deg,#171C2B,#1C1A2B 55%,#271E1C)}
+html.theme-dark .flow li{background:rgba(255,255,255,.05)}
+html.theme-dark .flow .after li{background:var(--surface-3);box-shadow:0 8px 20px -12px rgba(0,0,0,.6)}
+html.theme-dark .todo{color:#B5B8FF;background:#22244A}
 </style>
 </head>
 <body class="state-intro">
@@ -1484,7 +1542,7 @@ const SKIES = [
   {name:'Blue sky', seed:12, angle:.9,   fx:1.6, fy:2.3, warp:.9,  contrast:1.05, tilt:.4,  fg:'#FFFFFF', veil:.82,
    tshadow:'0 2px 30px rgba(24,50,130,.4), 0 0 2px rgba(24,50,130,.25)', pshadow:'0 1px 14px rgba(24,50,130,.45)',
    stops:[[0,'#3560C4'],[.12,'#5F8EDC'],[.25,'#9CB9EE'],[.36,'#DCE6FA'],[.44,'#FFFFFF'],[.54,'#FCDDE8'],[.66,'#F4B9CF'],[.8,'#FBE4EC'],[1,'#FFFFFF']]},
-  {name:'Overcast', seed:31, angle:-1.6, fx:1.4, fy:1.9, warp:1.05, contrast:1.15, tilt:-.6,  fg:'#FFFFFF', veil:.9,
+  {name:'Overcast', dark:true, seed:31, angle:-1.6, fx:1.4, fy:1.9, warp:1.05, contrast:1.15, tilt:-.6,  fg:'#FFFFFF', veil:.9,
    stops:[[0,'#0A0D11'],[.2,'#0F1419'],[.35,'#161D28'],[.52,'#1F2936'],[.68,'#2D3A4A'],[.82,'#3A4557'],[.95,'#4A5568'],[1,'#52607A']]},
   {name:'Sunset',   seed:5,  angle:2.1,  fx:1.7, fy:2.1, warp:1.1, contrast:1.1,  tilt:.55,   fg:'#FFFFFF', veil:.88,
    stops:[[0,'#1B1013'],[.22,'#5A201D'],[.42,'#C03A2B'],[.58,'#EE5D3C'],[.74,'#F68F6C'],[.88,'#F7C0B8'],[1,'#FCE4E6']]},
@@ -1583,7 +1641,7 @@ function paintSky(P){
     root.style.setProperty('--skyblur', (P.blur == null ? 16 : P.blur) + 'px');
     P.tshadow ? root.style.setProperty('--tshadow', P.tshadow) : root.style.removeProperty('--tshadow');
     P.pshadow ? root.style.setProperty('--pshadow', P.pshadow) : root.style.removeProperty('--pshadow');
-    root.classList.toggle('bg-flat', !!P.flat); root.classList.toggle('bg-dark-pills', !!P.darkPills);
+    root.classList.toggle('bg-flat', !!P.flat); root.classList.toggle('theme-dark', !!P.dark); root.classList.toggle('bg-dark-pills', !!P.darkPills);
     queueVeil();
     label.textContent = P.name; setOrb(n);
     const show = () => { const cv = sky(n); setOrb(n); if (!cv){ box.querySelectorAll('.fx-sky').forEach(c => c.classList.remove('on')); return; } requestAnimationFrame(() => requestAnimationFrame(() => {
