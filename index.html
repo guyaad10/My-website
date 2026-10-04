@@ -407,6 +407,7 @@ body.chat-view #thread{display:none}
 .toc small{display:block;font-size:.75rem;color:var(--ink-3);margin-bottom:4px}
 .ui-hero{position:relative;max-width:968px;margin:0 auto 40px;container-type:inline-size;cursor:zoom-in}
 .ui-hero img{display:block;width:100%;height:auto}
+.ui-hero.final{margin-bottom:104px}
 .chap{scroll-margin-top:96px}
 .chap{max-width:968px;margin:0 auto 72px;display:flex;align-items:baseline;gap:20px;padding-bottom:20px;border-bottom:1px solid var(--line)}
 .chap span{font-size:1rem;color:var(--ink-3);font-variant-numeric:tabular-nums}
@@ -1668,7 +1669,6 @@ function renderClalitCase(p){
   const anno = (imgs, notes, cls='') => `<figure class="anno ${cls}"><div class="anno-img"><div class="shot-img">${imgs}</div>${notes.map((n,k)=>`<span class="pin ${n.side}" data-n="${k+1}" style="--x:${n.x*100}%;--y:${n.y*100}%"><span class="lbl"><b>${n.t}</b>${n.d}</span></span>`).join('')}</div><ol class="anno-list">${notes.map(n=>`<li><b>${n.t}.</b> ${n.d}</li>`).join('')}</ol></figure>`;
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.summary}</p>${metaDL(p)}</header>
-    <div class="ui-hero" id="case-hero"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
     <nav class="toc" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
     ${section('The project', paras(p.context))}
@@ -1693,6 +1693,7 @@ function renderClalitCase(p){
     ${decisions}
     ${section('UI components', '<p>Delivered as a component set in the Clalit design system: icons, badges, patient cards and room cards.</p>')}
     ${anno('<img src="images/clalit-components.png" alt="UI component set: rooms, patients, badges and icons">', p.compNotes, 'bare')}
+    <div class="ui-hero final"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
     ${chapter(5)}
     ${takeaways}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
