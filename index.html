@@ -401,16 +401,17 @@ body.chat-view #thread{display:none}
 .og-quote p{margin:0;font:400 clamp(1.5rem,1.1rem + 1.4vw,2.25rem)/1.25 var(--sans);letter-spacing:-.035em;text-wrap:balance}
 .og-persona{border-radius:20px;background:linear-gradient(135deg,#F1F0FF,#F7F7FA);padding:22px 24px}
 .og-persona b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em}
-.og-persona > small{display:block;color:var(--ink-3);font-size:.875rem;margin:4px 0 14px}
-.og-persona dl{margin:16px 0 0;display:grid;gap:10px}
+.og-persona small{display:block;color:var(--ink-3);font-size:.875rem;line-height:1.4;margin:4px 0 16px}
+.og-persona p{margin:0;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.og-persona dl{margin:20px 0 0;display:grid;gap:12px}
 .og-persona dt{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.og-persona dd{margin:2px 0 0;font-size:.9375rem;line-height:1.5;color:var(--body)}
-.og-persona blockquote{margin:18px 0 0;padding-top:14px;border-top:1px solid rgba(0,0,0,.08);font-size:1rem;line-height:1.5;color:var(--ink);font-style:italic}
+.og-persona dd{margin:2px 0 0;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.og-persona blockquote{margin:20px 0 0;padding-top:16px;border-top:1px solid rgba(0,0,0,.08);font-size:.9375rem;line-height:1.55;color:var(--ink);font-style:normal;font-weight:500}
 .og-chips{display:flex;flex-wrap:wrap;gap:8px;margin:4px 0 1.2em;padding:0;list-style:none}
 .og-chips li{display:inline-flex;align-items:center;gap:8px;font-size:.875rem;padding:4px 12px 4px 4px;border-radius:99px;background:var(--surface-2);color:var(--ink-2)}
 .og-chips img{width:24px;height:24px;border-radius:50%;display:block}
-.og-persona{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:28px;align-items:start}
-.og-sticker{width:calc(100% + 80px);max-width:none;height:auto;display:block;transform:rotate(4deg);margin:-30px 0 0 40px;order:2;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
+.og-persona{display:grid;grid-template-columns:minmax(0,1fr) 180px;gap:16px;align-items:start}
+.og-sticker{width:calc(100% + 56px);max-width:none;height:auto;display:block;transform:rotate(4deg);margin:-30px 0 0 0;order:2;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
 .shot.og-flow{max-width:840px}
 .shot.og-flow .shot-img{background:#1A1B1E;padding:56px 64px}
 .shot.og-canvas .shot-img{background:none;box-shadow:none;border-radius:0}
