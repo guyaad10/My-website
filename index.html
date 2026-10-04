@@ -303,6 +303,7 @@ body.chat-view #thread{display:none}
 .art.sm .art-foot{padding:12px 14px 14px}
 .art.sm b{display:block;font-weight:500;font-size:.9375rem;letter-spacing:-.015em}
 .art.sm .art-foot p{margin:2px 0 0;font-size:.8125rem;line-height:1.4}
+.art.sm .tags{margin-top:12px}
 .art-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .art-h time{flex:none;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){
@@ -1180,7 +1181,7 @@ const PROJECTS = [
   },
   {
     id:'archive', kind:'archive',
-    line:"Older work. I'd design most of it differently today, which is part of the point.",
+    line:"Work from my student days. I’d design most of it differently today — and I think that’s a good thing 😅",
     items:[
       {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2023', tags:['Healthcare','UI design','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
@@ -1202,7 +1203,7 @@ const PROJECTS = [
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
       {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2023', tags:['B2C','Mobile app']},
-      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency'],
+      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2017–2019', tags:['Agency','Branding'],
        context:['[[Short context and a few highlight clients]]'], reflection:['[[What studio work taught you]]']}
     ]
   }
@@ -1366,7 +1367,7 @@ function projectMsg(p){
   if (p.kind === 'group') return `<article class="msg" id="m-${p.id}">${who(p.line)}
     <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><b>${i.title}</b><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
   return `<article class="msg" id="m-${p.id}">${who(p.line)}
-    <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><div class="art-h"><b>${i.title}</b><time>${i.year}</time></div><p>${i.summary}</p></div></a>`).join('')}</div></div></article>`;
+    <div class="m-body"><div class="art-grid">${p.items.map(i=>`<a class="art sm" href="#/${i.id}" data-open="${i.id}">${visual(i)}<div class="art-foot"><div class="art-h"><b>${i.title}</b><time>${i.year}</time></div><p>${i.summary}</p>${i.tags?.length?`<ul class="tags">${i.tags.map(t=>`<li>${t}</li>`).join('')}</ul>`:''}</div></a>`).join('')}</div></div></article>`;
 }
 
 const REPLIES = {
