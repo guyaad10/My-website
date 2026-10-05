@@ -918,24 +918,25 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 @media (hover:hover){html.theme-dark .art:hover{border-color:var(--surface-3);box-shadow:0 22px 50px -26px rgba(0,0,0,.7)}}
 
 /* Organiser / invitee switch */
-.wa-sides{max-width:968px;margin:-48px auto 104px}
-.wa-seg{display:flex;gap:4px;width:max-content;margin:0 auto 16px;padding:4px;border-radius:999px;background:var(--surface-2)}
+.wa-sides{margin-top:28px}
+.wa-seg{display:flex;gap:4px;width:max-content;margin:0 0 24px;padding:4px;border-radius:999px;background:var(--surface-2)}
 .wa-seg button{border:0;background:none;padding:8px 22px;border-radius:999px;font:500 .9375rem/1.2 var(--sans);color:var(--ink-3);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
 .wa-seg button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(15,15,30,.08),0 2px 8px rgba(15,15,30,.06)}
 .wa-seg button:focus-visible{outline:2px solid #13A486;outline-offset:2px}
-.wa-side{border-radius:28px;background:var(--surface-2);padding:36px 36px 40px}
-.wa-side .wa-list{max-width:640px;margin:0 auto 32px}
-.wa-side-media{display:flex;justify-content:center;align-items:flex-start;gap:32px}
+.wa-side{padding:0}
+.wa-side .wa-list{margin:0 0 28px}
+.wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:20px}
 .wa-side-media > *{margin:0}
-.wa-side-media.three > *{width:min(240px,31%)}
+.wa-side-media.three > *{width:min(180px,31%)}
+.wa-side-media .wa-vid{border-radius:22px}
 .wa-side-media figcaption{margin-top:12px;text-align:center;color:var(--ink-3);font-size:.875rem}
-.wa-side-media .wa-phone.wa-edge{width:min(280px,44%)}
-.wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(380px,100%);align-self:center;display:flex;flex-direction:column;gap:22px}
+.wa-side-media .wa-phone.wa-edge{width:min(200px,40%)}
+.wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(340px,56%);align-self:center;display:flex;flex-direction:column;gap:22px}
 .wa-steps img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 .6px rgba(15,15,30,.3)) drop-shadow(0 8px 20px rgba(15,15,30,.08))}
 .wa-steps span{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.875rem;color:var(--ink-3)}
 .wa-steps li{counter-increment:wa-step}
 .wa-steps span::before{content:counter(wa-step);flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#13A486;color:#fff;font-size:.75rem;font-weight:600}
-@media (max-width:760px){.wa-side{padding:20px 16px 24px}.wa-side-media{flex-wrap:wrap;gap:20px}.wa-side-media.three > *{width:44%}.wa-side-media .wa-phone.wa-edge{width:70%}}
+@media (max-width:760px){.wa-side-media{flex-wrap:wrap;gap:16px}.wa-side-media.three > *{width:calc(50% - 8px)}.wa-side-media .wa-phone.wa-edge{width:60%}.wa-steps{width:100%}}
 </style>
 </head>
 <body class="state-intro">
@@ -2067,7 +2068,7 @@ function renderWhatsappCase(p, next){
     ${chapter(4)}
     ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']))}
     <div class="wa-media"><figure class="wa-phone wa-edge"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>
-    ${section('Time and location', '<p>Every vote has two sides. The organiser sets it up, and invitees answer it right from the chat.</p>')}
+    ${section('Time and location', `<p>Every vote has two sides. The organiser sets it up, and invitees answer it right from the chat.</p>
     <div class="wa-sides" data-sides>
       <div class="wa-seg" role="tablist" aria-label="Point of view"><button type="button" role="tab" id="tl-org-t" aria-controls="tl-org" aria-selected="true">Organiser</button><button type="button" role="tab" id="tl-inv-t" aria-controls="tl-inv" aria-selected="false" tabindex="-1">Invitee</button></div>
       <div class="wa-side" role="tabpanel" id="tl-org" aria-labelledby="tl-org-t">${list(['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Set a deadline for the vote.','Allow one choice or several.','Only the organiser can release the vote card from being pinned.'])}
@@ -2075,7 +2076,7 @@ function renderWhatsappCase(p, next){
       <div class="wa-side" role="tabpanel" id="tl-inv" aria-labelledby="tl-inv-t" hidden>${list(['A vote card stays pinned to the top of the chat.','After voting, the card collapses and can be closed.','When voting ends, a notice points to the result in the event info.'])}
         <div class="wa-side-media"><figure class="wa-phone wa-edge"><img style="border-radius:9.7%/4.4%" src="images/whatsapp-invitee-chat.webp" alt="The event chat with the location and date vote cards pinned on top" loading="lazy"><figcaption>Vote cards pinned in the chat</figcaption></figure>
           <ol class="wa-steps">${[['1','Pinned to the top until you vote','Location vote card with live results'],['2','Collapsed once you vote, and can be closed','Collapsed card: you voted for Gadot Forest Park'],['3','Voting closed: the result is in the event info','Notice that voting on the location has closed']].map(([n,t,a])=>`<li><img src="images/whatsapp-vote-${n}.webp" alt="${a}" loading="lazy"><span>${t}</span></li>`).join('')}</ol></div></div>
-    </div>
+    </div>`)}
     ${section('Tasks', role('Organiser', ['Add tasks, like who brings the drinks.','Break a task into subtasks, and set how many people each one needs.','Decide whether invitees can edit tasks or assign themselves.']) + role('Invitees', ['Get notified about a new task.','Pick one up from the task list.','Mark it done once it is handled.']))}
     <div class="wa-media"><figure class="wa-ill"><img src="images/whatsapp-ill-tasks.webp" alt="" loading="lazy"></figure>${vid('tasks','Adding and claiming tasks')}</div>
     ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']))}
