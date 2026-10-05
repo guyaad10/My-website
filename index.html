@@ -496,7 +496,7 @@ body.chat-view #thread{display:none}
 .shot.wa-flow .shot-img{background:#075E54;padding:56px 64px}
 .wa-car .og-slide{padding:0 72px}
 .wa-car .og-slide img{display:block;width:100%;height:auto;mix-blend-mode:multiply}
-.wa-list{margin:0 0 1em;padding-left:1.1em;font-size:1.0625rem;line-height:1.6;color:var(--body)}
+.wa-list{margin:0 0 1em;padding-left:1.1em;font-size:.9375rem;line-height:1.6;color:var(--body)}
 .wa-list li{margin-bottom:6px}
 .wa-list:last-child{margin-bottom:0}
 .wa-role{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
@@ -918,18 +918,16 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 @media (hover:hover){html.theme-dark .art:hover{border-color:var(--surface-3);box-shadow:0 22px 50px -26px rgba(0,0,0,.7)}}
 
 /* Organiser / invitee switch */
-.wa-sides{margin-top:28px}
-.wa-seg{display:flex;gap:4px;width:max-content;margin:0 0 24px;padding:4px;border-radius:999px;background:var(--surface-2)}
-.wa-seg button{border:0;background:none;padding:8px 22px;border-radius:999px;font:500 .9375rem/1.2 var(--sans);color:var(--ink-3);cursor:pointer;transition:background .2s,color .2s,box-shadow .2s}
-.wa-seg button[aria-selected=true]{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(15,15,30,.08),0 2px 8px rgba(15,15,30,.06)}
-.wa-seg button:focus-visible{outline:2px solid #13A486;outline-offset:2px}
+.wa-sides{margin-top:28px;display:flex;flex-direction:column;gap:44px}
 .wa-side{padding:0}
 .wa-side .wa-list{margin:0 0 28px}
 .wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:20px}
 .wa-side-media > *{margin:0}
 .wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(180px,31%)}
-.wa-side-media > .wa-vid.wide{width:min(400px,100%)}
+.wa-side-media > .wa-vid.wide{width:min(400px,100%);align-self:center}
 .cs-body > .wa-side-media{margin-top:28px}
+.wa-annot{margin:28px 0 0}
+.wa-annot img{display:block;width:100%;height:auto}
 .wa-side-media .wa-vid{border-radius:22px}
 .wa-side-media figcaption{margin-top:12px;text-align:center;color:var(--ink-3);font-size:.875rem}
 .wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(340px,56%);align-self:center;display:flex;flex-direction:column;gap:22px}
@@ -2023,12 +2021,8 @@ function renderWhatsappCase(p, next){
   /* Screen recordings Guy is still collecting. Drop an MP4 named videos/whatsapp-<file>.mp4 and it replaces the placeholder automatically. */
   const vid = (file, label, wide=false) => `<figure class="wa-vid${wide?' wide':''}"><video src="videos/whatsapp-${file}.mp4" muted loop playsinline preload="metadata" aria-label="${label}, screen recording"></video><div class="wa-ph" aria-hidden="true"><span class="wa-play"></span><small>Video coming soon</small><b>${label}</b></div></figure>`;
   const list = arr => `<ul class="wa-list">${arr.map(t=>`<li>${t}</li>`).join('')}</ul>`;
-  /* Organiser / invitee switch: one tab per side, each with its bullets and screens. */
-  const sides = (id, org, orgMedia, inv, invMedia) => `<div class="wa-sides" data-sides>
-      <div class="wa-seg" role="tablist" aria-label="Point of view"><button type="button" role="tab" id="${id}-org-t" aria-controls="${id}-org" aria-selected="true">Organiser</button><button type="button" role="tab" id="${id}-inv-t" aria-controls="${id}-inv" aria-selected="false" tabindex="-1">Invitee</button></div>
-      <div class="wa-side" role="tabpanel" id="${id}-org" aria-labelledby="${id}-org-t">${list(org)}${orgMedia}</div>
-      <div class="wa-side" role="tabpanel" id="${id}-inv" aria-labelledby="${id}-inv-t" hidden>${list(inv)}${invMedia}</div>
-    </div>`;
+  /* Organiser and invitee views, one under the other, each with its bullets and screens. */
+  const sides = (org, orgMedia, inv, invMedia) => `<div class="wa-sides"><div class="wa-side"><span class="wa-role">Organiser</span>${list(org)}${orgMedia}</div><div class="wa-side"><span class="wa-role">Invitee</span>${list(inv)}${invMedia}</div></div>`;
   const role = (r, arr) => `<span class="wa-role">${r}</span>${list(arr)}`;
   const problems = [
     ['One person carries it','The organiser ends up chasing replies, collecting money and keeping everyone up to date.'],
@@ -2074,23 +2068,20 @@ function renderWhatsappCase(p, next){
       <div class="og-car-dots"><i class="on"></i><i></i></div></div>
     ${chapter(4)}
     ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']) + `<div class="wa-side-media"><figure class="wa-phone wa-edge"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>`)}
-    ${section('Time and location', `<p>Every vote has two sides. The organiser sets it up, and invitees answer it right from the chat.</p>
-    <div class="wa-sides" data-sides>
-      <div class="wa-seg" role="tablist" aria-label="Point of view"><button type="button" role="tab" id="tl-org-t" aria-controls="tl-org" aria-selected="true">Organiser</button><button type="button" role="tab" id="tl-inv-t" aria-controls="tl-inv" aria-selected="false" tabindex="-1">Invitee</button></div>
-      <div class="wa-side" role="tabpanel" id="tl-org" aria-labelledby="tl-org-t">${list(['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Set a deadline for the vote.','Allow one choice or several.','Only the organiser can release the vote card from being pinned.'])}
-        <div class="wa-side-media three"><figure class="wa-phone"><img src="images/whatsapp-time-place.webp" alt="Time and Place: two date options, a voting deadline toggle and a one-choice-only toggle" loading="lazy"><figcaption>Dates up for a vote</figcaption></figure>${vid('time-location','Setting the time and place')}<figure class="wa-phone"><img src="images/whatsapp-location.webp" alt="Location picker: map, current location and nearby places" loading="lazy"><figcaption>A pin for every place</figcaption></figure></div></div>
-      <div class="wa-side" role="tabpanel" id="tl-inv" aria-labelledby="tl-inv-t" hidden>${list(['A vote card stays pinned to the top of the chat.','After voting, the card collapses and can be closed.','When voting ends, a notice points to the result in the event info.'])}
-        <div class="wa-side-media"><figure class="wa-phone wa-edge"><img style="border-radius:9.7%/4.4%" src="images/whatsapp-invitee-chat.webp" alt="The event chat with the location and date vote cards pinned on top" loading="lazy"><figcaption>Vote cards pinned in the chat</figcaption></figure>
-          <ol class="wa-steps">${[['1','Pinned to the top until you vote','Location vote card with live results'],['2','Collapsed once you vote, and can be closed','Collapsed card: you voted for Gadot Forest Park'],['3','Voting closed: the result is in the event info','Notice that voting on the location has closed']].map(([n,t,a])=>`<li><img src="images/whatsapp-vote-${n}.webp" alt="${a}" loading="lazy"><span>${t}</span></li>`).join('')}</ol></div></div>
-    </div>`)}
-    ${section('Tasks', '<p>The organiser decides how much freedom invitees get, and invitees pick up what they can from the list.</p>' + sides('tk',
+    ${section('Time and location', '<p>Every vote has two sides. The organiser sets it up, and invitees answer it right from the chat.</p>' + sides(
+      ['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Set a deadline for the vote.','Allow one choice or several.','Only the organiser can release the vote card from being pinned.'],
+      `<div class="wa-side-media three"><figure class="wa-phone"><img src="images/whatsapp-time-place.webp" alt="Time and Place: two date options, a voting deadline toggle and a one-choice-only toggle" loading="lazy"><figcaption>Dates up for a vote</figcaption></figure>${vid('time-location','Setting the time and place')}<figure class="wa-phone"><img src="images/whatsapp-location.webp" alt="Location picker: map, current location and nearby places" loading="lazy"><figcaption>A pin for every place</figcaption></figure></div>`,
+      ['A vote card stays pinned to the top of the chat.','After voting, the card collapses and can be closed.','When voting ends, a notice points to the result in the event info.'],
+      `<div class="wa-side-media"><figure class="wa-phone wa-edge"><img style="border-radius:9.7%/4.4%" src="images/whatsapp-invitee-chat.webp" alt="The event chat with the location and date vote cards pinned on top" loading="lazy"><figcaption>Vote cards pinned in the chat</figcaption></figure>
+          <ol class="wa-steps">${[['1','Pinned to the top until you vote','Location vote card with live results'],['2','Collapsed once you vote, and can be closed','Collapsed card: you voted for Gadot Forest Park'],['3','Voting closed: the result is in the event info','Notice that voting on the location has closed']].map(([n,t,a])=>`<li><img src="images/whatsapp-vote-${n}.webp" alt="${a}" loading="lazy"><span>${t}</span></li>`).join('')}</ol></div>`))}
+    ${section('Tasks', '<p>The organiser decides how much freedom invitees get, and invitees pick up what they can from the list.</p>' + sides(
       ['Add tasks, like who brings the drinks.','Break a task into subtasks, and set how many people each one needs.','Decide whether invitees can assign themselves or add items.'],
       `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-tasks-setup.webp" alt="Tasks settings: a to-do list, create new task, and toggles for whether invitees can assign themselves or add items" loading="lazy"><figcaption>Set the rules</figcaption></figure>${vid('tasks','Adding a task list')}</div>`,
       ['Get notified about a new task.','Pick one up from the task list.','Mark it done once it is handled.'],
       `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-tasks-list.webp" alt="Task list: who took each task, how many people are still needed, and Assign buttons" loading="lazy"><figcaption>See who took what and claim the rest</figcaption></figure></div>`))}
-    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']) + `<div class="wa-side-media">${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>`)}
-    ${section('RSVP', list(['When you are invited, a pop-up asks you to RSVP or jump into the event chat.','Answer Going, Maybe or Can\'t make it.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']) + `<div class="wa-side-media">${vid('rsvp','RSVP card in the chat', true)}</div>`)}
-    ${section('Event info', '<p>The group info page becomes the event\'s home. It keeps the latest date and place, who is coming, every poll and announcement, a shared album and the payment balances in one place.</p>' + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-info.webp" alt="Event info: date, place, polls, announcements and shared gallery" loading="lazy"><figcaption>Event info</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-payments.webp" alt="Payments: what you owe each person, with a settle up button" loading="lazy"><figcaption>Payments</figcaption></figure></div>`)}
+    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']) + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-add-payment.webp" alt="Add New Payment: 120 ILS for decorations, split between the invitees you pick" loading="lazy"><figcaption>Split it your way</figcaption></figure>${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>`)}
+    ${section('RSVP', list(['When you are invited, a pop-up asks you to RSVP or jump into the event chat.','Answer Going, Maybe or Can\'t make it.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']) + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-rsvp-popup.webp" alt="Invitation pop-up: hey Shira, you just got invited to Noam's birthday, with RSVP, Add to Calendar and See Event" loading="lazy"><figcaption>The invitation pop-up</figcaption></figure>${vid('rsvp','RSVP card in the chat', true)}</div>`)}
+    ${section('Event info', '<p>The group info page becomes the event\'s home, with everything in one place.</p>' + list(['See who is coming.','The latest date and place. Add the event to your calendar, or tap the location for directions.','Every poll and announcement, in case you missed something, sorted by date or by name.','A shared album of every photo people upload, ready to download at once.','Payment balances, and who still owes whom.']) + `<figure class="wa-annot"><img src="images/whatsapp-event-info.webp" alt="Event info screen with notes on the invitee count, date and place, polls and announcements, the shared album, and the payments page it links to" loading="lazy"></figure>`)}
     ${section('Next steps', '<p>Three ideas I would explore next.</p>')}
     <ol class="kd wa-kd wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long-press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<li><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
@@ -2098,12 +2089,6 @@ function renderWhatsappCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
   initCarousel(caseInner.querySelector('.wa-car'));
-  /* Organiser / invitee switch: click or arrow keys move between the two tabs. */
-  caseInner.querySelectorAll('[data-sides]').forEach(w => {
-    const tabs = [...w.querySelectorAll('[role=tab]')];
-    const pick = t => tabs.forEach(x => { const on = x === t; x.setAttribute('aria-selected', on); x.tabIndex = on ? 0 : -1; document.getElementById(x.getAttribute('aria-controls')).hidden = !on; });
-    tabs.forEach((t, k) => { t.addEventListener('click', () => pick(t)); t.addEventListener('keydown', e => { if (e.key !== 'ArrowLeft' && e.key !== 'ArrowRight') return; const n = tabs[(k + (e.key === 'ArrowRight' ? 1 : tabs.length - 1)) % tabs.length]; pick(n); n.focus(); }); });
-  });
   /* Survey numbers count up from zero the first time they scroll into view. */
   const statIO = new IntersectionObserver(es => es.forEach(e => {
     if (!e.isIntersecting) return;
