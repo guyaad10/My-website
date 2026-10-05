@@ -2109,7 +2109,8 @@ function renderWhatsappCase(p, next){
   }), {threshold:.5});
   if (!reduced.matches) statIO.observe(caseInner.querySelector('.wa-stats'));
   caseInner.querySelectorAll('.wa-vid video').forEach(v => {
-    v.addEventListener('loadedmetadata', () => { v.closest('.wa-vid').classList.add('ready'); if (!reduced.matches) v.play().catch(()=>{}); }, {once:true});
+    v.defaultPlaybackRate = v.playbackRate = .85; /* the recordings run a touch fast */
+    v.addEventListener('loadedmetadata', () => { v.playbackRate = .85; v.closest('.wa-vid').classList.add('ready'); if (!reduced.matches) v.play().catch(()=>{}); }, {once:true});
   });
 }
 function renderCase(p){
