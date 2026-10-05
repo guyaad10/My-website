@@ -477,7 +477,7 @@ body.chat-view #thread{display:none}
 .kd.wa-kd li{grid-row:span 3}
 .wa-stats{list-style:none;max-width:968px;margin:-40px auto 104px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
 .wa-stats li{border-radius:20px;background:linear-gradient(135deg,#E7F8EE,#F3FBF6);padding:28px 24px}
-.wa-stats b{display:block;font:500 clamp(2.5rem,1.8rem + 2vw,3.5rem)/1 var(--sans);letter-spacing:-.05em;color:#075E54;margin-bottom:14px}
+.wa-stats b{display:block;font-variant-numeric:tabular-nums;font:500 clamp(2.5rem,1.8rem + 2vw,3.5rem)/1 var(--sans);letter-spacing:-.05em;color:#075E54;margin-bottom:14px}
 .wa-stats p{margin:0;font-size:.9375rem;line-height:1.5;color:var(--body);text-wrap:pretty}
 .wa-persona{border-radius:20px;background:var(--surface-2);padding:22px 24px;margin-bottom:12px}
 .wa-persona:last-child{margin-bottom:0}
@@ -2011,7 +2011,7 @@ function renderWhatsappCase(p, next){
     <ol class="kd wa-kd">${problems.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${chapter(2)}
     ${section('User research', '<p>I ran seven interviews and a survey with 34 respondents aged 19 to 67. All of them had planned a family or friends event in the past year, and almost all said the planning starts, and mostly stays, in WhatsApp.</p>')}
-    <ul class="wa-stats">${[['67%','said nobody but the organiser took any initiative'],['84%','used tools outside the group chat to plan the event'],['62%','are still in more than ten group chats from past events']].map(([n,d])=>`<li><b>${n}</b><p>${d}</p></li>`).join('')}</ul>
+    <ul class="wa-stats">${[['67%','said nobody but the organiser took any initiative'],['84%','used tools outside the group chat to plan the event'],['62%','are still in more than ten group chats from past events']].map(([n,d])=>`<li><b data-count="${parseInt(n)}" aria-label="${n}">${n}</b><p>${d}</p></li>`).join('')}</ul>
     ${section('What I heard', `<div class="learn">${findings.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     ${section('Personas', `<p>Every event has two sides, so I wrote a persona for each.</p>
       <div class="wa-persona"><div class="wa-p-head"><img src="images/whatsapp-organiser.webp" alt="" width="56" height="56" loading="lazy"><div><b>Oren Lev, the organiser</b><small>33, Tel Aviv. Senior architect, married with one child, and the planner of his friend group.</small></div></div>
@@ -2049,6 +2049,17 @@ function renderWhatsappCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
   initCarousel(caseInner.querySelector('.wa-car'));
+  /* Survey numbers count up from zero the first time they scroll into view. */
+  const statIO = new IntersectionObserver(es => es.forEach(e => {
+    if (!e.isIntersecting) return;
+    statIO.disconnect();
+    e.target.querySelectorAll('[data-count]').forEach((b, k) => {
+      const end = +b.dataset.count, dur = 1400, t0 = performance.now() + k*120;
+      const tick = t => { const x = Math.min(1, Math.max(0, (t - t0) / dur)); b.textContent = Math.round(end * (1 - Math.pow(1 - x, 3))) + '%'; if (x < 1) requestAnimationFrame(tick); };
+      b.textContent = '0%'; requestAnimationFrame(tick);
+    });
+  }), {threshold:.5});
+  if (!reduced.matches) statIO.observe(caseInner.querySelector('.wa-stats'));
   caseInner.querySelectorAll('.wa-vid video').forEach(v => {
     v.addEventListener('loadedmetadata', () => { v.closest('.wa-vid').classList.add('ready'); if (!reduced.matches) v.play().catch(()=>{}); }, {once:true});
   });
