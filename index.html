@@ -313,7 +313,6 @@ body.chat-view #thread{display:none}
   .art.sm .visual{--ar:16/10 !important}
   .art.sm .mk-merc{font-size:.5cqw;padding:0 26%}
   .art.sm .mk-way .pass{width:52%;margin-top:14%;font-size:.7cqw}
-  .art.sm .mk-studio{grid-template-columns:repeat(4,1fr);padding:22% 8%;gap:3em}
   .art .visual{margin:0 6px;border-radius:12px}
   .art-bar{padding:10px 10px 10px 12px}
   .divider{top:18px}
@@ -470,6 +469,57 @@ body.chat-view #thread{display:none}
 .og-pal small{display:block;color:var(--ink-3);font-variant-numeric:tabular-nums}
 .og-icons{display:block;width:100%;height:auto;margin-top:32px}
 @media (max-width:760px){.og-persona{grid-template-columns:1fr}.og-sticker{width:160px;margin:-56px -8px 0 0;order:0;justify-self:end}.og-car{padding-top:0}.og-slide{padding:0 20px}.og-ba{gap:20px}.og-car-btn{display:none}.shot.og-flow .shot-img{padding:24px}.og-pair-row{gap:20px}.toc.c4{grid-template-columns:repeat(2,1fr)}.og-pal{grid-template-columns:repeat(4,1fr)}}
+/* WhatsApp Events case study */
+.wa-hero{max-width:968px;margin:0 auto 72px;border-radius:20px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#25D366 0%,#128C7E 55%,#075E54 100%);aspect-ratio:968/600;display:flex;justify-content:center;align-items:flex-start;gap:6%;padding:7% 8% 0}
+.wa-hero img{display:block;width:30%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,40,30,.35))}
+.wa-hero img + img{margin-top:7%}
+.kd.wa-kd{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr}
+.kd.wa-kd li{grid-row:span 3}
+.wa-stats{list-style:none;max-width:968px;margin:-40px auto 104px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.wa-stats li{border-radius:20px;background:linear-gradient(135deg,#E7F8EE,#F3FBF6);padding:28px 24px}
+.wa-stats b{display:block;font:500 clamp(2.5rem,1.8rem + 2vw,3.5rem)/1 var(--sans);letter-spacing:-.05em;color:#075E54;margin-bottom:14px}
+.wa-stats p{margin:0;font-size:.9375rem;line-height:1.5;color:var(--body);text-wrap:pretty}
+.wa-persona{border-radius:20px;background:var(--surface-2);padding:22px 24px;margin-bottom:12px}
+.wa-persona:last-child{margin-bottom:0}
+.wa-p-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.wa-p-head img{width:56px;height:56px;border-radius:50%;flex:none;display:block}
+.wa-p-head b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em}
+.wa-p-head small{display:block;color:var(--ink-3);font-size:.875rem;line-height:1.4;margin-top:2px}
+.wa-persona dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px}
+.wa-persona dt{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.wa-persona dd{margin:4px 0 0;font-size:.9375rem;line-height:1.55;color:var(--body)}
+.wa-persona blockquote{margin:18px 0 0;padding:12px 16px;border-radius:4px 16px 16px 16px;background:#D9FDD3;font-size:.9375rem;line-height:1.55;color:#14352a;font-style:normal;max-width:480px}
+.shot.wa-flow{max-width:760px}
+.shot.wa-flow .shot-img{background:#075E54;padding:56px 64px}
+.shot.wa-sketch .shot-img{background:#fff}
+.shot.wa-sketch .shot-img + .shot-img{margin-top:12px}
+.wa-list{margin:0 0 1em;padding-left:1.1em;font-size:1.0625rem;line-height:1.6;color:var(--body)}
+.wa-list li{margin-bottom:6px}
+.wa-list:last-child{margin-bottom:0}
+.wa-role{display:block;font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin:0 0 8px}
+.wa-media{max-width:968px;margin:-48px auto 104px;display:flex;justify-content:center;align-items:flex-start;gap:48px;flex-wrap:wrap}
+.wa-media > *{margin:0}
+.wa-media figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
+.wa-phone{width:min(300px,44%)}
+.wa-phone img{display:block;width:100%;height:auto}
+.wa-card{width:min(390px,100%);align-self:center}
+.wa-card img{display:block;width:100%;height:auto}
+.wa-ill{width:min(220px,40%);align-self:center}
+.wa-ill img{display:block;width:100%;height:auto}
+.wa-vid{position:relative;width:min(300px,44%);aspect-ratio:328/710;border-radius:36px;overflow:hidden;background:#0B1F1A;box-shadow:0 1px 2px rgba(15,15,30,.06),0 20px 50px -28px rgba(40,50,110,.35)}
+.wa-vid.wide{width:min(580px,100%);aspect-ratio:580/417;border-radius:24px}
+.wa-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s var(--ease)}
+.wa-vid.ready video{opacity:1}
+.wa-vid.ready .wa-ph{display:none}
+.wa-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;color:#fff;background:radial-gradient(90% 60% at 50% 40%,#128C7E 0%,#075E54 60%,#06392F 100%)}
+.wa-play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;margin-bottom:12px}
+.wa-play::after{content:"";width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:4px}
+.wa-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65)}
+.wa-ph b{font:500 1.125rem/1.25 var(--sans);letter-spacing:-.02em;text-wrap:balance}
+.wa-next{list-style:none;margin:0;padding:0;display:grid;gap:12px}
+.wa-next li{border-radius:18px;background:var(--surface-2);padding:18px 22px;font-size:1.0625rem;line-height:1.5;color:var(--body)}
+.wa-next b{display:block;font-weight:500;color:var(--ink);margin-bottom:4px}
+@media (max-width:760px){.wa-hero{aspect-ratio:auto;padding:40px 20px 0;gap:4%;height:auto}.wa-hero img{width:44%}.kd.wa-kd{display:block}.wa-stats{grid-template-columns:1fr}.wa-persona dl{grid-template-columns:1fr}.shot.wa-flow .shot-img{padding:24px}.wa-media{gap:20px}.wa-vid{border-radius:24px}}
 @media (max-width:1020px){
   .anno{padding:0;max-width:968px}
   .pin{border:0;right:auto!important;left:var(--x)!important;width:0;filter:none}
@@ -749,13 +799,8 @@ body.chat-view #thread{display:none}
 .mk-merc .row span{display:block;height:2.4em;width:70%;border-radius:1em;background:#DDE5DF}
 .mk-merc .row span+span{width:40%;margin-top:2.4em;background:#EEF2EF}
 .mk-merc .pay{margin-top:2em;background:#1B1D2A;color:#fff;border-radius:99em;text-align:center;padding:.6em 0;font-size:5.5em;font-weight:500;letter-spacing:-.02em}
-.mk-studio{background:linear-gradient(150deg, #F4EFE8, #ECE6F7);display:grid;grid-template-columns:1fr 1fr;gap:5em;padding:16% 13%}
-.mk-studio i{border-radius:3em;background:#fff;display:grid;place-items:center;box-shadow:0 3em 6em -4em rgba(60,40,90,.3)}
-.mk-studio i::after{content:"";width:40%;aspect-ratio:1}
-.mk-studio .c1::after{border-radius:50%;background:#F08A5D}
-.mk-studio .c2::after{border-radius:1.5em;background:#6B4FC7}
-.mk-studio .c3::after{clip-path:polygon(50% 0,100% 100%,0 100%);background:#2E9E7A}
-.mk-studio .c4::after{border-radius:50% 50% 0 0;background:#1B1D2A}
+.mk-wa{background:linear-gradient(160deg,#D9FDD3,#B8F0CC);display:grid;place-items:center}
+.mk-wa img{display:block;width:74%;max-height:80%;height:auto;object-fit:contain}
 
 @media (max-width:760px){
   .home-mark{left:18px;top:calc(14px + env(safe-area-inset-top,0px))}
@@ -1204,8 +1249,7 @@ const PROJECTS = [
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]},
       {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2022', tags:['B2C','Mobile','UX/UI']},
-      {id:'studio', mock:'studio', ar:'4/5', title:'Studio work', summary:'Brand and product projects for early-stage clients', role:'Designer', company:'Design studio', year:'2022', tags:['Agency','Branding'],
-       context:['[[Short context and a few highlight clients]]'], reflection:['[[What studio work taught you]]']}
+      {id:'whatsapp', __case:'whatsapp', mock:'whatsapp', ar:'4/5', title:'WhatsApp Events', summary:'Event planning tools built into WhatsApp group chats', role:'UX/UI designer', company:'School project', year:'2023', tags:['B2C','Mobile','UX/UI']}
     ]
   }
 ];
@@ -1299,7 +1343,7 @@ const MOCKS = {
   headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
   offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-card.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
-  studio(){ return `<div class="mk-stage mk-studio"><i class="c1"></i><i class="c2"></i><i class="c3"></i><i class="c4"></i></div>`; },
+  whatsapp(){ return '<div class="mk-stage mk-wa"><img src="images/whatsapp-ill-time.webp" alt="" draggable="false"></div>'; },
 };
 
 /* ================== Helpers ================== */
@@ -1931,11 +1975,78 @@ function renderOffgridCase(p, next){
   track.addEventListener('scroll', () => { const i = idx(); dots.forEach((d,k)=>d.classList.toggle('on', k===i)); car.querySelector('.prev').disabled = i===0; car.querySelector('.next').disabled = i===dots.length-1; }, {passive:true});
   car.querySelector('.prev').disabled = true;
 }
+function renderWhatsappCase(p, next){
+  const CH = ['Overview','Research','Design','Features'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  const img = (src, alt, cls='') => `<figure class="${cls}"><div class="shot-img" style="background:none;box-shadow:none;border-radius:0"><img src="images/whatsapp-${src}.webp" alt="${alt}" loading="lazy"></div></figure>`;
+  /* Screen recordings Guy is still collecting. Drop an MP4 named videos/whatsapp-<file>.mp4 and it replaces the placeholder automatically. */
+  const vid = (file, label, wide=false) => `<figure class="wa-vid${wide?' wide':''}"><video src="videos/whatsapp-${file}.mp4" muted loop playsinline preload="metadata" aria-label="${label}, screen recording"></video><div class="wa-ph" aria-hidden="true"><span class="wa-play"></span><small>Video coming soon</small><b>${label}</b></div></figure>`;
+  const list = arr => `<ul class="wa-list">${arr.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+  const role = (r, arr) => `<span class="wa-role">${r}</span>${list(arr)}`;
+  const problems = [
+    ['One person carries it','The organiser ends up chasing replies, collecting money and keeping everyone up to date.'],
+    ['Decisions sink in the scroll','Dates, places and who brings what get buried under a stream of messages.'],
+    ['The tools live elsewhere','Polls in one app, lists in Docs, payments in Paybox. Nothing is connected to the chat.']
+  ];
+  const findings = [
+    ['Low engagement','Invitees stay passive and the organiser feels like they are micromanaging. Getting people to take part is the key to a better get-together.'],
+    ['Coordination','Agreeing on a date or a place, or splitting tasks between people, means syncing everyone\'s schedule by hand.'],
+    ['Endless scrolling','Important details get lost in the chat. Every event spawns a new group that stays around long after the event is over.'],
+    ['Missing tools','Most people plan with apps outside WhatsApp, like Docs, Sheets and Paybox. A built-in toolkit could keep the key details in one place.']
+  ];
+  caseInner.innerHTML = `
+    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A concept feature that turns a WhatsApp group into a lightweight event planner. Dates, places, tasks, RSVPs and shared costs live right where the conversation already happens.</p>${metaDL(p)}</header>
+    <div class="wa-hero"><img src="images/whatsapp-intro.webp" alt="The new Events tab introducing the feature"><img src="images/whatsapp-info.webp" alt="Event info screen for Noam's birthday"></div>
+    <nav class="toc c4" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
+    ${chapter(1)}
+    ${section('About', '<p>Almost every get-together, from a birthday to a weekend trip, gets planned in a WhatsApp group. WhatsApp Events adds the tools those groups are missing without pulling anyone out of the chat: a date and a place everyone agrees on, shared task lists, RSVPs and split payments.</p><p>Like a group admin, every event has an organiser, who can make it open or private and send reminders to friends and family.</p>')}
+    ${section('The problem', '<p>WhatsApp is how we talk to friends and family, but a group chat is a poor planning tool. With a large group, getting everyone on board and handing out tasks and information gets messy fast.</p>')}
+    <ol class="kd wa-kd">${problems.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
+    ${chapter(2)}
+    ${section('User research', '<p>I ran seven interviews and a survey with 34 respondents aged 19 to 67. All of them had planned a family or friends event in the past year, and almost all said the planning starts, and mostly stays, in WhatsApp.</p>')}
+    <ul class="wa-stats">${[['67%','said nobody but the organiser took any initiative'],['84%','used tools outside the group chat to plan the event'],['62%','are still in more than ten group chats from past events']].map(([n,d])=>`<li><b>${n}</b><p>${d}</p></li>`).join('')}</ul>
+    ${section('What I heard', `<div class="learn">${findings.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
+    ${section('Personas', `<p>Every event has two sides, so I wrote a persona for each.</p>
+      <div class="wa-persona"><div class="wa-p-head"><img src="images/whatsapp-organiser.webp" alt="" width="56" height="56" loading="lazy"><div><b>Oren Lev, the organiser</b><small>33, Tel Aviv. Senior architect, married with one child, and the planner of his friend group.</small></div></div>
+        <dl><div><dt>Frustrations</dt><dd>Chasing invitees for a reply. Juggling several apps to keep the event's details in order.</dd></div><div><dt>Needs</dt><dd>Tools that keep the information organised, and a chat that nudges invitees to act instead of just reading.</dd></div></dl>
+        <blockquote>“Planning in a group chat should be easier. When everything happens in messages, it's hard to decide anything or follow what's going on.”</blockquote></div>
+      <div class="wa-persona"><div class="wa-p-head"><img src="images/whatsapp-invitee.webp" alt="" width="56" height="56" loading="lazy"><div><b>The invitee</b><small>Wants to show up, bring the right thing and not read 200 messages to find out what that is.</small></div></div>
+        <dl><div><dt>Frustrations</dt><dd>The basic details are impossible to find in a running conversation. Too many dead group chats from past events.</dd></div><div><dt>Needs</dt><dd>A reminder of what's next and what to bring, and an event chat that goes away once the event is over.</dd></div></dl>
+        <blockquote>“I'm honestly overwhelmed by all the texts about this event. Just tell me what to do and I promise it will happen.”</blockquote></div>`)}
+    <div class="og-quote"><small>Value proposition</small><p>Simple planning tools inside the chat people already use, so the organiser stops chasing and everyone knows what's next.</p></div>
+    ${chapter(3)}
+    ${section('User flow', '<p>One flow covers both cases: creating a new event, and jumping into an event that already exists to update its tasks, dates or location.</p>')}
+    <figure class="shot wa-flow"><div class="shot-img"><img src="images/whatsapp-flow.webp" alt="User flow for creating an event and managing an existing one" loading="lazy"></div></figure>
+    ${section('Sketches', '<p>After the research I knew the MVP had to stay small and focused. Rather than inventing new patterns, I borrowed ones WhatsApp users already know: a new tab beside Chats, the attachment menu, poll cards and the group info page.</p>')}
+    <figure class="shot wa-sketch"><div class="shot-img"><img src="images/whatsapp-sketch-1.webp" alt="Crazy 8 sketches: Events tab, attachment menu, voting cards and payment card" loading="lazy"></div><div class="shot-img"><img src="images/whatsapp-sketch-2.webp" alt="Crazy 8 sketches: new task, RSVP card, event info and payments" loading="lazy"></div></figure>
+    ${chapter(4)}
+    ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']))}
+    <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>
+    ${section('Time and location', role('Organiser', ['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Allow one choice or several.','The vote card stays pinned to the top of the chat until the organiser closes it.']))}
+    <div class="wa-media">${vid('time-location','Voting on a time and place')}<figure class="wa-card"><img src="images/whatsapp-sticky.webp" alt="The vote card: pinned while open, collapsed once you vote, and a notice when voting closes" loading="lazy"><figcaption>The card collapses once you vote, and a notice points to the result when voting closes.</figcaption></figure></div>
+    ${section('Tasks', role('Organiser', ['Add tasks, like who brings the drinks.','Decide whether invitees can edit tasks or assign themselves.']) + role('Invitees', ['Get notified about a new task.','Pick one up from the tasks list.','Mark it done once it is handled.']))}
+    <div class="wa-media"><figure class="wa-ill"><img src="images/whatsapp-ill-tasks.webp" alt="" loading="lazy"></figure>${vid('tasks','Adding and claiming tasks')}</div>
+    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']))}
+    <div class="wa-media">${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>
+    ${section('RSVP', list(['Invitees answer Going, Maybe or Can\'t make it from a card in the chat.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']))}
+    <div class="wa-media">${vid('rsvp','RSVP card in the chat', true)}</div>
+    ${section('Event info', '<p>The group info page becomes the event\'s home. It keeps the latest date and place, who is coming, every poll and announcement, a shared album and the payment balances in one place.</p>')}
+    <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-info.webp" alt="Event info: date, place, polls, announcements and shared gallery" loading="lazy"><figcaption>Event info</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-payments.webp" alt="Payments: what you owe each person, with a settle up button" loading="lazy"><figcaption>Payments</figcaption></figure></div>
+    ${section('Next steps', `<ul class="wa-next"><li><b>Smart reminders</b>Let organisers schedule automatic nudges for tasks that are still open.</li><li><b>Payment method</b>Choose cash, card or transfer when adding an expense or settling up.</li><li><b>Locked messages</b>Long press a message to lock it, so key details can't get lost in the chat.</li></ul>`)}
+    ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+  caseInner.querySelectorAll('.wa-vid video').forEach(v => {
+    v.addEventListener('loadedmetadata', () => { v.closest('.wa-vid').classList.add('ready'); if (!reduced.matches) v.play().catch(()=>{}); }, {once:true});
+  });
+}
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
   if (p.__case === 'headspace') return renderHeadspaceCase(p, next);
   if (p.__case === 'offgrid') return renderOffgridCase(p, next);
+  if (p.__case === 'whatsapp') return renderWhatsappCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
   const figs = (p.figures||[]).map(f => f.type==='flow' ? `<figure class="fig"><div class="flow">
