@@ -2014,6 +2014,7 @@ function renderWhatsappCase(p, next){
     ${chapter(2)}
     ${section('User research', '<p>I ran seven interviews and a survey with 34 respondents aged 19 to 67. All of them had planned a family or friends event in the past year, and almost all said the planning starts, and mostly stays, in WhatsApp.</p>')}
     <ul class="wa-stats">${[['67%','said nobody but the organiser took any initiative'],['84%','used tools outside the group chat to plan the event'],['62%','are still in more than ten group chats from past events']].map(([n,d])=>`<li><b data-count="${parseInt(n)}" aria-label="${n}">${n}</b><p>${d}</p></li>`).join('')}</ul>
+    ${section('Why WhatsApp?', '<p>Almost every respondent said the main tool they plan any event with is, first of all, messaging, and for nearly all of them that means WhatsApp. So the answer was to bring the planning into the chat rather than build another app.</p>')}
     ${section('What I heard', `<div class="learn">${findings.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     ${section('Personas', `<p>Every event has two sides, so I wrote a persona for each.</p>
       <div class="wa-persona"><div class="wa-p-head"><img src="images/whatsapp-organiser.webp" alt="" width="56" height="56" loading="lazy"><div><b>Oren Lev, the organiser</b><small>33, Tel Aviv. Senior architect, married with one child, and the planner of his friend group.</small></div></div>
