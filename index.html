@@ -928,9 +928,9 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-sides{margin-top:28px;display:flex;flex-direction:column;gap:44px}
 .wa-side{padding:0}
 .wa-side .wa-list{margin:0 0 28px}
-.wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:36px}
+.wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:32px}
 .wa-side-media > *{margin:0}
-.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(184px,calc((100% - 72px) / 3))}
+.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(204px,calc((100% - 64px) / 3))}
 .wa-side-media > .wa-vid.wide{width:min(400px,100%);align-self:center}
 .cs-body > .wa-side-media{margin-top:28px}
 .wa-annot{margin:28px 0 0}
@@ -938,7 +938,8 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-side-media .wa-vid{border-radius:22px}
 .wa-phone img, .wa-steps img, .wa-annot img, .wa-flow-in img, .wa-collage img{cursor:zoom-in}
 .wa-sides .wa-side-media{position:relative}
-.wa-link{position:absolute;height:0;border-top:1.5px solid var(--ink);transform-origin:0 0;pointer-events:none;z-index:2;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95))}
+.wa-sides .wa-side-media > .wa-steps{align-self:flex-start}
+.wa-link{position:absolute;height:0;border-top:1.5px solid var(--ink);pointer-events:none;z-index:2;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95))}
 .wa-link::before{content:'';position:absolute;left:-4px;top:-4.75px;width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px #fff}
 .wa-side-media figcaption{margin-top:12px;text-align:center;color:var(--ink-3);font-size:.875rem}
 .wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(290px,52%);align-self:center;display:flex;flex-direction:column;gap:40px}
@@ -2090,8 +2091,8 @@ function renderWhatsappCase(p, next){
       `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-tasks-setup.webp" alt="Tasks settings: a to-do list, create new task, and toggles for whether invitees can assign themselves or add items" loading="lazy"><figcaption>Set the rules</figcaption></figure>${vid('tasks','Adding a task list')}</div>`,
       ['Get notified about a new task.','Pick one up from the task list.','Mark it done once it is handled.'],
       `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-tasks-list.webp" alt="Task list: who took each task, how many people are still needed, and Assign buttons" loading="lazy"><figcaption>See who took what and claim the rest</figcaption></figure></div>`))}
-    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']) + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-add-payment.webp" alt="Add New Payment: 120 ILS for decorations, split between the invitees you pick" loading="lazy"><figcaption>Split it your way</figcaption></figure>${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>`)}
-    ${section('RSVP', list(['When you are invited, a pop-up asks you to RSVP or jump into the event chat.','Answer Going, Maybe or Can\'t make it.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']) + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-rsvp-popup.webp" alt="Invitation pop-up: hey Shira, you just got invited to Noam's birthday, with RSVP, Add to Calendar and See Event" loading="lazy"><figcaption>The invitation pop-up</figcaption></figure>${vid('rsvp','RSVP card in the chat', true)}</div>`)}
+    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']) + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-add-payment.webp" alt="Add New Payment: 120 ILS for decorations, split between the invitees you pick" loading="lazy"><figcaption>Split it your way</figcaption></figure>${vid('payments','Adding an expense')}</div>`)}
+    ${section('RSVP', list(['When you are invited, a pop-up asks you to RSVP or jump into the event chat.','Answer Going, Maybe or Can\'t make it.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']) + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-rsvp-popup.webp" alt="Invitation pop-up: hey Shira, you just got invited to Noam's birthday, with RSVP, Add to Calendar and See Event" loading="lazy"><figcaption>The invitation pop-up</figcaption></figure></div>`)}
     ${section('Event info', '<p>The group info page becomes the event\'s home, with everything in one place.</p>' + list(['See who is coming.','The latest date and place. Add the event to your calendar, or tap the location for directions.','Every poll and announcement, in case you missed something, sorted by date or by name.','A shared album of every photo people upload, ready to download at once.','Payment balances, and who still owes whom.']) + `<figure class="wa-annot"><img src="images/whatsapp-event-info.webp" alt="Event info screen with notes on the invitee count, date and place, polls and announcements, the shared album, and the payments page it links to" loading="lazy"></figure>`)}
     ${section('Next steps', '<p>Three ideas I would explore next.</p>')}
     <ol class="kd wa-kd wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long-press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<li><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
@@ -2115,13 +2116,16 @@ function renderWhatsappCase(p, next){
     if (!phone || !card) return;
     const ln = document.createElement('div'); ln.className = 'wa-link'; ln.setAttribute('aria-hidden', 'true'); wrap.appendChild(ln);
     const draw = () => {
-      const w = wrap.getBoundingClientRect(), p = phone.getBoundingClientRect(), c = card.getBoundingClientRect();
-      if (!p.width || c.left < p.right) { ln.hidden = true; return; } /* stacked on mobile: no arrow */
+      steps.style.marginTop = '0px';
+      const p = phone.getBoundingClientRect(), c0 = card.getBoundingClientRect();
+      if (!p.width || c0.left < p.right) { ln.hidden = true; return; } /* stacked on mobile: no arrow */
+      /* slide the vote cards down so the first one lines up with the Location card in the chat, then draw a level line */
+      const y = p.top + p.height*.155;
+      steps.style.marginTop = Math.max(0, y - (c0.top + c0.height*.28)) + 'px';
+      const w = wrap.getBoundingClientRect(), c = card.getBoundingClientRect();
       ln.hidden = false;
-      const x1 = p.left + p.width*.9 - w.left, y1 = p.top + p.height*.155 - w.top; /* the Location card in the chat */
-      const x2 = c.left - w.left, y2 = c.top + c.height*.28 - w.top;               /* the Location card on the right */
-      const len = Math.hypot(x2-x1, y2-y1), ang = Math.atan2(y2-y1, x2-x1);
-      ln.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotate(${ang}rad)`;
+      const x1 = p.left + p.width*.9 - w.left, x2 = c.left - w.left;
+      ln.style.cssText = `left:${x1}px;top:${y - w.top}px;width:${x2 - x1}px`;
     };
     [phone, card].forEach(im => im.complete || im.addEventListener('load', draw, {once:true}));
     new ResizeObserver(draw).observe(wrap); draw();
