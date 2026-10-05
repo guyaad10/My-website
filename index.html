@@ -510,7 +510,10 @@ body.chat-view #thread{display:none}
 .wa-media.three{gap:32px}
 .wa-media.three > *{width:min(280px,30%)}
 .wa-today{width:min(400px,100%)}
-.wa-today img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.08))}
+.wa-collage{position:relative}
+.wa-collage img{position:absolute;display:block;height:auto;filter:drop-shadow(0 0 .6px rgba(15,15,30,.35)) drop-shadow(0 14px 28px rgba(15,15,30,.12));transition:transform .35s var(--ease)}
+.wa-collage img:hover{transform:scale(1.04);z-index:2}
+@media (prefers-reduced-motion:reduce){.wa-collage img{transition:none}}
 .wa-card img{display:block;width:100%;height:auto}
 .wa-ill{width:min(220px,40%);align-self:center}
 .wa-ill img{display:block;width:100%;height:auto}
@@ -2019,7 +2022,7 @@ function renderWhatsappCase(p, next){
     ${section('The problem', '<p>WhatsApp is how we talk to friends and family, but a group chat is a poor planning tool. With a large group, getting everyone on board and handing out tasks and information gets messy fast.</p>')}
     <ol class="kd wa-kd">${problems.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${section('Planning today', '<p>Two real groups show where it breaks. When only admins can post, one person carries everything. When everyone can post, the list, the spreadsheet and the bank transfers all end up in the same endless thread.</p>')}
-    <div class="wa-media"><figure class="wa-today"><img src="images/whatsapp-today-1.webp" alt="An admin-only birthday group: a poll for RSVPs and long announcement messages from the organiser" loading="lazy"><figcaption>Admin-only group: one person carries it all</figcaption></figure><figure class="wa-today"><img src="images/whatsapp-today-2.webp" alt="An open trip group: a Google Sheets link, a long list of who owes whom and a photo of a spreadsheet" loading="lazy"><figcaption>Open group: a thread with no end</figcaption></figure></div>
+    <div class="wa-media"><figure class="wa-today"><div class="wa-collage" style="aspect-ratio:1769/2154"><img src="images/whatsapp-today-1-phone.webp" alt="An admin-only birthday group with long announcement messages from the organiser" loading="lazy" style="left:44.05%;top:7.14%;width:55.95%"><img src="images/whatsapp-today-1-rsvp.webp" alt="An RSVP poll in the same group" loading="lazy" style="left:0%;top:0%;width:49.22%"></div><figcaption>Admin-only group: one person carries it all</figcaption></figure><figure class="wa-today"><div class="wa-collage" style="aspect-ratio:1793/2153"><img src="images/whatsapp-today-2-phone.webp" alt="An open trip group with a long list of who owes whom and a photo of a spreadsheet" loading="lazy" style="left:46.13%;top:7.1%;width:53.87%"><img src="images/whatsapp-today-2-list.webp" alt="A packing list message and a Google Sheets link" loading="lazy" style="left:0%;top:0%;width:46.96%"><img src="images/whatsapp-today-2-quote.webp" alt="A reply asking people to sign up in another spreadsheet" loading="lazy" style="left:7.05%;top:34.23%;width:45.95%"></div><figcaption>Open group: a thread with no end</figcaption></figure></div>
     ${chapter(2)}
     ${section('User research', '<p>I ran 7 interviews and a survey with 34 respondents aged 19 to 67. All of them had planned a family or friends event in the past year, and almost all said the planning starts, and mostly stays, in WhatsApp.</p>')}
     <ul class="wa-stats">${[['67%','Said nobody but the organiser took any initiative'],['84%','Used tools outside the group chat to plan the event'],['62%','Are still in more than 10 group chats from past events']].map(([n,d])=>`<li><b data-count="${parseInt(n)}" aria-label="${n}">${n}</b><p>${d}</p></li>`).join('')}</ul>
