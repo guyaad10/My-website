@@ -463,7 +463,7 @@ body.chat-view #thread{display:none}
 .og-car-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
 .og-car-dots i{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.2);transition:background .2s}
 .og-car-dots i.on{background:currentColor}
-.ui-hero.og-hero{max-width:520px;margin:0 auto 72px}
+.ui-hero.og-hero{margin:0 auto 72px}
 .og-pal{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:16px 12px}
 .og-pal li{font-size:.8125rem;color:var(--ink-2)}
 .og-pal i{display:block;aspect-ratio:1;border-radius:14px;margin-bottom:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
@@ -1894,7 +1894,7 @@ function renderOffgridCase(p, next){
     <div class="og-car-dots">${slides.map((_,k)=>`<i${k?'':' class="on"'}></i>`).join('')}</div></div>`;
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A trip planning app that helps you travel your way: it gets you to the places you care about and arranges each day around your time and the distances between stops.</p>${metaDL(p)}</header>
-    <div class="og-hero ui-hero"><img src="images/offgrid-hero.webp" alt="Off Grid map and explore screens"></div>
+    <div class="og-hero ui-hero"><img src="images/offgrid-hero.webp" alt="Off Grid place, day agenda and map screens over a Tel Aviv street"></div>
     <nav class="toc c4" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
     ${section('About', '<p>Off Grid is a B2C mobile app for travellers who want to tour like a local. You tell it what you are into and how much time you have, and it plans an optimal route for every day of the trip.</p>')}
