@@ -474,7 +474,7 @@ body.chat-view #thread{display:none}
 .wa-hero{max-width:968px;margin:0 auto 72px;border-radius:20px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#25D366 0%,#128C7E 55%,#075E54 100%);aspect-ratio:968/600;display:flex;justify-content:center;align-items:flex-start;gap:6%;padding:7% 8% 0}
 .wa-hero img{display:block;width:30%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,40,30,.35))}
 .wa-hero img + img{margin-top:7%}
-.wa-hero.wa-hero-vid{display:block;padding:0;aspect-ratio:968/600;background:#9fbde9}
+.wa-hero.wa-hero-vid{display:block;padding:0;aspect-ratio:2/1;background:#9fbde9}
 .wa-hero-vid video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
 .kd.wa-kd{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr}
 .kd.wa-kd li{grid-row:span 3}
@@ -495,6 +495,8 @@ body.chat-view #thread{display:none}
 .wa-persona blockquote::before{content:'';position:absolute;left:-7px;bottom:0;width:14px;height:14px;background:#D9FDD3;clip-path:polygon(100% 0,100% 100%,0 100%)}
 .wa-persona dd{margin:4px 0 0;font-size:.9375rem;line-height:1.55;color:var(--body)}
 .wa-persona blockquote{position:relative;margin:0 0 6px;padding:12px 16px;border-radius:16px 16px 16px 4px;background:#D9FDD3;font-size:.9375rem;line-height:1.55;color:#14352a;font-style:normal;max-width:480px}
+.wa-flow-in{margin:28px 0 0;width:min(560px,100%);background:#075E54;border-radius:20px;padding:28px 32px}
+.wa-flow-in img{display:block;width:100%;height:auto}
 .shot.wa-flow{max-width:760px}
 .shot.wa-flow .shot-img{background:#075E54;padding:56px 64px}
 .wa-car .og-slide{padding:0 72px}
@@ -924,21 +926,21 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-sides{margin-top:28px;display:flex;flex-direction:column;gap:44px}
 .wa-side{padding:0}
 .wa-side .wa-list{margin:0 0 28px}
-.wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:20px}
+.wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:36px}
 .wa-side-media > *{margin:0}
-.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(180px,31%)}
+.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(172px,29%)}
 .wa-side-media > .wa-vid.wide{width:min(400px,100%);align-self:center}
 .cs-body > .wa-side-media{margin-top:28px}
 .wa-annot{margin:28px 0 0}
 .wa-annot img{display:block;width:100%;height:auto}
 .wa-side-media .wa-vid{border-radius:22px}
 .wa-side-media figcaption{margin-top:12px;text-align:center;color:var(--ink-3);font-size:.875rem}
-.wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(340px,56%);align-self:center;display:flex;flex-direction:column;gap:22px}
+.wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(290px,52%);align-self:center;display:flex;flex-direction:column;gap:40px}
 .wa-steps img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 .6px rgba(15,15,30,.3)) drop-shadow(0 8px 20px rgba(15,15,30,.08))}
-.wa-steps span{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.875rem;color:var(--ink-3)}
+.wa-steps span{display:flex;align-items:flex-start;gap:10px;margin-top:12px;font-size:.875rem;line-height:1.45;color:var(--body)}
 .wa-steps li{counter-increment:wa-step}
-.wa-steps span::before{content:counter(wa-step);flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#13A486;color:#fff;font-size:.75rem;font-weight:600}
-@media (max-width:760px){.wa-side-media{flex-wrap:wrap;gap:16px}.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:calc(50% - 8px)}.wa-steps{width:100%}}
+.wa-steps span::before{content:counter(wa-step);flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 .75rem/22px var(--sans);text-align:center;margin-top:-1px}
+@media (max-width:760px){.wa-flow-in{padding:16px}.wa-side-media{flex-wrap:wrap;gap:20px}.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:calc(50% - 10px)}.wa-steps{width:100%}}
 </style>
 </head>
 <body class="state-intro">
@@ -2062,8 +2064,7 @@ function renderWhatsappCase(p, next){
         <div class="wa-p-msg"><img src="images/whatsapp-invitee.webp" alt="" width="56" height="56" loading="lazy"><blockquote>“I'm honestly overwhelmed by all the texts about this event. Just tell me what to do and I promise it will happen.”</blockquote></div></div></div>`)}
     <div class="og-quote"><small>Value proposition</small><p>Simple planning tools inside the chat people already use, so the organiser stops chasing and everyone knows what's next.</p></div>
     ${chapter(3)}
-    ${section('User flow', '<p>One flow covers both cases: creating a new event, and jumping into an event that already exists to update its tasks, dates or location. I then designed every screen from two sides, the organiser who creates the event and the invitee who joins it.</p>')}
-    <figure class="shot wa-flow"><div class="shot-img"><img src="images/whatsapp-flow.webp" alt="User flow for creating an event and managing an existing one" loading="lazy"></div></figure>
+    ${section('User flow', '<p>One flow covers both cases: creating a new event, and jumping into an event that already exists to update its tasks, dates or location. I then designed every screen from two sides, the organiser who creates the event and the invitee who joins it.</p><figure class="wa-flow-in"><img src="images/whatsapp-flow.webp" alt="User flow for creating an event and managing an existing one" loading="lazy"></figure>')}
     ${section('Sketches', '<p>After the research I knew the MVP had to stay small and focused. Rather than inventing new patterns, I borrowed ones WhatsApp users already know: a new tab beside Chats, the attachment menu, poll cards and the group info page.</p>')}
     <div class="og-car wa-car" aria-roledescription="carousel" aria-label="Sketches">
       <div class="og-car-track">${[['sketch-1','Events tab, attachment menu, voting cards and payment card'],['sketch-2','New task, RSVP card, event info and payments']].map(([f,t],k)=>`<div class="og-slide" role="group" aria-label="${k+1} of 2"><img src="images/whatsapp-${f}.webp" alt="Crazy 8 sketches: ${t}" loading="lazy"></div>`).join('')}</div>
@@ -2073,7 +2074,7 @@ function renderWhatsappCase(p, next){
     ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']) + `<div class="wa-side-media"><figure class="wa-phone wa-edge"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>`)}
     ${section('Time and location', '<p>Every vote has two sides. The organiser sets it up, and invitees answer it right from the chat.</p>' + sides(
       ['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Set a deadline for the vote.','Allow one choice or several.','Only the organiser can release the vote card from being pinned.'],
-      `<div class="wa-side-media three"><figure class="wa-phone"><img src="images/whatsapp-time-place.webp" alt="Time and Place: two date options, a voting deadline toggle and a one-choice-only toggle" loading="lazy"><figcaption>Dates up for a vote</figcaption></figure>${vid('time-location','Setting the time and place')}<figure class="wa-phone"><img src="images/whatsapp-location.webp" alt="Location picker: map, current location and nearby places" loading="lazy"><figcaption>A pin for every place</figcaption></figure></div>`,
+      `<div class="wa-side-media three"><figure class="wa-phone"><img src="images/whatsapp-time-place.webp" alt="Time and Place: two date options, a voting deadline toggle and a one-choice-only toggle" loading="lazy"><figcaption>Dates up for a vote</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-location.webp" alt="Location picker: map, current location and nearby places" loading="lazy"><figcaption>A pin for every place</figcaption></figure>${vid('time-location','Setting the time and place')}</div>`,
       ['A vote card stays pinned to the top of the chat.','After voting, the card collapses and can be closed.','When voting ends, a notice points to the result in the event info.'],
       `<div class="wa-side-media"><figure class="wa-phone wa-edge"><img style="border-radius:9.7%/4.4%" src="images/whatsapp-invitee-chat.webp" alt="The event chat with the location and date vote cards pinned on top" loading="lazy"><figcaption>Vote cards pinned in the chat</figcaption></figure>
           <ol class="wa-steps">${[['1','Pinned to the top until you vote','Location vote card with live results'],['2','Collapsed once you vote, and can be closed','Collapsed card: you voted for Gadot Forest Park'],['3','Voting closed: the result is in the event info','Notice that voting on the location has closed']].map(([n,t,a])=>`<li><img src="images/whatsapp-vote-${n}.webp" alt="${a}" loading="lazy"><span>${t}</span></li>`).join('')}</ol></div>`))}
