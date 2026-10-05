@@ -445,6 +445,7 @@ body.chat-view #thread{display:none}
 .shot.og-flow .shot-img{background:#1A1B1E;padding:28px 32px}
 .shot.og-canvas .shot-img{background:none;box-shadow:none;border-radius:0}
 .shot.og-canvas .shot-img:hover{transform:none;box-shadow:none}
+.cs-body .shot.og-canvas{max-width:none;margin-top:28px}
 .shot.og-s{max-width:600px}.shot.og-m{max-width:700px}.shot.og-l{max-width:860px}
 .og-car{position:relative;max-width:968px;margin:-48px auto 104px;padding:8px 0 0}
 .og-car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
@@ -1976,7 +1977,7 @@ function renderOffgridCase(p, next){
     ${section('Look and feel', `<p>Youthful but informative. The app is full of photos, so black is the primary colour to balance the visual load, with bright accents to keep discovering new places fun. Type is set in Poppins.</p>
       <ul class="og-pal">${[['Primary','#27272A'],['Neutral','#72747B'],['Neutral','#F2F2F6'],['Accent','#DCED59'],['Accent','#FF471A'],['Accent','#BCBBFF'],['Accent','#0A5748']].map(([n,c])=>`<li><i style="background:${c}"></i>${n}<small>${c}</small></li>`).join('')}</ul>
       <img class="og-icons" src="images/offgrid-icons.webp" alt="The Off Grid icon set: line icons and colourful category icons" loading="lazy">`)}
-    ${screens.map(([t,d,src,alt]) => section(t, `<p>${d}</p>`) + shot(src, alt, '', {home:'og-canvas og-s',trip:'og-canvas og-m',edit:'og-canvas og-l',newtrip:'og-canvas og-l',map:'og-canvas',onboarding:'og-canvas'}[src]||'')).join('')}
+    ${screens.map(([t,d,src,alt]) => src==='home' ? section(t, `<p>${d}</p>` + shot(src, alt, '', 'in og-canvas')) : section(t, `<p>${d}</p>`) + shot(src, alt, '', {trip:'og-canvas og-m',edit:'og-canvas og-l',newtrip:'og-canvas og-l',map:'og-canvas',onboarding:'og-canvas'}[src]||'')).join('')}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
