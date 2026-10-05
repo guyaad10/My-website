@@ -442,10 +442,12 @@ body.chat-view #thread{display:none}
 .og-persona{display:grid;grid-template-columns:minmax(0,1fr) 150px;gap:16px 24px;align-items:start}
 .og-persona blockquote{grid-column:1/-1;order:3}
 .og-sticker{width:calc(100% + 40px);max-width:none;height:auto;display:block;transform:rotate(4deg);margin:-30px 0 0 0;order:2;filter:drop-shadow(0 10px 18px rgba(30,30,60,.18))}
-.shot.og-flow{max-width:840px}
-.shot.og-flow .shot-img{background:#1A1B1E;padding:56px 64px}
+.shot.og-flow{max-width:none}
+.cs-body .shot.og-flow{margin-top:28px}
+.shot.og-flow .shot-img{background:#1A1B1E;padding:28px 32px}
 .shot.og-canvas .shot-img{background:none;box-shadow:none;border-radius:0}
 .shot.og-canvas .shot-img:hover{transform:none;box-shadow:none}
+.cs-body .shot.og-canvas{max-width:none;margin-top:28px}
 .shot.og-s{max-width:600px}.shot.og-m{max-width:700px}.shot.og-l{max-width:860px}
 .og-car{position:relative;max-width:968px;margin:var(--pull) auto var(--sec);padding:8px 0 0}
 .og-car-track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none}
@@ -461,6 +463,10 @@ body.chat-view #thread{display:none}
 .og-car-btn:hover{background:rgba(0,0,0,.12)}
 .og-car-btn:disabled{opacity:.3;cursor:default}
 .og-car-btn.prev{left:24px}.og-car-btn.next{right:24px}
+.cs-body .og-car{max-width:none;margin:28px 0 0;padding:0}
+.cs-body .og-slide{padding:0 56px}
+.cs-body .og-car-btn.prev{left:0}.cs-body .og-car-btn.next{right:0}
+@media (max-width:760px){.cs-body .og-slide{padding:0}}
 .og-car-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
 .og-car-dots i{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.2);transition:background .2s}
 .og-car-dots i.on{background:currentColor}
@@ -2006,17 +2012,15 @@ function renderOffgridCase(p, next){
     <div class="og-quote"><small>Value proposition</small><p>A trip planner that builds an itinerary from your interests and your available time, on the best route for each day.</p></div>
     <div class="og-hero ui-hero"><img src="images/offgrid-mockups.webp" alt="Off Grid map and explore screens" loading="lazy"></div>
     ${chapter(3)}
-    ${section('User flows', '<p>Two core flows came out of the research: creating a new trip and editing it.</p>')}
-    ${shot('userflow','User flows for creating and editing a trip','','og-flow')}
+    ${section('User flows', '<p>Two core flows came out of the research: creating a new trip and editing it.</p>' + shot('userflow','User flows for creating and editing a trip','','in og-flow'))}
     ${section('Wireframes', '<p>I kept the structure simple and familiar: a trip wizard, a home page and My trips, with drill down navigation from a trip to a day to a single stop. More than 50 mid fidelity screens covered every flow.</p>')}
     ${shot('wireframes','Mid fidelity wireframes')}
-    ${section('Usability testing', '<p>I tested a prototype with six participants from the target audience, across eight sets of tasks. The focus was efficiency, anxiety and discoverability, and the results drove a round of fixes.</p>')}
-    ${utCarousel}
+    ${section('Usability testing', '<p>I tested a prototype with six participants from the target audience, across eight sets of tasks. The focus was efficiency, anxiety and discoverability, and the results drove a round of fixes.</p>' + utCarousel)}
     ${chapter(4)}
     ${section('Look and feel', `<p>Youthful but informative. The app is full of photos, so black is the primary colour to balance the visual load, with bright accents to keep discovering new places fun. Type is set in Poppins.</p>
       <ul class="og-pal">${[['Primary','#27272A'],['Neutral','#72747B'],['Neutral','#F2F2F6'],['Accent','#DCED59'],['Accent','#FF471A'],['Accent','#BCBBFF'],['Accent','#0A5748']].map(([n,c])=>`<li><i style="background:${c}"></i>${n}<small>${c}</small></li>`).join('')}</ul>
       <img class="og-icons" src="images/offgrid-icons.webp" alt="The Off Grid icon set: line icons and colourful category icons" loading="lazy">`)}
-    ${screens.map(([t,d,src,alt]) => section(t, `<p>${d}</p>`) + shot(src, alt, '', {home:'og-canvas og-s',trip:'og-canvas og-m',edit:'og-canvas og-l',newtrip:'og-canvas og-l',map:'og-canvas',onboarding:'og-canvas'}[src]||'')).join('')}
+    ${screens.map(([t,d,src,alt]) => src==='home' ? section(t, `<p>${d}</p>` + shot(src, alt, '', 'in og-canvas')) : section(t, `<p>${d}</p>`) + shot(src, alt, '', {trip:'og-canvas og-m',edit:'og-canvas og-l',newtrip:'og-canvas og-l',map:'og-canvas',onboarding:'og-canvas'}[src]||'')).join('')}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
