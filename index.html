@@ -463,6 +463,7 @@ body.chat-view #thread{display:none}
 .og-car-dots i{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.2);transition:background .2s}
 .og-car-dots i.on{background:currentColor}
 .ui-hero.og-hero{max-width:520px;margin:0 auto 72px}
+.ui-hero.og-hero-wide{max-width:968px}
 .og-pal{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:16px 12px}
 .og-pal li{font-size:.8125rem;color:var(--ink-2)}
 .og-pal i{display:block;aspect-ratio:1;border-radius:14px;margin-bottom:8px;box-shadow:inset 0 0 0 1px rgba(0,0,0,.06)}
@@ -1228,7 +1229,7 @@ const PROJECTS = [
     id:'archive', kind:'archive',
     line:"Work from my student days. I’d design most of it differently today — and I think that’s a good thing 😅",
     items:[
-      {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
+      {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design, Illustrator', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
        why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
@@ -1875,7 +1876,7 @@ function renderClalitCase(p){
   $('#case-bar-title').textContent = p.title;
 }
 function renderHeadspaceCase(p, next){
-  const CH = ['Overview','Process','Screens'];
+  const CH = ['Overview','Process','Design'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
   const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
@@ -1946,7 +1947,7 @@ function renderOffgridCase(p, next){
     <div class="og-car-dots">${slides.map((_,k)=>`<i${k?'':' class="on"'}></i>`).join('')}</div></div>`;
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A trip planning app that helps you travel your way: it gets you to the places you care about and arranges each day around your time and the distances between stops.</p>${metaDL(p)}</header>
-    <div class="og-hero ui-hero"><img src="images/offgrid-hero.webp" alt="Off Grid map and explore screens"></div>
+    <div class="og-hero og-hero-wide ui-hero"><img src="images/offgrid-hero.webp" alt="Off Grid place, day agenda and map screens over a Tel Aviv street"></div>
     <nav class="toc c4" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
     ${section('About', '<p>Off Grid is a B2C mobile app for travellers who want to tour like a local. You tell it what you are into and how much time you have, and it plans an optimal route for every day of the trip.</p>')}
@@ -1960,6 +1961,7 @@ function renderOffgridCase(p, next){
       <blockquote>“I'm sluggish when planning a trip overseas, especially on tourist websites that recommend the same places I don't care about.”</blockquote></div>`)}
     ${section('Competitive research', `<p>I ran a heuristic evaluation of eight trip planning products.</p><ul class="og-chips">${[['Lambus','lambus'],['Maps.me','mapsme'],['Sygic Travel','sygic'],['Tripadvisor','tripadvisor'],['Visit a City','visitacity'],['TripIt','tripit'],['Pluto','pluto'],['Wanderlog','wanderlog']].map(([c,f])=>`<li><img src="images/offgrid-logos/${f}.webp" alt="" width="24" height="24">${c}</li>`).join('')}</ul><p>Most have an explore section for inspiration, but the content is the same touristic "must-see" list. None lets you browse trips from people who share your interests.</p>`)}
     <div class="og-quote"><small>Value proposition</small><p>A trip planner that builds an itinerary from your interests and your available time, on the best route for each day.</p></div>
+    <div class="og-hero ui-hero"><img src="images/offgrid-mockups.webp" alt="Off Grid map and explore screens" loading="lazy"></div>
     ${chapter(3)}
     ${section('User flows', '<p>Two core flows came out of the research: creating a new trip and editing it.</p>')}
     ${shot('userflow','User flows for creating and editing a trip','','og-flow')}
