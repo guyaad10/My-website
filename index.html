@@ -516,9 +516,8 @@ body.chat-view #thread{display:none}
 .wa-play::after{content:"";width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:4px}
 .wa-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:rgba(255,255,255,.65)}
 .wa-ph b{font:500 1.125rem/1.25 var(--sans);letter-spacing:-.02em;text-wrap:balance}
-.wa-next{list-style:none;margin:0;padding:0;display:grid;gap:12px}
-.wa-next li{border-radius:18px;background:var(--surface-2);padding:18px 22px;font-size:1.0625rem;line-height:1.5;color:var(--body)}
-.wa-next b{display:block;font-weight:500;color:var(--ink);margin-bottom:4px}
+.wa-ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;margin-bottom:20px}
+.wa-ic svg{width:20px;height:20px}
 @media (max-width:760px){.wa-car .og-slide{padding:0}.wa-hero{aspect-ratio:auto;padding:40px 20px 0;gap:4%;height:auto}.wa-hero img{width:44%}.kd.wa-kd{display:block}.wa-stats{grid-template-columns:1fr}.wa-persona dl{grid-template-columns:1fr}.shot.wa-flow .shot-img{padding:24px}.wa-media{gap:20px}.wa-vid{border-radius:24px}}
 @media (max-width:1020px){
   .anno{padding:0;max-width:968px}
@@ -1978,6 +1977,11 @@ function renderOffgridCase(p, next){
   $('#case-bar-title').textContent = p.title;
   initCarousel(caseInner.querySelector('.og-car'));
 }
+const WA_ICONS = {
+  bell:'<path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/>',
+  card:'<rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 10h20"/>',
+  lock:'<rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/>'
+};
 function renderWhatsappCase(p, next){
   const CH = ['Overview','Research','Design','Features'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
@@ -2038,7 +2042,8 @@ function renderWhatsappCase(p, next){
     <div class="wa-media">${vid('rsvp','RSVP card in the chat', true)}</div>
     ${section('Event info', '<p>The group info page becomes the event\'s home. It keeps the latest date and place, who is coming, every poll and announcement, a shared album and the payment balances in one place.</p>')}
     <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-info.webp" alt="Event info: date, place, polls, announcements and shared gallery" loading="lazy"><figcaption>Event info</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-payments.webp" alt="Payments: what you owe each person, with a settle up button" loading="lazy"><figcaption>Payments</figcaption></figure></div>
-    ${section('Next steps', `<ul class="wa-next"><li><b>Smart reminders</b>Let organisers schedule automatic nudges for tasks that are still open.</li><li><b>Payment method</b>Choose cash, card or transfer when adding an expense or settling up.</li><li><b>Locked messages</b>Long press a message to lock it, so key details can't get lost in the chat.</li></ul>`)}
+    ${section('Next steps', '<p>Three ideas I would explore next.</p>')}
+    <ol class="kd wa-kd wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<li><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
