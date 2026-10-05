@@ -505,6 +505,7 @@ body.chat-view #thread{display:none}
 .wa-media figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
 .wa-phone{width:min(300px,44%)}
 .wa-phone img{display:block;width:100%;height:auto}
+.wa-edge img{border-radius:10.6%/4.9%;box-shadow:0 0 0 1px rgba(15,15,30,.08),0 20px 50px -28px rgba(40,50,110,.35)}
 .wa-card{width:min(390px,100%);align-self:center}
 .wa-today{width:min(400px,100%)}
 .wa-today img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.08))}
@@ -2040,7 +2041,7 @@ function renderWhatsappCase(p, next){
       <div class="og-car-dots"><i class="on"></i><i></i></div></div>
     ${chapter(4)}
     ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']))}
-    <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>
+    <div class="wa-media"><figure class="wa-phone wa-edge"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>
     ${section('Time and location', role('Organiser', ['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Set a deadline for the vote.','Allow one choice or several.','The vote card stays pinned to the top of the chat until the organiser releases it.']))}
     <div class="wa-media">${vid('time-location','Voting on a time and place')}<figure class="wa-card"><img src="images/whatsapp-sticky.webp" alt="The vote card: pinned while open, collapsed once you vote, and a notice when voting closes" loading="lazy"><figcaption>The card collapses once you vote, and a notice points to the result when voting closes.</figcaption></figure></div>
     ${section('Tasks', role('Organiser', ['Add tasks, like who brings the drinks.','Break a task into subtasks, and set how many people each one needs.','Decide whether invitees can edit tasks or assign themselves.']) + role('Invitees', ['Get notified about a new task.','Pick one up from the task list.','Mark it done once it is handled.']))}
