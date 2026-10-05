@@ -927,17 +927,17 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-side .wa-list{margin:0 0 28px}
 .wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:20px}
 .wa-side-media > *{margin:0}
-.wa-side-media.three > *{width:min(180px,31%)}
-.wa-side-media:not(.three) > .wa-phone:not(.wa-edge), .wa-side-media:not(.three) > .wa-vid{width:min(200px,40%)}
+.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(180px,31%)}
+.wa-side-media > .wa-vid.wide{width:min(400px,100%)}
+.cs-body > .wa-side-media{margin-top:28px}
 .wa-side-media .wa-vid{border-radius:22px}
 .wa-side-media figcaption{margin-top:12px;text-align:center;color:var(--ink-3);font-size:.875rem}
-.wa-side-media .wa-phone.wa-edge{width:min(200px,40%)}
 .wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(340px,56%);align-self:center;display:flex;flex-direction:column;gap:22px}
 .wa-steps img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 .6px rgba(15,15,30,.3)) drop-shadow(0 8px 20px rgba(15,15,30,.08))}
 .wa-steps span{display:flex;align-items:center;gap:8px;margin-top:10px;font-size:.875rem;color:var(--ink-3)}
 .wa-steps li{counter-increment:wa-step}
 .wa-steps span::before{content:counter(wa-step);flex:none;display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#13A486;color:#fff;font-size:.75rem;font-weight:600}
-@media (max-width:760px){.wa-side-media{flex-wrap:wrap;gap:16px}.wa-side-media.three > *{width:calc(50% - 8px)}.wa-side-media .wa-phone.wa-edge{width:60%}.wa-steps{width:100%}}
+@media (max-width:760px){.wa-side-media{flex-wrap:wrap;gap:16px}.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:calc(50% - 8px)}.wa-steps{width:100%}}
 </style>
 </head>
 <body class="state-intro">
@@ -2073,8 +2073,7 @@ function renderWhatsappCase(p, next){
       <button type="button" class="og-car-btn prev" aria-label="Previous sketch">‹</button><button type="button" class="og-car-btn next" aria-label="Next sketch">›</button>
       <div class="og-car-dots"><i class="on"></i><i></i></div></div>
     ${chapter(4)}
-    ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']))}
-    <div class="wa-media"><figure class="wa-phone wa-edge"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>
+    ${section('Start an event', '<p>Events gets its own tab next to Chats. An event looks and works like a group, with extra tools attached to it.</p>' + list(['Name the event and invite people from your contacts or an existing group.','Set the date and place now, or open them to a vote.','Make the event open or private.']) + `<div class="wa-side-media"><figure class="wa-phone wa-edge"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>`)}
     ${section('Time and location', `<p>Every vote has two sides. The organiser sets it up, and invitees answer it right from the chat.</p>
     <div class="wa-sides" data-sides>
       <div class="wa-seg" role="tablist" aria-label="Point of view"><button type="button" role="tab" id="tl-org-t" aria-controls="tl-org" aria-selected="true">Organiser</button><button type="button" role="tab" id="tl-inv-t" aria-controls="tl-inv" aria-selected="false" tabindex="-1">Invitee</button></div>
@@ -2089,12 +2088,9 @@ function renderWhatsappCase(p, next){
       `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-tasks-setup.webp" alt="Tasks settings: a to-do list, create new task, and toggles for whether invitees can assign themselves or add items" loading="lazy"><figcaption>Set the rules</figcaption></figure>${vid('tasks','Adding a task list')}</div>`,
       ['Get notified about a new task.','Pick one up from the task list.','Mark it done once it is handled.'],
       `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-tasks-list.webp" alt="Task list: who took each task, how many people are still needed, and Assign buttons" loading="lazy"><figcaption>See who took what and claim the rest</figcaption></figure></div>`))}
-    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']))}
-    <div class="wa-media">${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>
-    ${section('RSVP', list(['When you are invited, a pop-up asks you to RSVP or jump into the event chat.','Answer Going, Maybe or Can\'t make it.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']))}
-    <div class="wa-media">${vid('rsvp','RSVP card in the chat', true)}</div>
-    ${section('Event info', '<p>The group info page becomes the event\'s home. It keeps the latest date and place, who is coming, every poll and announcement, a shared album and the payment balances in one place.</p>')}
-    <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-info.webp" alt="Event info: date, place, polls, announcements and shared gallery" loading="lazy"><figcaption>Event info</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-payments.webp" alt="Payments: what you owe each person, with a settle up button" loading="lazy"><figcaption>Payments</figcaption></figure></div>
+    ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']) + `<div class="wa-side-media">${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>`)}
+    ${section('RSVP', list(['When you are invited, a pop-up asks you to RSVP or jump into the event chat.','Answer Going, Maybe or Can\'t make it.','The organiser sees the guest list update in real time.','If you can\'t make it, you choose whether to stay in the chat or leave it.']) + `<div class="wa-side-media">${vid('rsvp','RSVP card in the chat', true)}</div>`)}
+    ${section('Event info', '<p>The group info page becomes the event\'s home. It keeps the latest date and place, who is coming, every poll and announcement, a shared album and the payment balances in one place.</p>' + `<div class="wa-side-media"><figure class="wa-phone"><img src="images/whatsapp-info.webp" alt="Event info: date, place, polls, announcements and shared gallery" loading="lazy"><figcaption>Event info</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-payments.webp" alt="Payments: what you owe each person, with a settle up button" loading="lazy"><figcaption>Payments</figcaption></figure></div>`)}
     ${section('Next steps', '<p>Three ideas I would explore next.</p>')}
     <ol class="kd wa-kd wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long-press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<li><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
