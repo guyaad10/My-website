@@ -1832,7 +1832,7 @@ function renderClalitCase(p){
   $('#case-bar-title').textContent = p.title;
 }
 function renderHeadspaceCase(p, next){
-  const CH = ['Overview','Process','Screens'];
+  const CH = ['Overview','Process','Design'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
   const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
