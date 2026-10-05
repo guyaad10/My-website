@@ -483,13 +483,15 @@ body.chat-view #thread{display:none}
 .wa-persona{border-radius:20px;background:var(--surface-2);padding:22px 24px;margin-bottom:12px}
 .wa-persona:last-child{margin-bottom:0}
 .wa-p-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
-.wa-p-head img{width:56px;height:56px;border-radius:50%;flex:none;display:block}
+.wa-p-msg{display:flex;align-items:flex-end;gap:10px;margin-top:20px}
+.wa-p-msg img{width:56px;height:56px;border-radius:50%;flex:none;display:block}
 .wa-p-head b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em}
 .wa-p-head small{display:block;color:var(--ink-3);font-size:.875rem;line-height:1.4;margin-top:2px}
 .wa-persona dl{margin:0;display:grid;grid-template-columns:1fr 1fr;gap:16px 24px}
 .wa-persona dt{font-size:.6875rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.wa-persona blockquote::before{content:'';position:absolute;left:-7px;bottom:0;width:14px;height:14px;background:#D9FDD3;clip-path:polygon(100% 0,100% 100%,0 100%)}
 .wa-persona dd{margin:4px 0 0;font-size:.9375rem;line-height:1.55;color:var(--body)}
-.wa-persona blockquote{margin:18px 0 0;padding:12px 16px;border-radius:4px 16px 16px 16px;background:#D9FDD3;font-size:.9375rem;line-height:1.55;color:#14352a;font-style:normal;max-width:480px}
+.wa-persona blockquote{position:relative;margin:0 0 6px;padding:12px 16px;border-radius:16px 16px 16px 4px;background:#D9FDD3;font-size:.9375rem;line-height:1.55;color:#14352a;font-style:normal;max-width:480px}
 .shot.wa-flow{max-width:760px}
 .shot.wa-flow .shot-img{background:#075E54;padding:56px 64px}
 .wa-car .og-slide{padding:0 72px}
@@ -505,7 +507,7 @@ body.chat-view #thread{display:none}
 .wa-phone img{display:block;width:100%;height:auto}
 .wa-card{width:min(390px,100%);align-self:center}
 .wa-today{width:min(400px,100%)}
-.wa-today img{display:block;width:100%;height:auto;border-radius:20px}
+.wa-today img{display:block;width:100%;height:auto;filter:drop-shadow(0 10px 24px rgba(0,0,0,.08))}
 .wa-card img{display:block;width:100%;height:auto}
 .wa-ill{width:min(220px,40%);align-self:center}
 .wa-ill img{display:block;width:100%;height:auto}
@@ -2016,17 +2018,17 @@ function renderWhatsappCase(p, next){
     ${section('Planning today', '<p>Two real groups show where it breaks. When only admins can post, one person carries everything. When everyone can post, the list, the spreadsheet and the bank transfers all end up in the same endless thread.</p>')}
     <div class="wa-media"><figure class="wa-today"><img src="images/whatsapp-today-1.webp" alt="An admin-only birthday group: a poll for RSVPs and long announcement messages from the organiser" loading="lazy"><figcaption>Admin-only group: one person carries it all</figcaption></figure><figure class="wa-today"><img src="images/whatsapp-today-2.webp" alt="An open trip group: a Google Sheets link, a long list of who owes whom and a photo of a spreadsheet" loading="lazy"><figcaption>Open group: a thread with no end</figcaption></figure></div>
     ${chapter(2)}
-    ${section('User research', '<p>I ran seven interviews and a survey with 34 respondents aged 19 to 67. All of them had planned a family or friends event in the past year, and almost all said the planning starts, and mostly stays, in WhatsApp.</p>')}
-    <ul class="wa-stats">${[['67%','said nobody but the organiser took any initiative'],['84%','used tools outside the group chat to plan the event'],['62%','are still in more than ten group chats from past events']].map(([n,d])=>`<li><b data-count="${parseInt(n)}" aria-label="${n}">${n}</b><p>${d}</p></li>`).join('')}</ul>
-    ${section('Why WhatsApp?', '<p>95% of respondents said the main tool they plan any event with is, first of all, messaging on WhatsApp. It is already where the group is, and its end-to-end encryption keeps addresses, plans and payment details private. So the answer was to bring the planning into the chat rather than build another app.</p>')}
+    ${section('User research', '<p>I ran 7 interviews and a survey with 34 respondents aged 19 to 67. All of them had planned a family or friends event in the past year, and almost all said the planning starts, and mostly stays, in WhatsApp.</p>')}
+    <ul class="wa-stats">${[['67%','Said nobody but the organiser took any initiative'],['84%','Used tools outside the group chat to plan the event'],['62%','Are still in more than 10 group chats from past events']].map(([n,d])=>`<li><b data-count="${parseInt(n)}" aria-label="${n}">${n}</b><p>${d}</p></li>`).join('')}</ul>
+    ${section('Why WhatsApp?', '<p>95% of respondents said their main tool for planning any event is messaging on WhatsApp. The group is already there, and end-to-end encryption keeps everything shared in the chat secure. So the answer was to bring the planning into the chat rather than build another app.</p>')}
     ${section('What I heard', `<div class="learn">${findings.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     ${section('Personas', `<p>Every event has two sides, so I wrote a persona for each.</p>
-      <div class="wa-persona"><div class="wa-p-head"><img src="images/whatsapp-organiser.webp" alt="" width="56" height="56" loading="lazy"><div><b>Oren Lev, the organiser</b><small>33, Tel Aviv. Data scientist, married with one child, and the planner of his friend group.</small></div></div>
+      <div class="wa-persona"><div class="wa-p-head"><div><b>Oren Lev, the organiser</b><small>33, Tel Aviv. Data scientist, married with one child, and the planner of his friend group.</small></div></div>
         <dl><div><dt>Frustrations</dt><dd>Chasing invitees for a reply. Juggling several apps to keep the event's details in order.</dd></div><div><dt>Needs</dt><dd>Tools that keep the information organised, and a chat that nudges invitees to act instead of just reading.</dd></div></dl>
-        <blockquote>“Planning in a group chat should be easier. When everything happens in messages, it's hard to decide anything or follow what's going on.”</blockquote></div>
-      <div class="wa-persona"><div class="wa-p-head"><img src="images/whatsapp-invitee.webp" alt="" width="56" height="56" loading="lazy"><div><b>Shira Stein, the invitee</b><small>37, Kibbutz Palmachim. Social worker, married with three kids, and the “just tell me when to show up” type.</small></div></div>
+        <div class="wa-p-msg"><img src="images/whatsapp-organiser.webp" alt="" width="56" height="56" loading="lazy"><blockquote>“Planning in a group chat should be easier. When everything happens in messages, it's hard to decide anything or follow what's going on.”</blockquote></div></div>
+      <div class="wa-persona"><div class="wa-p-head"><div><b>Shira Stein, the invitee</b><small>37, Kibbutz Palmachim. Social worker, married with three kids, and the “just tell me when to show up” type.</small></div></div>
         <dl><div><dt>Frustrations</dt><dd>The basic details are impossible to find in a running conversation. Too many dead group chats from past events.</dd></div><div><dt>Needs</dt><dd>A reminder of what's next and what to bring, and an event chat that goes away once the event is over.</dd></div></dl>
-        <blockquote>“I'm honestly overwhelmed by all the texts about this event. Just tell me what to do and I promise it will happen.”</blockquote></div>`)}
+        <div class="wa-p-msg"><img src="images/whatsapp-invitee.webp" alt="" width="56" height="56" loading="lazy"><blockquote>“I'm honestly overwhelmed by all the texts about this event. Just tell me what to do and I promise it will happen.”</blockquote></div></div>`)}
     <div class="og-quote"><small>Value proposition</small><p>Simple planning tools inside the chat people already use, so the organiser stops chasing and everyone knows what's next.</p></div>
     ${chapter(3)}
     ${section('User flow', '<p>One flow covers both cases: creating a new event, and jumping into an event that already exists to update its tasks, dates or location. I then designed every screen from two sides, the organiser who creates the event and the invitee who joins it.</p>')}
@@ -2041,7 +2043,7 @@ function renderWhatsappCase(p, next){
     <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-intro.webp" alt="Introducing Events screen" loading="lazy"></figure>${vid('new-event','Starting a new event')}</div>
     ${section('Time and location', role('Organiser', ['Offer several dates or places and let the group vote.','Every place option gets a pin on the map, so voters can see how they would get there.','Set a deadline for the vote.','Allow one choice or several.','The vote card stays pinned to the top of the chat until the organiser releases it.']))}
     <div class="wa-media">${vid('time-location','Voting on a time and place')}<figure class="wa-card"><img src="images/whatsapp-sticky.webp" alt="The vote card: pinned while open, collapsed once you vote, and a notice when voting closes" loading="lazy"><figcaption>The card collapses once you vote, and a notice points to the result when voting closes.</figcaption></figure></div>
-    ${section('Tasks', role('Organiser', ['Add tasks, like who brings the drinks.','Break a task into subtasks, and set how many people each one needs.','Decide whether invitees can edit tasks or assign themselves.']) + role('Invitees', ['Get notified about a new task.','Pick one up from the tasks list.','Mark it done once it is handled.']))}
+    ${section('Tasks', role('Organiser', ['Add tasks, like who brings the drinks.','Break a task into subtasks, and set how many people each one needs.','Decide whether invitees can edit tasks or assign themselves.']) + role('Invitees', ['Get notified about a new task.','Pick one up from the task list.','Mark it done once it is handled.']))}
     <div class="wa-media"><figure class="wa-ill"><img src="images/whatsapp-ill-tasks.webp" alt="" loading="lazy"></figure>${vid('tasks','Adding and claiming tasks')}</div>
     ${section('Payments', list(['Add an expense you paid for the event.','By default it is split evenly, or you can include only some of the group.','Everyone is notified about a new expense.','Track who has settled up, and open the balances from the event info to see who owes whom.']))}
     <div class="wa-media">${vid('payments','Adding an expense')}${vid('settle-up','Settling up')}</div>
@@ -2050,7 +2052,7 @@ function renderWhatsappCase(p, next){
     ${section('Event info', '<p>The group info page becomes the event\'s home. It keeps the latest date and place, who is coming, every poll and announcement, a shared album and the payment balances in one place.</p>')}
     <div class="wa-media"><figure class="wa-phone"><img src="images/whatsapp-info.webp" alt="Event info: date, place, polls, announcements and shared gallery" loading="lazy"><figcaption>Event info</figcaption></figure><figure class="wa-phone"><img src="images/whatsapp-payments.webp" alt="Payments: what you owe each person, with a settle up button" loading="lazy"><figcaption>Payments</figcaption></figure></div>
     ${section('Next steps', '<p>Three ideas I would explore next.</p>')}
-    <ol class="kd wa-kd wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<li><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
+    <ol class="kd wa-kd wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long-press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<li><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
