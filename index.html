@@ -474,6 +474,8 @@ body.chat-view #thread{display:none}
 .wa-hero{max-width:968px;margin:0 auto 72px;border-radius:20px;overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#25D366 0%,#128C7E 55%,#075E54 100%);aspect-ratio:968/600;display:flex;justify-content:center;align-items:flex-start;gap:6%;padding:7% 8% 0}
 .wa-hero img{display:block;width:30%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,40,30,.35))}
 .wa-hero img + img{margin-top:7%}
+.wa-hero.wa-hero-vid{display:block;padding:0;aspect-ratio:968/600;background:#9fbde9}
+.wa-hero-vid video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
 .kd.wa-kd{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr}
 .kd.wa-kd li{grid-row:span 3}
 .wa-stats{list-style:none;max-width:968px;margin:-40px auto 104px;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -2037,7 +2039,7 @@ function renderWhatsappCase(p, next){
   ];
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A concept feature that turns a WhatsApp group into a lightweight event planner. Dates, places, tasks, RSVPs and shared costs live right where the conversation already happens.</p>${metaDL(p)}</header>
-    <div class="wa-hero"><img src="images/whatsapp-intro.webp" alt="The new Events tab introducing the feature"><img src="images/whatsapp-info.webp" alt="Event info screen for Noam's birthday"></div>
+    <div class="wa-hero wa-hero-vid"><video muted playsinline preload="auto" poster="images/whatsapp-hero-poster.webp" title="Replay" aria-label="Billboard animation: WhatsApp? Events! Plan anything, everywhere, with anyone, together."><source src="videos/whatsapp-hero.webm" type="video/webm"><source src="videos/whatsapp-hero.mp4" type="video/mp4"></video></div>
     <nav class="toc c4" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
     ${chapter(1)}
     ${section('About', '<p>Almost every get-together, from a birthday to a weekend trip, gets planned in a WhatsApp group. WhatsApp Events adds the tools those groups are missing without pulling anyone out of the chat: a date and a place everyone agrees on, shared task lists, RSVPs and split payments.</p><p>Like a group admin, every event has an organiser, who can make it open or private and send reminders to friends and family. An event can repeat, like a weekly game night, or wrap up and disappear once it\'s over.</p>')}
@@ -2088,6 +2090,14 @@ function renderWhatsappCase(p, next){
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
+  /* Hero billboard: plays once when it scrolls into view and holds on the last frame; click to replay. */
+  const hero = caseInner.querySelector('.wa-hero-vid video');
+  if (hero) {
+    const go = () => { hero.currentTime = 0; hero.playbackRate = .85; hero.play().catch(()=>{}); };
+    if (reduced.matches) hero.addEventListener('loadedmetadata', () => { hero.currentTime = hero.duration; }, {once:true});
+    else new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); go(); } }, {threshold:.4}).observe(hero);
+    hero.addEventListener('click', go);
+  }
   initCarousel(caseInner.querySelector('.wa-car'));
   /* Survey numbers count up from zero the first time they scroll into view. */
   const statIO = new IntersectionObserver(es => es.forEach(e => {
