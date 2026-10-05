@@ -425,6 +425,8 @@ body.chat-view #thread{display:none}
 .kd.og-kd li{grid-row:span 3}
 .og-quote{max-width:820px;margin:0 auto var(--sec);text-align:center}
 .og-quote small{display:block;font-size:.8125rem;color:var(--ink-3);margin-bottom:16px}
+.wa-gif{margin:36px auto 0;width:min(320px,80%);border-radius:16px;overflow:hidden;aspect-ratio:480/400;background:#2a2230}
+.wa-gif video{display:block;width:100%;height:100%;object-fit:cover}
 .og-quote p{margin:0;font:400 clamp(1.5rem,1.1rem + 1.4vw,2.25rem)/1.25 var(--sans);letter-spacing:-.035em;text-wrap:balance}
 .og-persona{border-radius:20px;background:linear-gradient(135deg,#F1F0FF,#F7F7FA);padding:22px 24px}
 .og-persona b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em}
@@ -483,11 +485,11 @@ body.chat-view #thread{display:none}
 .wa-stats b{display:block;font-variant-numeric:tabular-nums;font:500 clamp(2.5rem,1.8rem + 2vw,3.5rem)/1 var(--sans);letter-spacing:-.05em;color:#075E54;margin-bottom:14px}
 .wa-stats p{margin:0;font-size:.9375rem;line-height:1.5;color:var(--body);text-wrap:pretty}
 .wa-personas{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
-.wa-persona{border-radius:20px;background:#E5DDD5 url(images/whatsapp-pattern.webp) center top/409px auto repeat;padding:22px 20px;display:flex;flex-direction:column}
+.wa-persona{border-radius:20px;background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.5)),#E5DDD5 url(images/whatsapp-pattern.webp) center top/409px auto repeat;padding:22px 20px;display:flex;flex-direction:column}
 .wa-persona .wa-p-msg{margin-top:auto;padding-top:20px}
 .wa-p-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .wa-p-msg{display:flex;align-items:flex-end;gap:10px}
-.wa-p-msg img{width:44px;height:44px;border-radius:50%;flex:none;display:block}
+.wa-p-msg img{width:52px;height:52px;border-radius:50%;flex:none;display:block}
 .wa-p-head b{display:block;font:500 1.25rem/1.2 var(--sans);letter-spacing:-.03em}
 .wa-p-head small{display:block;color:#6b6258;font-size:.875rem;line-height:1.4;margin-top:2px}
 .wa-persona dl{margin:0;display:grid;grid-template-columns:1fr;gap:14px}
@@ -495,7 +497,7 @@ body.chat-view #thread{display:none}
 .wa-persona blockquote::before{content:'';position:absolute;left:-7px;bottom:0;width:14px;height:14px;background:#D9FDD3;clip-path:polygon(100% 0,100% 100%,0 100%)}
 .wa-persona dd{margin:4px 0 0;font-size:.9375rem;line-height:1.55;color:var(--body)}
 .wa-persona blockquote{position:relative;margin:0 0 6px;padding:12px 16px;border-radius:16px 16px 16px 4px;background:#D9FDD3;font-size:.9375rem;line-height:1.55;color:#14352a;font-style:normal;max-width:480px}
-.wa-flow-in{margin:28px 0 0;width:min(560px,100%);background:#075E54;border-radius:20px;padding:28px 32px}
+.wa-flow-in{margin:28px 0 0;width:100%;background:#075E54;border-radius:20px;padding:28px 32px}
 .wa-flow-in img{display:block;width:100%;height:auto}
 .shot.wa-flow{max-width:760px}
 .shot.wa-flow .shot-img{background:#075E54;padding:56px 64px}
@@ -928,12 +930,16 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-side .wa-list{margin:0 0 28px}
 .wa-side-media{display:flex;justify-content:flex-start;align-items:flex-start;gap:36px}
 .wa-side-media > *{margin:0}
-.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(172px,29%)}
+.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:min(184px,calc((100% - 72px) / 3))}
 .wa-side-media > .wa-vid.wide{width:min(400px,100%);align-self:center}
 .cs-body > .wa-side-media{margin-top:28px}
 .wa-annot{margin:28px 0 0}
 .wa-annot img{display:block;width:100%;height:auto}
 .wa-side-media .wa-vid{border-radius:22px}
+.wa-phone img, .wa-steps img, .wa-annot img, .wa-flow-in img, .wa-collage img{cursor:zoom-in}
+.wa-sides .wa-side-media{position:relative}
+.wa-link{position:absolute;height:0;border-top:1.5px solid var(--ink);transform-origin:0 0;pointer-events:none;z-index:2;filter:drop-shadow(0 0 1.5px rgba(255,255,255,.95))}
+.wa-link::before{content:'';position:absolute;left:-4px;top:-4.75px;width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px #fff}
 .wa-side-media figcaption{margin-top:12px;text-align:center;color:var(--ink-3);font-size:.875rem}
 .wa-steps{list-style:none;margin:0;padding:0;counter-reset:wa-step;width:min(290px,52%);align-self:center;display:flex;flex-direction:column;gap:40px}
 .wa-steps img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 .6px rgba(15,15,30,.3)) drop-shadow(0 8px 20px rgba(15,15,30,.08))}
@@ -2063,7 +2069,7 @@ function renderWhatsappCase(p, next){
       <div class="wa-persona"><div class="wa-p-head"><div><b>Shira Stein, the invitee</b><small>37, Kibbutz Palmachim. Social worker, married with three kids, and the “just tell me when to show up” type.</small></div></div>
         <dl><div><dt>Frustrations</dt><dd>The basic details are impossible to find in a running conversation. Too many dead group chats from past events.</dd></div><div><dt>Needs</dt><dd>A reminder of what's next and what to bring, and an event chat that goes away once the event is over.</dd></div></dl>
         <div class="wa-p-msg"><img src="images/whatsapp-invitee.webp" alt="" width="56" height="56" loading="lazy"><blockquote>“I'm honestly overwhelmed by all the texts about this event. Just tell me what to do and I promise it will happen.”</blockquote></div></div></div>`)}
-    <div class="og-quote"><small>Value proposition</small><p>Simple planning tools inside the chat people already use, so the organiser stops chasing and everyone knows what's next.</p></div>
+    <div class="og-quote"><small>Value proposition</small><p>Simple planning tools inside the chat people already use, so the organiser stops chasing and everyone knows what's next.</p><figure class="wa-gif"><video autoplay loop muted playsinline preload="metadata" poster="images/whatsapp-phoebe-poster.webp" aria-label="Phoebe from Friends: I will be in charge of cups and ice."><source src="videos/whatsapp-phoebe.webm" type="video/webm"><source src="videos/whatsapp-phoebe.mp4" type="video/mp4"></video></figure></div>
     ${chapter(3)}
     ${section('User flow', '<p>One flow covers both cases: creating a new event, and jumping into an event that already exists to update its tasks, dates or location. I then designed every screen from two sides, the organiser who creates the event and the invitee who joins it.</p><figure class="wa-flow-in"><img src="images/whatsapp-flow.webp" alt="User flow for creating an event and managing an existing one" loading="lazy"></figure>')}
     ${section('Sketches', '<p>After the research I knew the MVP had to stay small and focused. Rather than inventing new patterns, I borrowed ones WhatsApp users already know: a new tab beside Chats, the attachment menu, poll cards and the group info page.</p>')}
@@ -2101,6 +2107,25 @@ function renderWhatsappCase(p, next){
     else new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); go(); } }, {threshold:.4}).observe(hero);
     hero.addEventListener('click', go);
   }
+  const gif = caseInner.querySelector('.wa-gif video');
+  if (gif && reduced.matches) { gif.removeAttribute('autoplay'); gif.pause(); }
+  /* Arrow from the first vote card to the matching card inside the chat screen, like the annotated screens elsewhere. */
+  caseInner.querySelectorAll('.wa-steps').forEach(steps => {
+    const wrap = steps.parentElement, phone = wrap.querySelector('.wa-phone img'), card = steps.querySelector('img');
+    if (!phone || !card) return;
+    const ln = document.createElement('div'); ln.className = 'wa-link'; ln.setAttribute('aria-hidden', 'true'); wrap.appendChild(ln);
+    const draw = () => {
+      const w = wrap.getBoundingClientRect(), p = phone.getBoundingClientRect(), c = card.getBoundingClientRect();
+      if (!p.width || c.left < p.right) { ln.hidden = true; return; } /* stacked on mobile: no arrow */
+      ln.hidden = false;
+      const x1 = p.left + p.width*.9 - w.left, y1 = p.top + p.height*.155 - w.top; /* the Location card in the chat */
+      const x2 = c.left - w.left, y2 = c.top + c.height*.28 - w.top;               /* the Location card on the right */
+      const len = Math.hypot(x2-x1, y2-y1), ang = Math.atan2(y2-y1, x2-x1);
+      ln.style.cssText = `left:${x1}px;top:${y1}px;width:${len}px;transform:rotate(${ang}rad)`;
+    };
+    [phone, card].forEach(im => im.complete || im.addEventListener('load', draw, {once:true}));
+    new ResizeObserver(draw).observe(wrap); draw();
+  });
   initCarousel(caseInner.querySelector('.wa-car'));
   /* Survey numbers count up from zero the first time they scroll into view. */
   const statIO = new IntersectionObserver(es => es.forEach(e => {
@@ -2195,8 +2220,8 @@ const closeZoom = () => { zoomEl.hidden = true; zoomEl.querySelector('img').src 
 zoomEl.addEventListener('click', closeZoom);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !zoomEl.hidden){ e.stopImmediatePropagation(); closeZoom(); } }, true);
 caseEl.addEventListener('click', e => {
-  const z = e.target.closest('.shot-img, .ui-hero');
-  if (z){ const im = z.querySelector('img'); if (im){ zoomEl.querySelector('img').src = im.currentSrc || im.src; zoomEl.querySelector('img').alt = im.alt; zoomEl.hidden = false; } return; }
+  const z = e.target.closest('.shot-img, .ui-hero, .wa-phone, .wa-steps li, .wa-annot, .wa-flow-in, .wa-collage');
+  if (z){ const im = e.target.tagName === 'IMG' ? e.target : z.querySelector('img'); if (im){ zoomEl.querySelector('img').src = im.currentSrc || im.src; zoomEl.querySelector('img').alt = im.alt; zoomEl.hidden = false; } return; }
   const g = e.target.closest('[data-goto]');
   if (g){ const t = document.getElementById(g.dataset.goto); if (t) t.scrollIntoView({behavior: reduced.matches ? 'auto' : 'smooth', block:'start'}); return; }
   if (e.target.closest('[data-back]')) goBack();
