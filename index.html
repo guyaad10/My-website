@@ -145,8 +145,8 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 @keyframes jf-bubble{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:.7}100%{opacity:0;transform:translate(var(--dx),-46px) scale(1)}}
 
 /* Intro */
-.intro{position:fixed;left:50%;bottom:calc(40vh + 150px * var(--z));transform:translateX(-50%);width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
-  opacity:calc(1 - var(--p, 0) * 1.8);transform:translate(-50%, calc(var(--p, 0) * -56px))}
+.intro{position:fixed;left:50%;bottom:calc(40vh + 150px * var(--z));width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
+  opacity:calc(1 - var(--p, 0) * 1.8);translate:-50% calc(var(--p, 0) * -56px * var(--z))}  /* `translate`, not `transform`: it applies outside the big-screen `scale`, so -50% stays centered */
 .intro-avatar{--bob:-30;position:relative;width:64px;height:64px;margin:0 auto 34px}
 .jf-shadow{position:absolute;left:50%;top:calc(100% + 14px);width:56px;height:10px;margin-left:-28px;border-radius:50%;pointer-events:none;
   background:radial-gradient(closest-side, rgba(6,14,38,.5), rgba(6,14,38,.22) 55%, rgba(6,14,38,0));
