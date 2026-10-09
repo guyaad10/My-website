@@ -535,6 +535,32 @@ body.chat-view #thread{display:none}
 .wa-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s var(--ease)}
 .wa-vid.ready video{opacity:1}
 .wa-vid.ready .wa-ph{display:none}
+.mk-lwf{background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%);display:flex;justify-content:center;align-items:center;gap:5%}
+.mk-lwf figure{margin:0;width:36%;display:flex;flex-direction:column;align-items:center;gap:1.4cqw}
+.mk-lwf span{display:block;width:100%;aspect-ratio:4/3;border-radius:2cqw;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 .25cqw rgba(255,255,255,.35)}
+.mk-lwf figure + figure span{background:rgba(255,255,255,.9)}
+.mk-lwf figcaption{color:rgba(255,255,255,.75);font-size:1.4cqw;letter-spacing:.02em}
+.lw-hero{max-width:968px;margin:0 auto 72px;border-radius:20px;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%);display:flex;justify-content:center;padding:6% 0}
+.lw-hero{gap:4%;align-items:flex-end}
+.lw-hero .lw-shot{width:66%}
+.lw-hero .lw-shot.lw-p{width:19%}
+.lw-shot.lw-p .lw-ph{aspect-ratio:9/19.5;border-radius:24px;padding:12px}
+.lw-row.lw-p .lw-shot{max-width:200px}
+.lw-shot.wd .lw-ph{aspect-ratio:16/9}
+.lw-shot{position:relative;margin:0;cursor:zoom-in}
+.lw-shot img{position:relative;z-index:1}
+.lw-ph{aspect-ratio:4/3;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px;text-align:center;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.lw-shot.ready .lw-ph{display:none}
+.lw-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.lw-ph b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);text-wrap:balance}
+.lw-shot figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
+.lw-ba{display:grid;gap:32px;margin-top:28px}
+.lw-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.lw-shot img{display:block;width:100%;height:auto;border-radius:20px}
+.cs-body .lw-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
+.lw-kd p{color:var(--ink-3)}
+@media (max-width:760px){.lw-ba{gap:20px}.lw-row{grid-template-columns:1fr;gap:20px}.lw-ph{border-radius:14px}.lw-hero .lw-shot:not(.lw-p){width:70%}.lw-hero .lw-shot.lw-p{width:20%}.lw-row.lw-p{grid-template-columns:repeat(3,1fr);gap:12px}.lw-shot.lw-p .lw-ph{border-radius:14px}}
+.lw-hero .lw-p .lw-ph *{display:none}
 .wa-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;color:#fff;background:radial-gradient(90% 60% at 50% 40%,#128C7E 0%,#075E54 60%,#06392F 100%)}
 .wa-play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;margin-bottom:12px}
 .wa-play::after{content:"";width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:4px}
@@ -1157,6 +1183,16 @@ const PROJECTS = [
     ]
   },
   {
+    id:'lwf', kind:'feature', wide:true, mock:'lwf', ar:'16/9',
+    __case:'lwf',
+    line:'At a UX/UI agency, I took over LWF Observer, the app water utilities use to catch leaks and water theft as they happen.',
+    said:'The product behind it was strong, but the app was basic and dated. I rethought the experience from the flows up, then designed a new interface, so field teams can see what is wrong, where, and what to do next.',
+    title:'LWF Observer',
+    summary:'A UX and UI redesign of the tablet and mobile app water utilities use to monitor their network for leaks, illegal drilling and water theft.',
+    role:'UX/UI designer', company:'LWF Corp (via a UX/UI agency)', year:'2024',
+    tags:['B2B','UX/UI','Tablet & mobile']
+  },
+  {
     id:'clalit', kind:'feature', wide:true, mock:'clalit', ar:'16/9',
     __customCase:true,
     icon:'images/clalit-icon.png',
@@ -1392,6 +1428,7 @@ const MOCKS = {
   headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
   offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-card.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
+  lwf(){ return '<div class="mk-stage mk-lwf"><figure><span></span><figcaption>Before</figcaption></figure><figure><span></span><figcaption>After</figcaption></figure></div>'; },
   whatsapp(){ return '<div class="mk-stage mk-wa"><img src="images/whatsapp-ill-time.webp" alt="" draggable="false"></div>'; },
 };
 
@@ -2151,12 +2188,66 @@ function renderWhatsappCase(p, next){
     v.addEventListener('loadedmetadata', () => { v.playbackRate = .85; v.closest('.wa-vid').classList.add('ready'); if (!reduced.matches) v.play().catch(()=>{}); }, {once:true});
   });
 }
+/* LWF Observer. Guy's before/after designs are still to come: drop images/lwf-<file>.webp in and each
+   placeholder is replaced automatically (the image hides itself until the file exists). */
+function renderLwfCase(p, next){
+  const CH = ['Overview','The old app','UX','UI','Outcome'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  const shot = (file, label, cap='', ph=false) => `<figure class="lw-shot${ph===true?' lw-p':ph?' '+ph:''}"><div class="lw-ph" aria-hidden="true"><small>Design coming soon</small><b>${label}</b></div><img src="images/lwf-${file}.webp" alt="${label}" loading="lazy" onload="this.parentNode.classList.add('ready')" onerror="this.remove()">${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const ba = (file, label) => `<div class="lw-ba">${shot(file+'-before', label+', before', 'Before')}${shot(file+'-after', label+', after', 'After')}</div>`;
+  const list = arr => `<ul class="wa-list">${arr.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+  /* Placeholder copy Guy still has to confirm or rewrite is marked with .lw-todo */
+  const todo = t => `<p class="lw-todo">${t}</p>`;
+  const how = [
+    ['Keep watch','Small sensors are fitted along the water pipes. They keep watch day and night, so nobody has to walk the streets looking for wet patches.'],
+    ['Spot the problem','Smart software learns what a healthy pipe looks like. When something changes, like a leak, someone drilling into a pipe or water being stolen, it notices.'],
+    ['Send the team','An alert pops up on the team\'s tablet or phone and shows exactly where the problem is, so they can go straight there and fix it.']
+  ];
+  const screens = [
+    ['Sign in','login','The first screen every user sees, every time they open the app.'],
+    ['Alerts','alerts','The list of open events across the network: leaks, drilling and theft.'],
+    ['Network map','map','Every sensor and every alert on one map.'],
+    ['Alert details','alert','What was detected, where, how sure the system is, and what to do next.'],
+    ['Sensors','sensors','Deploying and managing the sensing units in the field.']
+  ];
+  caseInner.innerHTML = `
+    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A UX and UI redesign of the tablet and mobile app water utilities use to watch their network, and to act fast when a pipe leaks or someone taps into it.</p>${metaDL(p)}</header>
+    <div class="lw-hero" id="case-hero">${shot('hero', 'LWF Observer on tablet')}${shot('hero-mobile', 'LWF Observer on mobile', '', true)}</div>
+    <nav class="toc" aria-label="Contents">${CH.map((t,n)=>`<button type="button" data-goto="ch-${n+1}"><small>0${n+1}</small>${t}</button>`).join('')}</nav>
+    ${chapter(1)}
+    ${section('About', '<p>LWF Corp builds a water loss detection system for water utilities and network operators. Every year a large share of the water that enters a city\'s pipes never reaches a tap: it is lost to hidden leaks, illegal drilling and theft, usually found only weeks later, if at all.</p><p>LWF Observer is the tablet and mobile app that sits on top of that system. It is where network managers and field teams get alerts, see what is happening across their infrastructure, and deploy and manage sensors in the field.</p>')}
+    ${section('How it works', '<p>Think of it as a smoke alarm for water pipes.</p>')}
+    <ol class="kd og-kd">${how.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
+    ${section('The brief', '<p>I worked on LWF as a UX/UI designer at a design agency. The client came to us with a working app built on a very basic, outdated UX. The technology underneath was strong, but the app did not show it.</p><p>The job was both UX and UI. First, rethink how people move through the app: what they need to see first, how an alert turns into action, and how the tablet and phone versions fit together. Then give it a modern interface that a field team can trust when an alert comes in.</p>')}
+    ${section('My role', list(['UX/UI designer at the agency, working directly with the LWF team.','UX: reviewed the existing app, mapped its flows and pain points, restructured the navigation and information, and redesigned the key flows in wireframes.','UI: designed the new visual language and the high fidelity screens for tablet and mobile.']) + todo('Placeholder: add the team you worked with, how long the project ran, and anything else you owned (design system, handoff to developers).'))}
+    ${chapter(2)}
+    ${section('Where it started', '<p>The app worked, but it was built like an internal tool: hard to navigate, with the important things buried, and a dated look on top.</p>' + todo('Placeholder: describe what you got from the client and what was wrong with it. A few examples to replace or keep: alerts were hard to scan, the map and the list did not connect, important actions were buried, the visual style felt dated and did not match the product.'))}
+    <ol class="kd og-kd lw-kd">${[['Hard to scan','Placeholder: one line on the first problem.'],['Hidden actions','Placeholder: one line on the second problem.'],['Unclear flows','Placeholder: one line on the third problem.']].map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
+    ${section('The original app', '<p>A few screens from the app as it was handed to us.</p><div class="lw-row">' + ['login','alerts','map'].map(f => shot(f+'-before', screens.find(s=>s[1]===f)[0]+', original')).join('') + '</div>')}
+    ${chapter(3)}
+    ${section('Goals', list(['Make the most urgent alert the first thing you see.','Connect the alert list and the map, so location is never more than a tap away.','Give every alert a clear next step.','A modern, calm interface that matches the quality of the technology.']) + todo('Placeholder: confirm these goals or replace them with the ones you actually worked to.'))}
+    ${section('Audit of the old app', '<p>I went through the existing app screen by screen and mapped every flow, noting where people got stuck, where steps could be cut, and what was missing.</p>' + todo('Placeholder: the main findings from your audit, and any input you got from LWF or its users.'))}
+    ${section('Information architecture', '<p>A new structure for the app, built around what a network manager or a field crew needs first.</p>' + todo('Placeholder: how you reorganised the navigation and why.') + '<div class="lw-ba">' + shot('ia', 'Sitemap of the new app', '', 'wd') + '</div>')}
+    ${section('User flows', '<p>The key flows, redesigned from start to end: handling an alert, and deploying a new sensor.</p>' + todo('Placeholder: which flows you redesigned and what changed in each.') + '<div class="lw-ba">' + shot('flows', 'User flows for handling an alert and deploying a sensor', '', 'wd') + '</div>')}
+    ${section('Wireframes', '<p>Low fidelity wireframes to test the new structure and flows before any visual design.</p>' + todo('Placeholder: how many screens, and what you learned from reviewing them with LWF.') + '<div class="lw-ba">' + shot('wireframes', 'Wireframes of the new app', '', 'wd') + '</div>')}
+    ${chapter(4)}
+    ${section('On mobile', '<p>The same app on a phone, for the crew out in the field.</p>' + todo('Placeholder: what changed between the tablet and the phone layouts, and why.') + '<div class="lw-row lw-p">' + ['alerts','map','alert'].map(f => shot(f+'-mobile', screens.find(s=>s[1]===f)[0]+', mobile', '', true)).join('') + '</div>')}
+    ${section('Look and feel', todo('Placeholder: the colour palette, type and icon style you chose, and why. Add a palette like the one in Off Grid once you share the values.'))}
+    ${screens.map(([t,f,d]) => section(t, `<p>${d}</p>` + todo('Placeholder: what you changed on this screen, in the flow and in the design, and why.') + ba(f, t))).join('')}
+    ${chapter(5)}
+    ${section('Shipped', '<p>The redesign shipped as version 2.0 of LWF Observer on the App Store, with a reworked experience and a new interface across the app.</p>' + todo('Placeholder: confirm the release, and add anything you know about how it landed: client feedback, adoption, fewer support calls.'))}
+    ${section('Looking back', todo('Placeholder: one or two sentences on what you learned, or what you would do differently today.'))}
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+}
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
   if (p.__case === 'headspace') return renderHeadspaceCase(p, next);
   if (p.__case === 'offgrid') return renderOffgridCase(p, next);
   if (p.__case === 'whatsapp') return renderWhatsappCase(p, next);
+  if (p.__case === 'lwf') return renderLwfCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
   const figs = (p.figures||[]).map(f => f.type==='flow' ? `<figure class="fig"><div class="flow">
@@ -2228,7 +2319,7 @@ const closeZoom = () => { zoomEl.hidden = true; zoomEl.querySelector('img').src 
 zoomEl.addEventListener('click', closeZoom);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !zoomEl.hidden){ e.stopImmediatePropagation(); closeZoom(); } }, true);
 caseEl.addEventListener('click', e => {
-  const z = e.target.closest('.shot-img, .ui-hero, .wa-phone, .wa-steps li, .wa-annot, .wa-flow-in, .wa-collage');
+  const z = e.target.closest('.shot-img, .ui-hero, .wa-phone, .wa-steps li, .wa-annot, .wa-flow-in, .wa-collage, .lw-shot');
   if (z){ const im = e.target.tagName === 'IMG' ? e.target : z.querySelector('img'); if (im){ zoomEl.querySelector('img').src = im.currentSrc || im.src; zoomEl.querySelector('img').alt = im.alt; zoomEl.hidden = false; } return; }
   const g = e.target.closest('[data-goto]');
   if (g){ const t = document.getElementById(g.dataset.goto); if (t) t.scrollIntoView({behavior: reduced.matches ? 'auto' : 'smooth', block:'start'}); return; }
