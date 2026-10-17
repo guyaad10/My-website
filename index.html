@@ -1968,7 +1968,7 @@ function renderClalitCase(p){
   $('#case-bar-title').textContent = p.title;
 }
 function renderHeadspaceCase(p, next){
-  const CH = ['Overview','Design','Process'];
+  const CH = ['Overview','Solution'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* Phones sit in columns 46% wide; pin x/y are given relative to their own image and mapped onto the whole row. */
   const pair = sc => { const n = sc.imgs.length, w = n === 3 ? .3 : .46, off = n === 1 ? [.27] : n === 3 ? [0, .35, .7] : [0, .54], H = Math.max(...sc.imgs.map(i => i[2]));
@@ -1983,11 +1983,10 @@ function renderHeadspaceCase(p, next){
     ${chapter(1)}
     ${section('About', paras(p.context))}
     ${section('So why Headspace?', `<p>${p.why}</p>`)}
+    ${section('Process', `<ol class="tline">${p.process.map(t=>`<li><b>${t}</b></li>`).join('')}</ol>`)}
     <figure class="hs-sky" role="img" aria-label="A smiling Headspace sun rising over clouds"><blockquote class="hs-quote"><p>“${p.quote[0]}”</p><cite>${p.quote[1]}</cite></blockquote></figure>
     ${chapter(2)}
     ${p.screens.map(sc => `<section class="cs"><h2>${sc.t}</h2><div class="cs-body">${sc.deco?`<img class="hs-deco" src="images/${sc.deco[0]}" alt="${sc.deco[1]}" loading="lazy">`:''}</div></section>` + pair(sc)).join('')}
-    ${chapter(3)}
-    <ol class="kd hs-steps">${p.process.map((t,k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b></li>`).join('')}</ol>
     <figure class="hs-rainbow" role="img" aria-label="A smiling Headspace character on a rope bridge under a rainbow"><p>Your path to feeling better is just a click away with our healthcare solutions!</p></figure>
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
