@@ -6,7 +6,7 @@
 <title>Guy — Senior Product Designer</title>
 <meta name="description" content="Guy is a senior product designer working on B2B and AI-native products.">
 <!-- set dark mode before first paint when the saved background is Overcast (SKIES[1]) -->
-<script>try{if(localStorage.getItem('portfolio-sky-2')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
+<script>try{if(localStorage.getItem('portfolio-sky-4')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
@@ -52,46 +52,48 @@ html{transition:--c0 1.6s var(--ease),--fg 1s var(--ease)}
 /* Boring = no background at all */
 html.bg-flat .fx-skies,html.bg-flat .fx-lift,html.bg-flat .fx-vig,html.bg-flat .fx-grain{display:none}
 html.bg-flat{--fadecol:#F0F5F5}
+html.bg-flat .fx{background-color:var(--c0);background-position:center;background-size:32px 32px;
+  background-image:linear-gradient(rgba(20,30,40,.045) 1px, transparent 1px),linear-gradient(90deg, rgba(20,30,40,.045) 1px, transparent 1px)}
 html.bg-flat .bg-orb::after{display:none}
-html.bg-flat .state-intro .chip{background:rgba(20,20,40,.055)}
-html.bg-flat .state-intro .chip:hover{background:rgba(20,20,40,.09)}
-html.bg-dark-pills .state-intro .chip{background:rgba(30,0,70,.34)}
+html.bg-flat .state-intro .chip{background:#fff;box-shadow:0 0 0 1px rgba(20,20,40,.07), 0 4px 12px -6px rgba(20,20,40,.16)}
+html.bg-dark-pills .state-intro .chip{color:var(--fg);background:rgba(30,0,70,.34);box-shadow:none}
 html.bg-dark-pills .state-intro .chip:hover{background:rgba(30,0,70,.46)}
 html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 .fx-vig{position:absolute;inset:0;background:radial-gradient(120% 95% at 50% 42%, transparent 58%, rgba(4,8,20,.22))}
 .fx-veil{position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .4s var(--ease)}
-.fx-grain{position:absolute;inset:-60px;pointer-events:none;mix-blend-mode:soft-light;opacity:.35;background-size:220px 220px;animation:grain .9s steps(1) infinite;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+.fx-grain{position:absolute;inset:-60px;pointer-events:none;mix-blend-mode:soft-light;opacity:var(--grain,.38);background-size:220px 220px;animation:grain .9s steps(1) infinite;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.4' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1.7' intercept='-.35'/%3E%3CfeFuncG type='linear' slope='1.7' intercept='-.35'/%3E%3CfeFuncB type='linear' slope='1.7' intercept='-.35'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
 .fx-grain.b{mix-blend-mode:overlay;opacity:.12;background-size:320px 320px;animation-duration:1.4s;animation-direction:reverse;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)'/%3E%3C/svg%3E")}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-22px,14px)}40%{transform:translate(18px,-26px)}60%{transform:translate(-30px,-10px)}80%{transform:translate(24px,22px)}100%{transform:translate(0,0)}}
 @media (prefers-reduced-motion:reduce){.fx-sky,.fx-grain{animation:none}}
+@media (min-resolution:2dppx){.fx-grain:not(.b){background-size:160px 160px}}  /* keep the grain ~2px on retina, like a photo's */
 
 /* intro adapts to the background */
-.intro h1{color:var(--fg);text-shadow:var(--tshadow, 0 2px 40px rgba(10,20,50,.18))}
-.state-intro .intro p{color:var(--fg);opacity:.9;text-shadow:var(--pshadow, none)}
+.intro h1{color:var(--fg);text-shadow:var(--tshadow, 0 1px 24px rgba(10,20,50,.12))}
+.state-intro .intro p{color:var(--fg);opacity:.8;text-shadow:var(--pshadow, none)}
 
 /* Background button positioned in top right header - only show on homepage */
-#bgBtn{position:fixed;top:24px;right:24px;z-index:50;opacity:1;transition:opacity .3s var(--ease)}
+#bgBtn{position:fixed;top:20px;right:20px;z-index:50;opacity:1;transition:opacity .3s var(--ease)}
 .state-thread #bgBtn{opacity:0;pointer-events:none}
 
 /* Quick-action pills, under the composer — reused for both the intro and docked states */
 .qa-row{display:flex;flex-wrap:wrap;gap:8px;justify-content:center}
-.chip{flex:none;display:inline-flex;align-items:center;gap:8px;padding:8px 16px;border-radius:999px;
-  font-size:.9375rem;font-weight:500;color:#16181B;letter-spacing:.005em;white-space:nowrap;
+.chip{flex:none;display:inline-flex;align-items:center;gap:6px;padding:6px 12px;border-radius:999px;
+  font-size:.8125rem;font-weight:500;line-height:20px;color:#16181B;letter-spacing:-.005em;white-space:nowrap;
   background:rgba(20,20,40,.04);border:0;
   -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   transition:color .4s, background .2s, transform .2s var(--ease)}
 .chip:hover{background:rgba(20,20,40,.08)}
-.state-intro .chip{color:var(--fg);background:rgba(255,255,255,.12)}
-.state-intro .chip:hover{background:rgba(255,255,255,.24)}
-.chip svg{width:18px;height:18px;flex:none;opacity:.92}
-.chip:not(.bg-btn){padding:8px 16px 8px 13px}
+.state-intro .chip{color:#16181B;background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(15,20,50,.06), 0 6px 16px -6px rgba(20,40,110,.28)}
+.state-intro .chip:hover{background:#fff;transform:translateY(-1px)}
+.chip svg{width:15px;height:15px;flex:none;opacity:.85}
+.chip:not(.bg-btn){padding:6px 12px 6px 10px}
 
 /* Background pill: orb swatch + name tooltip */
 .bg-wrap{position:relative;display:inline-flex}
-.chip.bg-btn{padding:6px 16px 6px 8px;gap:10px;min-width:118px}
-.bg-orb{width:24px;height:24px;border-radius:50%;flex:none;position:relative;overflow:hidden;background-size:cover;background-position:center;box-shadow:0 0 0 2px #fff, 0 3px 10px -2px rgba(20,30,80,.35);transition:transform .6s var(--ease)}
+.chip.bg-btn{padding:4px 12px 4px 5px;gap:8px;min-width:0}
+.bg-orb{width:20px;height:20px;border-radius:50%;flex:none;position:relative;overflow:hidden;background-size:cover;background-position:center;box-shadow:0 0 0 1.5px #fff, 0 2px 6px -2px rgba(20,30,80,.3);transition:transform .6s var(--ease)}
 .bg-orb::after{content:"";position:absolute;inset:0;opacity:.35;mix-blend-mode:soft-light;background-size:60px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.1' numOctaves='2'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='60' height='60' filter='url(%23n)'/%3E%3C/svg%3E")}
 .bg-btn:hover .bg-orb{transform:rotate(60deg) scale(1.08)}
 .bg-btn.spin .bg-orb{transform:rotate(360deg) scale(1)}
@@ -145,31 +147,31 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 @keyframes jf-bubble{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:.7}100%{opacity:0;transform:translate(var(--dx),-46px) scale(1)}}
 
 /* Intro */
-.intro{position:fixed;left:50%;bottom:calc(40vh + 150px * var(--z));width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
-  opacity:calc(1 - var(--p, 0) * 1.8);translate:-50% calc(var(--p, 0) * -56px * var(--z))}  /* `translate`, not `transform`: it applies outside the big-screen `scale`, so -50% stays centered */
-.intro-avatar{--bob:-30;position:relative;width:64px;height:64px;margin:0 auto 34px}
-.jf-shadow{position:absolute;left:50%;top:calc(100% + 14px);width:56px;height:10px;margin-left:-28px;border-radius:50%;pointer-events:none;
+.intro{position:fixed;left:50%;bottom:calc(40vh + 144px * var(--hz));width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
+  opacity:calc(1 - var(--p, 0) * 1.8);translate:-50% calc(var(--p, 0) * -56px * var(--hz))}  /* `translate`, not `transform`: it applies outside the big-screen `scale`, so -50% stays centered */
+.intro-avatar{--bob:-14;position:relative;width:44px;height:44px;margin:0 auto 26px}
+.jf-shadow{position:absolute;left:50%;top:calc(100% + 10px);width:38px;height:7px;margin-left:-19px;border-radius:50%;pointer-events:none;
   background:radial-gradient(closest-side, rgba(6,14,38,.5), rgba(6,14,38,.22) 55%, rgba(6,14,38,0));
   animation:jf-shadow 5.2s ease-in-out infinite}
 @keyframes jf-shadow{0%,100%{transform:scale(1,1);opacity:.95}50%{transform:scale(.6,.6);opacity:.45}}
 .intro-avatar .ghost{width:100%;height:100%}
-.intro h1{margin:0 0 12px;font:600 clamp(1.5rem, 1.2rem + 1.3vw, 2.125rem)/1.2 var(--sans);letter-spacing:-.03em;text-wrap:balance}
-.intro p{margin:0 auto;max-width:40ch;font-size:clamp(.9375rem, .9rem + .2vw, 1.0625rem);line-height:1.45;color:var(--ink-2);letter-spacing:-.01em;text-wrap:balance}
+.intro h1{margin:0 0 10px;font:600 clamp(1.375rem, 1.15rem + .8vw, 1.75rem)/1.25 var(--sans);letter-spacing:-.025em;text-wrap:balance}
+.intro p{margin:0 auto;max-width:44ch;font-size:.9375rem;line-height:1.5;color:var(--ink-2);letter-spacing:-.01em;text-wrap:balance}
 .state-thread .intro{pointer-events:none}
 
 /* Composer dock: positions the composer card + quick-action pills as one unit */
-.dock{position:fixed;left:50%;top:60%;translate:-50% -50%;z-index:40;width:min(700px, calc(100% - 32px));
-  display:flex;flex-direction:column;gap:14px;align-items:stretch;
+.dock{position:fixed;left:50%;top:calc(60% - 32px * var(--hz));translate:-50% -50%;z-index:40;width:min(640px, calc(100% - 32px));
+  display:flex;flex-direction:column;gap:12px;align-items:stretch;
   transition:top .7s var(--ease), translate .7s var(--ease), width .5s var(--ease), gap .4s}
 .state-thread .dock{top:calc(100% - 16px - env(safe-area-inset-bottom,0px));translate:-50% -100%;width:min(760px, calc(100% - 24px));gap:10px}
 
 .composer{width:100%;
-  background:rgba(255,255,255,.62);-webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
-  border:1px solid rgba(255,255,255,.5);border-radius:28px;box-shadow:var(--shadow);
-  padding:18px 14px 12px 22px;transition:box-shadow .25s, background .25s}
-.composer:focus-within{background:rgba(255,255,255,.78);box-shadow:0 2px 6px rgba(15,15,30,.05), 0 28px 70px -24px rgba(40,50,110,.28)}
+  background:rgba(255,255,255,.72);-webkit-backdrop-filter:blur(22px) saturate(1.4);backdrop-filter:blur(22px) saturate(1.4);
+  border:1px solid rgba(255,255,255,.6);border-radius:20px;box-shadow:0 0 0 .5px rgba(20,24,60,.06), 0 1px 2px rgba(15,15,30,.05), 0 12px 32px -14px rgba(30,40,100,.24);
+  padding:14px 10px 10px 18px;transition:box-shadow .25s, background .25s}
+.composer:focus-within{background:rgba(255,255,255,.84);box-shadow:0 0 0 .5px rgba(20,24,60,.08), 0 1px 2px rgba(15,15,30,.06), 0 16px 40px -16px rgba(30,40,100,.3)}
 .state-thread .composer{display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;column-gap:4px;
-  padding:8px 8px 8px 10px;border-radius:28px;background:rgba(255,255,255,.82);border-color:rgba(20,20,40,.06)}
+  padding:6px 6px 6px 8px;border-radius:20px;background:rgba(255,255,255,.86);border-color:rgba(20,20,40,.06)}
 /* docked = a single line: [+] message ... [mic] [send] */
 .state-thread .c-row,.state-thread .c-tools{display:contents}
 .state-thread .c-attach{grid-column:1;grid-row:1}
@@ -177,18 +179,19 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 .state-thread .c-mic{grid-column:3;grid-row:1}
 .state-thread .c-send{grid-column:4;grid-row:1;margin-left:2px}
 .composer textarea{display:block;width:100%;border:0;background:transparent;color:var(--ink);resize:none;outline:none;
-  font:400 1.25rem/1.45 var(--sans);letter-spacing:-.02em;min-height:60px;max-height:160px;padding:0}
-.state-thread .composer textarea{font-size:1rem;letter-spacing:-.01em}
+  font:400 1rem/1.5 var(--sans);letter-spacing:-.011em;min-height:48px;max-height:160px;padding:0}
+.state-thread .composer textarea{font-size:.9375rem;letter-spacing:-.01em}
 .composer textarea::placeholder{color:var(--ink-3)}
-.c-row{display:flex;justify-content:space-between;align-items:center;margin-top:8px}
-.c-tools{display:flex;align-items:center;gap:2px;margin-left:-8px}
-.c-icon{width:36px;height:36px;border-radius:999px;display:grid;place-items:center;color:var(--ink-3)}
+.c-row{display:flex;justify-content:space-between;align-items:center;margin-top:4px}
+.c-tools{display:flex;align-items:center;gap:0;margin-left:-7px}
+.c-icon{width:32px;height:32px;border-radius:8px;display:grid;place-items:center;color:var(--ink-3)}
 .c-icon:hover{background:var(--surface-2);color:var(--ink-2)}
-.c-icon svg,.c-send svg{width:18px;height:18px}
-.c-hint{font-size:.8125rem;color:var(--ink-3);margin-left:6px}
+.c-icon svg{width:16px;height:16px}
+.c-send svg{width:15px;height:15px}
+.c-hint{font-size:.75rem;color:var(--ink-3);margin-left:4px}
 .state-thread .c-hint{display:none}
-.c-send{width:38px;height:38px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;transition:opacity .2s, transform .2s var(--ease)}
-.c-send:hover{transform:scale(1.05)}
+.c-send{width:32px;height:32px;border-radius:50%;background:var(--ink);color:#fff;display:grid;place-items:center;transition:opacity .2s, transform .2s var(--ease)}
+.c-send:hover{opacity:.86}
 .c-send:disabled{opacity:.18;cursor:default;transform:none}
 .dock-fade{position:fixed;left:0;right:0;bottom:0;height:140px;z-index:39;pointer-events:none;opacity:0;
   background:linear-gradient(to bottom, color-mix(in srgb, var(--fadecol, #fff) 0%, transparent), var(--fadecol, #fff) 62%);transition:opacity .4s}
@@ -827,7 +830,7 @@ body.chat-view #thread{display:none}
 
 @media (max-width:760px){
   .home-mark{left:18px;top:calc(14px + env(safe-area-inset-top,0px))}
-  .intro-avatar{width:56px;height:56px;margin-bottom:14px}
+  .intro-avatar{width:40px;height:40px;margin-bottom:16px}
   .thread{padding:max(560px, calc(100vh / var(--z))) 18px 230px}
   .msg{margin-bottom:88px}
   .p-body,.reply-body{padding-left:0}
@@ -839,7 +842,7 @@ body.chat-view #thread{display:none}
   .tiles{grid-template-columns:1fr;margin-left:0}
   .tile .visual{--ar:4/3}
   .archive{margin-left:0}
-  .intro{bottom:calc(40vh + 100px * var(--z))}
+  .intro{bottom:calc(40vh + 120px * var(--hz))}
   .dock{width:calc(100% - 24px)}
   .cs{grid-template-columns:1fr;gap:16px;margin-bottom:var(--sec)}
   .cs > h2{position:static}
@@ -855,7 +858,7 @@ body.chat-view #thread{display:none}
 }
 
 /* ---------- Responsive scale: big screens grow proportionally ---------- */
-:root{--z:1}
+:root{--z:1;--hz:calc(1 + (var(--z) - 1) * .6)}  /* --hz: the home hero grows more gently than the rest */
 html,body{overflow-x:clip;overscroll-behavior-x:none}
 @media (min-width:1600px) and (min-height:860px){:root{--z:1.1}}
 @media (min-width:1920px) and (min-height:1000px){:root{--z:1.25}}
@@ -863,12 +866,12 @@ html,body{overflow-x:clip;overscroll-behavior-x:none}
 @media (min-width:2800px) and (min-height:1500px){:root{--z:1.7}}
 @media (min-width:3600px) and (min-height:1900px){:root{--z:2}}
 .thread, .case-inner, .case-bar > *{zoom:var(--z)}
-.intro{scale:var(--z);transform-origin:50% 100%}
-.dock{scale:var(--z);transform-origin:50% 50%}
+.intro{scale:var(--hz);transform-origin:50% 100%}
+.dock{scale:var(--hz);transform-origin:50% 50%}
 .state-thread .dock{transform-origin:50% 100%}
 .dock-fade{height:calc(140px * var(--z))}
 .home-mark{scale:var(--z);transform-origin:0 0}
-#bgBtn{scale:var(--z);transform-origin:100% 0}
+#bgBtn{scale:var(--hz);transform-origin:100% 0}
 
 /* ---------- Small phones ---------- */
 @media (max-width:560px){
@@ -921,7 +924,7 @@ html.theme-dark .composer:focus-within{background:rgba(22,27,34,.8);box-shadow:0
 html.theme-dark .state-thread .composer{background:rgba(22,27,34,.86);border-color:rgba(255,255,255,.07)}
 html.theme-dark .chip{color:var(--ink);background:rgba(255,255,255,.06)}
 html.theme-dark .chip:hover{background:rgba(255,255,255,.11)}
-html.theme-dark .state-intro .chip{color:var(--fg);background:rgba(255,255,255,.12)}
+html.theme-dark .state-intro .chip{color:var(--fg);background:rgba(255,255,255,.12);box-shadow:none}
 html.theme-dark .state-intro .chip:hover{background:rgba(255,255,255,.22)}
 html.theme-dark .c-send,html.theme-dark .view,html.theme-dark .btn.pri,html.theme-dark .art:hover .art-open,
 html.theme-dark .kd.light .kd-n,html.theme-dark .tk li::before,html.theme-dark .anno-list li::before,html.theme-dark .pin::before{color:var(--on-ink)}
@@ -1736,25 +1739,49 @@ document.addEventListener('click', e => {
 
 /* ================== Sky backgrounds ================== */
 const SKIES = [
-  {name:'Blue sky', seed:12, angle:.9,   fx:1.6, fy:2.3, warp:.9,  contrast:1.05, tilt:.4,  fg:'#FFFFFF', veil:.82,
-   tshadow:'0 2px 30px rgba(24,50,130,.4), 0 0 2px rgba(24,50,130,.25)', pshadow:'0 1px 14px rgba(24,50,130,.45)',
-   stops:[[0,'#3560C4'],[.12,'#5F8EDC'],[.25,'#9CB9EE'],[.36,'#DCE6FA'],[.44,'#FFFFFF'],[.54,'#FCDDE8'],[.66,'#F4B9CF'],[.8,'#FBE4EC'],[1,'#FFFFFF']]},
-  {name:'Overcast', dark:true, seed:31, angle:-1.6, fx:1.4, fy:1.9, warp:1.05, contrast:1.15, tilt:-.6,  fg:'#FFFFFF', veil:.9, lift:0,
-   stops:[[0,'#05070A'],[.2,'#080B0F'],[.35,'#0C1016'],[.52,'#11161E'],[.68,'#171E28'],[.82,'#1D2531'],[.95,'#242D3A'],[1,'#29333F']]},
-  {name:'Sunset',   seed:5,  angle:2.1,  fx:1.7, fy:2.1, warp:1.1, contrast:1.1,  tilt:.55,   fg:'#FFFFFF', veil:.88,
-   stops:[[0,'#1B1013'],[.22,'#5A201D'],[.42,'#C03A2B'],[.58,'#EE5D3C'],[.74,'#F68F6C'],[.88,'#F7C0B8'],[1,'#FCE4E6']]},
-  {name:'Dusk',     seed:47, angle:-2.4, fx:1.5, fy:2.0, warp:1.0, contrast:1.05, tilt:.45,   fg:'#FFFFFF', veil:.88,
-   stops:[[0,'#13132E'],[.25,'#3A337F'],[.45,'#6C66C8'],[.62,'#A78AD5'],[.78,'#E2A8C7'],[.9,'#F6CDBF'],[1,'#FDECE4']]},
-  {name:'Haze',     seed:73, angle:1.3,  fx:1.8, fy:1.6, warp:1.15, contrast:1.0,  tilt:0,    fg:'#141A12', veil:.84,
-   stops:[[0,'#4A6C9C'],[.25,'#6B89AE'],[.42,'#7F9B7E'],[.58,'#A3A98B'],[.72,'#D3BE8C'],[.86,'#EAD9A4'],[1,'#F5ECCD']]},
+  /* grid skies: colour fields measured off wonderful.ai's hero images (box-averaged 7x6), eased between cells,
+     pushed into soft horizontal bands, with fine wisps and a gentle focus patch where the wisps read a little sharper */
+  {name:'Blue sky', tilt:-.28, wave:.05, fx:.45, fy:6, streak:.05, wisp:.42, hi:'#EEF0F4', focus:[.2,.3,.35,.3], focusAmp:1.2, fg:'#FFFFFF', veil:.82, lift:0, blur:9,
+   tshadow:'0 1px 24px rgba(40,70,130,.3)', pshadow:'0 1px 12px rgba(40,70,130,.32)',
+   grid:[['#CAD2E2','#ABC0DC','#89AAD5','#7EA2D2','#81A5D5','#88ACDA','#8AAEDC'],
+         ['#C6CFDF','#A6BCD9','#96B0D2','#85A4CE','#83A5D2','#88ACDB','#8BAFDE'],
+         ['#CACFD9','#BBC7DA','#A8B9D3','#A2B4D1','#94AED2','#8CAEDA','#92B4DE'],
+         ['#DCD6D3','#C8CBD1','#A4B4CA','#9AAECB','#91ABCE','#9BB6D9','#9EBADD'],
+         ['#CBCFD0','#BEC6C7','#92A7B7','#7A98BC','#7D9EC9','#8BACD6','#90B3DD'],
+         ['#A8B9C3','#99AEB9','#819DB7','#7598C1','#81A4D0','#8FB2DC','#91B4DE']]},
+  {name:'Overcast', dark:true, tilt:-.3, wave:.04, fx:.45, fy:11, streak:.06, wisp:.3, hi:'#AEB4BF', focus:[.6,.25,.45,.3], focusAmp:1.4, fg:'#FFFFFF', veil:.9, lift:0, blur:5,
+   grid:[['#858C98','#8E94A0','#9499A5','#989DA9','#9BA0AC','#969BA7','#8F939F'],
+         ['#59606A','#656B77','#787E8B','#868C98','#9196A3','#9298A5','#818895'],
+         ['#5B636F','#4D545F','#434952','#3C434B','#373D45','#343B42','#353B42'],
+         ['#58606F','#5B6371','#59606D','#4B515B','#333940','#292F35','#22292D'],
+         ['#333B44','#353D46','#323A42','#2F363E','#293037','#22292E','#1B2124'],
+         ['#161C1E','#171C1E','#181E20','#1A2023','#1B2125','#1D2427','#1C2226']]},
+  // no artwork at all: a plain, flat page
+  {name:'Boring', flat:'#F0F5F5', face:true, fg:'#16181B', veil:0,
+   stops:[[0,'#FFFFFF'],[1,'#E9E9EC']]},
+  // same band structure in sunset colours: violet sky, pink, coral, then a golden glow low and right of centre
+  {name:'Sunset', tilt:-.08, wave:.05, fx:.6, fy:5, streak:.03, wisp:.14, hi:'#FFE6C8', focus:[.65,.75,.35,.3], focusAmp:1, fg:'#FFFFFF', veil:.88, lift:0, blur:7,
+   tshadow:'0 1px 24px rgba(90,30,40,.35)', pshadow:'0 1px 12px rgba(90,30,40,.4)',
+   grid:[['#56488C','#5C4B8F','#674F95','#6C5297','#684F93','#5C498B','#55468A'],
+         ['#9C5E8E','#B0678F','#BF7194','#C77796','#C06F93','#AB638F','#9C5D8D'],
+         ['#D97771','#E5826F','#EC8E70','#F09872','#EB8F70','#DE836F','#D57A70'],
+         ['#EC9862','#F3A764','#F8B666','#FBC36C','#F8BB68','#EFA864','#E89A62'],
+         ['#E59860','#F0AA65','#F8C272','#FCD17E','#F8C674','#ECAA66','#E19A62'],
+         ['#B06C58','#C77E5C','#D69060','#DE9966','#D48D62','#BF7C5C','#AE6E58']]},
+  {name:'Haze', tilt:0, wave:.04, fx:.6, fy:4, streak:.025, wisp:.06, hi:'#D9C9A0', focus:[.6,.2,.35,.3], focusAmp:.8, fg:'#FFFFFF', veil:.84, lift:0, blur:8,
+   tshadow:'0 1px 24px rgba(30,35,25,.4)', pshadow:'0 1px 12px rgba(30,35,25,.45)',
+   grid:[['#9DA49E','#ACB5B9','#88ABCC','#6D8EA6','#72704C','#5F6657','#386280'],
+         ['#A5A7A6','#BDB5A9','#97A8B6','#7F9BAF','#7B7146','#6D6847','#3C637E'],
+         ['#9E968A','#A1927A','#898A7D','#819194','#796636','#626754','#3F627B'],
+         ['#767567','#6C6652','#736C56','#757A74','#64512E','#535649','#3F5665'],
+         ['#45483B','#403E31','#474130','#4A4538','#3D2D12','#38372B','#303630'],
+         ['#24261F','#26241E','#282218','#20190E','#211809','#201E16','#1E1E16']]},
   // colours cycle several times (cycle) so the bands ripple and swirl like a lava lamp
   {name:'Psycho', seed:88, angle:.4, fx:1.5, fy:1.7, warp:1.7, contrast:1.9, tilt:0, cycle:2.4, fg:'#FFFFFF', veil:.9, lift:.03, darkPills:true, blur:9,
    tshadow:'0 2px 28px rgba(28,0,70,.6), 0 0 3px rgba(28,0,70,.4)', pshadow:'0 1px 14px rgba(28,0,70,.6)',
-   stops:[[0,'#2A0A72'],[.14,'#7B22D6'],[.28,'#FF2E9A'],[.42,'#FF8A1F'],[.55,'#FFE13A'],[.68,'#2EE6A6'],[.82,'#22B8FF'],[1,'#5B2BFF']]},
-  // no artwork at all: a plain, flat page
-  {name:'Boring', flat:'#F0F5F5', face:true, fg:'#16181B', veil:0,
-   stops:[[0,'#FFFFFF'],[1,'#E9E9EC']]}
+   stops:[[0,'#2A0A72'],[.14,'#7B22D6'],[.28,'#FF2E9A'],[.42,'#FF8A1F'],[.55,'#FFE13A'],[.68,'#2EE6A6'],[.82,'#22B8FF'],[1,'#5B2BFF']]}
 ];
+SKIES.forEach(P => { if (P.grid && !P.stops) P.stops = P.grid.map((r, i, g) => [i/(g.length - 1), r[r.length >> 1]]); });
 function makeNoise(seed){
   let st = seed|0 || 1; const rnd = () => ((st = (st*1664525 + 1013904223) >>> 0) / 4294967296);
   const a = Array.from({length:256}, (_,i) => i);
@@ -1788,6 +1815,78 @@ function paintSky(P){
   const fbm = (x,y,o) => { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++){ s += a*N(x*f, y*f); a *= .48; f *= 2.05; } return s; };
   const turb = (x,y,o) => { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++){ s += a*Math.abs(N(x*f, y*f)); a *= .5; f *= 2.15; } return s; };
   let i = 0;
+  if (P.grid){
+    const G = P.grid.map(r => r.map(hexRGB)), R = G.length, C = G[0].length, hi = hexRGB(P.hi);
+    const ct = Math.cos(P.tilt), st = Math.sin(P.tilt), [fx,fy,frx,fry] = P.focus;
+    const ease = f => f*f*(3 - 2*f), cl = (t, m) => t < 0 ? 0 : t > m ? m : t;
+    for (let y = 0; y < h; y++){
+      for (let x = 0; x < w; x++){
+        const X0 = x/w, Y0 = y/h, u = (X0 - .5)*ar, v = Y0 - .5, ru = u*ct - v*st, rv = u*st + v*ct;
+        const fdx = (X0 - fx)/frx, fdy = (Y0 - fy)/fry, m = 1 + P.focusAmp*Math.exp(-(fdx*fdx + fdy*fdy)*2);
+        const und = fbm(ru*.9 + 3.1, rv*.7 + 9.4, 3), sn = fbm(ru*P.fx + 7.3, rv*P.fy - 2.2, 4)*m;
+        const gx = cl(X0 + P.wave*1.4*fbm(ru*.7 - 5.2, rv*.7 + 1.7, 2), 1)*(C - 1);
+        const gy = cl(Y0 - (ru*st) + P.wave*und*2 + P.streak*sn*2, 1)*(R - 1);
+        const i0 = Math.min(C - 2, gx|0), j0 = Math.min(R - 2, gy|0), a = ease(gx - i0), b = ease(gy - j0);
+        const c00 = G[j0][i0], c10 = G[j0][i0+1], c01 = G[j0+1][i0], c11 = G[j0+1][i0+1];
+        const k = cl(sn*P.wisp*3, 1);
+        for (let c = 0; c < 3; c++){
+          const top = c00[c] + (c10[c] - c00[c])*a, bot = c01[c] + (c11[c] - c01[c])*a, val = top + (bot - top)*b;
+          d[i++] = val + (hi[c] - val)*k;
+        }
+        d[i++] = 255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    return cv;
+  }
+  if (P.spots || P.glow){
+    // spots: soft out-of-focus colour blobs over a base; glow: one big radial falloff. Both get a little noise warp for organic edges
+    const base = P.base ? hexRGB(P.base) : null, spots = (P.spots || []).map(([cx,cy,rx,ry,c,a]) => [cx,cy,rx,ry,hexRGB(c),a]);
+    for (let y = 0; y < h; y++){
+      for (let x = 0; x < w; x++){
+        const fx0 = x/w, fy0 = y/h, X = fx0 + P.warp*fbm(fx0*2.2 + 3.1, fy0*2.2 + 9.4, 3), Y = fy0 + P.warp*fbm(fx0*2.2 - 5.2, fy0*2.2 + 7.7, 3);
+        let r, g, b;
+        if (P.glow){
+          const [cx,cy,rx,ry] = P.glow, dx = (X - cx)/rx*ar*.6, dy = (Y - cy)/ry;
+          let t = Math.sqrt(dx*dx + dy*dy); t = t < 0 ? 0 : t > 1 ? 1 : t;
+          [r,g,b] = ramp[(t*255)|0];
+        } else {
+          [r,g,b] = base;
+          for (const [cx,cy,rx,ry,c,a] of spots){
+            const dx = (X - cx)/rx, dy = (Y - cy)/ry, k = Math.exp(-(dx*dx + dy*dy)*2)*a;
+            r += (c[0]-r)*k; g += (c[1]-g)*k; b += (c[2]-b)*k;
+          }
+        }
+        const dz = (Math.random() - .5)*4;
+        d[i++] = r + dz; d[i++] = g + dz; d[i++] = b + dz; d[i++] = 255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    return cv;
+  }
+  if (P.streak){
+    // stretch the noise along the streak direction so it reads as soft cloud trails, not blobs
+    const tints = (P.tints || []).map(([cx,cy,r,c,a]) => [cx,cy,r,hexRGB(c),a]);
+    for (let y = 0; y < h; y++){
+      const v = y/h - .5;
+      for (let x = 0; x < w; x++){
+        const u = (x/w - .5)*ar, ru = u*co - v*si, rv = u*si + v*co;
+        const wx = fbm(ru*.7 + 3.1, rv*.9 + 9.4, 2)*P.warp;
+        let n = fbm((ru + wx)*P.fx, (rv + wx*.5)*P.fy, 4) + .35*fbm(ru*P.fx*2.2 + 7, rv*P.fy*1.9 - 3, 3);
+        let t = .5 + n*P.contrast + v*P.tilt;
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        let [r,g,b] = ramp[(t*255)|0];
+        for (const [cx,cy,rad,tc,a] of tints){
+          const dx = (x/w - cx)*ar, dy = y/h - cy, m = Math.max(0, 1 - Math.sqrt(dx*dx + dy*dy)/rad), k = m*m*(3 - 2*m)*a*(.5 + .5*t);
+          r += (tc[0]-r)*k; g += (tc[1]-g)*k; b += (tc[2]-b)*k;
+        }
+        const dz = (Math.random() - .5)*4;
+        d[i++] = r + dz; d[i++] = g + dz; d[i++] = b + dz; d[i++] = 255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    return cv;
+  }
   for (let y = 0; y < h; y++){
     const v = y/h - .5;
     for (let x = 0; x < w; x++){
@@ -1813,10 +1912,11 @@ function paintSky(P){
   const btn = document.getElementById('bgBtn'), orb = document.getElementById('bgOrb'), label = document.getElementById('bgLabel'), box = document.getElementById('fxSkies');
   const root = document.documentElement, made = {};
   let i = 0;
-  try { const v = +localStorage.getItem('portfolio-sky-2'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
+  try { const v = +localStorage.getItem('portfolio-sky-4'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
   const mid = P => P.stops[Math.floor(P.stops.length/2)][1];
   const swatch = P => { const st = P.stops, at = f => st[Math.round(f * (st.length - 1))][1]; return `linear-gradient(135deg, ${at(0)}, ${at(.35)} 40%, ${at(.7)} 75%, ${at(1)})`; };
-  const sky = n => SKIES[n].flat ? null : (made[n] || (made[n] = box.appendChild(paintSky(SKIES[n]))));
+  const paint = P => box.appendChild(paintSky(P));
+  const sky = n => SKIES[n].flat ? null : (made[n] || (made[n] = paint(SKIES[n])));
   // the swatch is a crop of the actual painted sky, so it always matches what's behind the page
   const SAD = "<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'><circle cx='12' cy='12' r='12' fill='#EEF3F3'/><circle cx='8.3' cy='9.6' r='1.35' fill='#16181B'/><circle cx='15.7' cy='9.6' r='1.35' fill='#16181B'/><path d='M7.6 17.4c1.3-2.5 7.5-2.5 8.8 0' fill='none' stroke='#16181B' stroke-width='1.6' stroke-linecap='round'/><path d='M17.3 12.1c.9 1.3 1.4 2 1.4 2.7a1.4 1.4 0 0 1-2.8 0c0-.7.5-1.4 1.4-2.7z' fill='#6CB8E8'/></svg>";
   function setOrb(n){
@@ -1850,7 +1950,7 @@ function paintSky(P){
   SKIES.forEach((P, k) => { if (k !== i && !P.flat) setTimeout(() => sky(k), 2600 + k*900); });
   btn.addEventListener('click', () => {
     i = (i + 1) % SKIES.length; apply(i, true);
-    try { localStorage.setItem('portfolio-sky-2', String(i)); } catch(e){}
+    try { localStorage.setItem('portfolio-sky-4', String(i)); } catch(e){}
     if (!reduced.matches){ btn.classList.remove('spin'); void btn.offsetWidth; btn.classList.add('spin'); setTimeout(() => btn.classList.remove('spin'), 700); }
   });
 })();
