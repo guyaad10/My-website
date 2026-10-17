@@ -569,7 +569,8 @@ body.chat-view #thread{display:none}
   .chap{scroll-margin-top:150px}
 }
 /* Mockup with a bold title and a short description beside it */
-.feat{max-width:968px;margin:0 auto 128px;display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:56px;align-items:end}
+.feat{max-width:968px;margin:0 auto 128px;display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:56px;align-items:start}
+.feat-txt{position:sticky;top:120px}
 .feat-media .shot{margin:0;max-width:none}
 .feat-media .shot.og-canvas{max-width:none}
 .feat-txt h3{margin:0 0 8px;font:500 1.25rem/1.25 var(--sans);letter-spacing:-.025em;color:var(--ink)}
@@ -661,6 +662,7 @@ body.chat-view #thread{display:none}
   .iter-arrow{transform:rotate(90deg);height:24px}
   .toc{margin-bottom:56px}
   .feat{grid-template-columns:1fr;gap:20px;margin-bottom:88px}
+  .feat-txt{position:static}
   .chap{margin-bottom:40px}
   .pn-row{grid-template-columns:1fr}
   .pn-arrow{transform:rotate(90deg);height:18px}
