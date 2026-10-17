@@ -986,7 +986,7 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-steps img{display:block;width:100%;height:auto;filter:drop-shadow(0 0 .6px rgba(15,15,30,.3)) drop-shadow(0 8px 20px rgba(15,15,30,.08))}
 .wa-steps span{display:flex;align-items:flex-start;gap:8px;margin-top:10px;font-size:.75rem;line-height:1.45;color:var(--ink-3)}
 .wa-steps li{counter-increment:wa-step}
-.wa-steps span::before{content:counter(wa-step);flex:none;width:18px;height:18px;border-radius:50%;background:var(--ink);color:#fff;font:600 .6875rem/18px var(--sans);text-align:center;margin-top:-.5px}
+.wa-steps span::before{content:counter(wa-step) '.';flex:none;font-variant-numeric:tabular-nums}
 /* WhatsApp features: screens in a soft box */
 .wa-box{background:var(--surface-2);border-radius:8px;padding:36px 28px}
 /* two sides of one problem: keep them close to the intro and to each other */
