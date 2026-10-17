@@ -47,7 +47,6 @@ html{transition:--c0 1.6s var(--ease),--fg 1s var(--ease)}
 .fx-sky{position:absolute;left:-7%;top:-7%;width:114%;height:114%;display:block;opacity:0;filter:blur(var(--skyblur, 16px));transition:opacity 1.8s var(--ease);
   animation:skydrift 56s ease-in-out infinite alternate;will-change:transform,opacity}
 .fx-sky.on{opacity:1}
-.fx-detail{filter:blur(calc(var(--skyblur, 16px) * .12))}
 @keyframes skydrift{from{transform:translate3d(-1.8%,.6%,0) scale(1)}to{transform:translate3d(1.8%,-1%,0) scale(1.07)}}
 .fx-lift{position:absolute;inset:0;background:#fff;opacity:var(--lift,.22);mix-blend-mode:screen}
 /* Boring = no background at all */
@@ -62,12 +61,13 @@ html.bg-dark-pills .state-intro .chip:hover{background:rgba(30,0,70,.46)}
 html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 .fx-vig{position:absolute;inset:0;background:radial-gradient(120% 95% at 50% 42%, transparent 58%, rgba(4,8,20,.22))}
 .fx-veil{position:absolute;inset:0;background:#fff;opacity:0;transition:opacity .4s var(--ease)}
-.fx-grain{position:absolute;inset:-60px;pointer-events:none;mix-blend-mode:soft-light;opacity:.35;background-size:220px 220px;animation:grain .9s steps(1) infinite;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.95' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
+.fx-grain{position:absolute;inset:-60px;pointer-events:none;mix-blend-mode:soft-light;opacity:var(--grain,.38);background-size:220px 220px;animation:grain .9s steps(1) infinite;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.4' numOctaves='3' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='1.7' intercept='-.35'/%3E%3CfeFuncG type='linear' slope='1.7' intercept='-.35'/%3E%3CfeFuncB type='linear' slope='1.7' intercept='-.35'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)'/%3E%3C/svg%3E")}
 .fx-grain.b{mix-blend-mode:overlay;opacity:.12;background-size:320px 320px;animation-duration:1.4s;animation-direction:reverse;
   background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='320' height='320'%3E%3Cfilter id='n' x='0' y='0' width='100%25' height='100%25'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.55' numOctaves='1' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='matrix' values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3CfeComponentTransfer%3E%3CfeFuncR type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncG type='linear' slope='2.4' intercept='-.7'/%3E%3CfeFuncB type='linear' slope='2.4' intercept='-.7'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='320' height='320' filter='url(%23n)'/%3E%3C/svg%3E")}
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-22px,14px)}40%{transform:translate(18px,-26px)}60%{transform:translate(-30px,-10px)}80%{transform:translate(24px,22px)}100%{transform:translate(0,0)}}
 @media (prefers-reduced-motion:reduce){.fx-sky,.fx-grain{animation:none}}
+@media (min-resolution:2dppx){.fx-grain:not(.b){background-size:160px 160px}}  /* keep the grain ~2px on retina, like a photo's */
 
 /* intro adapts to the background */
 .intro h1{color:var(--fg);text-shadow:var(--tshadow, 0 1px 24px rgba(10,20,50,.12))}
@@ -1706,26 +1706,40 @@ document.addEventListener('click', e => {
 
 /* ================== Sky backgrounds ================== */
 const SKIES = [
-  // long, wind-blown streaks over an even blue, with a faint peach/teal haze low on the left
-  {name:'Blue sky', focus:[24,26,38,30], fine:2, streak:true, seed:12, angle:.38, fx:.45, fy:2.3, warp:.5, contrast:1.35, tilt:-.3, fg:'#FFFFFF', veil:.82, lift:.04, blur:22,
-   tshadow:'0 1px 24px rgba(30,60,130,.28)', pshadow:'0 1px 12px rgba(30,60,130,.3)',
-   tints:[[.03,.6,.55,'#F7D3BD',.9],[.3,.97,.5,'#C2DCC8',.8],[.0,.12,.4,'#ECD3E1',.55]],
-   stops:[[0,'#5E86C6'],[.38,'#6E95D2'],[.55,'#8FADE0'],[.7,'#B9CBEE'],[.84,'#DCE2F4'],[1,'#F3EEF4']]},
-  // fine silver ripples over a dark sea (wonderful AI OS)
-  {name:'Overcast', focus:[62,18,48,30], dark:true, streak:true, seed:31, angle:.22, fx:.3, fy:6.5, warp:.7, contrast:1.15, tilt:-.55, fg:'#FFFFFF', veil:.9, lift:0, blur:10,
-   tints:[[.15,.1,.6,'#7E8796',.3]],
-   stops:[[0,'#0E1217'],[.35,'#171D25'],[.55,'#262E39'],[.7,'#3E4754'],[.84,'#5C6573'],[.95,'#7C8592'],[1,'#8E96A2']]},
-  // a defocused sunset: golden sun low on the right, orange and coral into pink, violet sky up top
-  {name:'Sunset', focus:[74,78,34,30], bokeh:['#FFE2A6','#FFD08A','#FFB27A'], base:'#8A4C78', warp:.22, seed:5, fg:'#FFFFFF', veil:.88, lift:0, blur:26,
+  /* grid skies: colour fields measured off wonderful.ai's hero images (box-averaged 7x6), eased between cells,
+     pushed into soft horizontal bands, with fine wisps and a gentle focus patch where the wisps read a little sharper */
+  {name:'Blue sky', tilt:-.28, wave:.05, fx:.45, fy:6, streak:.05, wisp:.42, hi:'#EEF0F4', focus:[.2,.3,.35,.3], focusAmp:1.2, fg:'#FFFFFF', veil:.82, lift:0, blur:9,
+   tshadow:'0 1px 24px rgba(40,70,130,.3)', pshadow:'0 1px 12px rgba(40,70,130,.32)',
+   grid:[['#CAD2E2','#ABC0DC','#89AAD5','#7EA2D2','#81A5D5','#88ACDA','#8AAEDC'],
+         ['#C6CFDF','#A6BCD9','#96B0D2','#85A4CE','#83A5D2','#88ACDB','#8BAFDE'],
+         ['#CACFD9','#BBC7DA','#A8B9D3','#A2B4D1','#94AED2','#8CAEDA','#92B4DE'],
+         ['#DCD6D3','#C8CBD1','#A4B4CA','#9AAECB','#91ABCE','#9BB6D9','#9EBADD'],
+         ['#CBCFD0','#BEC6C7','#92A7B7','#7A98BC','#7D9EC9','#8BACD6','#90B3DD'],
+         ['#A8B9C3','#99AEB9','#819DB7','#7598C1','#81A4D0','#8FB2DC','#91B4DE']]},
+  {name:'Overcast', dark:true, tilt:-.3, wave:.04, fx:.45, fy:11, streak:.06, wisp:.3, hi:'#AEB4BF', focus:[.6,.25,.45,.3], focusAmp:1.4, fg:'#FFFFFF', veil:.9, lift:0, blur:5,
+   grid:[['#858C98','#8E94A0','#9499A5','#989DA9','#9BA0AC','#969BA7','#8F939F'],
+         ['#59606A','#656B77','#787E8B','#868C98','#9196A3','#9298A5','#818895'],
+         ['#5B636F','#4D545F','#434952','#3C434B','#373D45','#343B42','#353B42'],
+         ['#58606F','#5B6371','#59606D','#4B515B','#333940','#292F35','#22292D'],
+         ['#333B44','#353D46','#323A42','#2F363E','#293037','#22292E','#1B2124'],
+         ['#161C1E','#171C1E','#181E20','#1A2023','#1B2125','#1D2427','#1C2226']]},
+  // same band structure in sunset colours: violet sky, pink, coral, then a golden glow low and right of centre
+  {name:'Sunset', tilt:-.08, wave:.05, fx:.6, fy:5, streak:.03, wisp:.14, hi:'#FFE6C8', focus:[.65,.75,.35,.3], focusAmp:1, fg:'#FFFFFF', veil:.88, lift:0, blur:7,
    tshadow:'0 1px 24px rgba(90,30,40,.35)', pshadow:'0 1px 12px rgba(90,30,40,.4)',
-   spots:[[.5,-.02,.75,.32,'#4E3F8E',.9],[.78,.3,.4,.28,'#D9709A',.85],[.25,.42,.5,.3,'#EC6C5C',.9],[.45,.66,.6,.3,'#F5864A',.95],
-          [.66,.8,.32,.22,'#FFC56E',1],[.15,.85,.3,.2,'#F49A5A',.8],[.5,1.06,.7,.14,'#8A3B2C',.6]],
-   stops:[[0,'#4E3F8E'],[1,'#FFC56E']]},
-  // out-of-focus city lights at golden hour: blue sky, amber glow, dark olive (wonderful AI Gateway)
-  {name:'Haze', focus:[66,22,30,30], bokeh:['#F2C46A','#E7A94A','#A9C6EA'], base:'#2F3A2C', warp:.2, seed:73, fg:'#FFFFFF', veil:.84, lift:0, blur:26,
-   spots:[[.45,.02,.36,.32,'#86AEDE',1],[.7,.24,.24,.3,'#B4842C',.95],[.14,.36,.2,.24,'#CBB29E',.7],[.32,.62,.34,.26,'#5D6E48',.7],
-          [.9,.08,.16,.16,'#5E7DA8',.7],[.55,.4,.2,.14,'#9C9A7E',.5]],
-   stops:[[0,'#2F3A2C'],[1,'#86AEDE']]},
+   grid:[['#56488C','#5C4B8F','#674F95','#6C5297','#684F93','#5C498B','#55468A'],
+         ['#9C5E8E','#B0678F','#BF7194','#C77796','#C06F93','#AB638F','#9C5D8D'],
+         ['#D97771','#E5826F','#EC8E70','#F09872','#EB8F70','#DE836F','#D57A70'],
+         ['#EC9862','#F3A764','#F8B666','#FBC36C','#F8BB68','#EFA864','#E89A62'],
+         ['#E59860','#F0AA65','#F8C272','#FCD17E','#F8C674','#ECAA66','#E19A62'],
+         ['#B06C58','#C77E5C','#D69060','#DE9966','#D48D62','#BF7C5C','#AE6E58']]},
+  {name:'Haze', tilt:0, wave:.04, fx:.6, fy:4, streak:.025, wisp:.06, hi:'#D9C9A0', focus:[.6,.2,.35,.3], focusAmp:.8, fg:'#FFFFFF', veil:.84, lift:0, blur:8,
+   tshadow:'0 1px 24px rgba(30,35,25,.4)', pshadow:'0 1px 12px rgba(30,35,25,.45)',
+   grid:[['#9DA49E','#ACB5B9','#88ABCC','#6D8EA6','#72704C','#5F6657','#386280'],
+         ['#A5A7A6','#BDB5A9','#97A8B6','#7F9BAF','#7B7146','#6D6847','#3C637E'],
+         ['#9E968A','#A1927A','#898A7D','#819194','#796636','#626754','#3F627B'],
+         ['#767567','#6C6652','#736C56','#757A74','#64512E','#535649','#3F5665'],
+         ['#45483B','#403E31','#474130','#4A4538','#3D2D12','#38372B','#303630'],
+         ['#24261F','#26241E','#282218','#20190E','#211809','#201E16','#1E1E16']]},
   // colours cycle several times (cycle) so the bands ripple and swirl like a lava lamp
   {name:'Psycho', seed:88, angle:.4, fx:1.5, fy:1.7, warp:1.7, contrast:1.9, tilt:0, cycle:2.4, fg:'#FFFFFF', veil:.9, lift:.03, darkPills:true, blur:9,
    tshadow:'0 2px 28px rgba(28,0,70,.6), 0 0 3px rgba(28,0,70,.4)', pshadow:'0 1px 14px rgba(28,0,70,.6)',
@@ -1734,6 +1748,7 @@ const SKIES = [
   {name:'Boring', flat:'#F0F5F5', face:true, fg:'#16181B', veil:0,
    stops:[[0,'#FFFFFF'],[1,'#E9E9EC']]}
 ];
+SKIES.forEach(P => { if (P.grid && !P.stops) P.stops = P.grid.map((r, i, g) => [i/(g.length - 1), r[r.length >> 1]]); });
 function makeNoise(seed){
   let st = seed|0 || 1; const rnd = () => ((st = (st*1664525 + 1013904223) >>> 0) / 4294967296);
   const a = Array.from({length:256}, (_,i) => i);
@@ -1758,9 +1773,8 @@ function buildRamp(stops){
   }
   return out;
 }
-// scale > 1 paints a sharper copy; fine adds the small ripples that only show where that copy is in focus
-function paintSky(P, scale = 1, fine = 0){
-  const ar = innerWidth / innerHeight, w = Math.round(Math.sqrt(190000*ar)*scale), h = Math.round(w/ar);
+function paintSky(P){
+  const ar = innerWidth / innerHeight, w = Math.round(Math.sqrt(190000*ar)), h = Math.round(w/ar);
   const cv = document.createElement('canvas'); cv.width = w; cv.height = h; cv.className = 'fx-sky';
   const ctx = cv.getContext('2d'), img = ctx.createImageData(w,h), d = img.data, N = makeNoise(P.seed), ramp = buildRamp(P.stops);
   const co = Math.cos(P.angle), si = Math.sin(P.angle);
@@ -1768,19 +1782,36 @@ function paintSky(P, scale = 1, fine = 0){
   const fbm = (x,y,o) => { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++){ s += a*N(x*f, y*f); a *= .48; f *= 2.05; } return s; };
   const turb = (x,y,o) => { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++){ s += a*Math.abs(N(x*f, y*f)); a *= .5; f *= 2.15; } return s; };
   let i = 0;
+  if (P.grid){
+    const G = P.grid.map(r => r.map(hexRGB)), R = G.length, C = G[0].length, hi = hexRGB(P.hi);
+    const ct = Math.cos(P.tilt), st = Math.sin(P.tilt), [fx,fy,frx,fry] = P.focus;
+    const ease = f => f*f*(3 - 2*f), cl = (t, m) => t < 0 ? 0 : t > m ? m : t;
+    for (let y = 0; y < h; y++){
+      for (let x = 0; x < w; x++){
+        const X0 = x/w, Y0 = y/h, u = (X0 - .5)*ar, v = Y0 - .5, ru = u*ct - v*st, rv = u*st + v*ct;
+        const fdx = (X0 - fx)/frx, fdy = (Y0 - fy)/fry, m = 1 + P.focusAmp*Math.exp(-(fdx*fdx + fdy*fdy)*2);
+        const und = fbm(ru*.9 + 3.1, rv*.7 + 9.4, 3), sn = fbm(ru*P.fx + 7.3, rv*P.fy - 2.2, 4)*m;
+        const gx = cl(X0 + P.wave*1.4*fbm(ru*.7 - 5.2, rv*.7 + 1.7, 2), 1)*(C - 1);
+        const gy = cl(Y0 - (ru*st) + P.wave*und*2 + P.streak*sn*2, 1)*(R - 1);
+        const i0 = Math.min(C - 2, gx|0), j0 = Math.min(R - 2, gy|0), a = ease(gx - i0), b = ease(gy - j0);
+        const c00 = G[j0][i0], c10 = G[j0][i0+1], c01 = G[j0+1][i0], c11 = G[j0+1][i0+1];
+        const k = cl(sn*P.wisp*3, 1);
+        for (let c = 0; c < 3; c++){
+          const top = c00[c] + (c10[c] - c00[c])*a, bot = c01[c] + (c11[c] - c01[c])*a, val = top + (bot - top)*b;
+          d[i++] = val + (hi[c] - val)*k;
+        }
+        d[i++] = 255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    return cv;
+  }
   if (P.spots || P.glow){
     // spots: soft out-of-focus colour blobs over a base; glow: one big radial falloff. Both get a little noise warp for organic edges
     const base = P.base ? hexRGB(P.base) : null, spots = (P.spots || []).map(([cx,cy,rx,ry,c,a]) => [cx,cy,rx,ry,hexRGB(c),a]);
-    // the sharp copy also gets small light discs scattered round the focus point, like bokeh in a photo
-    let bs = P.seed*7 + 1; const rnd = () => ((bs = (bs*1664525 + 1013904223) >>> 0) / 4294967296);
-    const discs = fine && P.bokeh && P.focus ? Array.from({length:16}, () => {
-      const a = rnd()*6.283, q = Math.sqrt(rnd());
-      return [P.focus[0]/100 + Math.cos(a)*q*P.focus[2]/100, P.focus[1]/100 + Math.sin(a)*q*P.focus[3]/100, .008 + rnd()*.022, hexRGB(P.bokeh[(rnd()*P.bokeh.length)|0]), .25 + rnd()*.4];
-    }) : [];
     for (let y = 0; y < h; y++){
       for (let x = 0; x < w; x++){
-        const fx0 = x/w, fy0 = y/h, fw = fine ? .035*fbm(fx0*11 + 1.3, fy0*11 - 2.1, 2) : 0,
-          X = fx0 + P.warp*fbm(fx0*2.2 + 3.1, fy0*2.2 + 9.4, 3) + fw, Y = fy0 + P.warp*fbm(fx0*2.2 - 5.2, fy0*2.2 + 7.7, 3) + fw*.6;
+        const fx0 = x/w, fy0 = y/h, X = fx0 + P.warp*fbm(fx0*2.2 + 3.1, fy0*2.2 + 9.4, 3), Y = fy0 + P.warp*fbm(fx0*2.2 - 5.2, fy0*2.2 + 7.7, 3);
         let r, g, b;
         if (P.glow){
           const [cx,cy,rx,ry] = P.glow, dx = (X - cx)/rx*ar*.6, dy = (Y - cy)/ry;
@@ -1791,11 +1822,6 @@ function paintSky(P, scale = 1, fine = 0){
           for (const [cx,cy,rx,ry,c,a] of spots){
             const dx = (X - cx)/rx, dy = (Y - cy)/ry, k = Math.exp(-(dx*dx + dy*dy)*2)*a;
             r += (c[0]-r)*k; g += (c[1]-g)*k; b += (c[2]-b)*k;
-          }
-          for (const [cx,cy,rad,c,a] of discs){
-            const dx = (fx0 - cx)*ar, dy = fy0 - cy, e = (rad - Math.sqrt(dx*dx + dy*dy))/(rad*.3);
-            if (e <= 0) continue;
-            const k = (e > 1 ? 1 : e)*a; r += (c[0]-r)*k; g += (c[1]-g)*k; b += (c[2]-b)*k;
           }
         }
         const dz = (Math.random() - .5)*4;
@@ -1814,7 +1840,6 @@ function paintSky(P, scale = 1, fine = 0){
         const u = (x/w - .5)*ar, ru = u*co - v*si, rv = u*si + v*co;
         const wx = fbm(ru*.7 + 3.1, rv*.9 + 9.4, 2)*P.warp;
         let n = fbm((ru + wx)*P.fx, (rv + wx*.5)*P.fy, 4) + .35*fbm(ru*P.fx*2.2 + 7, rv*P.fy*1.9 - 3, 3);
-        if (fine) n += .22*(P.fine || 1)*fbm((ru + wx)*P.fx*6 + 4, (rv + wx*.5)*P.fy*4.5 - 8, 2);
         let t = .5 + n*P.contrast + v*P.tilt;
         t = t < 0 ? 0 : t > 1 ? 1 : t;
         let [r,g,b] = ramp[(t*255)|0];
@@ -1857,18 +1882,7 @@ function paintSky(P, scale = 1, fine = 0){
   try { const v = +localStorage.getItem('portfolio-sky-3'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
   const mid = P => P.stops[Math.floor(P.stops.length/2)][1];
   const swatch = P => { const st = P.stops, at = f => st[Math.round(f * (st.length - 1))][1]; return `linear-gradient(135deg, ${at(0)}, ${at(.35)} 40%, ${at(.7)} 75%, ${at(1)})`; };
-  // a sharper, more detailed copy shows through a soft mask at each sky's focus point, so parts of the canvas read in focus and the rest stays blurred
-  const paint = P => {
-    const cv = box.appendChild(paintSky(P));
-    // painted a beat later (it costs a few hundred ms) so the page never waits on it; it fades in when ready
-    if (P.focus) setTimeout(() => {
-      const [fx,fy,rx,ry] = P.focus, dc = paintSky(P, 1.4, 1), m = `radial-gradient(ellipse ${rx}% ${ry}% at ${fx}% ${fy}%, #000 0%, rgba(0,0,0,.55) 45%, transparent 100%)`;
-      dc.classList.add('fx-detail'); dc.style.webkitMaskImage = dc.style.maskImage = m;
-      cv.detail = box.appendChild(dc);
-      if (cv.classList.contains('on')) requestAnimationFrame(() => requestAnimationFrame(() => dc.classList.add('on')));
-    }, 400);
-    return cv;
-  };
+  const paint = P => box.appendChild(paintSky(P));
   const sky = n => SKIES[n].flat ? null : (made[n] || (made[n] = paint(SKIES[n])));
   // the swatch is a crop of the actual painted sky, so it always matches what's behind the page
   const SAD = "<svg xmlns='http://www.w3.org/2000/svg' width='48' height='48' viewBox='0 0 24 24'><circle cx='12' cy='12' r='12' fill='#EEF3F3'/><circle cx='8.3' cy='9.6' r='1.35' fill='#16181B'/><circle cx='15.7' cy='9.6' r='1.35' fill='#16181B'/><path d='M7.6 17.4c1.3-2.5 7.5-2.5 8.8 0' fill='none' stroke='#16181B' stroke-width='1.6' stroke-linecap='round'/><path d='M17.3 12.1c.9 1.3 1.4 2 1.4 2.7a1.4 1.4 0 0 1-2.8 0c0-.7.5-1.4 1.4-2.7z' fill='#6CB8E8'/></svg>";
@@ -1895,7 +1909,7 @@ function paintSky(P, scale = 1, fine = 0){
     queueVeil();
     label.textContent = P.name; setOrb(n);
     const show = () => { const cv = sky(n); setOrb(n); if (!cv){ box.querySelectorAll('.fx-sky').forEach(c => c.classList.remove('on')); return; } requestAnimationFrame(() => requestAnimationFrame(() => {
-      box.querySelectorAll('.fx-sky').forEach(c => c.classList.toggle('on', c === cv || c === cv.detail)); })); };
+      box.querySelectorAll('.fx-sky').forEach(c => c.classList.toggle('on', c === cv)); })); };
     animate ? show() : setTimeout(show, 30);
   }
   apply(i, false);
