@@ -144,7 +144,7 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 @keyframes jf-bubble{0%{opacity:0;transform:translate(0,0) scale(.4)}20%{opacity:.7}100%{opacity:0;transform:translate(var(--dx),-46px) scale(1)}}
 
 /* Intro */
-.intro{position:fixed;left:50%;bottom:calc(40vh + 112px * var(--hz));width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
+.intro{position:fixed;left:50%;bottom:calc(40vh + 144px * var(--hz));width:min(980px, calc(100% - 40px));z-index:5;text-align:center;
   opacity:calc(1 - var(--p, 0) * 1.8);translate:-50% calc(var(--p, 0) * -56px * var(--hz))}  /* `translate`, not `transform`: it applies outside the big-screen `scale`, so -50% stays centered */
 .intro-avatar{--bob:-14;position:relative;width:44px;height:44px;margin:0 auto 26px}
 .jf-shadow{position:absolute;left:50%;top:calc(100% + 10px);width:38px;height:7px;margin-left:-19px;border-radius:50%;pointer-events:none;
@@ -157,7 +157,7 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 .state-thread .intro{pointer-events:none}
 
 /* Composer dock: positions the composer card + quick-action pills as one unit */
-.dock{position:fixed;left:50%;top:60%;translate:-50% -50%;z-index:40;width:min(640px, calc(100% - 32px));
+.dock{position:fixed;left:50%;top:calc(60% - 32px * var(--hz));translate:-50% -50%;z-index:40;width:min(640px, calc(100% - 32px));
   display:flex;flex-direction:column;gap:12px;align-items:stretch;
   transition:top .7s var(--ease), translate .7s var(--ease), width .5s var(--ease), gap .4s}
 .state-thread .dock{top:calc(100% - 16px - env(safe-area-inset-bottom,0px));translate:-50% -100%;width:min(760px, calc(100% - 24px));gap:10px}
@@ -839,7 +839,7 @@ body.chat-view #thread{display:none}
   .tiles{grid-template-columns:1fr;margin-left:0}
   .tile .visual{--ar:4/3}
   .archive{margin-left:0}
-  .intro{bottom:calc(40vh + 88px * var(--hz))}
+  .intro{bottom:calc(40vh + 120px * var(--hz))}
   .dock{width:calc(100% - 24px)}
   .cs{grid-template-columns:1fr;gap:16px;margin-bottom:var(--sec)}
   .cs > h2{position:static}
@@ -1708,14 +1708,21 @@ const SKIES = [
    tshadow:'0 1px 24px rgba(30,60,130,.28)', pshadow:'0 1px 12px rgba(30,60,130,.3)',
    tints:[[.03,.6,.55,'#F7D3BD',.9],[.3,.97,.5,'#C2DCC8',.8],[.0,.12,.4,'#ECD3E1',.55]],
    stops:[[0,'#5E86C6'],[.38,'#6E95D2'],[.55,'#8FADE0'],[.7,'#B9CBEE'],[.84,'#DCE2F4'],[1,'#F3EEF4']]},
-  {name:'Overcast', dark:true, seed:31, angle:-1.6, fx:1.4, fy:1.9, warp:1.05, contrast:1.15, tilt:-.6,  fg:'#FFFFFF', veil:.9, lift:0,
-   stops:[[0,'#05070A'],[.2,'#080B0F'],[.35,'#0C1016'],[.52,'#11161E'],[.68,'#171E28'],[.82,'#1D2531'],[.95,'#242D3A'],[1,'#29333F']]},
-  {name:'Sunset',   seed:5,  angle:2.1,  fx:1.7, fy:2.1, warp:1.1, contrast:1.1,  tilt:.55,   fg:'#FFFFFF', veil:.88,
-   stops:[[0,'#1B1013'],[.22,'#5A201D'],[.42,'#C03A2B'],[.58,'#EE5D3C'],[.74,'#F68F6C'],[.88,'#F7C0B8'],[1,'#FCE4E6']]},
-  {name:'Dusk',     seed:47, angle:-2.4, fx:1.5, fy:2.0, warp:1.0, contrast:1.05, tilt:.45,   fg:'#FFFFFF', veil:.88,
-   stops:[[0,'#13132E'],[.25,'#3A337F'],[.45,'#6C66C8'],[.62,'#A78AD5'],[.78,'#E2A8C7'],[.9,'#F6CDBF'],[1,'#FDECE4']]},
-  {name:'Haze',     seed:73, angle:1.3,  fx:1.8, fy:1.6, warp:1.15, contrast:1.0,  tilt:0,    fg:'#141A12', veil:.84,
-   stops:[[0,'#4A6C9C'],[.25,'#6B89AE'],[.42,'#7F9B7E'],[.58,'#A3A98B'],[.72,'#D3BE8C'],[.86,'#EAD9A4'],[1,'#F5ECCD']]},
+  // silver light raking across a dark sea, brightest at the top
+  {name:'Overcast', dark:true, streak:true, seed:31, angle:.3, fx:.5, fy:3.2, warp:.5, contrast:1.3, tilt:-.55, fg:'#FFFFFF', veil:.9, lift:0, blur:16,
+   tints:[[.15,.1,.6,'#7E8796',.35]],
+   stops:[[0,'#0E1217'],[.35,'#171D25'],[.55,'#262E39'],[.7,'#3E4754'],[.84,'#5C6573'],[.95,'#7C8592'],[1,'#8E96A2']]},
+  {name:'Sunset', streak:true, seed:5, angle:.42, fx:.5, fy:2.2, warp:.6, contrast:1.35, tilt:.35, fg:'#FFFFFF', veil:.88, lift:.04, blur:22,
+   tints:[[.95,.05,.45,'#3A2A1C',.55],[.85,.95,.5,'#F7C6CC',.75]],
+   stops:[[0,'#B9372A'],[.35,'#D9493A'],[.55,'#E9624A'],[.7,'#F08E6E'],[.85,'#F6B9AA'],[1,'#FBDDDD']]},
+  {name:'Dusk', streak:true, seed:47, angle:.36, fx:.5, fy:2.4, warp:.5, contrast:1.1, tilt:-.25, fg:'#FFFFFF', veil:.88, lift:.02, blur:22,
+   tshadow:'0 1px 24px rgba(50,35,120,.4)', pshadow:'0 1px 12px rgba(50,35,120,.45)',
+   tints:[[.05,.85,.55,'#F3CDBF',.8],[.95,.1,.45,'#4A3F99',.5]],
+   stops:[[0,'#463E98'],[.4,'#625ABB'],[.6,'#8579CC'],[.76,'#AC95D4'],[.9,'#D8B3D0'],[1,'#F2D8DF']]},
+  {name:'Haze', streak:true, seed:73, angle:.32, fx:.5, fy:2.3, warp:.5, contrast:1.1, tilt:-.3, fg:'#FFFFFF', veil:.84, lift:.02, blur:22,
+   tints:[[.08,.8,.6,'#E9D6A6',.85],[.9,.15,.5,'#8EA9C8',.5]],
+   tshadow:'0 1px 24px rgba(40,55,60,.45)', pshadow:'0 1px 12px rgba(40,55,60,.5)',
+   stops:[[0,'#5F7D9F'],[.4,'#768F95'],[.6,'#8EA087'],[.75,'#ADB08B'],[.88,'#D2C69E'],[1,'#EDE3C6']]},
   // colours cycle several times (cycle) so the bands ripple and swirl like a lava lamp
   {name:'Psycho', seed:88, angle:.4, fx:1.5, fy:1.7, warp:1.7, contrast:1.9, tilt:0, cycle:2.4, fg:'#FFFFFF', veil:.9, lift:.03, darkPills:true, blur:9,
    tshadow:'0 2px 28px rgba(28,0,70,.6), 0 0 3px rgba(28,0,70,.4)', pshadow:'0 1px 14px rgba(28,0,70,.6)',
