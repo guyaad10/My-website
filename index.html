@@ -53,9 +53,8 @@ html{transition:--c0 1.6s var(--ease),--fg 1s var(--ease)}
 html.bg-flat .fx-skies,html.bg-flat .fx-lift,html.bg-flat .fx-vig,html.bg-flat .fx-grain{display:none}
 html.bg-flat{--fadecol:#F0F5F5}
 html.bg-flat .bg-orb::after{display:none}
-html.bg-flat .state-intro .chip{background:rgba(20,20,40,.055)}
-html.bg-flat .state-intro .chip:hover{background:rgba(20,20,40,.09)}
-html.bg-dark-pills .state-intro .chip{background:rgba(30,0,70,.34)}
+html.bg-flat .state-intro .chip{background:#fff;box-shadow:0 0 0 1px rgba(20,20,40,.07), 0 4px 12px -6px rgba(20,20,40,.16)}
+html.bg-dark-pills .state-intro .chip{color:var(--fg);background:rgba(30,0,70,.34);box-shadow:none}
 html.bg-dark-pills .state-intro .chip:hover{background:rgba(30,0,70,.46)}
 html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
 .fx-vig{position:absolute;inset:0;background:radial-gradient(120% 95% at 50% 42%, transparent 58%, rgba(4,8,20,.22))}
@@ -83,8 +82,8 @@ html.bg-flat .bg-orb{box-shadow:0 0 0 1px rgba(20,20,40,.14)}
   -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);
   transition:color .4s, background .2s, transform .2s var(--ease)}
 .chip:hover{background:rgba(20,20,40,.08)}
-.state-intro .chip{color:var(--fg);background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 1px rgba(255,255,255,.18)}
-.state-intro .chip:hover{background:rgba(255,255,255,.24)}
+.state-intro .chip{color:#16181B;background:rgba(255,255,255,.9);box-shadow:0 1px 2px rgba(15,20,50,.06), 0 6px 16px -6px rgba(20,40,110,.28)}
+.state-intro .chip:hover{background:#fff;transform:translateY(-1px)}
 .chip svg{width:15px;height:15px;flex:none;opacity:.85}
 .chip:not(.bg-btn){padding:6px 12px 6px 10px}
 
@@ -922,7 +921,7 @@ html.theme-dark .composer:focus-within{background:rgba(22,27,34,.8);box-shadow:0
 html.theme-dark .state-thread .composer{background:rgba(22,27,34,.86);border-color:rgba(255,255,255,.07)}
 html.theme-dark .chip{color:var(--ink);background:rgba(255,255,255,.06)}
 html.theme-dark .chip:hover{background:rgba(255,255,255,.11)}
-html.theme-dark .state-intro .chip{color:var(--fg);background:rgba(255,255,255,.12)}
+html.theme-dark .state-intro .chip{color:var(--fg);background:rgba(255,255,255,.12);box-shadow:none}
 html.theme-dark .state-intro .chip:hover{background:rgba(255,255,255,.22)}
 html.theme-dark .c-send,html.theme-dark .view,html.theme-dark .btn.pri,html.theme-dark .art:hover .art-open,
 html.theme-dark .kd.light .kd-n,html.theme-dark .tk li::before,html.theme-dark .anno-list li::before,html.theme-dark .pin::before{color:var(--on-ink)}
@@ -1704,9 +1703,11 @@ document.addEventListener('click', e => {
 
 /* ================== Sky backgrounds ================== */
 const SKIES = [
-  {name:'Blue sky', seed:12, angle:.9,   fx:1.6, fy:2.3, warp:.9,  contrast:1.05, tilt:.4,  fg:'#FFFFFF', veil:.82,
-   tshadow:'0 2px 30px rgba(24,50,130,.4), 0 0 2px rgba(24,50,130,.25)', pshadow:'0 1px 14px rgba(24,50,130,.45)',
-   stops:[[0,'#3560C4'],[.12,'#5F8EDC'],[.25,'#9CB9EE'],[.36,'#DCE6FA'],[.44,'#FFFFFF'],[.54,'#FCDDE8'],[.66,'#F4B9CF'],[.8,'#FBE4EC'],[1,'#FFFFFF']]},
+  // long, wind-blown streaks over an even blue, with a faint peach/teal haze low on the left
+  {name:'Blue sky', streak:true, seed:12, angle:.38, fx:.45, fy:2.3, warp:.5, contrast:1.35, tilt:-.3, fg:'#FFFFFF', veil:.82, lift:.04, blur:22,
+   tshadow:'0 1px 24px rgba(30,60,130,.28)', pshadow:'0 1px 12px rgba(30,60,130,.3)',
+   tints:[[.03,.6,.55,'#F7D3BD',.9],[.3,.97,.5,'#C2DCC8',.8],[.0,.12,.4,'#ECD3E1',.55]],
+   stops:[[0,'#5E86C6'],[.38,'#6E95D2'],[.55,'#8FADE0'],[.7,'#B9CBEE'],[.84,'#DCE2F4'],[1,'#F3EEF4']]},
   {name:'Overcast', dark:true, seed:31, angle:-1.6, fx:1.4, fy:1.9, warp:1.05, contrast:1.15, tilt:-.6,  fg:'#FFFFFF', veil:.9, lift:0,
    stops:[[0,'#05070A'],[.2,'#080B0F'],[.35,'#0C1016'],[.52,'#11161E'],[.68,'#171E28'],[.82,'#1D2531'],[.95,'#242D3A'],[1,'#29333F']]},
   {name:'Sunset',   seed:5,  angle:2.1,  fx:1.7, fy:2.1, warp:1.1, contrast:1.1,  tilt:.55,   fg:'#FFFFFF', veil:.88,
@@ -1756,6 +1757,29 @@ function paintSky(P){
   const fbm = (x,y,o) => { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++){ s += a*N(x*f, y*f); a *= .48; f *= 2.05; } return s; };
   const turb = (x,y,o) => { let s = 0, a = .5, f = 1; for (let i = 0; i < o; i++){ s += a*Math.abs(N(x*f, y*f)); a *= .5; f *= 2.15; } return s; };
   let i = 0;
+  if (P.streak){
+    // stretch the noise along the streak direction so it reads as soft cloud trails, not blobs
+    const tints = (P.tints || []).map(([cx,cy,r,c,a]) => [cx,cy,r,hexRGB(c),a]);
+    for (let y = 0; y < h; y++){
+      const v = y/h - .5;
+      for (let x = 0; x < w; x++){
+        const u = (x/w - .5)*ar, ru = u*co - v*si, rv = u*si + v*co;
+        const wx = fbm(ru*.7 + 3.1, rv*.9 + 9.4, 2)*P.warp;
+        let n = fbm((ru + wx)*P.fx, (rv + wx*.5)*P.fy, 4) + .35*fbm(ru*P.fx*2.2 + 7, rv*P.fy*1.9 - 3, 3);
+        let t = .5 + n*P.contrast + v*P.tilt;
+        t = t < 0 ? 0 : t > 1 ? 1 : t;
+        let [r,g,b] = ramp[(t*255)|0];
+        for (const [cx,cy,rad,tc,a] of tints){
+          const dx = (x/w - cx)*ar, dy = y/h - cy, m = Math.max(0, 1 - Math.sqrt(dx*dx + dy*dy)/rad), k = m*m*(3 - 2*m)*a*(.5 + .5*t);
+          r += (tc[0]-r)*k; g += (tc[1]-g)*k; b += (tc[2]-b)*k;
+        }
+        const dz = (Math.random() - .5)*4;
+        d[i++] = r + dz; d[i++] = g + dz; d[i++] = b + dz; d[i++] = 255;
+      }
+    }
+    ctx.putImageData(img,0,0);
+    return cv;
+  }
   for (let y = 0; y < h; y++){
     const v = y/h - .5;
     for (let x = 0; x < w; x++){
