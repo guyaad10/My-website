@@ -219,7 +219,7 @@ body.chat-view #thread{display:none}
 
 .p-body{padding-left:42px;display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px 40px;align-items:end}
 .p-title{grid-column:1;margin:0;font:500 clamp(1.75rem, 1.4rem + 1.2vw, 2.5rem)/1.05 var(--sans);letter-spacing:-.045em}
-.p-sum{grid-column:1;margin:4px 0 18px;color:var(--ink-2);font-size:1.125rem;line-height:1.45;letter-spacing:-.015em;max-width:50ch;text-wrap:pretty}
+.p-sum{grid-column:1;margin:4px 0 18px;color:var(--ink-2);font-size:1rem;line-height:1.45;letter-spacing:-.015em;max-width:50ch;text-wrap:pretty}
 .p-body .meta{grid-column:1}
 .p-foot{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
 .meta{display:flex;flex-wrap:wrap;gap:10px 36px;margin:0 0 20px}
@@ -276,7 +276,7 @@ body.chat-view #thread{display:none}
 .m-head b{font-weight:500;font-size:.9375rem;letter-spacing:-.01em}
 .m-head time{color:var(--ink-3);font-size:.875rem}
 .m-body,.reply-body{padding-left:38px}
-.m-text{margin:0 0 16px;font-size:1.125rem;line-height:1.45;letter-spacing:-.02em;max-width:52ch;text-wrap:pretty}
+.m-text{margin:0 0 16px;font-size:1rem;line-height:1.45;letter-spacing:-.02em;max-width:52ch;text-wrap:pretty}
 .msg:hover .g-dots circle{transform:translateX(-4px) scaleY(.15);opacity:0}
 .msg:hover .g-smile path{stroke-dashoffset:0;opacity:1}
 
@@ -336,7 +336,7 @@ body.chat-view #thread{display:none}
 .case-hero{margin:0 auto 128px;border-radius:32px;max-width:968px}
 .cs{display:grid;grid-template-columns:260px minmax(0,660px);gap:48px;justify-content:center;margin:0 0 var(--sec)}
 .cs > h2{margin:0;font:400 1.75rem/1.1 var(--sans);letter-spacing:-.04em;position:sticky;top:88px;align-self:start}
-.cs-body p{font-size:1.125rem;line-height:1.6;color:var(--body);letter-spacing:-.012em;margin:0 0 1em;text-wrap:pretty}
+.cs-body p{font-size:1rem;line-height:1.6;color:var(--body);letter-spacing:-.012em;margin:0 0 1em;text-wrap:pretty}
 .cs-body p:last-child{margin-bottom:0}
 .plain{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
 .plain li{padding:12px 0;border-bottom:1px solid var(--line);font-size:.9375rem;line-height:1.5;color:var(--body);letter-spacing:-.01em}
@@ -573,7 +573,7 @@ body.chat-view #thread{display:none}
 .feat-media .shot{margin:0;max-width:none}
 .feat-media .shot.og-canvas{max-width:none}
 .feat-txt h3{margin:0 0 8px;font:500 1.25rem/1.25 var(--sans);letter-spacing:-.025em;color:var(--ink)}
-.feat-txt p{margin:0;font-size:1.0625rem;line-height:1.5;color:var(--ink-2);letter-spacing:-.012em;text-wrap:pretty}
+.feat-txt p{margin:0;font-size:.9375rem;line-height:1.5;color:var(--ink-2);letter-spacing:-.012em;text-wrap:pretty}
 .feat-txt ul{margin:12px 0 0;padding-left:1.1em;font-size:.9375rem;line-height:1.5;color:var(--ink-2)}
 .feat-txt li{margin-bottom:4px}
 .chap + .feat{margin-top:8px}
@@ -1917,7 +1917,7 @@ function renderClalitCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   /* Real screens live in images/; a figure whose file is missing removes itself. */
   const shot = (src, alt, cls='', cap='') => `<figure class="shot ${cls}"><div class="shot-img"><img src="images/${src}" alt="${alt}"  onerror="this.closest('figure').remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
-  const CH = ['Overview','Solution','Research','Design process','Takeaways'];
+  const CH = ['Overview','User research','Wireframes','User interface','Takeaways'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   const pains = p.pains.map(g => { const k = g.lvl.toLowerCase().startsWith('crit') ? 'critical' : g.lvl.toLowerCase().startsWith('use') ? 'useful' : 'nice';
     return `<div class="pn-group g-${k}"><span class="pn-lvl pn-${k}">${g.lvl}</span>${g.items.map(([a,b])=>`<div class="pn-row"><div class="pn-pain">${a}</div><div class="pn-arrow" aria-hidden="true">→</div><div class="pn-need">${b}</div></div>`).join('')}</div>`; }).join('');
@@ -1937,26 +1937,25 @@ function renderClalitCase(p){
     ${section('Role', `<p>As the UX designer of the project I:</p><ul class="plain">${p.myRole.map(r=>`<li>${r}</li>`).join('')}</ul>`)}
     ${section('Timeline', `<ol class="tline">${p.timeline.map(([d,t,b])=>`<li><small>${d}</small><b>${t}</b>${b?`<p>${b}</p>`:''}</li>`).join('')}</ol>`)}
     ${chapter(2)}
-    ${feature(shot('clalit-ui.png','The final patient record board in the Clalit design system'), 'One board for the whole department', '<p>Every room is a column and every patient a card, so nurses see who is where, who needs attention and who is ready to go home at a glance.</p>')}
-    ${feature(shot('clalit-hifi-drawer.png','The reports drawer open over the board'), 'Reports in the footer', '<p>A live summary of department data sits at the bottom of the board and opens into a reports drawer.</p>')}
-    ${section('Key decisions', '<p>Four decisions shaped the final board.</p>')}
-    ${decisions}
-    ${chapter(3)}
     ${section('Observations', `<p>${p.observeIntro}</p><ul class="plain">${p.questions.map(q=>`<li>${q}</li>`).join('')}</ul><p>The information gathered gave me valuable insight into the challenges and needs of the nursing teams.</p>`)}
     ${shot('clalit-boards.jpg','Physical patient boards on the wards at Geha and Carmel','sq', 'The physical boards each department had built for itself.')}
     ${section('What I learned as a fly on the wall', kv(p.learned))}
     ${section('Pain points and needs', pains)}
-    ${chapter(4)}
+    ${chapter(3)}
     ${section('Workflows', `<p>${p.workflows}</p>`)}
     ${section('Low fidelity', '<p>A Kanban layout: structured but flexible, customisable per department, with a clear hierarchy.</p>')}
     ${anno('<img src="images/clalit-lofi.png" alt="Low fidelity patient board">', p.lofiNotes)}
     ${section('What the first iteration taught me', iteration)}
+    ${chapter(4)}
     ${section('High fidelity', '<p>The board after the first round of feedback. The summary footer opens a reports drawer.</p>')}
     ${anno('<img src="images/clalit-hifi.png" alt="High fidelity patient board"><img class="drawer" src="images/clalit-hifi-drawer.png" alt="" aria-hidden="true">', p.hifiNotes)}
     ${section('Card states', '<p>Every state a room or patient card can be in, from an empty bed to a patient who is out of the department.</p>')}
     ${shot('clalit-states.png','Patient and room card states','bare')}
+    ${section('Key decisions', '<p>Four decisions shaped the final board.</p>')}
+    ${decisions}
     ${section('UI components', '<p>Delivered as a component set in the Clalit design system: icons, badges, patient cards and room cards.</p>')}
     ${anno('<img src="images/clalit-components.png" alt="UI component set: rooms, patients, badges and icons">', p.compNotes, 'bare')}
+    <div class="ui-hero final"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
     ${chapter(5)}
     ${takeaways}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
