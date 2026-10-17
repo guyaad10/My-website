@@ -983,6 +983,9 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-steps span::before{content:counter(wa-step);flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 .75rem/22px var(--sans);text-align:center;margin-top:-1px}
 /* WhatsApp features: screens in a soft box */
 .wa-box{background:var(--surface-2);border-radius:24px;padding:36px 28px}
+/* screens float above the box/canvas: drop-shadow follows the transparent phone shapes */
+.wa-box img{filter:drop-shadow(0 2px 3px rgba(20,28,60,.08)) drop-shadow(0 18px 28px rgba(20,28,60,.16))}
+.wa-box .wa-vid{box-shadow:0 2px 3px rgba(20,28,60,.08),0 18px 28px rgba(20,28,60,.16)}
 .wa-box .wa-side-media{justify-content:center;gap:20px}
 .wa-box .wa-side-media > .wa-phone, .wa-box .wa-side-media > .wa-vid{width:min(200px,calc((100% - 40px) / 3))}
 .wa-box .wa-side-media:not(:has(> :nth-child(3))) > .wa-phone, .wa-box .wa-side-media:not(:has(> :nth-child(3))) > .wa-vid{width:min(200px,calc((100% - 20px) / 2))}
