@@ -6,7 +6,7 @@
 <title>Guy — Senior Product Designer</title>
 <meta name="description" content="Guy is a senior product designer working on B2B and AI-native products.">
 <!-- set dark mode before first paint when the saved background is Overcast (SKIES[1]) -->
-<script>try{if(localStorage.getItem('portfolio-sky-3')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
+<script>try{if(localStorage.getItem('portfolio-sky-4')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
@@ -1723,6 +1723,9 @@ const SKIES = [
          ['#58606F','#5B6371','#59606D','#4B515B','#333940','#292F35','#22292D'],
          ['#333B44','#353D46','#323A42','#2F363E','#293037','#22292E','#1B2124'],
          ['#161C1E','#171C1E','#181E20','#1A2023','#1B2125','#1D2427','#1C2226']]},
+  // no artwork at all: a plain, flat page
+  {name:'Boring', flat:'#F0F5F5', face:true, fg:'#16181B', veil:0,
+   stops:[[0,'#FFFFFF'],[1,'#E9E9EC']]},
   // same band structure in sunset colours: violet sky, pink, coral, then a golden glow low and right of centre
   {name:'Sunset', tilt:-.08, wave:.05, fx:.6, fy:5, streak:.03, wisp:.14, hi:'#FFE6C8', focus:[.65,.75,.35,.3], focusAmp:1, fg:'#FFFFFF', veil:.88, lift:0, blur:7,
    tshadow:'0 1px 24px rgba(90,30,40,.35)', pshadow:'0 1px 12px rgba(90,30,40,.4)',
@@ -1743,10 +1746,7 @@ const SKIES = [
   // colours cycle several times (cycle) so the bands ripple and swirl like a lava lamp
   {name:'Psycho', seed:88, angle:.4, fx:1.5, fy:1.7, warp:1.7, contrast:1.9, tilt:0, cycle:2.4, fg:'#FFFFFF', veil:.9, lift:.03, darkPills:true, blur:9,
    tshadow:'0 2px 28px rgba(28,0,70,.6), 0 0 3px rgba(28,0,70,.4)', pshadow:'0 1px 14px rgba(28,0,70,.6)',
-   stops:[[0,'#2A0A72'],[.14,'#7B22D6'],[.28,'#FF2E9A'],[.42,'#FF8A1F'],[.55,'#FFE13A'],[.68,'#2EE6A6'],[.82,'#22B8FF'],[1,'#5B2BFF']]},
-  // no artwork at all: a plain, flat page
-  {name:'Boring', flat:'#F0F5F5', face:true, fg:'#16181B', veil:0,
-   stops:[[0,'#FFFFFF'],[1,'#E9E9EC']]}
+   stops:[[0,'#2A0A72'],[.14,'#7B22D6'],[.28,'#FF2E9A'],[.42,'#FF8A1F'],[.55,'#FFE13A'],[.68,'#2EE6A6'],[.82,'#22B8FF'],[1,'#5B2BFF']]}
 ];
 SKIES.forEach(P => { if (P.grid && !P.stops) P.stops = P.grid.map((r, i, g) => [i/(g.length - 1), r[r.length >> 1]]); });
 function makeNoise(seed){
@@ -1879,7 +1879,7 @@ function paintSky(P){
   const btn = document.getElementById('bgBtn'), orb = document.getElementById('bgOrb'), label = document.getElementById('bgLabel'), box = document.getElementById('fxSkies');
   const root = document.documentElement, made = {};
   let i = 0;
-  try { const v = +localStorage.getItem('portfolio-sky-3'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
+  try { const v = +localStorage.getItem('portfolio-sky-4'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
   const mid = P => P.stops[Math.floor(P.stops.length/2)][1];
   const swatch = P => { const st = P.stops, at = f => st[Math.round(f * (st.length - 1))][1]; return `linear-gradient(135deg, ${at(0)}, ${at(.35)} 40%, ${at(.7)} 75%, ${at(1)})`; };
   const paint = P => box.appendChild(paintSky(P));
@@ -1917,7 +1917,7 @@ function paintSky(P){
   SKIES.forEach((P, k) => { if (k !== i && !P.flat) setTimeout(() => sky(k), 2600 + k*900); });
   btn.addEventListener('click', () => {
     i = (i + 1) % SKIES.length; apply(i, true);
-    try { localStorage.setItem('portfolio-sky-3', String(i)); } catch(e){}
+    try { localStorage.setItem('portfolio-sky-4', String(i)); } catch(e){}
     if (!reduced.matches){ btn.classList.remove('spin'); void btn.offsetWidth; btn.classList.add('spin'); setTimeout(() => btn.classList.remove('spin'), 700); }
   });
 })();
