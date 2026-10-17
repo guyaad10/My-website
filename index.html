@@ -385,6 +385,7 @@ body.chat-view #thread{display:none}
 .pin.l{left:-32px;right:calc(100% - var(--x))}
 .pin::before{content:'';position:absolute;top:-4.5px;width:8px;height:8px;border-radius:50%;background:var(--ink);box-shadow:0 0 0 2px #fff}
 .pin.top .lbl{transform:translateY(-.75em)}
+.pin.dn .lbl{transform:translateY(-.8em)}
 .pin.r::before{left:-4px}
 .pin.l::before{right:-4px}
 .pin .lbl{position:absolute;top:0;transform:translateY(-50%);width:calc(var(--gut) - 48px);font-size:.875rem;line-height:1.45;color:var(--ink-2);filter:none;text-wrap:pretty}
@@ -396,7 +397,7 @@ body.chat-view #thread{display:none}
 /* Clalit × Headspace case study */
 .hs-pair{display:grid;grid-template-columns:repeat(var(--n),1fr);gap:0 8%;align-items:start}
 .hs-pair[style*="--n:3"]{gap:0 5%}
-.anno.rgut{max-width:1160px;padding:24px var(--gut) 24px 0}
+.anno.rgut{max-width:var(--cw);padding:24px var(--gut) 24px 0}
 .hs-pair{margin-bottom:48px}
 .hs-col{position:relative}
 .hs-c{position:absolute;top:100%;left:0;right:0;margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
@@ -1320,7 +1321,7 @@ const PROJECTS = [
           notes:[{on:1, side:'r', x:.55, y:.09, t:'Clearer heading', d:'A better heading for orientation.'},{on:1, side:'r', x:.8, y:.3, t:'Friendlier cards', d:'An illustration on each card makes the file less formal and more positive.'}]},
          {t:'Categories', wide:true, deco:['headspace-virus.png','Two smiling Headspace-style virus characters'], imgs:[['headspace-categories-original.png','Original category screens',541],['headspace-categories-ui.png','Category screens in the Headspace style',660]], notes:[]},
          {t:'Test results', caps:['Original','Bottom sheet','Headspace UI'], rgut:true, imgs:[['headspace-results-original.png','Original test results screen',541],['headspace-results-sheet.png','Test details open in a bottom sheet',541],['headspace-results-ui.png','Test results in the Headspace style',950]],
-          notes:[{on:2, side:'r', x:.965, y:.155, t:'Hide notes', d:'An option to hide notification notes.'},{on:1, side:'r', x:.97, y:.5, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
+          notes:[{on:2, side:'r', x:.965, y:.155, t:'Hide notes', d:'An option to hide notification notes.'},{on:1, side:'r dn', x:.97, y:.5, t:'Bottom sheet', d:'Cards can be minimised for a cleaner list. Details open in a bottom sheet instead of inside each card.'}]},
          {t:'Vaccines', imgs:[['headspace-vaccines-original.png','Original vaccines screen',541],['headspace-vaccines-ui.png','Vaccines screen in the Headspace style',735]],
           notes:[{on:1, side:'r', x:.9, y:.415, t:'Tabs', d:'Tabs instead of a filter button make the list simpler.'},{on:1, side:'r', x:.12, y:.6, t:'Status', d:'An indicator shows when a vaccine has expired or is due.'}]}
        ]}
