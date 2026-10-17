@@ -6,7 +6,7 @@
 <title>Guy — Senior Product Designer</title>
 <meta name="description" content="Guy is a senior product designer working on B2B and AI-native products.">
 <!-- set dark mode before first paint when the saved background is Overcast (SKIES[1]) -->
-<script>try{if(localStorage.getItem('portfolio-sky-2')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
+<script>try{if(localStorage.getItem('portfolio-sky-3')==='1')document.documentElement.classList.add('theme-dark')}catch(e){}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Space+Grotesk:wght@400;500&display=swap" rel="stylesheet">
@@ -52,6 +52,8 @@ html{transition:--c0 1.6s var(--ease),--fg 1s var(--ease)}
 /* Boring = no background at all */
 html.bg-flat .fx-skies,html.bg-flat .fx-lift,html.bg-flat .fx-vig,html.bg-flat .fx-grain{display:none}
 html.bg-flat{--fadecol:#F0F5F5}
+html.bg-flat .fx{background-color:var(--c0);background-position:center;background-size:32px 32px;
+  background-image:linear-gradient(rgba(20,30,40,.045) 1px, transparent 1px),linear-gradient(90deg, rgba(20,30,40,.045) 1px, transparent 1px)}
 html.bg-flat .bg-orb::after{display:none}
 html.bg-flat .state-intro .chip{background:#fff;box-shadow:0 0 0 1px rgba(20,20,40,.07), 0 4px 12px -6px rgba(20,20,40,.16)}
 html.bg-dark-pills .state-intro .chip{color:var(--fg);background:rgba(30,0,70,.34);box-shadow:none}
@@ -1712,14 +1714,12 @@ const SKIES = [
   {name:'Overcast', dark:true, streak:true, seed:31, angle:.22, fx:.3, fy:6.5, warp:.7, contrast:1.15, tilt:-.55, fg:'#FFFFFF', veil:.9, lift:0, blur:10,
    tints:[[.15,.1,.6,'#7E8796',.3]],
    stops:[[0,'#0E1217'],[.35,'#171D25'],[.55,'#262E39'],[.7,'#3E4754'],[.84,'#5C6573'],[.95,'#7C8592'],[1,'#8E96A2']]},
-  // a defocused red flower: big soft petals, dark leaves in the corners (wonderful Systems)
-  {name:'Sunset', base:'#24261A', warp:.22, seed:5, fg:'#FFFFFF', veil:.88, lift:0, blur:26,
-   spots:[[.4,.36,.5,.42,'#D8432F',1],[.72,.12,.34,.3,'#D23E2C',.95],[.55,.56,.26,.2,'#F07A3E',.85],[.86,.92,.42,.32,'#F6C6D0',1],
-          [.08,.96,.3,.2,'#EE9C95',.75],[.3,.74,.34,.24,'#C8452F',.85],[.62,.84,.22,.16,'#F09A7E',.6],[.93,.46,.14,.24,'#2C3A1D',.85],[.03,.3,.12,.3,'#3A2A1E',.6]],
-   stops:[[0,'#24261A'],[1,'#D8432F']]},
-  // a bright glow at the top falling through blue and violet into pink (Lovable)
-  {name:'Dusk', glow:[.5,-.08,.95,1.05], seed:47, warp:.04, fg:'#14162A', veil:.86, lift:0, blur:12, tshadow:'none', pshadow:'none',
-   stops:[[0,'#FFFFFF'],[.26,'#F4F5FB'],[.4,'#B9C9F6'],[.52,'#6F8FF0'],[.64,'#9A86EA'],[.76,'#E57FD8'],[.9,'#F76BB3'],[1,'#FF4D86']]},
+  // a defocused sunset: golden sun low on the right, orange and coral into pink, violet sky up top
+  {name:'Sunset', base:'#8A4C78', warp:.22, seed:5, fg:'#FFFFFF', veil:.88, lift:0, blur:26,
+   tshadow:'0 1px 24px rgba(90,30,40,.35)', pshadow:'0 1px 12px rgba(90,30,40,.4)',
+   spots:[[.5,-.02,.75,.32,'#4E3F8E',.9],[.78,.3,.4,.28,'#D9709A',.85],[.25,.42,.5,.3,'#EC6C5C',.9],[.45,.66,.6,.3,'#F5864A',.95],
+          [.66,.8,.32,.22,'#FFC56E',1],[.15,.85,.3,.2,'#F49A5A',.8],[.5,1.06,.7,.14,'#8A3B2C',.6]],
+   stops:[[0,'#4E3F8E'],[1,'#FFC56E']]},
   // out-of-focus city lights at golden hour: blue sky, amber glow, dark olive (wonderful AI Gateway)
   {name:'Haze', base:'#2F3A2C', warp:.2, seed:73, fg:'#FFFFFF', veil:.84, lift:0, blur:26,
    spots:[[.45,.02,.36,.32,'#86AEDE',1],[.7,.24,.24,.3,'#B4842C',.95],[.14,.36,.2,.24,'#CBB29E',.7],[.32,.62,.34,.26,'#5D6E48',.7],
@@ -1839,7 +1839,7 @@ function paintSky(P){
   const btn = document.getElementById('bgBtn'), orb = document.getElementById('bgOrb'), label = document.getElementById('bgLabel'), box = document.getElementById('fxSkies');
   const root = document.documentElement, made = {};
   let i = 0;
-  try { const v = +localStorage.getItem('portfolio-sky-2'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
+  try { const v = +localStorage.getItem('portfolio-sky-3'); if (Number.isInteger(v) && SKIES[v]) i = v; } catch(e){}
   const mid = P => P.stops[Math.floor(P.stops.length/2)][1];
   const swatch = P => { const st = P.stops, at = f => st[Math.round(f * (st.length - 1))][1]; return `linear-gradient(135deg, ${at(0)}, ${at(.35)} 40%, ${at(.7)} 75%, ${at(1)})`; };
   const sky = n => SKIES[n].flat ? null : (made[n] || (made[n] = box.appendChild(paintSky(SKIES[n]))));
@@ -1876,7 +1876,7 @@ function paintSky(P){
   SKIES.forEach((P, k) => { if (k !== i && !P.flat) setTimeout(() => sky(k), 2600 + k*900); });
   btn.addEventListener('click', () => {
     i = (i + 1) % SKIES.length; apply(i, true);
-    try { localStorage.setItem('portfolio-sky-2', String(i)); } catch(e){}
+    try { localStorage.setItem('portfolio-sky-3', String(i)); } catch(e){}
     if (!reduced.matches){ btn.classList.remove('spin'); void btn.offsetWidth; btn.classList.add('spin'); setTimeout(() => btn.classList.remove('spin'), 700); }
   });
 })();
