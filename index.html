@@ -1923,7 +1923,7 @@ function renderClalitCase(p){
     return `<div class="pn-group g-${k}"><span class="pn-lvl pn-${k}">${g.lvl}</span>${g.items.map(([a,b])=>`<div class="pn-row"><div class="pn-pain">${a}</div><div class="pn-arrow" aria-hidden="true">→</div><div class="pn-need">${b}</div></div>`).join('')}</div>`; }).join('');
   const kv = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
   const decisions = `<ol class="kd">${p.decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>`;
-  const takeaways = `<ol class="kd light">${p.takeaways.map((t,k)=>`<li><span class="kd-n">${k+1}</span><p>${rich(t)}</p></li>`).join('')}</ol>`;
+  const takeaways = section('Lessons', `<div class="learn">${p.takeaways.map((t,k)=>`<div><span class="kd-n">0${k+1}</span><p>${rich(t)}</p></div>`).join('')}</div>`);
   const iteration = `<p>I tested the low fidelity board in feedback sessions with nursing teams. On the left is what they told me, and on the right is what I took into the next version.</p>
     <div class="iter"><div class="iter-col fb"><small>Feedback on the low fidelity board</small><b>From the nursing team</b><ul>${p.fromTeam.map(x=>`<li>${x}</li>`).join('')}</ul></div>
     <div class="iter-arrow" aria-hidden="true">→</div>
