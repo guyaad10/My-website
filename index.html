@@ -955,6 +955,16 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-steps span::before{content:counter(wa-step);flex:none;width:22px;height:22px;border-radius:50%;background:var(--ink);color:#fff;font:600 .75rem/22px var(--sans);text-align:center;margin-top:-1px}
 @media (max-width:760px){.wa-flow-in{padding:16px}.wa-side-media{flex-wrap:wrap;gap:20px}.wa-side-media > .wa-phone, .wa-side-media > .wa-vid{width:calc(50% - 10px)}.wa-steps{width:100%}}
 @media (max-width:760px){:root{--sec:96px;--pull:-68px}}
+/* Default hero: a quiet cue that scrolling down opens the work (scroll, swipe or this button all start the feed) */
+.scroll-cue{position:fixed;left:50%;bottom:max(18px, env(safe-area-inset-bottom));translate:-50% 0;z-index:30;display:flex;flex-direction:column;align-items:center;gap:2px;
+  padding:6px 12px;border:0;background:none;color:var(--fg);font:500 .8125rem/1.2 var(--sans);letter-spacing:-.005em;opacity:.78;cursor:pointer;
+  text-shadow:var(--pshadow, none);transition:opacity .4s var(--ease),visibility .4s}
+.scroll-cue:hover{opacity:1}
+.scroll-cue svg{width:18px;height:18px;animation:cue-bob 1.8s var(--ease) infinite}
+@keyframes cue-bob{0%,100%{translate:0 0}50%{translate:0 4px}}
+body.started .scroll-cue, body.chat-view .scroll-cue{opacity:0;visibility:hidden;pointer-events:none}
+@media (max-height:620px){.scroll-cue{display:none}}
+@media (prefers-reduced-motion:reduce){.scroll-cue svg{animation:none}}
 </style>
 </head>
 <body class="state-intro">
@@ -975,6 +985,8 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
   <h1 id="introH1">Hi, I'm Guy, a senior product designer.</h1>
   <p>B2B and AI-native products, from the system down to the last interaction.</p>
 </div>
+
+<button type="button" class="scroll-cue" data-nav="work" aria-label="Scroll to see my work">Scroll for work<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button>
 
 <main class="thread" id="thread" aria-live="polite"></main>
 <main class="thread" id="chat" aria-live="polite"></main>
@@ -1653,6 +1665,27 @@ document.addEventListener('click', e => {
   jelly.hop(); jelly.happy();
   NAV[n]();
 });
+
+/* On the default hero the page can't scroll yet, so a scroll, swipe or key press downward
+   opens the work feed, exactly like the Work pill. */
+(function(){
+  let wheel = 0, touchY = null;
+  const ready = () => !started && view === 'home' && caseEl.hidden;
+  const go = () => { if (!ready()) return; wheel = 0; jelly.hop(); jelly.happy(); workAction(); };
+  addEventListener('wheel', e => {
+    if (!ready()) return;
+    if (e.deltaY <= 0){ wheel = 0; return; }
+    wheel += e.deltaY;
+    if (wheel > 40) go();
+  }, {passive:true});
+  addEventListener('touchstart', e => { touchY = ready() ? e.touches[0].clientY : null; }, {passive:true});
+  addEventListener('touchmove', e => { if (touchY !== null && touchY - e.touches[0].clientY > 50){ touchY = null; go(); } }, {passive:true});
+  addEventListener('keydown', e => {
+    if (e.defaultPrevented || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.target.closest && e.target.closest('textarea, input, select, [contenteditable]')) return;
+    if (['ArrowDown','PageDown','End'].includes(e.key) || (e.key === ' ' && !e.target.closest('button, a'))) go();
+  });
+})();
 
 /* ================== Composer ================== */
 function autosize(){ prompt.style.height='auto'; prompt.style.height = Math.min(prompt.scrollHeight, 160)+'px'; }
