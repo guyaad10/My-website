@@ -554,19 +554,21 @@ body.chat-view #thread{display:none}
   .anno-list b{font-weight:500;color:var(--ink)}
 }
 /* Chapter nav: a list in the left margin that follows you on wide screens, a sticky strip under the bar below that. */
-.toc{position:sticky;top:0;z-index:2;height:0;max-width:var(--cw);margin:0 auto}
+.toc{position:sticky;top:0;z-index:4;height:0;max-width:var(--cw);margin:0 auto}
 .toc ol{list-style:none;margin:0;padding:0;position:absolute;top:104px;right:calc(100% + 72px);width:150px;display:grid;gap:2px}
 .toc button{position:relative;display:block;width:100%;text-align:left;font:inherit;font-size:.9375rem;line-height:1.3;color:var(--ink-3);letter-spacing:-.01em;padding:6px 0;cursor:pointer;transition:color .2s}
 .toc button:hover{color:var(--ink)}
 .toc button.on{color:var(--ink)}
 .toc button.on::before{content:'';position:absolute;left:-14px;top:50%;width:6px;height:6px;margin-top:-3px;border-radius:50%;background:var(--ink)}
 @media (max-width:1399px){
-  .toc{height:auto;top:var(--bar,64px);margin:0 auto 96px;max-width:none;padding:10px 0;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);border-bottom:1px solid var(--line)}
-  .toc ol{position:static;width:auto;max-width:var(--cw);margin:0 auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none}
+  .toc{height:auto;top:calc(var(--bar,64px) + 12px);margin:0 auto 96px;max-width:none;display:flex;justify-content:center;pointer-events:none}
+  .toc ol{position:static;width:auto;max-width:100%;margin:0;display:flex;gap:2px;overflow-x:auto;scrollbar-width:none;pointer-events:auto;padding:4px 6px;border-radius:16px;
+    background:color-mix(in srgb, var(--bg) 70%, transparent);-webkit-backdrop-filter:blur(18px) saturate(1.6);backdrop-filter:blur(18px) saturate(1.6);
+    border:1px solid color-mix(in srgb, var(--ink) 8%, transparent);box-shadow:0 10px 30px -12px rgba(20,20,40,.25)}
   .toc ol::-webkit-scrollbar{display:none}
-  .toc button{white-space:nowrap;width:auto;padding:7px 14px;border-radius:999px;color:var(--ink-2)}
-  .toc button:hover{background:var(--surface-2)}
-  .toc button.on{background:var(--ink);color:var(--bg)}
+  .toc button{white-space:nowrap;width:auto;padding:8px 12px;color:var(--ink-3)}
+  .toc button:hover{color:var(--ink)}
+  .toc button.on{color:var(--ink);font-weight:600}
   .toc button.on::before{display:none}
   .chap{scroll-margin-top:150px}
 }
