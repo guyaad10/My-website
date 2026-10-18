@@ -857,8 +857,8 @@ body.chat-view #thread{display:none}
 .mk-merc .row span{display:block;height:2.4em;width:70%;border-radius:1em;background:#DDE5DF}
 .mk-merc .row span+span{width:40%;margin-top:2.4em;background:#EEF2EF}
 .mk-merc .pay{margin-top:2em;background:#1B1D2A;color:#fff;border-radius:99em;text-align:center;padding:.6em 0;font-size:5.5em;font-weight:500;letter-spacing:-.02em}
-.mk-wa{background:linear-gradient(160deg,#D9FDD3,#B8F0CC);display:grid;place-items:center}
-.mk-wa img{display:block;width:74%;max-height:80%;height:auto;object-fit:contain}
+.mk-wa{background:#BFD3EE}
+.mk-wa img{display:block;width:100%;height:100%;object-fit:cover}
 
 @media (max-width:760px){
   .home-mark{left:18px;top:calc(14px + env(safe-area-inset-top,0px))}
@@ -1458,7 +1458,7 @@ const MOCKS = {
   headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
   offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-card.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
-  whatsapp(){ return '<div class="mk-stage mk-wa"><img src="images/whatsapp-ill-time.webp" alt="" draggable="false"></div>'; },
+  whatsapp(){ return '<div class="mk-stage mk-wa"><img src="images/whatsapp-card.webp" alt="" draggable="false"></div>'; },
 };
 
 /* ================== Helpers ================== */
