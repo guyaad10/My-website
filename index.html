@@ -1415,7 +1415,7 @@ const PROJECTS = [
     line:"Work from my student days. I’d design most of it differently today — and I think that’s a good thing 😅",
     items:[
       {id:'whatsapp', __case:'whatsapp', mock:'whatsapp', ar:'4/5', title:'WhatsApp Events', summary:'Event planning tools built into WhatsApp group chats', role:'UX/UI designer', company:'School project', year:'2023', tags:['B2C','Mobile','UX/UI']},
-      {id:'offgrid', __case:'offgrid', mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2022', tags:['B2C','Mobile','UX/UI']},
+      {id:'offgrid', __case:'offgrid', cover:['offgrid-cover.webp','Off Grid poster on a tiled street kiosk: We like you to travel as you wish'], mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2022', tags:['B2C','Mobile','UX/UI']},
       {id:'headspace', __case:'headspace', mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design, Illustrator', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
@@ -2277,7 +2277,7 @@ function renderOffgridCase(p, next){
     <button type="button" class="og-car-btn prev" aria-label="Previous change">‹</button><button type="button" class="og-car-btn next" aria-label="Next change">›</button>
     <div class="og-car-dots">${slides.map((_,k)=>`<i${k?'':' class="on"'}></i>`).join('')}</div></div>`;
   caseInner.innerHTML = `
-    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A trip planning app that helps you travel your way: it gets you to the places you care about and arranges each day around your time and the distances between stops.</p>${metaDL(p)}</header>
+    ${mainHead(p, metaDL(p), 'A trip planning app that helps you travel your way: it gets you to the places you care about and arranges each day around your time and the distances between stops.')}
     <div class="og-hero og-hero-wide ui-hero"><img src="images/offgrid-hero.webp" alt="Off Grid place, day agenda and map screens over a Tel Aviv street"></div>
     ${caseToc(CH)}
     ${chapter(1)}
