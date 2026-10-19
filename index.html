@@ -327,8 +327,8 @@ body.chat-view #thread{display:none}
 .case-bar{position:sticky;top:0;z-index:3;display:flex;justify-content:space-between;align-items:center;gap:16px;
   padding:calc(12px + env(safe-area-inset-top,0px)) 20px 12px;background:rgba(255,255,255,.96);border-bottom:1px solid transparent;transition:border-color .2s}
 .case.scrolled .case-bar{border-bottom-color:var(--line)}
-.back{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;flex:none;padding:9px 16px;border-radius:999px;font-size:.9375rem;font-weight:500;background:var(--surface-2)}
-.back:hover{background:var(--surface-3)}
+.back{display:inline-flex;align-items:center;gap:8px;white-space:nowrap;flex:none;padding:9px 6px;margin-left:-6px;font-size:.9375rem;font-weight:500;background:none;color:var(--ink);transition:color .15s}
+.back:hover{color:var(--ink-2)}
 .case-bar-title{font-size:.9375rem;color:var(--ink-3);opacity:0;transition:opacity .2s;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .case.scrolled .case-bar-title{opacity:1}
 .case-inner{--cw:880px;max-width:1280px;margin:0 auto;padding:64px 24px 140px}
