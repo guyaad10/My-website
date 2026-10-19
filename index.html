@@ -1300,7 +1300,7 @@ const PROJECTS = [
     title:'Clalit Innovation — Patient Record',
     cover:['clalit-hero.webp','Nurses at a ward station under patient status screens while a bed rushes past'],
     summary:'A patient record platform for nursing staff that gives the whole department a clear, current overview of every patient.',
-    role:'UX Designer', company:'Clalit Innovation', year:'2023',
+    role:'UX Designer', company:'Clalit Innovation', year:'2024',
     tags:['Healthcare','User research','Product design'],
     context:[
       'Nursing teams track who is in every bed on a physical board on the ward wall. The board is separate from the hospital\'s digital records and updated by hand, and every department has built its own version with its own stickers, colours and codes.',
@@ -1312,13 +1312,12 @@ const PROJECTS = [
       'Validated each iteration in feedback sessions with nursing teams and Clalit Innovation project stakeholders.',
       'Worked closely with project managers and UI designers to bring the design into the Clalit design system.'
     ],
-    questions:[
-      'When and how do they use the patient record?',
-      'What is their work environment like?',
-      'How much attention and workload do they have when they use the record?',
-      'How does the team interact with the record?',
-      'Which indicators has each department adopted?',
-      'What do all the patient records have in common?'
+    constraints:[
+      ['Read only, at a glance','The board hangs on the ward wall and nobody touches it, so a whole department has to fit on one screen, with no scrolling or zooming.'],
+      ['One system, many departments','Every ward had built its own board with its own codes. The design needed one shared foundation that each department could configure.'],
+      ['Built on the Clalit design system','New patterns had to fit the existing components and visual language.'],
+      ['Real-time data and patient privacy','The board syncs with the hospital\'s health record systems and shows sensitive information on a wall, so it had to meet medical privacy rules.'],
+      ['Busy, rotating teams','Nurses work shifts around the clock with constant interruptions, and many are less familiar with digital tools. Every detail had to read in seconds.']
     ],
     learned:[
       ['Rotating shifts','Teams work flexible shifts covering mornings, evenings and nights.'],
@@ -1373,9 +1372,8 @@ const PROJECTS = [
       'Show empty beds instead of hiding them.'
     ],
     outcome:[
-      'Low-fidelity board tested in feedback sessions with nursing teams, which reshaped the high-fidelity design.',
-      'High-fidelity board with location statuses, severity badges, same-name alerts and a live summary footer, confirmed by the project team.',
-      'Delivered as a UI component set (icons, badges, patient and room cards) and final screens in the Clalit design system.'
+      'Clalit adopted the concept and funded its development.',
+      'When I left the project, the team was preparing a pilot in one hospital to test how the board integrates with the existing health record systems and meets patient privacy regulations.'
     ],
     takeaways:[
       'The medical team has established workflows, so the digital system must closely resemble familiar processes to be adopted.',
@@ -1383,6 +1381,7 @@ const PROJECTS = [
       'When space is limited, many icons create clutter. Colour coding organises them into groups and makes them easier to tell apart.',
       'The medical team is a diverse audience, often less familiar with digital tools. Details that seem trivial need careful thought.'
     ],
+    lookingBack:'The pilot\'s two big questions, integration with the hospital\'s systems and patient privacy, came late in my part of the project. Today I would bring the IT and privacy teams into the research from the start, and test the board on a real ward screen, from across the room, before the final UI.',
     timeline:[
       ['Dec 2023','Kick-off',''],
       ['Dec 2023','Research','User interviews and observations.'],
@@ -1390,7 +1389,7 @@ const PROJECTS = [
       ['Jan 2024','Prototype and team confirmation','High fidelity wireframes.'],
       ['Feb 2024','UI design','Implementation in the Clalit design system.']
     ],
-    observeIntro:'I joined nursing teams in their daily work across youth, adult, internal and surgical departments at Geha and Carmel hospitals.',
+    observeIntro:'I joined nursing teams in their daily work across youth, adult, internal and surgical departments at Geha and Carmel hospitals, to see when and how each team uses the board, under how much pressure, and what every department\'s board has in common.',
     workflows:'After the research and observations, I wrote a document summarising the workflows around the patient record: the essential information, the use cases and the users\' needs. I then used it to decide which information each department\'s record should show.',
     hifiNotes:[
       {side:'r', x:.968, y:.129, t:'Room', d:'Bed capacity indicator removed.'},
@@ -2180,9 +2179,10 @@ function renderClalitCase(p){
     ${chapter(1)}
     ${section('The project', paras(p.context))}
     ${section('Role', `<p>As the UX designer of the project I:</p><ul class="plain">${p.myRole.map(r=>`<li>${r}</li>`).join('')}</ul>`)}
+    ${section('Constraints', kv(p.constraints))}
     ${section('Timeline', `<ol class="tline">${p.timeline.map(([d,t,b])=>`<li><small>${d}</small><b>${t}</b>${b?`<p>${b}</p>`:''}</li>`).join('')}</ol>`)}
     ${chapter(2)}
-    ${section('Observations', `<p>${p.observeIntro}</p><ul class="plain">${p.questions.map(q=>`<li>${q}</li>`).join('')}</ul><p>The information gathered gave me valuable insight into the challenges and needs of the nursing teams.</p>`)}
+    ${section('Observations', `<p>${p.observeIntro}</p>`)}
     ${shot('clalit-boards.jpg','Physical patient boards on the wards at Geha and Carmel','sq', 'The physical boards each department had built for itself.')}
     ${section('What I learned as a fly on the wall', kv(p.learned))}
     ${section('Pain points and needs', pains)}
@@ -2202,7 +2202,9 @@ function renderClalitCase(p){
     ${anno('<img src="images/clalit-components.png" alt="UI component set: rooms, patients, badges and icons">', p.compNotes, 'bare')}
     <div class="ui-hero final"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
     ${chapter(5)}
+    ${section('Outcome', paras(p.outcome))}
     ${takeaways}
+    ${section('Looking back', `<p>${p.lookingBack}</p>`)}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
