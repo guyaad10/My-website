@@ -546,6 +546,35 @@ body.chat-view #thread{display:none}
 .wa-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s var(--ease)}
 .wa-vid.ready video{opacity:1}
 .wa-vid.ready .wa-ph{display:none}
+.mk-lwf{background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%);display:flex;justify-content:center;align-items:center;gap:5%}
+.mk-lwf figure{margin:0;width:36%;display:flex;flex-direction:column;align-items:center;gap:1.4cqw}
+.mk-lwf span{display:block;width:100%;aspect-ratio:4/3;border-radius:2cqw;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 .25cqw rgba(255,255,255,.35)}
+.mk-lwf figure + figure span{background:rgba(255,255,255,.9)}
+.mk-lwf figcaption{color:rgba(255,255,255,.75);font-size:1.4cqw;letter-spacing:.02em}
+.mk-lwf img{display:block;width:100%;height:100%;object-fit:cover}
+.lw-hero{max-width:var(--cw);margin:0 auto 72px;border-radius:8px;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%);display:flex;justify-content:center;padding:6% 0}
+.lw-hero{gap:4%;align-items:flex-end}
+.lw-hero .lw-shot{width:66%}
+.lw-hero .lw-shot.lw-p{width:19%}
+.lw-shot.lw-p .lw-ph{aspect-ratio:9/19.5;border-radius:8px;padding:12px}
+.lw-row.lw-p .lw-shot{max-width:200px}
+.lw-shot.wd .lw-ph{aspect-ratio:16/9}
+.lw-shot{position:relative;margin:0;cursor:zoom-in}
+.lw-shot img{position:relative;z-index:1}
+.lw-ph{aspect-ratio:4/3;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px;text-align:center;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.lw-shot.ready .lw-ph{display:none}
+.lw-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.lw-ph b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);text-wrap:balance}
+.lw-shot figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
+.lw-ba{display:grid;gap:32px;margin-top:28px}
+.lw-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
+.lw-shot img{display:block;width:100%;height:auto;border-radius:8px}
+.cs-body .lw-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
+.lw-kd p{color:var(--ink-3)}
+@media (max-width:760px){.lw-ba{gap:20px}.lw-row{grid-template-columns:1fr;gap:20px}.lw-ph{border-radius:8px}.lw-hero .lw-shot:not(.lw-p){width:70%}.lw-hero .lw-shot.lw-p{width:20%}.lw-row.lw-p{grid-template-columns:repeat(3,1fr);gap:12px}.lw-shot.lw-p .lw-ph{border-radius:8px}}
+.lw-hero .lw-p .lw-ph *{display:none}
+.feat-media .lw-row{margin-top:0}
+.ui-hero.lw-photo img{border-radius:8px}
 .wa-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;color:#fff;background:radial-gradient(90% 60% at 50% 40%,#128C7E 0%,#075E54 60%,#06392F 100%)}
 .wa-play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;margin-bottom:12px}
 .wa-play::after{content:"";width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:4px}
@@ -851,7 +880,7 @@ body.chat-view #thread{display:none}
 .mk-og img{display:block;width:100%;height:100%;object-fit:cover}
 .mk-hs{background:#1749D1;display:grid;place-items:center}
 .mk-hs img{display:block;width:100%;height:100%;object-fit:cover}
-.mk-og::after,.mk-hs::after,.mk-wa::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:soft-light;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/160px 160px}
+.mk-og::after,.mk-hs::after,.mk-wa::after,.mk-lwf::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:.35;mix-blend-mode:soft-light;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/160px 160px}
 .mk-way{background:linear-gradient(170deg, #D9ECFF, #FFE9DC);display:grid;place-items:center}
 .mk-way svg{position:absolute;left:0;top:0;width:100%;height:46%;color:#7C8CB8}
 .mk-way .pass{width:70%;margin-top:22%;background:#fff;border-radius:4em;padding:5em 5.5em;box-shadow:0 4em 8em -4em rgba(40,50,120,.35);color:#1B1D2A}
@@ -1232,6 +1261,16 @@ const PROJECTS = [
     ]
   },
   {
+    id:'lwf', kind:'feature', wide:true, mock:'lwf', ar:'16/9',
+    __case:'lwf',
+    line:'At a UX/UI agency, I redesigned LWF Observer, the system water utilities use to catch leaks and water theft as they happen.',
+    said:'The technology behind it was strong, but the system around it was complex and dated. I simplified its core, from the structure and the flows to the interface, so a team can see what is wrong, where, and what to do next.',
+    title:'LWF Observer',
+    summary:'Simplifying and modernising the core of a water monitoring system, on tablet and mobile.',
+    role:'UX/UI designer', company:'LWF Corp (via a UX/UI agency)', year:'2024',
+    tags:['B2B','UX/UI','System redesign']
+  },
+  {
     id:'clalit', kind:'feature', wide:true, mock:'clalit', ar:'16/9',
     __customCase:true,
     icon:'images/clalit-icon.png',
@@ -1468,6 +1507,7 @@ const MOCKS = {
   headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
   offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-card.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
+  lwf(){ return '<div class="mk-stage mk-lwf"><img src="images/lwf-hero-photo.webp" alt="" draggable="false"></div>'; },
   whatsapp(){ return '<div class="mk-stage mk-wa"><img src="images/whatsapp-card.webp" alt="" draggable="false"></div>'; },
 };
 
@@ -2373,12 +2413,71 @@ function renderWhatsappCase(p, next){
     v.addEventListener('loadedmetadata', () => { v.playbackRate = .85; v.closest('.wa-vid').classList.add('ready'); if (!reduced.matches) v.play().catch(()=>{}); }, {once:true});
   });
 }
+/* LWF Observer. Guy's designs are still to come: drop images/lwf-<file>.webp in and each placeholder
+   swaps itself for the image (the image hides itself until the file exists). */
+function renderLwfCase(p, next){
+  const CH = ['Overview','Solution','Research','Design process','Takeaways'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  /* kind: true for a phone, 'wd' for a wide board (flows, sitemap), nothing for a tablet */
+  const shot = (file, label, cap='', kind=false) => `<figure class="lw-shot${kind===true?' lw-p':kind?' '+kind:''}"><div class="lw-ph" aria-hidden="true"><small>Design coming soon</small><b>${label}</b></div><img src="images/lwf-${file}.webp" alt="${label}" loading="lazy" onload="this.parentNode.classList.add('ready')" onerror="this.remove()">${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const ba = (file, label) => `<div class="lw-ba">${shot(file+'-before', label+', before', 'Before')}${shot(file+'-after', label+', after', 'After')}</div>`;
+  const list = arr => `<ul class="wa-list">${arr.map(t=>`<li>${t}</li>`).join('')}</ul>`;
+  const kd = arr => `<ol class="kd og-kd">${arr.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
+  const learn = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
+  /* Notes for Guy to confirm or rewrite in his own words */
+  const todo = t => `<p class="lw-todo">${t}</p>`;
+  const how = [
+    ['Keep watch','Small sensors are fitted along the water pipes. They keep watch day and night, so nobody has to walk the streets looking for wet patches.'],
+    ['Spot the problem','Smart software learns what a healthy pipe looks like. When something changes, like a leak, someone drilling into a pipe or water being stolen, it notices.'],
+    ['Send the team','An alert pops up on the team\'s tablet or phone and shows exactly where the problem is, so they can go straight there and fix it.']
+  ];
+  const screens = [
+    ['dashboard','Home','One home for the whole network','The new home answers the first question anyone asks: is everything OK? Network health, open alerts and sensor status sit on one calm screen, instead of spread across several.'],
+    ['alerts','Alerts','Alerts, sorted by what matters','The most urgent alert is always on top. Each one says in plain words what was found, a leak, drilling or theft, how serious it is and whether someone is already on it.'],
+    ['map','Map','The map and the list, together','Pick an alert and it lights up on the map. Location is never more than a tap away, and the map shows only what you need to act on.'],
+    ['alert','Alert details','Every alert has a next step','The alert page shows what happened, where and how sure the system is, then the actions that follow: send a crew, add a note, close it.'],
+    ['sensors','Sensors','Sensors without the manual','Adding and checking sensors became a short guided flow, so a field technician can set one up without calling the office.']
+  ];
+  caseInner.innerHTML = `
+    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">Simplifying and modernising the core of a water monitoring system, so utilities can find a leak and act on it fast.</p>${metaDL(p)}</header>
+    <div class="og-hero og-hero-wide ui-hero lw-photo" id="case-hero"><img src="images/lwf-hero-photo.webp" alt="Two engineers at a water treatment plant check LWF Observer on a tablet beside a large blue valve"></div>
+    ${caseToc(CH)}
+    ${chapter(1)}
+    ${section('About', '<p>LWF Corp builds a water loss detection system for water utilities. A large share of the water that enters a city\'s pipes never reaches a tap: it is lost to hidden leaks, illegal drilling and theft, and usually found only weeks later, if at all.</p><p>LWF Observer is the system on top of the technology, on tablet and mobile. It is where network managers and field teams get alerts, follow what is happening across the network, and manage the sensors.</p>')}
+    ${section('How it works', '<p>Think of it as a smoke alarm for water pipes.</p>')}
+    ${kd(how)}
+    ${section('The brief', '<p>I worked on LWF as a UX/UI designer at a design agency. The client came to us with a working system built on a very basic, outdated UX. The technology underneath was strong, but the system did not show it.</p><p>The job was to simplify and modernise its core: rethink the structure and the main flows so the system is easy to understand, then give it a modern interface a team can trust when an alert comes in.</p>')}
+    ${section('My role', list(['UX/UI designer at the agency, working directly with the LWF team.','UX: audited the existing system, restructured its navigation and information, and redesigned the core flows.','UI: built a new visual language and component set, and designed the high fidelity screens for tablet and mobile.']) + todo('To fill: the team you worked with, how long the project ran, and the handoff to developers.'))}
+    ${chapter(2)}
+    <div class="og-quote"><small>The redesign in one line</small><p>One calm view of the whole network, and a clear next step for every alert.</p></div>
+    ${screens.map(([f,n,t,d]) => feature(shot(f, n+', redesigned'), t, `<p>${d}</p>`)).join('')}
+    ${feature(`<div class="lw-row lw-p">${['alerts','map','alert'].map(f => shot(f+'-mobile', screens.find(s=>s[0]===f)[1]+', mobile', '', true)).join('')}</div>`, 'In the field, on a phone', '<p>The same system on a phone, cut down to what a crew needs on the way to a site: the alert, the location and the next step.</p>')}
+    ${chapter(3)}
+    ${section('Where it started', '<p>The system had grown feature by feature, around the data rather than the people using it. Every reading was there, but finding the one thing that needed attention took experience and patience.</p>')}
+    ${section('The original system', '<p>A few screens as they were handed to us.</p><div class="lw-row">' + ['dashboard','alerts','map'].map(f => shot(f+'-before', screens.find(s=>s[0]===f)[1]+', original')).join('') + '</div>')}
+    ${section('System audit', '<p>I went through the system screen by screen and mapped every flow. Four problems kept coming up.</p>' + learn([['Too many places to look','The same information lived on several screens, so getting a full picture meant jumping between them.'],['Data without meaning','Raw readings and technical terms, with no clear status. Users had to work out for themselves whether something was wrong.'],['No clear next step','An alert told you something happened, but not what to do about it or who was handling it.'],['Dated and inconsistent','Every screen looked a little different, which made the system feel older and harder to trust than the technology behind it.']]) + todo('Check these four against what you actually found, and add any input you had from LWF or its users.'))}
+    ${chapter(4)}
+    ${section('Principles', '<p>Three rules guided every decision.</p>')}
+    ${kd([['Simplify','Fewer screens and fewer steps. If a piece of information did not help someone decide or act, it moved one level down.'],['Prioritise','Urgent things first. Status, colour and order all point to what needs attention now.'],['Modernise','One consistent visual language and component set across tablet and mobile.']])}
+    ${section('Information architecture', '<p>I rebuilt the structure around a few clear destinations, instead of a long menu that mirrored the database.</p>' + todo('To fill: the old menu compared with the new one, and why.') + shot('ia', 'Sitemap, before and after', '', 'wd'))}
+    ${section('Core flows', '<p>The flows people use every day, redesigned from start to end: handling an alert, and adding a new sensor.</p>' + shot('flows', 'User flows for handling an alert and adding a sensor', '', 'wd'))}
+    ${section('Wireframes', '<p>Wireframes to test the new structure and flows with the LWF team before any visual design.</p>' + shot('wireframes', 'Wireframes of the new system', '', 'wd'))}
+    ${section('Design system', '<p>A modern, calm look that matches the quality of the technology: a clear status colour scale, readable type for the field, and one set of components for tablet and mobile.</p>' + todo('To fill: the palette, type and key components, like the palette in Off Grid.') + shot('design-system', 'Colours, type and components', '', 'wd'))}
+    ${section('Before and after', '<p>The same screens, before and after the redesign.</p>' + ['dashboard','alerts','alert'].map(f => ba(f, screens.find(s=>s[0]===f)[1])).join(''))}
+    ${chapter(5)}
+    ${section('Shipped', '<p>The redesign shipped as version 2.0 of LWF Observer, with a simpler structure and a new interface across the system.</p>' + todo('Confirm the release, and add anything you know about how it landed: client feedback, adoption, fewer support calls.'))}
+    ${section('What I learned', '<p>Simplifying a technical product is mostly deciding what not to show. Every piece of data mattered to the engineers who built it; the job was to turn it into answers for the people who use it.</p>' + todo('Rewrite in your own words, or keep.'))}
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+}
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
   if (p.__case === 'headspace') return renderHeadspaceCase(p, next);
   if (p.__case === 'offgrid') return renderOffgridCase(p, next);
   if (p.__case === 'whatsapp') return renderWhatsappCase(p, next);
+  if (p.__case === 'lwf') return renderLwfCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
   const figs = (p.figures||[]).map(f => f.type==='flow' ? `<figure class="fig"><div class="flow">
@@ -2450,7 +2549,7 @@ const closeZoom = () => { zoomEl.hidden = true; zoomEl.querySelector('img').src 
 zoomEl.addEventListener('click', closeZoom);
 document.addEventListener('keydown', e => { if (e.key === 'Escape' && !zoomEl.hidden){ e.stopImmediatePropagation(); closeZoom(); } }, true);
 caseEl.addEventListener('click', e => {
-  const z = e.target.closest('.shot-img, .ui-hero, .wa-phone, .wa-steps li, .wa-annot, .wa-flow-in, .wa-collage');
+  const z = e.target.closest('.shot-img, .ui-hero, .wa-phone, .wa-steps li, .wa-annot, .wa-flow-in, .wa-collage, .lw-shot');
   if (z){ const im = e.target.tagName === 'IMG' ? e.target : z.querySelector('img'); if (im){ zoomEl.querySelector('img').src = im.currentSrc || im.src; zoomEl.querySelector('img').alt = im.alt; zoomEl.hidden = false; } return; }
   const g = e.target.closest('[data-goto]');
   if (g){ const t = document.getElementById(g.dataset.goto); if (t) t.scrollIntoView({behavior: reduced.matches ? 'auto' : 'smooth', block:'start'}); return; }
