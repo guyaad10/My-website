@@ -1550,7 +1550,7 @@ const visual = (p, cls='') => p.mock ? `<div class="visual ${cls}" data-visual="
 
 /* ================== Thread rendering ================== */
 function el(markup){ const t=document.createElement('template'); t.innerHTML=markup.trim(); return t.content.firstElementChild; }
-function who(text, meta){ return `<div class="m-head"><span class="avatar" aria-hidden="true">${GHOST}</span><b>Guy</b>${typeof meta==='string'?`<time>${meta}</time>`:''}</div><div class="m-body"><p class="m-text"><span class="sr">Guy: </span>${text}</p></div>`; }
+function who(text, meta){ return `<div class="m-head"><span class="avatar" aria-hidden="true">${GHOST}</span><b>Guy</b>${typeof meta==='string'?`<time>${meta}</time>`:''}</div><div class="m-body">${[].concat(text).map((t,i)=>`<p class="m-text">${i?'':'<span class="sr">Guy: </span>'}${t}</p>`).join('')}</div>`; }
 
 const ICO_DOC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`;
 function stamp(p){
@@ -1564,7 +1564,7 @@ function stamp(p){
 function groupLabel(p){ return p.kind==='feature' ? p.year : p.kind==='group' ? 'Side projects' : 'Earlier work'; }
 function projectMsg(p){
   if (p.kind === 'feature') return `<article class="msg" id="m-${p.id}">
-    ${who(`${p.line} ${p.said || ''}`, p.company.replace(/\s*\(.*\)/,''))}
+    ${who([p.line, p.said].filter(Boolean), p.company.replace(/\s*\(.*\)/,''))}
     <div class="m-body">
       <a class="art" href="#/${p.id}" data-open="${p.id}" aria-label="Open ${p.title} case study">
         <div class="art-bar"><span class="art-ico${p.icon?' img':''}" aria-hidden="true">${p.icon?`<img src="${p.icon}" alt="">`:ICO_DOC}</span>
