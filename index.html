@@ -681,6 +681,10 @@ body.chat-view #thread{display:none}
 .iter-col b{display:block;font-weight:500;font-size:1.0625rem;letter-spacing:-.015em;margin-bottom:10px}
 .iter-col ul{margin:0;padding:0 0 0 1.1em;font-size:.9375rem;line-height:1.5;color:var(--body)}
 .iter-col li{margin-bottom:6px}
+/* Case study bullets: one small square marker instead of the browser's default disc */
+.wa-list,.iter-col ul,.og-slide ul,.feat-txt ul,.pp ul{list-style:none;padding-left:0}
+.wa-list li,.iter-col li,.og-slide li,.feat-txt li,.pp li{position:relative;padding-left:1.25em}
+.wa-list li::before,.iter-col li::before,.og-slide li::before,.feat-txt li::before,.pp li::before{content:'';position:absolute;left:.15em;top:.6em;top:calc(.5lh - 3px);width:6px;height:6px;border-radius:1px;background:var(--ink)}
 .iter-arrow{display:grid;place-items:center;color:var(--ink-3);font-size:1.25rem}
 .zoom img{cursor:zoom-out}
 .dots{margin:0;padding:0 0 0 1.1em;font-size:.9375rem;line-height:1.5;color:var(--ink-2)}
