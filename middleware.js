@@ -104,12 +104,33 @@ input::placeholder{letter-spacing:normal;color:#A0A0A8}
 input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(14,14,16,.08)}
 button{font:inherit;font-size:.9375rem;font-weight:500;border:0;border-radius:999px;padding:12px 22px;background:var(--ink);color:#fff;cursor:pointer}
 button:hover{background:#2a2a2e}
+.jf{--bob:-14;position:relative;width:52px;height:52px;margin:0 0 34px;cursor:pointer}
+.ghost{width:100%;height:100%;display:block;overflow:visible}
+.ghost g{transform-box:view-box}
+.g-body{fill:#111B21}
+.g-bob{animation:jf-bob 5.2s ease-in-out infinite}
+.g-squish{transform-origin:100px 200px;animation:jf-pulse 5.2s ease-in-out infinite}
+.g-eyes{transition:transform .35s cubic-bezier(.2,.7,.1,1)}
+.g-dots circle{fill:#fff;transform-box:fill-box;transform-origin:center;animation:jf-blink 6s infinite;transition:transform .28s,opacity .2s}
+.g-smile path{fill:none;stroke:#fff;stroke-width:5.5;stroke-linecap:round;stroke-dasharray:30;stroke-dashoffset:30;opacity:0;transition:stroke-dashoffset .34s .06s,opacity .15s .06s}
+.jf:hover .g-dots circle,.jf.happy .g-dots circle{animation:none;transform:translateX(-4px) scaleY(.15);opacity:0}
+.jf:hover .g-smile path,.jf.happy .g-smile path{stroke-dashoffset:0;opacity:1}
+.jf.hop .g-squish{animation:jf-hop .9s cubic-bezier(.3,.7,.3,1)}
+.jf-shadow{position:absolute;left:50%;top:calc(100% + 10px);width:44px;height:8px;margin-left:-22px;border-radius:50%;pointer-events:none;
+  background:radial-gradient(closest-side,rgba(6,14,38,.5),rgba(6,14,38,.22) 55%,rgba(6,14,38,0));animation:jf-shadow 5.2s ease-in-out infinite}
+@keyframes jf-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(calc(var(--bob,-9) * 1px))}}
+@keyframes jf-pulse{0%,38%,62%,100%{transform:scale(1,1)}46%{transform:scale(1.05,.94)}54%{transform:scale(.97,1.04)}}
+@keyframes jf-blink{0%,91%,97%,100%{transform:scaleY(1)}94%{transform:scaleY(.1)}}
+@keyframes jf-shadow{0%,100%{transform:scale(1,1);opacity:.95}50%{transform:scale(.6,.6);opacity:.45}}
+@keyframes jf-hop{0%{transform:scale(1,1)}16%{transform:scale(1.14,.82)}40%{transform:translateY(-58px) scale(.9,1.12)}62%{transform:translateY(-58px) scale(1.02,.98) rotate(-4deg)}82%{transform:translateY(0) scale(1.1,.88)}92%{transform:scale(.97,1.03)}100%{transform:scale(1,1)}}
+@media (prefers-reduced-motion:reduce){.jf *{animation:none!important}}
 .err{margin:12px 0 0 18px;color:var(--warn);font-size:.875rem}
 ${wrong ? 'input{border-color:var(--warn)}' : ''}
 </style>
 </head>
 <body>
 <main>
+  <div class="jf" aria-hidden="true"><svg class="ghost" viewBox="0 0 200 200" focusable="false"><g class="g-bob"><g class="g-squish"><path class="g-body" d="M44 0C19.6995 0 0 19.6995 0 44V184C0 192.837 7.16344 200 16 200H17C25.2843 200 32 193.284 32 185V182C32 175.373 37.3726 170 44 170C50.6274 170 56 175.373 56 182V185C56 193.284 62.7157 200 71 200H73C81.2843 200 88 193.284 88 185V182C88 175.373 93.3726 170 100 170C106.627 170 112 175.373 112 182V185C112 193.284 118.716 200 127 200H129C137.284 200 144 193.284 144 185V182C144 175.373 149.373 170 156 170C162.627 170 168 175.373 168 182V185C168 193.284 174.716 200 183 200H184C192.837 200 200 192.837 200 184V44C200 19.6995 180.301 0 156 0H44Z"/><g class="g-eyes"><g class="g-dots"><circle cx="115" cy="77" r="6"/><circle cx="172" cy="77" r="6"/></g><g class="g-smile"><path d="M99 83Q110 72 121 83"/><path d="M153 83Q164 72 175 83"/></g></g></g></g></svg><i class="jf-shadow" aria-hidden="true"></i></div>
   <h1>Hi, I'm Guy.</h1>
   <p>This portfolio is password protected. Enter the password to view my work.</p>
   <form method="post" action="${UNLOCK_PATH}">
@@ -119,6 +140,19 @@ ${wrong ? 'input{border-color:var(--warn)}' : ''}
   </form>
   ${wrong ? '<div class="err" role="alert">That password isn\'t right. Try again.</div>' : ''}
 </main>
+<script>
+// The same jellyfish as the home page: its eyes follow the pointer, and it hops when clicked.
+const jf = document.querySelector('.jf'), eyes = jf.querySelector('.g-eyes');
+addEventListener('pointermove', e => {
+  const r = jf.getBoundingClientRect(), dx = e.clientX - (r.left + r.width * .7), dy = e.clientY - (r.top + r.height * .38);
+  const d = Math.hypot(dx, dy) || 1, k = Math.min(1, d / 260);
+  eyes.style.transform = \`translate(\${(dx / d) * 13 * k}px, \${(dy / d) * 9 * k}px)\`;
+}, { passive: true });
+jf.addEventListener('click', () => {
+  jf.classList.remove('hop'); void jf.offsetWidth; jf.classList.add('hop', 'happy');
+  setTimeout(() => jf.classList.remove('hop', 'happy'), 950);
+});
+</script>
 </body>
 </html>`;
 }
