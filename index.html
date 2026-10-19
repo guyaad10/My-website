@@ -423,11 +423,13 @@ body.chat-view #thread{display:none}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
 .case-cover{position:relative;border-radius:var(--img-r);overflow:hidden;aspect-ratio:2172/1450;background:#D9D2C6;margin-bottom:24px}
-.case-cover img{display:block;width:100%;height:100%;object-fit:cover}
+.case-cover>img{display:block;width:100%;height:100%;object-fit:cover}
+/* a mock cover keeps its own proportions; its em-based layout scales with the cover width */
+.case-cover.mock{aspect-ratio:var(--ar);container-type:inline-size;isolation:isolate}
 /* the title sits on the photo, Wonderful-style: white, bottom left, over a soft shade so it reads on any part of the shot */
 .case-cover::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top, rgba(10,14,24,.62), rgba(10,14,24,.18) 42%, transparent 64%)}
 .case-head.has-cover h1{position:absolute;left:6%;right:6%;bottom:7%;z-index:2;margin:0;color:#fff;text-wrap:balance}
-@media (max-width:760px){.case-cover{aspect-ratio:4/5}.case-cover img{object-position:58% 50%}.case-head.has-cover h1{left:20px;right:20px;bottom:20px}}
+@media (max-width:760px){.case-cover{aspect-ratio:4/5}.case-cover>img{object-position:58% 50%}.case-head.has-cover h1{left:20px;right:20px;bottom:20px}}
 /* same subtle grain as the Work grid thumbnails */
 .case-cover::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.35;mix-blend-mode:soft-light;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/160px 160px}
 .hs-sky{max-width:var(--cw);margin:0 auto var(--sec);border-radius:var(--img-r);overflow:hidden;background:#0B50FF url(images/headspace-sky.png) center bottom/100% auto no-repeat;aspect-ratio:968/600;display:flex;justify-content:center;padding:64px 7% 0}
@@ -588,7 +590,6 @@ body.chat-view #thread{display:none}
 @media (max-width:760px){.lw-ba{gap:20px}.lw-row{grid-template-columns:1fr;gap:20px}.lw-ph{border-radius:8px}.lw-hero .lw-shot:not(.lw-p){width:70%}.lw-hero .lw-shot.lw-p{width:20%}.lw-row.lw-p{grid-template-columns:repeat(3,1fr);gap:12px}.lw-shot.lw-p .lw-ph{border-radius:8px}}
 .lw-hero .lw-p .lw-ph *{display:none}
 .feat-media .lw-row{margin-top:0}
-.ui-hero.lw-photo img{border-radius:8px}
 .wa-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;color:#fff;background:radial-gradient(90% 60% at 50% 40%,#128C7E 0%,#075E54 60%,#06392F 100%)}
 .wa-play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;margin-bottom:12px}
 .wa-play::after{content:"";width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:4px}
@@ -1277,6 +1278,7 @@ const PROJECTS = [
   {
     id:'lwf', kind:'feature', wide:true, mock:'lwf', ar:'16/9',
     __case:'lwf',
+    cover:['lwf-hero-photo.webp','Two engineers at a water treatment plant check LWF Observer on a tablet beside a large blue valve'],
     line:'At a UX/UI agency, I redesigned LWF Observer, the system water utilities use to catch leaks and water theft as they happen.',
     said:'The technology behind it was strong, but the system around it was complex and dated. I simplified its core, from the structure and the flows to the interface, so a team can see what is wrong, where, and what to do next.',
     title:'LWF Observer',
@@ -2141,11 +2143,15 @@ function spyToc(){
     } else if (k !== on) b.removeAttribute('aria-current');
   });
 }
-/* Header for the main (featured) case studies. With a cover photo the title sits on it, summary underneath;
-   a title's em dash becomes a line break there, so "Clalit Innovation — Patient Record" reads as two lines. */
-function mainHead(p, meta){
+/* Header for the main (featured) case studies: the title sits on the cover, summary underneath.
+   The cover is the project's photo, or its mock when it has no photo yet.
+   A title's em dash becomes a line break there, so "Clalit Innovation — Patient Record" reads as two lines. */
+function mainHead(p, meta, summary=p.summary){
   const t = `<h1 id="case-title">${p.title.replace(/\s+—\s+/, '<br>')}</h1>`;
-  return `<header class="case-head main${p.cover ? ' has-cover' : ''}">${p.cover ? `<div class="case-cover"><img src="images/${p.cover[0]}" alt="${p.cover[1]}">${t}</div>` : t}<p class="case-sum">${p.summary}</p>${meta}</header>`;
+  const id = p.__customCase ? '' : ' id="case-hero"';
+  const cover = p.cover ? `<div class="case-cover"${id}><img src="images/${p.cover[0]}" alt="${p.cover[1]}">${t}</div>`
+    : p.mock ? `<div class="case-cover mock"${id} style="--ar:${p.ar}">${MOCKS[p.mock]()}${t}</div>` : t;
+  return `<header class="case-head main${cover !== t ? ' has-cover' : ''}">${cover}<p class="case-sum">${summary}</p>${meta}</header>`;
 }
 function renderClalitCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
@@ -2454,8 +2460,7 @@ function renderLwfCase(p, next){
     ['sensors','Sensors','Sensors without the manual','Adding and checking sensors became a short guided flow, so a field technician can set one up without calling the office.']
   ];
   caseInner.innerHTML = `
-    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">Simplifying and modernising the core of a water monitoring system, so utilities can find a leak and act on it fast.</p>${metaDL(p)}</header>
-    <div class="og-hero og-hero-wide ui-hero lw-photo" id="case-hero"><img src="images/lwf-hero-photo.webp" alt="Two engineers at a water treatment plant check LWF Observer on a tablet beside a large blue valve"></div>
+    ${mainHead(p, metaDL(p), 'Simplifying and modernising the core of a water monitoring system, so utilities can find a leak and act on it fast.')}
     ${caseToc(CH)}
     ${chapter(1)}
     ${section('About', '<p>LWF Corp builds a water loss detection system for water utilities. A large share of the water that enters a city\'s pipes never reaches a tap: it is lost to hidden leaks, illegal drilling and theft, and usually found only weeks later, if at all.</p><p>LWF Observer is the system on top of the technology, on tablet and mobile. It is where network managers and field teams get alerts, follow what is happening across the network, and manage the sensors.</p>')}
@@ -2501,7 +2506,6 @@ function renderCase(p){
       <figcaption>${f.cap}</figcaption></figure>` : '').join('');
   caseInner.innerHTML = `
     ${mainHead(p, metaDL(p).replace('</dl>', p.tags?`<div><dt>Focus</dt><dd>${p.tags.join(', ')}</dd></div></dl>`:'</dl>'))}
-    ${p.mock ? `<div class="visual case-hero" style="--ar:${p.ar}" id="case-hero">${MOCKS[p.mock]()}</div>` : ''}
     ${section('Context', paras(p.context))}
     ${section('Problem', paras(p.problem))}
     ${section('My role', paras(p.myRole))}
