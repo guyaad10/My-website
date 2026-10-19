@@ -496,7 +496,7 @@ body.chat-view #thread{display:none}
 .og-car-dots{display:flex;justify-content:center;gap:8px;margin-top:20px}
 .og-car-dots i{width:7px;height:7px;border-radius:50%;background:rgba(0,0,0,.2);transition:background .2s}
 .og-car-dots i.on{background:currentColor}
-.ui-hero.og-hero{max-width:520px;margin:0 auto 72px}
+.ui-hero.og-hero{max-width:760px;margin:0 auto 72px}
 .ui-hero.og-hero-wide{max-width:var(--cw)}
 .og-pal{list-style:none;margin:24px 0 0;padding:0;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:16px 10px}
 @media (max-width:760px){.og-pal{grid-template-columns:repeat(auto-fill,minmax(72px,1fr))}}
@@ -2281,7 +2281,7 @@ function renderOffgridCase(p, next){
     <ol class="kd og-kd">${problems.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>
     ${chapter(2)}
     <div class="og-quote"><small>Value proposition</small><p>A trip planner that builds an itinerary from your interests and your available time, on the best route for each day.</p></div>
-    <div class="og-hero ui-hero"><img src="images/offgrid-mockups.webp" alt="Off Grid map and explore screens" loading="lazy"></div>
+    <div class="og-hero ui-hero"><img src="images/offgrid-mockups.webp" alt="Off Grid place page, day agenda and route map screens" loading="lazy"></div>
     ${screens.map(([t,d,src,alt]) => feature(shot(src, alt, '', 'og-canvas'), t, `<p>${d}</p>`)).join('')}
     ${chapter(3)}
     ${section('User interviews', '<p>I interviewed seven people from the target audience. All travel at least twice a year, and all had been abroad in the six months before the interview.</p>')}
