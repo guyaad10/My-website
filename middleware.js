@@ -57,7 +57,8 @@ export default async function middleware(request) {
     return gate(next, true);
   }
 
-  if (readCookie(request, COOKIE) === (await cookieValue())) return; // unlocked: serve the site
+  // Unlocked: tell Vercel to carry on and serve the site (what next() in @vercel/functions returns).
+  if (readCookie(request, COOKIE) === (await cookieValue())) return new Response(null, { headers: { 'x-middleware-next': '1' } });
 
   return gate(url.pathname + url.search, false);
 }
@@ -91,14 +92,16 @@ function page(next, wrong) {
   --sans:"Geist","Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color-scheme:light}
 *,*::before,*::after{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{font-family:var(--sans);color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;
-  background-image:radial-gradient(60% 50% at 20% 0%,#C9DCFF 0%,transparent 70%),radial-gradient(50% 45% at 90% 10%,#DDD2FF 0%,transparent 70%),radial-gradient(60% 50% at 60% 100%,#FFDCCB66 0%,transparent 70%);
+body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased;
+  /* the site's "Boring" background: flat, with a faint 32px grid */
+  background-color:#F0F5F5;background-position:center;background-size:32px 32px;
+  background-image:linear-gradient(rgba(20,30,40,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(20,30,40,.045) 1px,transparent 1px);
   display:grid;place-items:center;padding:24px 16px}
 main{width:100%;max-width:400px}
 h1{font-size:clamp(1.75rem,5vw,2.25rem);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin:0 0 12px}
 p{margin:0 0 28px;color:var(--ink-2);font-size:1rem;line-height:1.5}
 form{display:flex;gap:8px}
-input{flex:1;min-width:0;font:inherit;font-size:1rem;color:var(--ink);background:rgba(255,255,255,.85);border:1px solid var(--line);
+input{flex:1;min-width:0;font:inherit;font-size:1rem;color:var(--ink);background:#fff;border:1px solid rgba(20,20,40,.1);
   border-radius:999px;padding:12px 18px;outline:none;letter-spacing:.2em;transition:border-color .2s,box-shadow .2s}
 input::placeholder{letter-spacing:normal;color:#A0A0A8}
 input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(14,14,16,.08)}
@@ -111,8 +114,8 @@ button:hover{background:#2a2a2e}
 .g-bob{animation:jf-bob 5.2s ease-in-out infinite}
 .g-squish{transform-origin:100px 200px;animation:jf-pulse 5.2s ease-in-out infinite}
 .g-eyes{transition:transform .35s cubic-bezier(.2,.7,.1,1)}
-.g-dots circle{fill:#fff;transform-box:fill-box;transform-origin:center;animation:jf-blink 6s infinite;transition:transform .28s,opacity .2s}
-.g-smile path{fill:none;stroke:#fff;stroke-width:5.5;stroke-linecap:round;stroke-dasharray:30;stroke-dashoffset:30;opacity:0;transition:stroke-dashoffset .34s .06s,opacity .15s .06s}
+.g-dots circle{fill:#F0F5F5;transform-box:fill-box;transform-origin:center;animation:jf-blink 6s infinite;transition:transform .28s,opacity .2s}
+.g-smile path{fill:none;stroke:#F0F5F5;stroke-width:5.5;stroke-linecap:round;stroke-dasharray:30;stroke-dashoffset:30;opacity:0;transition:stroke-dashoffset .34s .06s,opacity .15s .06s}
 .jf:hover .g-dots circle,.jf.happy .g-dots circle{animation:none;transform:translateX(-4px) scaleY(.15);opacity:0}
 .jf:hover .g-smile path,.jf.happy .g-smile path{stroke-dashoffset:0;opacity:1}
 .jf.hop .g-squish{animation:jf-hop .9s cubic-bezier(.3,.7,.3,1)}
