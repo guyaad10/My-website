@@ -565,6 +565,7 @@ body.chat-view #thread{display:none}
 @media (max-width:760px){.lw-ba{gap:20px}.lw-row{grid-template-columns:1fr;gap:20px}.lw-ph{border-radius:14px}.lw-hero .lw-shot:not(.lw-p){width:70%}.lw-hero .lw-shot.lw-p{width:20%}.lw-row.lw-p{grid-template-columns:repeat(3,1fr);gap:12px}.lw-shot.lw-p .lw-ph{border-radius:14px}}
 .lw-hero .lw-p .lw-ph *{display:none}
 .feat-media .lw-row{margin-top:0}
+.ui-hero.lw-photo img{border-radius:20px}
 .wa-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;color:#fff;background:radial-gradient(90% 60% at 50% 40%,#128C7E 0%,#075E54 60%,#06392F 100%)}
 .wa-play{width:56px;height:56px;border-radius:50%;background:rgba(255,255,255,.16);display:grid;place-items:center;margin-bottom:12px}
 .wa-play::after{content:"";width:0;height:0;border-style:solid;border-width:9px 0 9px 15px;border-color:transparent transparent transparent #fff;margin-left:4px}
@@ -2423,7 +2424,7 @@ function renderLwfCase(p, next){
   ];
   caseInner.innerHTML = `
     <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">Simplifying and modernising the core of a water monitoring system, so utilities can find a leak and act on it fast.</p>${metaDL(p)}</header>
-    <div class="lw-hero" id="case-hero">${shot('hero', 'LWF Observer on tablet')}${shot('hero-mobile', 'LWF Observer on mobile', '', true)}</div>
+    <div class="og-hero og-hero-wide ui-hero lw-photo" id="case-hero"><img src="images/lwf-hero-photo.webp" alt="Two engineers at a water treatment plant check LWF Observer on a tablet beside a large blue valve"></div>
     ${caseToc(CH)}
     ${chapter(1)}
     ${section('About', '<p>LWF Corp builds a water loss detection system for water utilities. A large share of the water that enters a city\'s pipes never reaches a tap: it is lost to hidden leaks, illegal drilling and theft, and usually found only weeks later, if at all.</p><p>LWF Observer is the system on top of the technology, on tablet and mobile. It is where network managers and field teams get alerts, follow what is happening across the network, and manage the sensors.</p>')}
