@@ -335,6 +335,7 @@ body.chat-view #thread{display:none}
 .case-head{max-width:var(--cw);margin:0 auto 56px}
 .case-head h1{margin:0 0 20px;font:400 clamp(2.25rem, 1.2rem + 5vw, 6rem)/.95 var(--sans);overflow-wrap:break-word;letter-spacing:-.055em}
 .case-sum{margin:0 0 40px;font-size:clamp(1.25rem, 1.1rem + .7vw, 1.75rem);line-height:1.3;letter-spacing:-.03em;color:var(--ink-2);max-width:32ch;text-wrap:pretty}
+.case-head.main .case-sum{font-size:clamp(1.0625rem, 1rem + .4vw, 1.375rem);font-weight:300;max-width:38ch;margin-bottom:32px}
 .case-head .meta{gap:12px 48px;padding-top:24px;border-top:1px solid var(--line)}
 .case-hero{margin:0 auto 128px;border-radius:var(--img-r);max-width:var(--cw)}
 .cs{display:grid;grid-template-columns:220px minmax(0,612px);gap:48px;justify-content:center;margin:0 0 var(--sec)}
@@ -407,14 +408,14 @@ body.chat-view #thread{display:none}
 .hs-pair.one{grid-template-columns:46%;justify-content:center}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
-.cl-hero{position:relative;border-radius:var(--img-r);overflow:hidden;aspect-ratio:2172/1450;background:#D9D2C6;margin-bottom:40px}
-.cl-hero img{display:block;width:100%;height:100%;object-fit:cover}
+.case-cover{position:relative;border-radius:var(--img-r);overflow:hidden;aspect-ratio:2172/1450;background:#D9D2C6;margin-bottom:24px}
+.case-cover img{display:block;width:100%;height:100%;object-fit:cover}
 /* the title sits on the photo, Wonderful-style: white, bottom left, over a soft shade so it reads on any part of the shot */
-.cl-hero::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top, rgba(10,14,24,.62), rgba(10,14,24,.18) 42%, transparent 64%)}
-.case-head.cl-head h1{position:absolute;left:6%;right:6%;bottom:7%;z-index:2;margin:0;color:#fff;text-wrap:balance}
-@media (max-width:760px){.cl-hero{aspect-ratio:4/5}.cl-hero img{object-position:58% 50%}.case-head.cl-head h1{left:20px;right:20px;bottom:20px}}
+.case-cover::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top, rgba(10,14,24,.62), rgba(10,14,24,.18) 42%, transparent 64%)}
+.case-head.has-cover h1{position:absolute;left:6%;right:6%;bottom:7%;z-index:2;margin:0;color:#fff;text-wrap:balance}
+@media (max-width:760px){.case-cover{aspect-ratio:4/5}.case-cover img{object-position:58% 50%}.case-head.has-cover h1{left:20px;right:20px;bottom:20px}}
 /* same subtle grain as the Work grid thumbnails */
-.cl-hero::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.35;mix-blend-mode:soft-light;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/160px 160px}
+.case-cover::after{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;opacity:.35;mix-blend-mode:soft-light;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/160px 160px}
 .hs-sky{max-width:var(--cw);margin:0 auto var(--sec);border-radius:var(--img-r);overflow:hidden;background:#0B50FF url(images/headspace-sky.png) center bottom/100% auto no-repeat;aspect-ratio:968/600;display:flex;justify-content:center;padding:64px 7% 0}
 .hs-sky .hs-quote{margin:0;color:#fff}
 .hs-rainbow{max-width:var(--cw);margin:0 auto var(--sec);border-radius:var(--img-r);overflow:hidden;aspect-ratio:2880/1556;background:#fff url(images/headspace-rainbow.png) center/100% auto no-repeat;display:flex;justify-content:center;padding:7.5% 18% 0}
@@ -1237,6 +1238,7 @@ const PROJECTS = [
     line:'At Clalit, nurses relied on handwritten boards disconnected from the hospital’s digital records, making critical information easy to miss.',
     said:'I spent time on the wards observing and interviewing nurses to understand how different departments work and what each one needs. Those insights shaped a flexible system that adapts to different workflows while maintaining one consistent foundation. The result is a scalable, real-time patient record designed to work across medical teams, departments, and hospitals nationwide.',
     title:'Clalit Innovation — Patient Record',
+    cover:['clalit-hero.webp','Nurses at a ward station under patient status screens while a bed rushes past'],
     summary:'A patient record platform for nursing staff that gives the whole department a clear, current overview of every patient.',
     role:'UX Designer', company:'Clalit Innovation', year:'2023',
     tags:['Healthcare','User research','Product design'],
@@ -2084,6 +2086,12 @@ function spyToc(){
     } else if (k !== on) b.removeAttribute('aria-current');
   });
 }
+/* Header for the main (featured) case studies. With a cover photo the title sits on it, summary underneath;
+   a title's em dash becomes a line break there, so "Clalit Innovation — Patient Record" reads as two lines. */
+function mainHead(p, meta){
+  const t = `<h1 id="case-title">${p.title.replace(/\s+—\s+/, '<br>')}</h1>`;
+  return `<header class="case-head main${p.cover ? ' has-cover' : ''}">${p.cover ? `<div class="case-cover"><img src="images/${p.cover[0]}" alt="${p.cover[1]}">${t}</div>` : t}<p class="case-sum">${p.summary}</p>${meta}</header>`;
+}
 function renderClalitCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   /* Real screens live in images/; a figure whose file is missing removes itself. */
@@ -2101,7 +2109,7 @@ function renderClalitCase(p){
     <div class="iter-col me"><small>What I learned</small><b>My understandings</b><ul>${p.mine.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>`;
   const anno = (imgs, notes, cls='') => `<figure class="anno ${cls}"><div class="anno-img"><div class="shot-img">${imgs}</div>${notes.map((n,k)=>`<span class="pin ${n.side}" data-n="${k+1}" style="--x:${n.x*100}%;--y:${n.y*100}%"><span class="lbl"><b>${n.t}</b>${n.d}</span></span>`).join('')}</div><ol class="anno-list">${notes.map(n=>`<li><b>${n.t}.</b> ${n.d}</li>`).join('')}</ol></figure>`;
   caseInner.innerHTML = `
-    <header class="case-head cl-head"><div class="cl-hero"><img src="images/clalit-hero.webp" alt="Nurses at a ward station under patient status screens while a bed rushes past"><h1 id="case-title">${p.title}</h1></div><p class="case-sum">${p.summary}</p>${metaDL(p)}</header>
+    ${mainHead(p, metaDL(p))}
     ${caseToc(CH)}
     ${chapter(1)}
     ${section('The project', paras(p.context))}
@@ -2378,7 +2386,7 @@ function renderCase(p){
       <div class="flow-row"><span class="flow-label">${f.before?'After':'Flow'}</span><ol class="after">${f.after.map(s=>`<li>${s}</li>`).join('')}</ol></div></div>
       <figcaption>${f.cap}</figcaption></figure>` : '').join('');
   caseInner.innerHTML = `
-    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">${p.summary}</p>${metaDL(p).replace('</dl>', p.tags?`<div><dt>Focus</dt><dd>${p.tags.join(', ')}</dd></div></dl>`:'</dl>')}</header>
+    ${mainHead(p, metaDL(p).replace('</dl>', p.tags?`<div><dt>Focus</dt><dd>${p.tags.join(', ')}</dd></div></dl>`:'</dl>'))}
     ${p.mock ? `<div class="visual case-hero" style="--ar:${p.ar}" id="case-hero">${MOCKS[p.mock]()}</div>` : ''}
     ${section('Context', paras(p.context))}
     ${section('Problem', paras(p.problem))}
