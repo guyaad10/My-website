@@ -551,6 +551,7 @@ body.chat-view #thread{display:none}
 .mk-lwf span{display:block;width:100%;aspect-ratio:4/3;border-radius:2cqw;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 .25cqw rgba(255,255,255,.35)}
 .mk-lwf figure + figure span{background:rgba(255,255,255,.9)}
 .mk-lwf figcaption{color:rgba(255,255,255,.75);font-size:1.4cqw;letter-spacing:.02em}
+.mk-lwf img{display:block;width:100%;height:100%;object-fit:cover}
 .lw-hero{max-width:var(--cw);margin:0 auto 72px;border-radius:8px;overflow:hidden;background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%);display:flex;justify-content:center;padding:6% 0}
 .lw-hero{gap:4%;align-items:flex-end}
 .lw-hero .lw-shot{width:66%}
@@ -1506,7 +1507,7 @@ const MOCKS = {
   headspace(){ return '<div class="mk-stage mk-hs"><img src="images/headspace-card.webp" alt="" draggable="false"></div>'; },
   offgrid(){ return '<div class="mk-stage mk-og"><img src="images/offgrid-card.webp" alt="" draggable="false"></div>'; },
   mercato(){ return `<div class="mk-stage mk-merc"><div class="row"><i style="background:#F6D9C4"></i><div><span></span><span></span></div></div><div class="row"><i style="background:#CFE3F5"></i><div><span></span><span></span></div></div><div class="pay">Pay $48.00</div></div>`; },
-  lwf(){ return '<div class="mk-stage mk-lwf"><figure><span></span><figcaption>Before</figcaption></figure><figure><span></span><figcaption>After</figcaption></figure></div>'; },
+  lwf(){ return '<div class="mk-stage mk-lwf"><img src="images/lwf-hero-photo.webp" alt="" draggable="false"></div>'; },
   whatsapp(){ return '<div class="mk-stage mk-wa"><img src="images/whatsapp-card.webp" alt="" draggable="false"></div>'; },
 };
 
