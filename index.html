@@ -1076,7 +1076,7 @@ body.started .scroll-cue, body.chat-view .scroll-cue{opacity:0;visibility:hidden
 
 <section class="case" id="case" hidden role="dialog" aria-modal="true" aria-labelledby="case-title">
   <div class="case-bar">
-    <button class="back" id="case-back" type="button">← Back to conversation</button>
+    <button class="back" id="case-back" type="button">← Back to work</button>
     <span class="case-bar-title" id="case-bar-title"></span>
   </div>
   <article class="case-inner" id="case-inner"></article>
@@ -2122,7 +2122,7 @@ function renderClalitCase(p){
     <div class="ui-hero final"><img src="images/clalit-ui.png" alt="The final patient record board in the Clalit design system"></div>
     ${chapter(5)}
     ${takeaways}
-    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
@@ -2147,7 +2147,7 @@ function renderHeadspaceCase(p, next){
     ${chapter(2)}
     ${p.screens.map(sc => `<section class="cs"><h2>${sc.t}</h2><div class="cs-body">${sc.deco?`<img class="hs-deco" src="images/${sc.deco[0]}" alt="${sc.deco[1]}" loading="lazy">`:''}</div></section>` + pair(sc)).join('')}
     <figure class="hs-rainbow" role="img" aria-label="A smiling Headspace character on a rope bridge under a rainbow"><p>Your path to feeling better is just a click away with our healthcare solutions!</p></figure>
-    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
@@ -2222,7 +2222,7 @@ function renderOffgridCase(p, next){
     ${section('Look and feel', `<p>Youthful but informative. The app is full of photos, so black is the primary colour to balance the visual load, with bright accents to keep discovering new places fun. Type is set in Poppins.</p>
       <ul class="og-pal">${[['Primary','#27272A'],['Neutral','#72747B'],['Neutral','#F2F2F6'],['Accent','#DCED59'],['Accent','#FF471A'],['Accent','#BCBBFF'],['Accent','#0A5748']].map(([n,c])=>`<li><i style="background:${c}"></i>${n}<small>${c}</small></li>`).join('')}</ul>
       <img class="og-icons" src="images/offgrid-icons.webp" alt="The Off Grid icon set: line icons and colourful category icons" loading="lazy">`)}
-    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
   initCarousel(caseInner.querySelector('.og-car'));
@@ -2308,7 +2308,7 @@ function renderWhatsappCase(p, next){
     ${chapter(5)}
     ${section('Next steps', `<p>Three ideas I would explore next.</p><div class="learn wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long-press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<div><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
-    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
   /* Hero billboard: plays once when it scrolls into view and holds on the last frame; click to replay. */
@@ -2381,7 +2381,7 @@ function renderCase(p){
     ${figs ? section('Product and interaction design', '<p>The flows below show how the decisions above changed the product.</p>') + `<div class="figs">${figs}</div>` : ''}
     ${section('Outcome', p.outcome ? `<ul class="plain">${p.outcome.map(o=>`<li>${rich(o)}</li>`).join('')}</ul>` : '')}
     ${section('Reflection', paras(p.reflection))}
-    <footer class="case-foot"><button class="back" type="button" data-back>← Back to conversation</button>
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
