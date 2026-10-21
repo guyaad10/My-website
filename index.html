@@ -896,6 +896,41 @@ body.chat-view #thread{display:none}
 .tg::after{content:"";position:absolute;right:.2em;top:.2em;width:1.2em;height:1.2em;border-radius:50%;background:#fff}
 .tg.off{background:var(--surface-3)}.tg.off::after{right:auto;left:.2em}
 
+/* DreamHub case: a CSS stand-in for the cover and the card until real screens arrive */
+.mk-dh{background:radial-gradient(120% 110% at 85% 0%,#5B4BD6 0%,#2A1F6E 45%,#120C33 100%);font-family:var(--sans);color:#16141F}
+.mk-dh .dh-card{position:absolute;background:#fff;border-radius:1.2cqw;box-shadow:0 .4cqw 1cqw rgba(8,4,30,.18),0 3cqw 6cqw rgba(8,4,30,.35)}
+.mk-dh .dh-mail{top:9%;right:6%;width:54%;padding:2.8cqw 3cqw}
+.mk-dh .dh-top{display:flex;align-items:center;justify-content:space-between;font-size:1.35cqw;color:#6E6A80;margin-bottom:2cqw}
+.mk-dh .dh-top b{font-weight:500;color:#16141F}
+.mk-dh .dh-ai{display:inline-flex;align-items:center;gap:.5cqw;padding:.35cqw .9cqw;border-radius:99px;background:#EFEBFF;color:#4B3BC4;font-weight:500}
+.mk-dh .dh-ai::before{content:"";width:.8cqw;height:.8cqw;border-radius:50%;background:#6A57F0}
+.mk-dh p{margin:0 0 1.2cqw;font-size:1.7cqw;line-height:1.7;letter-spacing:-.01em}
+.mk-dh .dh-tk{padding:.1cqw .5cqw;border-radius:.4cqw;background:#FFF2D6;box-shadow:inset 0 -.18cqw 0 #E9A93A;white-space:nowrap}
+.mk-dh .dh-fl{padding:.1cqw .5cqw;border-radius:.4cqw;background:#FFE6E3;box-shadow:inset 0 -.18cqw 0 #E0574A}
+.mk-dh .dh-bar{display:flex;gap:.4cqw;height:.8cqw;margin:2.2cqw 0 1cqw}
+.mk-dh .dh-bar i{border-radius:99px}
+.mk-dh .dh-legend{display:flex;gap:2cqw;font-size:1.25cqw;color:#6E6A80}
+.mk-dh .dh-legend span::before{content:"";display:inline-block;width:.8cqw;height:.8cqw;border-radius:.2cqw;margin-right:.5cqw;vertical-align:-.05cqw;background:var(--c)}
+.mk-dh .dh-score{top:15%;left:6%;width:27%;padding:2.2cqw 2.4cqw}
+.mk-dh .dh-score small{display:block;font-size:1.3cqw;color:#6E6A80;margin-bottom:.4cqw}
+.mk-dh .dh-score b{display:block;font-weight:500;font-size:2.8cqw;letter-spacing:-.03em;color:#B4532A;margin-bottom:1.4cqw}
+.mk-dh .dh-score ul{list-style:none;margin:0;padding:0;font-size:1.45cqw;line-height:2.2}
+.mk-dh .dh-score li::before{content:"✓";display:inline-block;width:2cqw;color:#2F9E6A;font-weight:600}
+.mk-dh .dh-score li.no{color:#9A96AA}
+.mk-dh .dh-score li.no::before{content:"–";color:#C9C6D4}
+.mk-dh .dh-who{position:absolute;right:6%;bottom:9%;padding:.9cqw 1.6cqw;border-radius:99px;background:rgba(255,255,255,.14);color:#fff;font-size:1.4cqw;backdrop-filter:blur(6px)}
+/* on the case cover the title needs the lower left, so only the draft stays, smaller, top right */
+.case-cover.mock:has(.mk-dh){aspect-ratio:2172/1450}
+.case-cover .mk-dh .dh-score{display:none}
+.case-cover .mk-dh .dh-mail{top:7%;transform:scale(.86);transform-origin:top right}
+@media (max-width:760px){.case-cover.mock:has(.mk-dh){aspect-ratio:4/5}.case-cover .mk-dh .dh-mail{top:6%;right:6%;width:88%;transform:none;zoom:1.7}.case-cover .mk-dh .dh-who{display:none}}
+/* placeholders until the screens arrive; a real image hides its placeholder once it loads */
+.dh-ph{aspect-ratio:var(--ph-ar,16/10);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
+.dh-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.dh-ph b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);max-width:36ch;text-wrap:balance}
+.dh-shot.ready .dh-ph{display:none}
+.cs-body .dh-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
+.learn p.dh-led{margin-top:10px!important;color:var(--ink)!important;font-weight:500}
 .mk-og{background:#2F6B1F}
 .mk-og img{display:block;width:100%;height:100%;object-fit:cover}
 .mk-hs{background:#1749D1;display:grid;place-items:center}
@@ -1145,6 +1180,16 @@ body.started .scroll-cue, body.chat-view .scroll-cue{opacity:0;visibility:hidden
    [[text]] renders as a highlighted "To add" note for real data.
    ============================================================ */
 const PROJECTS = [
+  {
+    id:'dreamhub', kind:'feature', wide:true, mock:'dreamhub', ar:'16/9',
+    __case:'dreamhub',
+    line:'At DreamHub, an AI-native sales CRM, I’m the only designer. Most of my work is deciding what the AI shows before anyone acts on it.',
+    said:'Every CRM now ships AI that writes, fills and scores. I designed what happens between the AI’s output and the human’s action, so the AI stays visible, explainable and accountable, and the rep stays the author of record.',
+    title:'DreamHub: AI that shows its work',
+    summary:'Dreamer’s trust layer: CRM AI that writes, fills and scores, designed so the person acting on it can always see what it did and why.',
+    role:'Product designer, sole designer', company:'DreamHub', year:'2026',
+    tags:['B2B SaaS','AI-native','CRM']
+  },
   {
     id:'ledger', kind:'feature', wide:true, mock:'ledger', ar:'16/9.5',
     line:"Here's a product I helped redesign from the ground up.",
@@ -1500,6 +1545,17 @@ const MOCKS = {
     </div>`;
   },
 
+  dreamhub(){
+    return `<div class="mk-stage mk-dh">
+      <div class="dh-card dh-score"><small>Deal health</small><b>Weak</b><ul><li>Champion</li><li class="no">Economic buyer</li><li>Pain and urgency</li><li class="no">Path to close</li></ul></div>
+      <div class="dh-card dh-mail"><div class="dh-top"><b>Follow-up to Northwind</b><span class="dh-ai">Drafted by Dreamer</span></div>
+        <p>Hi Marcus, thanks for the time today. As discussed, <span class="dh-tk">we'll send the security review by Friday</span> and <span class="dh-tk">hold this pricing through Q1</span>.</p>
+        <p><span class="dh-fl">Our API already supports SSO with Okta</span>, so your team can roll it out on day one.</p>
+        <div class="dh-bar"><i style="flex:46;background:#6A57F0"></i><i style="flex:32;background:#2F9E6A"></i><i style="flex:22;background:#E0574A"></i></div>
+        <div class="dh-legend"><span style="--c:#6A57F0">Call notes</span><span style="--c:#2F9E6A">CRM record</span><span style="--c:#E0574A">Not grounded</span></div></div>
+      <span class="dh-who">Created by Dreamer · for Dana</span>
+    </div>`;
+  },
   clalit(){
     return '<div class="mk-stage mk-clalit"><figure class="ck-before"><img src="images/clalit-thumb-board.jpg" alt="" draggable="false"><figcaption>Before</figcaption></figure><figure class="ck-after"><img src="images/clalit-ui.png" alt="" draggable="false"><figcaption>After</figcaption></figure></div>';
   },
@@ -2497,6 +2553,114 @@ function renderLwfCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
+function renderDreamhubCase(p, next){
+  /* Same order as every case study on the site: the answer first, then the research and process that prove it */
+  const CH = ['Overview','Solution','Research','Design process','Takeaways'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  /* A placeholder until the screen arrives: drop images/dreamhub-<file>.webp in and it replaces itself. */
+  const shot = (file, label, cap='', ar='16/10') => `<figure class="shot dh-shot"><div class="shot-img"><div class="dh-ph" style="--ph-ar:${ar}"><small>Design coming soon</small><b>${label}</b></div><img src="images/dreamhub-${file}.webp" alt="${label}" loading="lazy" onload="this.closest('figure').classList.add('ready')" onerror="this.remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const cards = arr => `<ol class="kd og-kd">${arr.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
+  const kv = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
+  /* Notes for Guy to confirm or fill in */
+  const todo = t => `<p class="dh-todo">${t}</p>`;
+  const problems = [
+    ['Drafts that overpromise','An AI email can read perfectly and still commit the rep to a date, a discount or a feature nobody agreed to.'],
+    ['Data with no author','When the AI creates tasks and fills in fields, nobody can tell what a person did and what the AI did for them.'],
+    ['Scores with no reason','A win probability says a deal is at risk, but not why, so a manager cannot coach on it and a rep cannot fix it.']
+  ];
+  const surfaces = [
+    ['drafter','Email Drafter: commitment tokens, a flagged claim and the grounding bar','In the Email Drafter, review is the product','The draft arrives already marked up for the rep. Every commitment is an inline token, every capability claim is flagged, and a grounding bar shows where each statement came from.'],
+    ['provenance','A task created by Dreamer, with its provenance line','Every task says who made it, and for whom','“Created by Dreamer · for Dana.” Anyone reading the pipeline can tell what a rep did and what the AI did on their behalf.'],
+    ['autofill','AI-Autofill: the sample review and the bulk unlock','Autofill earns trust before it acts in bulk','It runs on a sample first. Bulk deployment unlocks only once sample accuracy clears 90%.'],
+    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','One of four health levels, judged on four named fundamentals. Risks, like no executive engagement in three weeks, are listed separately and never silently lower the level.']
+  ];
+  const decisions = [
+    {t:'Commitments become tokens',
+     y:'Anything the draft promises, like a date, a discount or a deliverable, is an inline token the rep can see and edit before sending.',
+     w:'Reps skim a draft before they send it. A promise made in the rep’s name has to stand out from the paragraph around it.'},
+    {t:'Name the author and the owner',
+     y:'Dreamer’s work is labelled in words: who created it, and who it is for.',
+     w:'An AI icon says that AI was involved. A provenance line says who is accountable, which is what a manager reviewing the pipeline needs.'},
+    {t:'Autonomy is earned',
+     y:'Autofill proves itself on a sample before it can run in bulk, and the bulk action stays locked until the sample clears the bar.',
+     w:'DreamHub’s AI climbs a ladder: capture, analyse, recommend, then act. Each step up has to be earned, because one bad bulk update across thousands of records ends the team’s trust in the feature.'},
+    {t:'Risks never move the level',
+     y:'The level is built from the four fundamentals only. Risks are listed on their own and never silently lower it.',
+     w:'If a risk quietly pulled the score down, nobody could tell why a deal changed. This way the level always traces back to a fundamental someone can fix.'}
+  ];
+  const insights = [
+    ['Reps skim, then send','A draft gets a quick read, not a proofread. Anything that matters has to be visible at a glance.','Led to commitment tokens and flagged claims.'],
+    ['A wrong claim costs more than a slow draft','Promising a feature the product does not have, or a discount nobody approved, damages the deal and the rep’s credibility.','Led to the grounding bar, and flags that ask the rep to confirm.'],
+    ['Managers coach on gaps, not numbers','“64%” starts no conversation. “No economic buyer yet” starts the right one.','Led to health levels built on named fundamentals.'],
+    ['Trust in automation is lost at scale','People forgive one wrong field. They switch a feature off after one bad bulk update.','Led to the sample review and the 90% bulk unlock.']
+  ];
+  const obvious = [
+    ['A confidence score on every draft','Sources for every statement, in a grounding bar'],
+    ['A sparkle icon on AI content','A provenance line: “Created by Dreamer · for Dana”'],
+    ['Autofill on by default, with undo','A sample first, and bulk only after 90% accuracy'],
+    ['A win probability, with risks folded in','Four health levels on four fundamentals, risks listed apart']
+  ];
+  caseInner.innerHTML = `
+    ${mainHead(p, metaDL(p))}
+    ${caseToc(CH)}
+    ${chapter(1)}
+    ${section('The project', '<p>DreamHub is an AI-native sales CRM. Its AI, Dreamer, drafts emails, creates tasks, fills in records and judges the health of deals.</p>')}
+    ${section('The problem', '<p>Every CRM now ships AI that writes, fills and scores. The output is fast, but the person acting on it cannot check it: they send, accept or trust it blind. The risk is not that the AI is sometimes wrong. It is that nobody can tell when.</p><p>At DreamHub the stakes are higher. Dreamer does not just suggest: it fills qualification fields, creates tasks and drafts follow-ups with no rep input expected. The more the AI does on its own, the more the person needs to see what it did.</p>')}
+    ${cards(problems)}
+    ${section('Role', `<p>As DreamHub’s sole product designer I:</p><ul class="wa-list"><li>Owned the end-to-end design process, from discovery and user research through UX/UI, prototyping, implementation and QA.</li><li>Partnered directly with the founders, product and engineering to turn open problems into clear product decisions.</li><li>Took features from design to production with AI-assisted and agentic tools.</li></ul>` + todo('To add: when this work started and shipped, and who you worked with on it.'))}
+    ${section('Constraints', kv([
+      ['The model will be wrong sometimes','The design could not assume a perfect model. It had to make mistakes easy to catch.'],
+      ['Reps are paid to sell, not to review','Every check had to take seconds, or reps would skip it.'],
+      ['Two readers for every output','A rep acts on it and a manager judges it. Both need to understand the same screen.'],
+      ['One designer, an early-stage team','Patterns had to be simple enough to reuse across every AI feature.']
+    ]) + todo('Check these four against the real constraints, and add any from engineering or the model.'))}
+    ${chapter(2)}
+    <div class="og-quote"><small>The principle</small><p>The AI is visible, explainable and accountable, and the human stays the author of record.</p></div>
+    ${surfaces.map(([f,label,t,d]) => feature(shot(f, label), t, `<p>${d}</p>`)).join('')}
+    ${section('The four fundamentals', '<p>The Deal Score judges every deal on the same four things, drawn from the qualification methods sales teams already use, like MEDDPICC. Each one has a fixed definition, so the same deal always gets the same answer, and a level always says what is there and what is missing.</p>' + kv([
+      ['Champion','Someone inside the account is actively pushing the deal forward.'],
+      ['Economic buyer','The person who owns the budget is known and involved.'],
+      ['Pain and urgency','There is a real problem, and a reason to solve it now.'],
+      ['Path to close','The steps to a signature are clear and agreed.']
+    ]) + todo('To add: the names of the four health levels, from strongest to weakest.'))}
+    ${section('Key decisions', '<p>Four decisions shaped the trust layer.</p>')}
+    <ol class="kd">${decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>
+    ${chapter(3)}
+    ${section('Trust breaks at the moment of action', '<p>The problem was never the AI’s output on its own. It was the moment a person had to act on it: send the email, accept the value, believe the score.</p>' + todo('To add: who you spoke to (reps, managers, RevOps), how many, and what you looked at in other CRMs.'))}
+    ${section('Other CRMs show a number, not a reason', kv([
+      ['Salesforce and HubSpot','AI added on top of generic fields. Deals get a score from 1 to 99 or a likelihood to close, and fields like “Champion” are free text the AI has to guess at.'],
+      ['Attio and Clarify','AI-native and flexible, but the sales method is something each team designs, builds and maintains itself.'],
+      ['Day.ai and Reevo','Strong at capturing activity and answering questions, with forecasting and scoring still manual or rolling out.'],
+      ['DreamHub','A fixed sales model, so the AI fills methodology fields itself. That autonomy is the reason the trust layer has to exist.']
+    ]))}
+    <div class="og-quote"><small>From DreamHub’s blog</small><p>A wrong field is worse than an empty one, because the failure is invisible downstream.</p></div>
+    ${section('What I learned', `<div class="learn">${insights.map(([t,d,l],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p><p class="dh-led">→ ${l}</p></div>`).join('')}</div>` + todo('Replace these with what you actually heard, with a quote from a rep or manager if you have one.'))}
+    ${chapter(4)}
+    ${section('Replacing the obvious model', `<p>Each part of the trust layer started from the model most CRMs use. On the left is the obvious version, and on the right is what we built instead.</p>
+      <div class="iter"><div class="iter-col fb"><small>The obvious model</small><b>What most CRMs do</b><ul>${obvious.map(([a])=>`<li>${a}</li>`).join('')}</ul></div>
+      <div class="iter-arrow" aria-hidden="true">→</div>
+      <div class="iter-col me"><small>What we built</small><b>The trust layer</b><ul>${obvious.map(([,b])=>`<li>${b}</li>`).join('')}</ul></div></div>`)}
+    ${section('Trade-offs', '<p>Every part of the trust layer cost something. These were the trade-offs worth making.</p>')}
+    ${cards([
+      ['Friction, on purpose','Tokens and flags make sending a little slower. A few seconds of review is cheaper than one wrong promise to a buyer.'],
+      ['Value later','The sample gate delays Autofill’s payoff. In return, nobody has to clean up a bad bulk update.'],
+      ['Less precise, more useful','Four levels are coarser than a percentage, but each one says what to do next.']
+    ])}
+    ${section('Iterations', '<p>Early explorations, and what changed after testing with the team.</p>' + todo('To add: one or two before and after moments, for example an earlier drafter or an early Deal Score.'))}
+    ${shot('iterations', 'Early explorations, before and after')}
+    ${chapter(5)}
+    ${section('Outcome', todo('To add: what shipped and how it landed. For example, how often reps edit tokens before sending, Autofill accuracy, or how managers use the Deal Score.'))}
+    ${section('Lessons', `<div class="learn">${[
+      'Trust in AI is built one output at a time. Every draft, task and score has to show what it is based on.',
+      'The review step is part of the product, not a gate in front of it. What the human checks matters as much as what the AI produces.',
+      'Autonomy works best when it is earned in steps. Proving accuracy on a sample first made bulk actions something users chose, not something they feared.',
+      'Explainable means actionable. A judgement is only useful when the person reading it knows what to do next.'
+    ].map((t,k)=>`<div><span class="kd-n">0${k+1}</span><p>${t}</p></div>`).join('')}</div>`)}
+    ${section('What I’d do next', '<ul class="wa-list"><li>Learn from the review: when reps edit a token or reject a flagged claim, use it so the next draft makes fewer of them.</li><li>Ground the Deal Score too: link each fundamental to the call or email that proved it.</li><li>Carry the trust layer into customer success, where Dreamer drafts outreach to at-risk accounts and health scores already promise to show which signal moved and why.</li></ul>' + todo('Draft ideas. Keep, change or replace them with what is really next.'))}
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+}
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
@@ -2504,6 +2668,7 @@ function renderCase(p){
   if (p.__case === 'offgrid') return renderOffgridCase(p, next);
   if (p.__case === 'whatsapp') return renderWhatsappCase(p, next);
   if (p.__case === 'lwf') return renderLwfCase(p, next);
+  if (p.__case === 'dreamhub') return renderDreamhubCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
   const figs = (p.figures||[]).map(f => f.type==='flow' ? `<figure class="fig"><div class="flow">
