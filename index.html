@@ -855,6 +855,28 @@ body.chat-view #thread{display:none}
 .dr-prop.on{box-shadow:0 0 0 .15em var(--ink)}
 .dr-prop em{font-style:normal;color:var(--ok);font-size:.9em;font-weight:500}
 
+.mk-dhc{background:linear-gradient(135deg, #DDF2E7 0%, #E3EBFF 55%, #F1E6FF 100%)}
+.mk-dhc .win{left:34em;right:5em;top:5em;bottom:-1em;border-radius:1.6em;padding:2.4em 2.6em;font-size:1.05em;overflow:hidden}
+.dhc-head{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:1.4em}
+.dhc-head b{display:block;font-size:2.1em;font-weight:400;letter-spacing:-.05em;margin-bottom:.15em}
+.dhc-tabs{display:flex;gap:.4em;margin-bottom:1.6em}
+.dhc-tabs span{padding:.4em .9em;border-radius:99em;color:var(--ink-3)}
+.dhc-tabs span.on{color:var(--ink);background:var(--surface-2)}
+.dhc-ev{position:relative;display:grid;grid-template-columns:1fr auto;gap:.2em 1em;padding:0 0 1.5em 2em}
+.dhc-ev::before{content:"";position:absolute;left:.3em;top:.35em;width:.7em;height:.7em;border-radius:50%;background:var(--ink)}
+.dhc-ev::after{content:"";position:absolute;left:.62em;top:1.4em;bottom:.2em;width:1px;background:var(--line)}
+.dhc-ev:last-child::after{display:none}
+.dhc-ev.new::before{background:#fff;box-shadow:inset 0 0 0 .18em var(--ink)}
+.dhc-ev b{font-weight:500}
+.dhc-ev small{grid-column:1}
+.dhc-ev code{grid-row:1;grid-column:2;font:500 .8em/1.6 ui-monospace,SFMono-Regular,Menlo,monospace;color:var(--ink-3);letter-spacing:.02em}
+.dhc-cut{position:absolute;left:5em;top:7em;width:26em;background:#fff;border-radius:1.4em;padding:1.8em;display:flex;flex-direction:column;gap:.7em;font-size:1.05em;box-shadow:0 .2em .6em rgba(20,20,50,.05), 0 3em 5em -2.5em rgba(40,50,120,.35)}
+.dhc-cut .pill{align-self:flex-start}
+.dhc-cut b{font-size:1.3em;font-weight:500;letter-spacing:-.03em}
+.dhc-cut p{margin:0;color:var(--ink-2)}
+.dhc-cut div{display:flex;gap:.5em;margin-top:.5em}
+.learn .dhc-led{margin-top:14px!important;color:var(--ink-2)!important}
+.learn .dhc-led small{display:block;font-size:.8125rem;font-weight:500;color:var(--ink);margin-bottom:4px}
 .mk-relay{background:linear-gradient(180deg, #DCEBFF 0%, #EEE8FF 60%, #FFF0E8 100%);display:flex;justify-content:center;align-items:flex-start;gap:4.5em;padding-top:6em}
 .ph{width:20em;aspect-ratio:9/19;border-radius:3.2em;background:#fff;padding:.5em;box-shadow:0 .2em .6em rgba(20,20,50,.05), 0 3em 5em -2.5em rgba(40,50,120,.35);flex:none}
 .ph:nth-child(2){margin-top:-2.4em}
@@ -1191,6 +1213,34 @@ const PROJECTS = [
     tags:['B2B SaaS','AI-native','CRM']
   },
   {
+    id:'dh-contracts', kind:'feature', wide:true, mock:'dhContracts', ar:'16/9',
+    __case:'dh-contracts',
+    line:'At DreamHub, my current work, I designed what a CRM does after the deal is won.',
+    said:'Most CRMs stop at Closed Won. DreamHub models what actually happens next: the contract, its amendments and its renewal. The difference is in decisions users never see but constantly feel.',
+    title:'DreamHub: Contract lifecycle',
+    summary:'What happens after Closed Won: contracts, amendments and renewals, modelled so the CRM stays honest about what was actually signed.',
+    role:'Product designer, sole designer', company:'DreamHub', year:'2026',
+    tags:['B2B SaaS','CRM','Data modelling'],
+    decisions:[
+      {t:'A renewal is a new contract',
+       n:'Treat a renewal as the next version of the same contract, with new dates and a new price.',
+       y:'A renewal duplicates the contract into a new one, linked to the agreement it renews. The original keeps its own terms, dates and history.',
+       w:'A renewal is a new agreement, not an edit. It is signed again, it can change almost everything, and finance reports on it separately. Modelling it as a version would quietly rewrite what the customer signed the first time.'},
+      {t:'Versions people can read',
+       n:'Number every change: v1, v2, up to v7.',
+       y:'Every change gets an immutable reference ID for the system and an auto-generated name for people, written from the diff itself: "Added 20 seats, extended to Dec 2026".',
+       w:'"v7" tells nobody what changed. The ID keeps every version traceable and can never be edited, and the generated name means nobody has to write one. The timeline reads like the account\'s story.'},
+      {t:'Catch the edit at Closed Won',
+       n:'Let reps edit a won deal freely, or lock it completely once it closes.',
+       y:'When someone changes a financial field on a Closed Won deal, an intercept stops them at that moment and asks what they mean: amend the contract, or keep the deal as it is.',
+       w:'Editing freely lets the deal and the contract drift apart without anyone noticing. Locking it pushes people into workarounds. The intercept appears only at the exact moment the numbers would split, and asks one question. As DreamHub puts it, a wrong field is worse than an empty one.'},
+      {t:'Terms History is a timeline',
+       n:'Show the history of terms as a table, one row per version and one column per field.',
+       y:'A vertical timeline of events, newest first. Each event names what changed, when, who changed it and why, with renewals marked where one agreement hands over to the next.',
+       w:'People ask a contract\'s history questions in time: what did they sign, when did it grow, what changed before the renewal? A table answers which cell changed. A timeline answers what happened.'}
+    ]
+  },
+  {
     id:'ledger', kind:'feature', wide:true, mock:'ledger', ar:'16/9.5',
     line:"Here's a product I helped redesign from the ground up.",
     said:"Month-end reconciliation at Ledger was scattered across spreadsheets, bank portals and email. I turned it into one workspace finance teams share.",
@@ -1447,6 +1497,19 @@ const CV_FILENAME = 'Guy Peretz - Resume.pdf';
 
 /* ================== Mockups ================== */
 const MOCKS = {
+  dhContracts(){
+    const ev = [
+      ['new','Renewal drafted as CT-2311','Starts Jan 2027, a new agreement linked to this one','REF 9C04E2'],
+      ['','Added 20 seats, extended to Dec 2026','Jun 2025, by Dana','REF 7F3A21'],
+      ['','Price per seat from $38 to $42','Mar 2025, by Dana','REF 51B8D0'],
+      ['','Signed: 100 seats, Jan 2025 to Jun 2026','Closed Won, Jan 2025','REF 2E61AF']
+    ].map(([c,t,d,r])=>`<div class="dhc-ev ${c}"><b>${t}</b><code>${r}</code><small>${d}</small></div>`).join('');
+    return `<div class="mk-stage mk-dhc">
+      <div class="win"><div class="dhc-head"><div><b>Northwind Logistics</b><small>Contract CT-2048, 120 seats, $60,480 a year</small></div><span class="pill ok">Active</span></div>
+        <div class="dhc-tabs"><span>Overview</span><span class="on">Terms History</span><span>Documents</span></div>${ev}</div>
+      <div class="dhc-cut"><span class="pill rv">Closed Won</span><b>This deal has a signed contract</b><p>Changing the amount to $72,000 means the deal no longer matches CT-2048.</p><div><span class="mb pri">Amend contract</span><span class="mb">Keep the deal as is</span></div></div>
+    </div>`;
+  },
   ledger(){
     const rows = [
       ['Operating account','••4410','a1',100,'ok','Reconciled'],
@@ -2604,6 +2667,69 @@ function renderDreamhubCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
+function renderDhContractsCase(p, next){
+  const CH = ['Overview','Solution','Research','Design process','Takeaways'];
+  const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
+  /* Placeholders until the real screens land in images/dreamhub-contracts-<file>.webp */
+  const shot = (file, label) => `<figure class="lw-shot"><div class="lw-ph" aria-hidden="true"><small>Design coming soon</small><b>${label}</b></div><img src="images/dreamhub-contracts-${file}.webp" alt="${label}" loading="lazy" onload="this.parentNode.classList.add('ready')" onerror="this.remove()"></figure>`;
+  const kv = arr => `<div class="learn">${arr.map(([t,d,led],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p>${led?`<p class="dhc-led"><small>Led to →</small>${led}</p>`:''}</div>`).join('')}</div>`;
+  const decisions = `<ol class="kd">${p.decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>`;
+  const led = k => `${String(k).padStart(2,'0')} ${p.decisions[k-1].t}`;
+  /* Notes for Guy to confirm or rewrite in his own words */
+  const todo = t => `<p class="lw-todo">${t}</p>`;
+  const screens = [
+    ['contract','Contract record','Every won deal hands over to a contract','When a deal closes, its terms become a contract: seats, price, start and end dates. The deal records the sale. The contract becomes the source of truth for what the customer signed.'],
+    ['terms-history','Terms History','The history reads like the account\'s story','Every change appears on one timeline, named in plain words and backed by a reference ID that never changes. When someone asks why a number moved, the answer is one line on the timeline.'],
+    ['intercept','Closed Won intercept','The CRM asks before it disagrees','Change the amount on a won deal and DreamHub asks what you mean, before the deal and the contract can split.'],
+    ['renewal','Renewal','A renewal starts a new agreement','A renewal starts as a copy of the current contract and becomes its own agreement, linked to the one before it.']
+  ];
+  caseInner.innerHTML = `
+    ${mainHead(p, metaDL(p))}
+    ${caseToc(CH)}
+    ${chapter(1)}
+    ${section('The problem', '<p><b>Most CRMs stop at Closed Won, but the customer relationship starts there.</b></p><p>After the win, the deal becomes a contract, the contract is amended as the customer grows, and a year later it is up for renewal. When the CRM stops at the win, all of that moves to spreadsheets, billing tools and memory. The deal says one thing, the contract says another, and nobody can tell which is right.</p><p>Most CRMs, including the newer AI-native ones, end at or near Closed Won. For DreamHub, the contract after the win had to be modelled as carefully as the deal before it.</p>')}
+    ${section('The project', '<p>DreamHub is an AI-native CRM for B2B software revenue teams, and my current work. It follows revenue from first touch through renewal, and treats retention as half of it. The goal of this project was to model what happens after Closed Won, so the CRM stays honest about what was signed, through every amendment and renewal.</p>' + todo('To confirm: the company stage and anything you want to add about the team.'))}
+    ${section('Role', `<p>As the sole product designer at DreamHub I:</p><ul class="plain">${['Shaped the contract model with engineering: what a contract is, what counts as a change, and what counts as a new agreement.','Designed the contract record, Terms History, the Closed Won intercept and the renewal flow.','Worked directly with the founders and engineers from the model to the final UI.'].map(r=>`<li>${r}</li>`).join('')}</ul>` + todo('To fill: who you worked with and when this shipped.'))}
+    ${section('Constraints', kv([
+      ['The deal already exists','Contracts had to grow out of the existing deal record without breaking pipeline and revenue reports.'],
+      ['Signed terms are history','What a customer signed can never be overwritten, so every change has to be traceable.'],
+      ['Reps move fast','No extra steps on the everyday path. Anything new could appear only when it matters.'],
+      ['Fixed meaning, flexible surface','In DreamHub every concept, renewals included, has one fixed meaning that the AI relies on. Teams can shape fields and stages, but a contract had to mean the same thing everywhere.']
+    ]) + todo('Check these against the real constraints and swap any that don\'t fit.'))}
+    ${chapter(2)}
+    <div class="og-quote"><small>The model in one line</small><p>After Closed Won, the contract is the source of truth, and the CRM never quietly disagrees with it.</p></div>
+    ${screens.map(([f,n,t,d]) => feature(shot(f, n), t, `<p>${d}</p>`)).join('')}
+    ${section('Key decisions', '<p>Four modelling decisions shaped everything above.</p>')}
+    ${decisions}
+    ${chapter(3)}
+    ${section('Closed Won is where the questions start', '<p>Watching how sales and finance teams actually work after a deal closes, four things kept coming up. Each one shaped a decision.</p>' + kv([
+      ['A renewal is signed again','Finance counts a renewal as new business: a new signature, new dates and often a new price. Nobody treats it as an edit to last year\'s deal.', led(1)],
+      ['Nobody remembers v7','When someone asks how an account grew, they ask in events: when it added seats, when the price changed. Version numbers answer none of that.', `${led(2)}, ${led(4)}`],
+      ['Won deals still get edited','Reps reopen won deals to fix an amount or a date, usually with good intentions. Every edit is a chance for the deal and the contract to disagree.', led(3)],
+      ['The handoff shouldn\'t be a handoff','When a deal closes, customer success inherits the account. If the terms live in a PDF or a spreadsheet, the first thing a CSM does is ask sales what was signed.', 'The contract record, one place sales, customer success and finance all read']
+    ]) + todo('To confirm: where these came from (customer calls, the sales team, RevOps, your own audit), and add a quote or a number if you have one.'))}
+    ${chapter(4)}
+    ${section('Each decision replaced an obvious model', `<p>Each time, there was an obvious model that looked fine in a demo, and a less obvious one that holds up under real B2B sales operations. On the left is where each decision started, and on the right is what we built.</p>
+      <div class="iter"><div class="iter-col fb"><small>Where it started</small><b>The obvious model</b><ul>${p.decisions.map(d=>`<li>${d.n}</li>`).join('')}</ul></div>
+      <div class="iter-arrow" aria-hidden="true">→</div>
+      <div class="iter-col me"><small>Where it landed</small><b>What we built</b><ul>${p.decisions.map(d=>`<li>${d.t}.</li>`).join('')}</ul></div></div>`)}
+    ${section('What each choice cost', kv([
+      ['More records, linked','A renewal as its own contract means more records. Linking each one to the agreement before it keeps the chain readable.'],
+      ['One more step, only at the risk','The intercept adds a step, so it appears only for financial fields on Closed Won deals, never for notes or contacts.'],
+      ['Short names, full detail','A generated name summarises the change. The full diff is one click away under the reference ID.']
+    ]) + todo('Check these trade-offs against what you actually built.'))}
+    ${chapter(5)}
+    ${section('Outcome', todo('To fill: what shipped, who uses it, and any signal since, such as fewer mismatches between deals and contracts, renewals tracked in DreamHub instead of spreadsheets, or a quote from a customer or the sales team.'))}
+    ${section('Lessons', kv([
+      ['Model the business, not the screen','The hardest part was deciding what a contract, a change and a renewal are. Once the model was honest, the screens were simple to design.'],
+      ['Invisible decisions are felt','Nobody notices that a renewal is a separate record. They notice when the numbers always match.'],
+      ['Interrupt at the right moment','A single question at the moment of risk beats both a locked record and a free-for-all.']
+    ]))}
+    ${section('What I\'d do next', '<p>Test Terms History with the people who read it most, finance and RevOps, and bring upcoming renewals onto the same timeline, next to the renewal forecast and health score customer success already works from, so a renewal shows up before it is due rather than when it is late.</p>' + todo('Rewrite in your own words, or keep.'))}
+    <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
+      <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  $('#case-bar-title').textContent = p.title;
+}
 function renderCase(p){
   const i = FLAT.indexOf(p), next = FLAT[(i+1) % FLAT.length];
   if (p.__customCase) return renderClalitCase(p, next);
@@ -2612,6 +2738,7 @@ function renderCase(p){
   if (p.__case === 'whatsapp') return renderWhatsappCase(p, next);
   if (p.__case === 'lwf') return renderLwfCase(p, next);
   if (p.__case === 'dreamhub') return renderDreamhubCase(p, next);
+  if (p.__case === 'dh-contracts') return renderDhContractsCase(p, next);
   const decisions = p.decisions ? p.decisions.map(d=>`<div class="dec"><h3>${d.t}</h3>
     <div class="dec-grid"><div><small>Considered</small>${d.c}</div><div class="chose"><small>Chose</small>${d.y}</div></div><p>${d.w}</p></div>`).join('') : '';
   const figs = (p.figures||[]).map(f => f.type==='flow' ? `<figure class="fig"><div class="flow">
