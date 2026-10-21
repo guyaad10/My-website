@@ -1240,49 +1240,6 @@ const PROJECTS = [
     ]
   },
   {
-    id:'draft', kind:'feature', wide:true, mock:'draft', ar:'16/9.5',
-    line:'This one is about making AI suggestions feel safe to accept.',
-    said:"I designed how AI edits get proposed, reviewed and undone inside Draft's collaborative editor.",
-    title:'Draft',
-    summary:'Designed how AI edits are proposed, reviewed and undone inside a collaborative document editor.',
-    role:'Senior product designer', company:'Draft (collaborative docs)', year:'2024',
-    tags:['AI features','Editor','Interaction design'],
-    context:[
-      "Draft is a document editor used by product and marketing teams. Leadership wanted to add AI rewriting, and the first prototype replaced text in place the moment you asked."
-    ],
-    problem:[
-      "In testing, people didn't trust edits they couldn't see. In shared documents it was worse: a collaborator's AI rewrite looked identical to a human edit, and nobody could tell what had changed or why."
-    ],
-    myRole:[
-      "I led design for the AI editing surface, from how it's invoked to review, attribution and undo, working with a PM, an ML engineer and two editor engineers. I also wrote the interaction specs the editor team built against."
-    ],
-    constraints:[
-      'Model responses took several seconds, so the document had to stay usable while waiting.',
-      "The editor's existing track-changes model couldn't be rewritten this cycle.",
-      'Suggestions had to survive several people editing the same paragraph.'
-    ],
-    decisions:[
-      {t:"Propose, don't replace", c:'Apply AI edits directly, with a single undo.', y:'Show edits as inline proposals using the track-changes grammar people already knew, applied only on accept.',
-       w:'Reusing a familiar model meant nothing new to teach, and it made AI edits reviewable by collaborators, not just the person who asked.'},
-      {t:'Stream into a layer, not the document', c:'Streaming generated text straight into the page.', y:"Streaming into a proposal layer that doesn't move anyone's cursor or reflow their text.",
-       w:"Live streaming into shared text broke collaborators' cursors and felt out of control. The proposal layer showed progress without taking the document hostage."},
-      {t:'Attribute every AI change', c:"Treating AI edits as the requesting person's own edits.", y:'Marking them as AI-assisted in history, alongside the instruction that produced them.',
-       w:'Reviewers wanted to know why something changed, not only who changed it.'}
-    ],
-    figures:[
-      {type:'flow', after:['Select text','Ask for a rewrite','Proposal appears inline','Accept, edit or reject','Logged with the instruction'],
-       cap:'The proposal lifecycle. Every AI feature in the editor now follows these five steps.'}
-    ],
-    outcome:[
-      'Proposals became the shared pattern for every AI feature in the editor.',
-      '[[Acceptance rate of AI proposals, or usage change after launch]]',
-      '[[Support-ticket trend for unexpected changes in shared docs]]'
-    ],
-    reflection:[
-      "We first treated latency as something to hide. It turned out to be a design material: showing where a proposal would land, before the text arrived, did more for trust than any loading state."
-    ]
-  },
-  {
     id:'relay', kind:'feature', wide:false, mock:'relay', ar:'16/10.5',
     line:'Mobile work, designed for people wearing gloves.',
     said:"I rebuilt Relay's field technician app around offline work and one-handed use.",
@@ -1509,20 +1466,6 @@ const MOCKS = {
           <ul class="lg-reasons"><li>Amount matches</li><li>Date within 2 days</li><li class="w">Reference differs</li></ul></div>
         <div class="lg-actions"><span class="mb pri">Accept match</span><span class="mb">Assign</span></div>
         <div class="lg-hist"><small>History</small><p><i class="av a2"></i>Maya flagged this</p><p><i class="av a1"></i>Engine suggested a match</p></div></aside>
-    </div></div>`;
-  },
-  draft(){
-    return `<div class="mk-stage mk-draft"><div class="win">
-      <div class="dr-bar"><span>Marketing / Q3 launch narrative</span><span class="avs"><i class="av a1"></i><i class="av a3"></i><i class="av a4"></i></span></div>
-      <div class="dr-body"><article class="dr-doc"><h4>Q3 launch narrative</h4>
-        <p>For the first time, teams can plan, review and ship a launch in one place.</p>
-        <p><del>Our customers have told us over and over again that the thing they struggle with most is keeping every stakeholder on the same page</del> <ins>Customers told us their hardest problem is keeping stakeholders aligned</ins> as a launch comes together.</p>
-        <div class="dr-pop"><i class="spark"></i><span>Make it more concise</span><span class="mb pri">Accept</span><span class="mb">Reject</span></div>
-        <div class="lines"><i></i><i></i><i class="m"></i></div><div class="lines"><i></i><i class="s"></i></div></article>
-      <aside class="dr-rail"><small>Proposals</small>
-        <div class="dr-prop on"><b>More concise</b><span>Paragraph 2, requested by you</span></div>
-        <div class="dr-prop"><b>Friendlier tone</b><span>Intro, requested by Sam</span><em>Accepted</em></div>
-        <div class="dr-prop"><b>Fix terminology</b><span>Section 3, requested by Ana</span></div></aside></div>
     </div></div>`;
   },
   relay(){
