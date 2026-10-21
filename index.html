@@ -2656,7 +2656,7 @@ function renderDreamhubCase(p, next){
       'Autonomy works best when it is earned in steps. Proving accuracy on a sample first made bulk actions something users chose, not something they feared.',
       'Explainable means actionable. A judgement is only useful when the person reading it knows what to do next.'
     ].map((t,k)=>`<div><span class="kd-n">0${k+1}</span><p>${t}</p></div>`).join('')}</div>`)}
-    ${section('What I’d do next', '<ul class="wa-list"><li>Learn from the review: when reps edit a token or reject a flagged claim, use it so the next draft makes fewer of them.</li><li>Ground the Deal Score too: link each fundamental to the call or email that proved it.</li></ul>' + todo('Draft ideas. Keep, change or replace them with what is really next.'))}
+    ${section('What I’d do next', '<ul class="wa-list"><li>Learn from the review: when reps edit a token or reject a flagged claim, use it so the next draft makes fewer of them.</li><li>Ground the Deal Score too: link each fundamental to the call or email that proved it.</li><li>Carry the trust layer into customer success, where Dreamer drafts outreach to at-risk accounts and health scores already promise to show which signal moved and why.</li></ul>' + todo('Draft ideas. Keep, change or replace them with what is really next.'))}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
