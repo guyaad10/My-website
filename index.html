@@ -2572,7 +2572,7 @@ function renderDreamhubCase(p, next){
     ['drafter','Email Drafter: commitment tokens, a flagged claim and the grounding bar','In the Email Drafter, review is the product','The draft arrives already marked up for the rep. Every commitment is an inline token, every capability claim is flagged, and a grounding bar shows where each statement came from.'],
     ['provenance','A task created by Dreamer, with its provenance line','Every task says who made it, and for whom','“Created by Dreamer · for Dana.” Anyone reading the pipeline can tell what a rep did and what the AI did on their behalf.'],
     ['autofill','AI-Autofill: the sample review and the bulk unlock','Autofill earns trust before it acts in bulk','It runs on a sample first. Bulk deployment unlocks only once sample accuracy clears 90%.'],
-    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','One of four health levels, judged on four named fundamentals. Risks are listed separately and never silently lower the level.']
+    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','One of four health levels, judged on four named fundamentals. Risks, like no executive engagement in three weeks, are listed separately and never silently lower the level.']
   ];
   const decisions = [
     {t:'Commitments become tokens',
@@ -2583,7 +2583,7 @@ function renderDreamhubCase(p, next){
      w:'An AI icon says that AI was involved. A provenance line says who is accountable, which is what a manager reviewing the pipeline needs.'},
     {t:'Autonomy is earned',
      y:'Autofill proves itself on a sample before it can run in bulk, and the bulk action stays locked until the sample clears the bar.',
-     w:'One wrong value is easy to fix. The same mistake across thousands of records is a cleanup project, and the end of the team’s trust in the feature.'},
+     w:'DreamHub’s AI climbs a ladder: capture, analyse, recommend, then act. Each step up has to be earned, because one bad bulk update across thousands of records ends the team’s trust in the feature.'},
     {t:'Risks never move the level',
      y:'The level is built from the four fundamentals only. Risks are listed on their own and never silently lower it.',
      w:'If a risk quietly pulled the score down, nobody could tell why a deal changed. This way the level always traces back to a fundamental someone can fix.'}
@@ -2605,7 +2605,7 @@ function renderDreamhubCase(p, next){
     ${caseToc(CH)}
     ${chapter(1)}
     ${section('The project', '<p>DreamHub is an AI-native sales CRM. Its AI, Dreamer, drafts emails, creates tasks, fills in records and judges the health of deals.</p>')}
-    ${section('The problem', '<p>Every CRM now ships AI that writes, fills and scores. The output is fast, but the person acting on it cannot check it: they send, accept or trust it blind. The risk is not that the AI is sometimes wrong. It is that nobody can tell when.</p>')}
+    ${section('The problem', '<p>Every CRM now ships AI that writes, fills and scores. The output is fast, but the person acting on it cannot check it: they send, accept or trust it blind. The risk is not that the AI is sometimes wrong. It is that nobody can tell when.</p><p>At DreamHub the stakes are higher. Dreamer does not just suggest: it fills qualification fields, creates tasks and drafts follow-ups with no rep input expected. The more the AI does on its own, the more the person needs to see what it did.</p>')}
     ${cards(problems)}
     ${section('Role', `<p>As DreamHub’s sole product designer I:</p><ul class="wa-list"><li>Owned the end-to-end design process, from discovery and user research through UX/UI, prototyping, implementation and QA.</li><li>Partnered directly with the founders, product and engineering to turn open problems into clear product decisions.</li><li>Took features from design to production with AI-assisted and agentic tools.</li></ul>` + todo('To add: when this work started and shipped, and who you worked with on it.'))}
     ${section('Constraints', kv([
@@ -2617,7 +2617,7 @@ function renderDreamhubCase(p, next){
     ${chapter(2)}
     <div class="og-quote"><small>The principle</small><p>The AI is visible, explainable and accountable, and the human stays the author of record.</p></div>
     ${surfaces.map(([f,label,t,d]) => feature(shot(f, label), t, `<p>${d}</p>`)).join('')}
-    ${section('The four fundamentals', '<p>The Deal Score judges every deal on the same four things, so a level always says what is there and what is missing.</p>' + kv([
+    ${section('The four fundamentals', '<p>The Deal Score judges every deal on the same four things, drawn from the qualification methods sales teams already use, like MEDDPICC. Each one has a fixed definition, so the same deal always gets the same answer, and a level always says what is there and what is missing.</p>' + kv([
       ['Champion','Someone inside the account is actively pushing the deal forward.'],
       ['Economic buyer','The person who owns the budget is known and involved.'],
       ['Pain and urgency','There is a real problem, and a reason to solve it now.'],
@@ -2627,6 +2627,13 @@ function renderDreamhubCase(p, next){
     <ol class="kd">${decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>
     ${chapter(3)}
     ${section('Trust breaks at the moment of action', '<p>The problem was never the AI’s output on its own. It was the moment a person had to act on it: send the email, accept the value, believe the score.</p>' + todo('To add: who you spoke to (reps, managers, RevOps), how many, and what you looked at in other CRMs.'))}
+    ${section('Other CRMs show a number, not a reason', kv([
+      ['Salesforce and HubSpot','AI added on top of generic fields. Deals get a score from 1 to 99 or a likelihood to close, and fields like “Champion” are free text the AI has to guess at.'],
+      ['Attio and Clarify','AI-native and flexible, but the sales method is something each team designs, builds and maintains itself.'],
+      ['Day.ai and Reevo','Strong at capturing activity and answering questions, with forecasting and scoring still manual or rolling out.'],
+      ['DreamHub','A fixed sales model, so the AI fills methodology fields itself. That autonomy is the reason the trust layer has to exist.']
+    ]))}
+    <div class="og-quote"><small>From DreamHub’s blog</small><p>A wrong field is worse than an empty one, because the failure is invisible downstream.</p></div>
     ${section('What I learned', `<div class="learn">${insights.map(([t,d,l],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p><p class="dh-led">→ ${l}</p></div>`).join('')}</div>` + todo('Replace these with what you actually heard, with a quote from a rep or manager if you have one.'))}
     ${chapter(4)}
     ${section('Replacing the obvious model', `<p>Each part of the trust layer started from the model most CRMs use. On the left is the obvious version, and on the right is what we built instead.</p>
