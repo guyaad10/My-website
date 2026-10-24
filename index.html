@@ -519,6 +519,9 @@ body.chat-view #thread{display:none}
 .wa-personas{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:stretch}
 .wa-persona{border-radius:8px;background:linear-gradient(rgba(255,255,255,.5),rgba(255,255,255,.5)),#E5DDD5 url(images/whatsapp-pattern.webp) center top/409px auto repeat;padding:22px 20px;display:flex;flex-direction:column}
 .wa-persona .wa-p-msg{margin-top:auto;padding-top:20px}
+.wa-persona.wa-org, .wa-persona.wa-inv{background:linear-gradient(rgba(255,255,255,.55),rgba(255,255,255,.55)),url(images/whatsapp-pattern.webp) center top/409px auto repeat,var(--tint);background-blend-mode:normal,luminosity,normal}
+.wa-persona.wa-org{--tint:#E2F2DA}.wa-persona.wa-inv{--tint:#F9F9F9}
+.wa-p-head .wa-role{margin-bottom:6px}
 .wa-p-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
 .wa-p-msg{display:flex;align-items:flex-end;gap:10px}
 .wa-p-msg img{width:52px;height:52px;border-radius:50%;flex:none;display:block}
@@ -1050,6 +1053,19 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-steps span::before{content:counter(wa-step) '.';flex:none;font-variant-numeric:tabular-nums}
 /* WhatsApp features: screens in a soft box */
 .wa-box{background:var(--surface-2);border-radius:8px;padding:36px 28px}
+/* organiser and invitee each get their own tint, here and in the wireframes */
+.wa-box.wa-org, .wa-wf-row.wa-org{background:#E2F2DA}
+.wa-box.wa-inv, .wa-wf-row.wa-inv{background:#F9F9F9}
+/* Wireframes: one sideways-scrolling strip per side */
+.wa-wf{max-width:var(--cw);margin:var(--pull) auto var(--sec);display:grid;gap:12px}
+/* scrollbar sits on the block's bottom edge; the track's bottom padding keeps it clear of the screens */
+.wa-wf-row{margin:0;border-radius:8px;padding:40px 0 8px;overflow:hidden}
+.wa-wf-row .wa-role{padding:0 48px;margin-bottom:28px}
+.wa-wf-track{display:flex;overflow-x:auto;overscroll-behavior-x:contain;padding:0 48px 36px;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent;cursor:grab}
+.wa-wf-track::after{content:'';flex:0 0 48px}
+.wa-wf-track.drag{cursor:grabbing;user-select:none}
+.wa-wf-track img{flex:none;display:block;height:360px;width:auto;max-width:none;-webkit-user-drag:none}
+@media (max-width:760px){.wa-wf-row{padding:28px 0 6px}.wa-wf-track{padding-bottom:26px}.wa-wf-row .wa-role{margin-bottom:20px}.wa-wf-row .wa-role,.wa-wf-track{padding-left:24px;padding-right:24px}.wa-wf-track::after{flex-basis:24px}.wa-wf-track img{height:300px}}
 /* two sides of one problem: keep them close to the intro and to each other */
 .cs:has(+ .wa-pair){margin-bottom:40px}
 .wa-pair{margin-bottom:128px}
@@ -2198,7 +2214,8 @@ function renderWhatsappCase(p, next){
   const box = (media, title, desc) => {
     const caps = [];
     media = media.replace(/<figcaption>(.*?)<\/figcaption>/g, (m, t) => (caps.push(t), ''));
-    return feature(`<div class="wa-box">${media}</div>`, title, (caps.length ? `<p class="feat-sub">${caps.join(', ')}</p>` : '') + desc);
+    const tone = {Organiser:' wa-org', Invitee:' wa-inv'}[title] || '';
+    return feature(`<div class="wa-box${tone}">${media}</div>`, title, (caps.length ? `<p class="feat-sub">${caps.join(', ')}</p>` : '') + desc);
   };
   const role = (r, t) => `<span class="wa-role">${r}</span>${t}`;
   const problems = [
@@ -2245,10 +2262,10 @@ function renderWhatsappCase(p, next){
     ${section('Why WhatsApp?', '<p>95% of respondents said their main tool for planning any event is messaging on WhatsApp. The group is already there, and end-to-end encryption keeps everything shared in the chat secure. So the answer was to bring the planning into the chat rather than build another app.</p>')}
     ${section('What I heard', `<div class="learn">${findings.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     ${section('Personas', `<p>Every event has two sides, so I wrote a persona for each.</p>
-      <div class="wa-personas"><div class="wa-persona"><div class="wa-p-head"><div><b>Oren Lev, the organiser</b><small>33, Tel Aviv. Data scientist, married with one child, and the planner of his friend group.</small></div></div>
+      <div class="wa-personas"><div class="wa-persona wa-org"><div class="wa-p-head"><div><span class="wa-role">Organiser</span><b>Oren Lev</b><small>33, Tel Aviv. Data scientist, married with one child, and the planner of his friend group.</small></div></div>
         <dl><div><dt>Frustrations</dt><dd>Chasing invitees for a reply. Juggling several apps to keep the event's details in order.</dd></div><div><dt>Needs</dt><dd>Tools that keep the information organised, and a chat that nudges invitees to act instead of just reading.</dd></div></dl>
         <div class="wa-p-msg"><img src="images/whatsapp-organiser.webp" alt="" width="56" height="56" loading="lazy"><blockquote>“Planning in a group chat should be easier. When everything happens in messages, it's hard to decide anything or follow what's going on.”</blockquote></div></div>
-      <div class="wa-persona"><div class="wa-p-head"><div><b>Shira Stein, the invitee</b><small>37, Kibbutz Palmachim. Social worker, married with three kids, and the “just tell me when to show up” type.</small></div></div>
+      <div class="wa-persona wa-inv"><div class="wa-p-head"><div><span class="wa-role">Invitee</span><b>Shira Stein</b><small>37, Kibbutz Palmachim. Social worker, married with three kids, and the “just tell me when to show up” type.</small></div></div>
         <dl><div><dt>Frustrations</dt><dd>The basic details are impossible to find in a running conversation. Too many dead group chats from past events.</dd></div><div><dt>Needs</dt><dd>A reminder of what's next and what to bring, and an event chat that goes away once the event is over.</dd></div></dl>
         <div class="wa-p-msg"><img src="images/whatsapp-invitee.webp" alt="" width="56" height="56" loading="lazy"><blockquote>“I'm honestly overwhelmed by all the texts about this event. Just tell me what to do and I promise it will happen.”</blockquote></div></div></div>`)}
     ${chapter(4)}
@@ -2258,12 +2275,22 @@ function renderWhatsappCase(p, next){
       <div class="og-car-track">${[['sketch-1','Events tab, attachment menu, voting cards and payment card'],['sketch-2','New task, RSVP card, event info and payments']].map(([f,t],k)=>`<div class="og-slide" role="group" aria-label="${k+1} of 2"><img src="images/whatsapp-${f}.webp" alt="Crazy 8 sketches: ${t}" loading="lazy"></div>`).join('')}</div>
       <button type="button" class="og-car-btn prev" aria-label="Previous sketch">‹</button><button type="button" class="og-car-btn next" aria-label="Next sketch">›</button>
       <div class="og-car-dots"><i class="on"></i><i></i></div></div>
+    ${section('Wireframes', '<p>Every flow, screen by screen, from both sides: the organiser who sets the event up, and the invitee who gets the invite and answers from the chat.</p>')}
+    <div class="wa-wf">${[['org','Organiser',14763,'Organiser wireframes: the Events tab, creating an event and inviting people, setting dates and places to vote on, tasks, payments and the event info'],['inv','Invitee',9520,'Invitee wireframes: the event chat, voting on the date and place, RSVP, picking up tasks and settling payments']].map(([k,r,w,a])=>`<figure class="wa-wf-row wa-${k}"><figcaption class="wa-role">${r}</figcaption><div class="wa-wf-track" tabindex="0" role="region" aria-label="${r} wireframes, scroll sideways"><img src="images/whatsapp-wf-${k}.webp" alt="${a}" width="${w}" height="720" loading="lazy"></div></figure>`).join('')}</div>
     ${chapter(5)}
     ${section('Next steps', `<p>Three ideas I would explore next.</p><div class="learn wa-next">${[['bell','#F7883B','Smart reminders','Let organisers schedule automatic nudges for tasks that are still open.'],['card','#13A486','Payment method','Choose cash, card or transfer when adding an expense or settling up.'],['lock','#F04438','Locked messages','Long-press a message to lock it, so key details can\'t get lost in the chat.']].map(([i,c,t,d])=>`<div><span class="wa-ic" style="background:${c}" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">${WA_ICONS[i]}</svg></span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     ${section('Looking back', '<p>WhatsApp has since shipped events in groups and Communities, close to the core of this idea. Today I would cut the scope further, and test the vote card and RSVP with a real group planning a real event before designing anything else.</p>')}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
+  /* Mouse users can drag the wireframe strips sideways; touch and trackpads scroll natively. */
+  caseInner.querySelectorAll('.wa-wf-track').forEach(t => {
+    let x0 = 0, s0 = 0;
+    t.addEventListener('pointerdown', e => { if (e.pointerType !== 'mouse') return; x0 = e.clientX; s0 = t.scrollLeft; t.classList.add('drag'); t.setPointerCapture(e.pointerId); });
+    t.addEventListener('pointermove', e => { if (t.classList.contains('drag')) t.scrollLeft = s0 - (e.clientX - x0); });
+    const end = () => t.classList.remove('drag');
+    t.addEventListener('pointerup', end); t.addEventListener('pointercancel', end);
+  });
   const gif = caseInner.querySelector('.wa-gif video');
   if (gif && reduced.matches) { gif.removeAttribute('autoplay'); gif.pause(); }
   /* Arrow from the first vote card to the matching card inside the chat screen, like the annotated screens elsewhere. */
