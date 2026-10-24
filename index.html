@@ -510,11 +510,6 @@ body.chat-view #thread{display:none}
 .og-icons{display:block;width:100%;height:auto;margin-top:32px}
 @media (max-width:760px){.og-persona{grid-template-columns:1fr}.og-sticker{width:160px;margin:-56px -8px 0 0;order:0;justify-self:end}.og-car{padding-top:0}.og-slide{padding:0 20px}.og-ba{gap:20px}.og-car-btn{display:none}.shot.og-flow .shot-img{padding:24px}.og-pair-row{gap:20px}.toc.c4{grid-template-columns:repeat(2,1fr)}.og-pal{grid-template-columns:repeat(4,1fr)}}
 /* WhatsApp Events case study */
-.wa-hero{max-width:var(--cw);margin:0 auto 72px;border-radius:var(--img-r);overflow:hidden;background:radial-gradient(120% 90% at 50% 0%,#25D366 0%,#128C7E 55%,#075E54 100%);aspect-ratio:968/600;display:flex;justify-content:center;align-items:flex-start;gap:6%;padding:7% 8% 0}
-.wa-hero img{display:block;width:30%;height:auto;filter:drop-shadow(0 30px 40px rgba(0,40,30,.35))}
-.wa-hero img + img{margin-top:7%}
-.wa-hero.wa-hero-vid{display:block;padding:0;aspect-ratio:2/1;background:#9fbde9}
-.wa-hero-vid video{display:block;width:100%;height:100%;object-fit:cover;cursor:pointer}
 .kd.wa-kd{grid-template-columns:repeat(3,minmax(0,1fr));grid-template-rows:auto auto 1fr}
 .kd.wa-kd li{grid-row:span 3}
 .wa-stats{list-style:none;max-width:var(--cw);margin:var(--pull) auto var(--sec);padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
@@ -601,7 +596,7 @@ body.chat-view #thread{display:none}
 .wa-ph b{font:500 1.125rem/1.25 var(--sans);letter-spacing:-.02em;text-wrap:balance}
 .wa-ic{width:36px;height:36px;border-radius:10px;display:grid;place-items:center;margin-bottom:20px}
 .wa-ic svg{width:20px;height:20px}
-@media (max-width:760px){.wa-car .og-slide{padding:0}.wa-hero{aspect-ratio:auto;padding:40px 20px 0;gap:4%;height:auto}.wa-hero img{width:44%}.kd.wa-kd{display:block}.wa-stats{grid-template-columns:1fr}.wa-personas{grid-template-columns:1fr}.shot.wa-flow .shot-img{padding:24px}.wa-media{gap:20px}.wa-media.three > *{width:44%}.wa-vid{border-radius:24px}}
+@media (max-width:760px){.wa-car .og-slide{padding:0}.kd.wa-kd{display:block}.wa-stats{grid-template-columns:1fr}.wa-personas{grid-template-columns:1fr}.shot.wa-flow .shot-img{padding:24px}.wa-media{gap:20px}.wa-media.three > *{width:44%}.wa-vid{border-radius:24px}}
 @media (max-width:1020px){
   .anno{padding:0;max-width:var(--cw)}
   .pin{border:0;right:auto!important;left:var(--x)!important;width:0;filter:none}
@@ -1321,7 +1316,7 @@ const PROJECTS = [
     id:'archive', kind:'archive',
     line:"Work from my student days. I’d design most of it differently today — and I think that’s a good thing 😅",
     items:[
-      {id:'whatsapp', __case:'whatsapp', mock:'whatsapp', ar:'4/5', title:'WhatsApp Events', summary:'Event planning tools built into WhatsApp group chats', role:'UX/UI designer', company:'School project', year:'2023', tags:['B2C','Mobile','UX/UI']},
+      {id:'whatsapp', __case:'whatsapp', cover:['whatsapp-cover.webp','Two friends on a city street at dusk read a phone together, with chat bubbles about a birthday invite floating around them'], mock:'whatsapp', ar:'4/5', title:'WhatsApp Events', summary:'Event planning tools built into WhatsApp group chats', role:'UX/UI designer', company:'School project', year:'2023', tags:['B2C','Mobile','UX/UI']},
       {id:'offgrid', __case:'offgrid', cover:['offgrid-cover.webp','Off Grid poster on a tiled street kiosk: We like you to travel as you wish'], mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2022', tags:['B2C','Mobile','UX/UI']},
       {id:'headspace', __case:'headspace', cover:['headspace-hero.png','Headspace-style illustrations around a Clalit app screen'], mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design, Illustrator', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
@@ -2218,8 +2213,7 @@ function renderWhatsappCase(p, next){
     ['Too many group chats','Every event gets its own new group, even though events are temporary, and those groups stay around long after.']
   ];
   caseInner.innerHTML = `
-    <header class="case-head"><h1 id="case-title">${p.title}</h1><p class="case-sum">A concept feature that turns a WhatsApp group into a lightweight event planner. Dates, places, tasks, RSVPs and shared costs live right where the conversation already happens.</p>${metaDL(p)}</header>
-    <div class="wa-hero wa-hero-vid"><video muted playsinline preload="auto" poster="images/whatsapp-hero-poster.webp" title="Replay" aria-label="Billboard animation: WhatsApp? Events! Plan anything, everywhere, with anyone, together."><source src="videos/whatsapp-hero.webm" type="video/webm"><source src="videos/whatsapp-hero.mp4" type="video/mp4"></video></div>
+    ${mainHead(p, metaDL(p), 'A concept feature that turns a WhatsApp group into a lightweight event planner. Dates, places, tasks, RSVPs and shared costs live right where the conversation already happens.')}
     ${caseToc(CH)}
     ${chapter(1)}
     ${section('About', '<p>Almost every get-together, from a birthday to a weekend trip, gets planned in a WhatsApp group. WhatsApp Events adds the tools those groups are missing without pulling anyone out of the chat: a date and a place everyone agrees on, shared task lists, RSVPs and split payments.</p><p>Like a group admin, every event has an organiser, who can make it open or private and send reminders to friends and family. An event can repeat, like a weekly game night, or wrap up and disappear once it\'s over.</p>')}
@@ -2270,14 +2264,6 @@ function renderWhatsappCase(p, next){
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
-  /* Hero billboard: plays once when it scrolls into view and holds on the last frame; click to replay. */
-  const hero = caseInner.querySelector('.wa-hero-vid video');
-  if (hero) {
-    const go = () => { hero.currentTime = 0; hero.playbackRate = .85; hero.play().catch(()=>{}); };
-    if (reduced.matches) hero.addEventListener('loadedmetadata', () => { hero.currentTime = hero.duration; }, {once:true});
-    else new IntersectionObserver((es, io) => { if (es[0].isIntersecting) { io.disconnect(); go(); } }, {threshold:.4}).observe(hero);
-    hero.addEventListener('click', go);
-  }
   const gif = caseInner.querySelector('.wa-gif video');
   if (gif && reduced.matches) { gif.removeAttribute('autoplay'); gif.pause(); }
   /* Arrow from the first vote card to the matching card inside the chat screen, like the annotated screens elsewhere. */
