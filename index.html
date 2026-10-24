@@ -2430,8 +2430,8 @@ function renderDreamhubCase(p, next){
     ${cards(problems)}
     ${section('Role', `<p>As DreamHub’s sole product designer I:</p><ul class="wa-list"><li>Owned the end-to-end design process, from discovery through UX/UI, prototyping, implementation and QA.</li><li>Partnered directly with the founders, product and engineering to turn open problems into clear product decisions.</li><li>Worked closely with the data science team to shape how Dreamer’s scores, filled fields and confidence show up for sales reps.</li><li>Took features from design to production with AI-assisted and agentic tools.</li></ul>` + todo('To add: when this work started and shipped, and who you worked with on it.'))}
     ${section('Constraints', kv([
-      ['The model will be wrong sometimes','The design could not assume a perfect model. It had to make mistakes easy to catch.'],
-      ['Reps are paid to sell, not to review','Every check had to take seconds, or reps would skip it.'],
+      ['The model will be wrong sometimes','The design could not assume a perfect model. Reps had to see at a glance which claims Dreamer was less sure of, without reading a percentage on every line.'],
+      ['Reps and the AI will disagree','A rep may say a deal has a champion while the calls say otherwise. Dreamer had to show its evidence, not just insist, and the rep had to be able to overrule it.'],
       ['Two readers for every output','A rep acts on it and a manager judges it. Both need to understand the same screen.'],
       ['One designer, an early-stage team','Patterns had to be simple enough to reuse across every AI feature.']
     ]) + todo('Check these four against the real constraints, and add any from engineering or the model.'))}
