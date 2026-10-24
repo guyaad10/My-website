@@ -2456,10 +2456,10 @@ function renderDreamhubCase(p, next){
     ${chapter(3)}
     ${section('Trust breaks at the moment of action', '<p>The problem was never the AI’s output on its own. It was the moment a person had to act on it: send the email, accept the value, believe the score.</p>' + todo('To add: who you spoke to (reps, managers, RevOps), how many, and what you looked at in other CRMs.'))}
     ${section('Other CRMs show a number, not a reason', `<div class="learn">${[
-      [['salesforce','hubspot'],'Salesforce and HubSpot','AI added on top of generic fields. Deals get a score from 1 to 99 or a likelihood to close, and fields like “Champion” are free text the AI has to guess at.'],
-      [['attio','clarify.png'],'Attio and Clarify','AI-native and flexible, but the sales method is something each team designs, builds and maintains itself.'],
-      [['dayai.png','reevo.png'],'Day.ai and Reevo','Strong at capturing activity and answering questions, with forecasting and scoring still manual or rolling out.'],
-      [['dreamhub.png'],'DreamHub','A fixed sales model, so the AI fills methodology fields itself. That autonomy is the reason the trust layer has to exist.']
+      [['salesforce','hubspot'],'Salesforce and HubSpot','Reps still type most of the data in, and methods like MEDDPICC live in custom fields. The AI scores on top: a number from 1 to 99 or a likelihood to close, with no reason a rep can act on.'],
+      [['attio','clarify.png'],'Attio and Clarify','AI-native and flexible, but each team designs, builds and maintains its own sales method. The AI is only as good as that setup.'],
+      [['dayai.png','reevo.png'],'Day.ai and Reevo','Strong at capturing activity and answering questions. Forecasting and scoring are still manual or rolling out, so reps get notes, not a read on the deal.'],
+      [['dreamhub.png'],'DreamHub','MEDDPICC and SPICED are built in and filled from every call and email. Reps stop typing, but now act on fields they did not write. That is why the trust layer has to exist.']
     ].map(([logos,t,d])=>`<div><span class="dh-logos">${logos.map(f=>`<span class="dh-logo${f.endsWith('.png')?' full':''}">${f[0].toUpperCase()}<img src="images/dreamhub-logos/${f.includes('.')?f:f+'.svg'}" alt="" width="20" height="20" onerror="this.remove()"></span>`).join('')}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     <div class="og-quote"><small>From DreamHub’s blog</small><p>A wrong field is worse than an empty one, because the failure is invisible downstream.</p></div>
     ${section('What I learned', `<div class="learn">${insights.map(([t,d,l],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p><p class="dh-led">→ ${l}</p></div>`).join('')}</div>` + todo('Replace these with what you actually heard, with a quote from a rep or manager if you have one.'))}
