@@ -720,6 +720,13 @@ body.chat-view #thread{display:none}
 .chips{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
 .chips li{padding:7px 14px;border-radius:999px;background:var(--surface-2);font-size:.9375rem;color:var(--body)}
 .learn{display:grid;grid-template-columns:1fr 1fr;gap:0}
+.dh-logos{display:flex;margin-bottom:20px}
+.dh-logo{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-size:.9375rem;font-weight:600;color:var(--ink-2)}
+.dh-logo + .dh-logo{margin-left:-8px}
+.dh-logo:last-child{box-shadow:0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)}
+.dh-logo img{position:absolute;inset:0;width:100%;height:100%;padding:7px;box-sizing:border-box;border-radius:inherit;background:#fff;object-fit:contain}
+.dh-logo.full{border:0}
+.dh-logo.full img{padding:0}
 .learn > div{padding:4px 28px 32px}
 .cs-body p + .learn{margin-top:32px}
 .learn > div:nth-child(odd){padding-left:0}
@@ -1193,7 +1200,7 @@ const PROJECTS = [
     line:'At DreamHub, an AI-native sales CRM, I’m the only designer. Most of my work is deciding what the AI shows before anyone acts on it.',
     said:'Every CRM now ships AI that writes, fills and scores. I designed what happens between the AI’s output and the human’s action, so the AI stays visible, explainable and accountable, and the rep stays the author of record.',
     title:'DreamHub: AI that shows its work',
-    summary:'Dreamer’s trust layer: CRM AI that writes, fills and scores, designed so the person acting on it can always see what it did and why.',
+    summary:'Helping sales reps trust Dreamer, the AI that writes their emails, fills their CRM and scores their deals, by always showing what it did and why.',
     role:'Product designer, sole designer', company:'DreamHub', year:'2026',
     tags:['B2B SaaS','AI-native','CRM']
   },
@@ -2487,10 +2494,10 @@ function renderDreamhubCase(p, next){
     ${section('The project', '<p>DreamHub is an AI-native sales CRM. Its AI, Dreamer, drafts emails, creates tasks, fills in records and judges the health of deals.</p>')}
     ${section('The problem', '<p>Every CRM now ships AI that writes, fills and scores. The output is fast, but the person acting on it cannot check it: they send, accept or trust it blind. The risk is not that the AI is sometimes wrong. It is that nobody can tell when.</p><p>At DreamHub the stakes are higher. Dreamer does not just suggest: it fills qualification fields, creates tasks and drafts follow-ups with no rep input expected. The more the AI does on its own, the more the person needs to see what it did.</p>')}
     ${cards(problems)}
-    ${section('Role', `<p>As DreamHub’s sole product designer I:</p><ul class="wa-list"><li>Owned the end-to-end design process, from discovery and user research through UX/UI, prototyping, implementation and QA.</li><li>Partnered directly with the founders, product and engineering to turn open problems into clear product decisions.</li><li>Took features from design to production with AI-assisted and agentic tools.</li></ul>` + todo('To add: when this work started and shipped, and who you worked with on it.'))}
+    ${section('Role', `<p>As DreamHub’s sole product designer I:</p><ul class="wa-list"><li>Owned the end-to-end design process, from discovery through UX/UI, prototyping, implementation and QA.</li><li>Partnered directly with the founders, product and engineering to turn open problems into clear product decisions.</li><li>Worked closely with the data science team to shape how Dreamer’s scores, filled fields and confidence show up for sales reps.</li><li>Took features from design to production with AI-assisted and agentic tools.</li></ul>` + todo('To add: when this work started and shipped, and who you worked with on it.'))}
     ${section('Constraints', kv([
-      ['The model will be wrong sometimes','The design could not assume a perfect model. It had to make mistakes easy to catch.'],
-      ['Reps are paid to sell, not to review','Every check had to take seconds, or reps would skip it.'],
+      ['The model will be wrong sometimes','The design could not assume a perfect model. Reps had to see at a glance which claims Dreamer was less sure of, without reading a percentage on every line.'],
+      ['Reps and the AI will disagree','A rep may say a deal has a champion while the calls say otherwise. Dreamer had to show its evidence, not just insist, and the rep had to be able to overrule it.'],
       ['Two readers for every output','A rep acts on it and a manager judges it. Both need to understand the same screen.'],
       ['Same answer, every time','Every DreamHub concept has one fixed meaning, so the AI’s output had to be consistent and traceable back to that definition.']
     ]) + todo('Check these four against the real constraints, and add any from engineering or the model.'))}
@@ -2507,12 +2514,12 @@ function renderDreamhubCase(p, next){
     <ol class="kd">${decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>
     ${chapter(3)}
     ${section('Trust breaks at the moment of action', '<p>The problem was never the AI’s output on its own. It was the moment a person had to act on it: send the email, accept the value, believe the score.</p>' + todo('To add: who you spoke to (reps, managers, RevOps), how many, and what you looked at in other CRMs.'))}
-    ${section('Other CRMs show a number, not a reason', kv([
-      ['Salesforce and HubSpot','AI added on top of generic fields. Deals get a score from 1 to 99 or a likelihood to close, and fields like “Champion” are free text the AI has to guess at.'],
-      ['Attio and Clarify','AI-native and flexible, but the sales method is something each team designs, builds and maintains itself.'],
-      ['Day.ai and Reevo','Strong at capturing activity and answering questions, with forecasting and scoring still manual or rolling out.'],
-      ['DreamHub','A fixed sales model, so the AI fills methodology fields itself. That autonomy is the reason the trust layer has to exist.']
-    ]))}
+    ${section('Other CRMs show a number, not a reason', `<div class="learn">${[
+      [['salesforce','hubspot'],'Salesforce and HubSpot','Reps type deal details in by hand. The AI gives back a score from 1 to 99 but never says why, so reps can’t tell what to fix.'],
+      [['attio','clarify.png'],'Attio and Clarify','Each team builds its own fields and sales process before the AI can help. Reps get whatever their admin set up, and it varies from team to team.'],
+      [['dayai.png','reevo.png'],'Day.ai and Reevo','Reps get good call notes and quick answers. Nobody tells them how healthy a deal is, so they still judge it on gut feel.'],
+      [['dreamhub.png'],'DreamHub','Reps don’t type anything. The AI fills in the deal from calls and emails, so reps act on information they didn’t write and need to see where it came from.']
+    ].map(([logos,t,d])=>`<div><span class="dh-logos">${logos.map(f=>`<span class="dh-logo${f.endsWith('.png')?' full':''}">${f[0].toUpperCase()}<img src="images/dreamhub-logos/${f.includes('.')?f:f+'.svg'}" alt="" width="20" height="20" onerror="this.remove()"></span>`).join('')}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     <div class="og-quote"><small>From DreamHub’s blog</small><p>A wrong field is worse than an empty one, because the failure is invisible downstream.</p></div>
     ${section('What I learned', `<div class="learn">${insights.map(([t,d,l],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p><p class="dh-led">→ ${l}</p></div>`).join('')}</div>` + todo('Replace these with what you actually heard, with a quote from a rep or manager if you have one.'))}
     ${chapter(4)}
@@ -2561,7 +2568,7 @@ function renderDhContractsCase(p, next){
     ${mainHead(p, metaDL(p))}
     ${caseToc(CH)}
     ${chapter(1)}
-    ${section('The problem', '<p><b>Most CRMs stop at Closed Won, but the customer relationship starts there.</b></p><p>After the win, the deal becomes a contract, the contract is amended as the customer grows, and a year later it is up for renewal. When the CRM stops at the win, all of that moves to spreadsheets, billing tools and memory. The deal says one thing, the contract says another, and nobody can tell which is right.</p><p>Most CRMs, including the newer AI-native ones, end at or near Closed Won. For DreamHub, the contract after the win had to be modelled as carefully as the deal before it.</p>')}
+    ${section('The problem', '<p><b>Sales and customer success work in different tools, so every handoff loses something.</b></p><p>Reps close the deal in the CRM. Customer success managers (CSMs) take over in a separate CS tool, a spreadsheet or the billing system. What the customer actually signed has no clear home, so CSMs rebuild it from kickoff calls and old emails.</p><p>Then the contract is amended, or comes up for renewal. The deal says one thing, the contract says another, and nobody can tell which is right. DreamHub had to give sales and CS one place to work, with the contract at its centre.</p>')}
     ${section('The project', '<p>DreamHub is an AI-native CRM for B2B software revenue teams, and my current work. It follows revenue from first touch through renewal, and treats retention as half of it. The goal of this project was to model what happens after Closed Won, so the CRM stays honest about what was signed, through every amendment and renewal.</p>' + todo('To confirm: the company stage and anything you want to add about the team.'))}
     ${section('Role', `<p>As the sole product designer at DreamHub I:</p><ul class="plain">${['Shaped the contract model with engineering: what a contract is, what counts as a change, and what counts as a new agreement.','Designed the contract record, Terms History, the Closed Won intercept and the renewal flow.','Worked directly with the founders and engineers from the model to the final UI.'].map(r=>`<li>${r}</li>`).join('')}</ul>` + todo('To fill: who you worked with and when this shipped.'))}
     ${section('Constraints', kv([
