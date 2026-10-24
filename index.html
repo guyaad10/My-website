@@ -611,12 +611,11 @@ body.chat-view #thread{display:none}
 .lw-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
 .lw-ph b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);text-wrap:balance}
 .lw-shot figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
-.lw-ba{display:grid;gap:32px;margin-top:28px}
 .lw-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
 .lw-shot img{display:block;width:100%;height:auto;border-radius:8px}
 .cs-body .lw-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
 .lw-kd p{color:var(--ink-3)}
-@media (max-width:760px){.lw-ba{gap:20px}.lw-row{grid-template-columns:1fr;gap:20px}.lw-ph{border-radius:8px}.lw-hero .lw-shot:not(.lw-p){width:70%}.lw-hero .lw-shot.lw-p{width:20%}.lw-row.lw-p{grid-template-columns:repeat(3,1fr);gap:12px}.lw-shot.lw-p .lw-ph{border-radius:8px}}
+@media (max-width:760px){.lw-row{grid-template-columns:1fr;gap:20px}.lw-ph{border-radius:8px}.lw-hero .lw-shot:not(.lw-p){width:70%}.lw-hero .lw-shot.lw-p{width:20%}.lw-row.lw-p{grid-template-columns:repeat(3,1fr);gap:12px}.lw-shot.lw-p .lw-ph{border-radius:8px}}
 .lw-hero .lw-p .lw-ph *{display:none}
 .feat-media .lw-row{margin-top:0}
 .wa-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;color:#fff;background:radial-gradient(90% 60% at 50% 40%,#128C7E 0%,#075E54 60%,#06392F 100%)}
@@ -2384,7 +2383,7 @@ function renderLwfCase(p, next){
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* kind: true for a phone, 'wd' for a wide board (flows, sitemap), nothing for a tablet */
   const shot = (file, label, cap='', kind=false) => `<figure class="lw-shot${kind===true?' lw-p':kind?' '+kind:''}"><div class="lw-ph" aria-hidden="true"><small>Design coming soon</small><b>${label}</b></div><img src="images/lwf-${file}.webp" alt="${label}" loading="lazy" onload="this.parentNode.classList.add('ready')" onerror="this.remove()">${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
-  const ba = (file, label) => `<div class="lw-ba">${shot(file+'-before', label+', before', 'Before')}${shot(file+'-after', label+', after', 'After')}</div>`;
+  const ba = (file, label) => wireUi(`lwf-${file}-before.webp`, `lwf-${file}-after.webp`, label, {tags:['Before','After'], cap:label});
   const list = arr => `<ul class="wa-list">${arr.map(t=>`<li>${t}</li>`).join('')}</ul>`;
   const kd = arr => `<ol class="kd og-kd">${arr.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
   const learn = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
@@ -2426,7 +2425,7 @@ function renderLwfCase(p, next){
     ${section('Core flows', '<p>The flows people use every day, redesigned from start to end: handling an alert, and adding a new sensor.</p>' + shot('flows', 'User flows for handling an alert and adding a sensor', '', 'wd'))}
     ${section('Wireframes', '<p>Wireframes to test the new structure and flows with the LWF team before any visual design.</p>' + shot('wireframes', 'Wireframes of the new system', '', 'wd') + wireUi('lwf-wire-dashboard.webp', 'lwf-dashboard.webp', 'Home screen', {cap:'Drag to compare the wireframe with the final UI'}))}
     ${section('Design system', '<p>A modern, calm look that matches the quality of the technology: a clear status colour scale, readable type for the field, and one set of components for tablet and mobile.</p>' + todo('To fill: the palette, type and key components, like the palette in Off Grid.') + shot('design-system', 'Colours, type and components', '', 'wd'))}
-    ${section('Before and after', '<p>The same screens, before and after the redesign.</p>' + ['dashboard','alerts','alert'].map(f => ba(f, screens.find(s=>s[0]===f)[1])).join(''))}
+    ${section('Before and after', '<p>The same screens, before and after the redesign. Drag to compare.</p>' + ['dashboard','alerts','alert'].map(f => ba(f, screens.find(s=>s[0]===f)[1])).join(''))}
     ${chapter(5)}
     ${section('Shipped', '<p>The redesign shipped as version 2.0 of LWF Observer, with a simpler structure and a new interface across the system.</p>' + todo('Confirm the release, and add anything you know about how it landed: client feedback, adoption, fewer support calls.'))}
     ${section('What I learned', '<p>Simplifying a technical product is mostly deciding what not to show. Every piece of data mattered to the engineers who built it; the job was to turn it into answers for the people who use it.</p>' + todo('Rewrite in your own words, or keep.'))}
