@@ -422,10 +422,13 @@ body.chat-view #thread{display:none}
 .hs-pair.one{grid-template-columns:46%;justify-content:center}
 .hs-pair .shot-img{border-radius:0;background:none;box-shadow:none}
 .hs-pair .shot-img:hover{box-shadow:none}
-.case-cover{position:relative;border-radius:var(--img-r);overflow:hidden;aspect-ratio:var(--cover-ar,2172/1450);background:#D9D2C6;margin-bottom:24px}
+/* every case study cover shares one height: 16:9 on desktop, 4:5 on phones */
+.case-cover{position:relative;border-radius:var(--img-r);overflow:hidden;aspect-ratio:16/9;background:#D9D2C6;margin-bottom:24px}
 .case-cover>img{display:block;width:100%;height:100%;object-fit:cover}
-/* a mock cover keeps its own proportions; its em-based layout scales with the cover width */
-.case-cover.mock{aspect-ratio:var(--ar);container-type:inline-size;isolation:isolate}
+/* the Headspace art is wider than the cover, so keep the phone in frame */
+@media (min-width:761px){.case-cover>img[src$="headspace-hero.png"]{object-position:22% 50%}}
+/* a mock cover's em-based layout scales with the cover width */
+.case-cover.mock{container-type:inline-size;isolation:isolate}
 /* the title sits on the photo, Wonderful-style: white, bottom left, over a soft shade so it reads on any part of the shot */
 .case-cover::before{content:"";position:absolute;inset:0;z-index:1;pointer-events:none;background:linear-gradient(to top, rgba(10,14,24,.62), rgba(10,14,24,.18) 42%, transparent 64%)}
 .case-head.has-cover h1{position:absolute;left:6%;right:6%;bottom:7%;z-index:2;margin:0;color:#fff;text-wrap:balance}
@@ -888,10 +891,9 @@ body.chat-view #thread{display:none}
 .mk-dh .dh-score li.no::before{content:"–";color:#C9C6D4}
 .mk-dh .dh-who{position:absolute;right:6%;bottom:9%;padding:.9cqw 1.6cqw;border-radius:99px;background:rgba(255,255,255,.14);color:#fff;font-size:1.4cqw;backdrop-filter:blur(6px)}
 /* on the case cover the title needs the lower left, so only the draft stays, smaller, top right */
-.case-cover.mock:has(.mk-dh){aspect-ratio:2172/1450}
 .case-cover .mk-dh .dh-score{display:none}
-.case-cover .mk-dh .dh-mail{top:7%;transform:scale(.86);transform-origin:top right}
-@media (max-width:760px){.case-cover.mock:has(.mk-dh){aspect-ratio:4/5}.case-cover .mk-dh .dh-mail{top:6%;right:6%;width:88%;transform:none;zoom:1.7}.case-cover .mk-dh .dh-who{display:none}}
+.case-cover .mk-dh .dh-mail{top:7%;transform:scale(.72);transform-origin:top right}
+@media (max-width:760px){.case-cover .mk-dh .dh-mail{top:6%;right:6%;width:88%;transform:none;zoom:1.7}.case-cover .mk-dh .dh-who{display:none}}
 /* placeholders until the screens arrive; a real image hides its placeholder once it loads */
 .dh-ph{aspect-ratio:var(--ph-ar,16/10);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
 .dh-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
@@ -1321,7 +1323,7 @@ const PROJECTS = [
     items:[
       {id:'whatsapp', __case:'whatsapp', mock:'whatsapp', ar:'4/5', title:'WhatsApp Events', summary:'Event planning tools built into WhatsApp group chats', role:'UX/UI designer', company:'School project', year:'2023', tags:['B2C','Mobile','UX/UI']},
       {id:'offgrid', __case:'offgrid', cover:['offgrid-cover.webp','Off Grid poster on a tiled street kiosk: We like you to travel as you wish'], mock:'offgrid', ar:'4/5', title:'Off Grid', summary:'A trip planner that builds each day around your interests', role:'UX/UI designer', company:'Personal project', year:'2022', tags:['B2C','Mobile','UX/UI']},
-      {id:'headspace', __case:'headspace', cover:['headspace-hero.png','Headspace-style illustrations around a Clalit app screen','2880/1296'], mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design, Illustrator', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
+      {id:'headspace', __case:'headspace', cover:['headspace-hero.png','Headspace-style illustrations around a Clalit app screen'], mock:'headspace', ar:'4/5', title:'Clalit × Headspace', summary:'The Clalit app reimagined in the Headspace design system', role:'UX & UI Design, Illustrator', company:'Concept project', year:'2022', tags:['B2C','Mobile','Illustration'],
        intro:'An imaginary UI project that shows how the Clalit Health Services app could look if it inherited the Headspace design system.',
        context:['An imaginary UI design project showing how the Clalit Health Services app would look if it inherited the Headspace design system. The aim was a friendlier interface that improves the experience and accessibility for a wider audience.'],
        why:'A friendly, positive UI matters in healthcare products. It builds confidence, encourages people to engage with and keep track of their health, and eases the anxiety and stress that come with medical care. The result is a supportive space for managing your health.',
@@ -2025,13 +2027,12 @@ function spyToc(){
 }
 /* Header for the main (featured) case studies: the title sits on the cover, summary underneath.
    The cover is the project's photo, or its mock when it has no photo yet.
-   A title's colon becomes a line break there, so "Clalit Innovation: Patient Record" reads as two lines.
-   An optional third cover entry sets the cover's aspect ratio (desktop only). */
+   A title's colon becomes a line break there, so "Clalit Innovation: Patient Record" reads as two lines. */
 function mainHead(p, meta, summary=p.summary){
   const t = `<h1 id="case-title">${p.title.replace(/:\s+/, '<br>')}</h1>`;
   const id = p.__customCase ? '' : ' id="case-hero"';
-  const cover = p.cover ? `<div class="case-cover"${id}${p.cover[2] ? ` style="--cover-ar:${p.cover[2]}"` : ''}><img src="images/${p.cover[0]}" alt="${p.cover[1]}">${t}</div>`
-    : p.mock ? `<div class="case-cover mock"${id} style="--ar:${p.ar}">${MOCKS[p.mock]()}${t}</div>` : t;
+  const cover = p.cover ? `<div class="case-cover"${id}><img src="images/${p.cover[0]}" alt="${p.cover[1]}">${t}</div>`
+    : p.mock ? `<div class="case-cover mock"${id}>${MOCKS[p.mock]()}${t}</div>` : t;
   return `<header class="case-head main${cover !== t ? ' has-cover' : ''}">${cover}<p class="case-sum">${summary}</p>${meta}</header>`;
 }
 function renderClalitCase(p){
