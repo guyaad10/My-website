@@ -1058,13 +1058,14 @@ html.theme-dark .art{background:var(--surface);box-shadow:none}
 .wa-box.wa-inv, .wa-wf-row.wa-inv{background:#F9F9F9}
 /* Wireframes: one sideways-scrolling strip per side */
 .wa-wf{max-width:var(--cw);margin:var(--pull) auto var(--sec);display:grid;gap:12px}
-.wa-wf-row{margin:0;border-radius:8px;padding:40px 0 28px;overflow:hidden}
+/* scrollbar sits on the block's bottom edge; the track's bottom padding keeps it clear of the screens */
+.wa-wf-row{margin:0;border-radius:8px;padding:40px 0 8px;overflow:hidden}
 .wa-wf-row .wa-role{padding:0 48px;margin-bottom:28px}
-.wa-wf-track{display:flex;overflow-x:auto;overscroll-behavior-x:contain;padding:0 48px 16px;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent;cursor:grab}
+.wa-wf-track{display:flex;overflow-x:auto;overscroll-behavior-x:contain;padding:0 48px 36px;scrollbar-width:thin;scrollbar-color:rgba(0,0,0,.18) transparent;cursor:grab}
 .wa-wf-track::after{content:'';flex:0 0 48px}
 .wa-wf-track.drag{cursor:grabbing;user-select:none}
 .wa-wf-track img{flex:none;display:block;height:360px;width:auto;max-width:none;-webkit-user-drag:none}
-@media (max-width:760px){.wa-wf-row{padding:28px 0 20px}.wa-wf-row .wa-role{margin-bottom:20px}.wa-wf-row .wa-role,.wa-wf-track{padding-left:24px;padding-right:24px}.wa-wf-track::after{flex-basis:24px}.wa-wf-track img{height:300px}}
+@media (max-width:760px){.wa-wf-row{padding:28px 0 6px}.wa-wf-track{padding-bottom:26px}.wa-wf-row .wa-role{margin-bottom:20px}.wa-wf-row .wa-role,.wa-wf-track{padding-left:24px;padding-right:24px}.wa-wf-track::after{flex-basis:24px}.wa-wf-track img{height:300px}}
 /* two sides of one problem: keep them close to the intro and to each other */
 .cs:has(+ .wa-pair){margin-bottom:40px}
 .wa-pair{margin-bottom:128px}
