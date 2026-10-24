@@ -564,6 +564,33 @@ body.chat-view #thread{display:none}
 .wa-vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .4s var(--ease)}
 .wa-vid.ready video{opacity:1}
 .wa-vid.ready .wa-ph{display:none}
+/* Wireframe to UI slider: the UI sits underneath, the wireframe on top is clipped at --pos */
+.wu{--pos:50%;margin:28px 0 0}
+.wu-frame{position:relative;border-radius:8px;overflow:hidden;background:#F4F4F6;cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none}
+.wu-layer{position:absolute;inset:0}
+.wu-layer img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block;opacity:0;transition:opacity .3s var(--ease)}
+.wu-layer.ready img{opacity:1}
+.wu-wire{clip-path:inset(0 calc(100% - var(--pos)) 0 0)}
+.wu-ph{position:absolute;inset:0;display:grid;grid-template-columns:22% 1fr;grid-template-rows:12% 1fr 1fr;gap:4%;padding:6%}
+.wu-ph i{display:block;border-radius:6px}
+.wu-ph i:first-child{grid-row:1/4}
+.wu-ph i:nth-child(2){grid-column:2}
+.wu-ph i:nth-child(3){grid-column:2;grid-row:2/4}
+.wu-ui .wu-ph{background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%)}
+.wu-ui .wu-ph i{background:rgba(255,255,255,.9)}
+.wu-ui .wu-ph i:first-child{background:rgba(255,255,255,.18)}
+.wu-wire .wu-ph{background:#FAFAFB}
+.wu-wire .wu-ph i{border:1.5px dashed #B9B9C2;background:repeating-linear-gradient(135deg,transparent 0 10px,rgba(0,0,0,.025) 10px 11px)}
+.wu-layer.ready .wu-ph{display:none}
+.wu-tag{position:absolute;top:14px;z-index:2;padding:5px 10px;border-radius:8px;font-size:.8125rem;font-weight:600;letter-spacing:.01em;background:rgba(255,255,255,.92);color:var(--ink);box-shadow:0 2px 10px -4px rgba(15,15,30,.3);pointer-events:none;transition:opacity .2s}
+.wu-tag.l{left:14px}.wu-tag.r{right:14px}
+.wu-bar{position:absolute;top:0;bottom:0;left:var(--pos);z-index:3;width:2px;margin-left:-1px;background:#fff;box-shadow:0 0 0 1px rgba(15,15,30,.12);pointer-events:none}
+.wu-bar::after{content:"";position:absolute;top:50%;left:50%;width:40px;height:40px;margin:-20px 0 0 -20px;border-radius:50%;background:#fff url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%230E0E10' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M7 5 2 10l5 5M13 5l5 5-5 5'/%3E%3C/svg%3E") center/20px no-repeat;box-shadow:0 4px 14px -4px rgba(15,15,30,.4)}
+/* the range input is only there for keyboard and screen readers; pointers are handled in JS */
+.wu input{position:absolute;inset:0;z-index:4;width:100%;height:100%;margin:0;opacity:0;pointer-events:none}
+.wu input:focus-visible ~ .wu-bar::after{outline:2px solid var(--ink);outline-offset:3px}
+.wu figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
+@media (max-width:760px){.wu-bar::after{width:34px;height:34px;margin:-17px 0 0 -17px}.wu-tag{top:10px;font-size:.75rem}.wu-tag.l{left:10px}.wu-tag.r{right:10px}}
 .mk-lwf{background:radial-gradient(120% 100% at 50% 0%,#3B82C4 0%,#0E4A7B 55%,#082B4A 100%);display:flex;justify-content:center;align-items:center;gap:5%}
 .mk-lwf figure{margin:0;width:36%;display:flex;flex-direction:column;align-items:center;gap:1.4cqw}
 .mk-lwf span{display:block;width:100%;aspect-ratio:4/3;border-radius:2cqw;background:rgba(255,255,255,.14);box-shadow:inset 0 0 0 .25cqw rgba(255,255,255,.35)}
@@ -2022,6 +2049,26 @@ function section(title, inner){ return inner ? `<section class="cs"><h2>${title}
 /* Every case study reads Overview, Solution, Research, Process: the result first, then how it got there. */
 function caseToc(CH){ return `<nav class="toc" aria-label="Contents"><ol>${CH.map((t,n)=>`<li><button type="button" data-goto="ch-${n+1}">${t}</button></li>`).join('')}</ol></nav>`; }
 /* A screen with a bold title and a short description beside it. */
+/* Wireframe to UI slider. wire and ui are file names under images/. Drag, tap or use the arrow keys. */
+function wireUi(wire, ui, label, {ar='4/3', start=50, cap='', tags=['UX wireframe','UI']}={}){
+  const layer = (k, src, alt) => `<div class="wu-layer wu-${k}"><div class="wu-ph" aria-hidden="true"><i></i><i></i><i></i></div><img src="images/${src}" alt="${alt}" loading="lazy" draggable="false" onload="this.parentNode.classList.add('ready')" onerror="this.remove()"></div>`;
+  return `<figure class="wu" style="--pos:${start}%"><div class="wu-frame" style="aspect-ratio:${ar}">${layer('ui', ui, label+', '+tags[1])}${layer('wire', wire, label+', '+tags[0])}<span class="wu-tag l">${tags[0]}</span><span class="wu-tag r">${tags[1]}</span><input type="range" min="0" max="100" step="1" value="${start}" aria-label="${label}: slide between ${tags[0]} and ${tags[1]}"><span class="wu-bar"></span></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+}
+document.addEventListener('input', e => {
+  const r = e.target.closest && e.target.closest('.wu input'); if (!r) return;
+  const f = r.closest('.wu'), v = +r.value; f.style.setProperty('--pos', v + '%');
+  f.querySelector('.wu-tag.l').style.opacity = v < 12 ? 0 : 1; f.querySelector('.wu-tag.r').style.opacity = v > 88 ? 0 : 1;
+});
+document.addEventListener('pointerdown', e => {
+  const fr = e.target.closest && e.target.closest('.wu-frame'); if (!fr || e.button > 0) return;
+  const r = fr.querySelector('input'), touch = e.pointerType === 'touch';
+  const set = x => { const b = fr.getBoundingClientRect(); r.value = Math.max(0, Math.min(100, (x - b.left) / b.width * 100)); r.dispatchEvent(new Event('input', {bubbles:true})); };
+  /* a tap on touch waits for a sideways drag, so scrolling past the slider does not move it */
+  if (!touch) { e.preventDefault(); set(e.clientX); }
+  r.focus({preventScroll:true}); fr.setPointerCapture(e.pointerId);
+  const mv = ev => set(ev.clientX), end = () => { fr.removeEventListener('pointermove', mv); fr.removeEventListener('pointerup', end); fr.removeEventListener('pointercancel', end); };
+  fr.addEventListener('pointermove', mv); fr.addEventListener('pointerup', end); fr.addEventListener('pointercancel', end);
+});
 function feature(media, title, desc){ return `<div class="feat"><div class="feat-media">${media}</div><div class="feat-txt">${title?`<h3>${title}</h3>`:''}${desc}</div></div>`; }
 /* Highlight the chapter being read, and keep it in view in the mobile strip. */
 function spyToc(){
@@ -2377,7 +2424,7 @@ function renderLwfCase(p, next){
     ${kd([['Simplify','Fewer screens and fewer steps. If a piece of information did not help someone decide or act, it moved one level down.'],['Prioritise','Urgent things first. Status, colour and order all point to what needs attention now.'],['Modernise','One consistent visual language and component set across tablet and mobile.']])}
     ${section('Information architecture', '<p>I rebuilt the structure around a few clear destinations, instead of a long menu that mirrored the database.</p>' + todo('To fill: the old menu compared with the new one, and why.') + shot('ia', 'Sitemap, before and after', '', 'wd'))}
     ${section('Core flows', '<p>The flows people use every day, redesigned from start to end: handling an alert, and adding a new sensor.</p>' + shot('flows', 'User flows for handling an alert and adding a sensor', '', 'wd'))}
-    ${section('Wireframes', '<p>Wireframes to test the new structure and flows with the LWF team before any visual design.</p>' + shot('wireframes', 'Wireframes of the new system', '', 'wd'))}
+    ${section('Wireframes', '<p>Wireframes to test the new structure and flows with the LWF team before any visual design.</p>' + shot('wireframes', 'Wireframes of the new system', '', 'wd') + wireUi('lwf-wire-dashboard.webp', 'lwf-dashboard.webp', 'Home screen', {cap:'Drag to compare the wireframe with the final UI'}))}
     ${section('Design system', '<p>A modern, calm look that matches the quality of the technology: a clear status colour scale, readable type for the field, and one set of components for tablet and mobile.</p>' + todo('To fill: the palette, type and key components, like the palette in Off Grid.') + shot('design-system', 'Colours, type and components', '', 'wd'))}
     ${section('Before and after', '<p>The same screens, before and after the redesign.</p>' + ['dashboard','alerts','alert'].map(f => ba(f, screens.find(s=>s[0]===f)[1])).join(''))}
     ${chapter(5)}
