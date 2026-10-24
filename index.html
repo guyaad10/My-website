@@ -2458,8 +2458,8 @@ function renderDreamhubCase(p, next){
     ${section('Other CRMs show a number, not a reason', `<div class="learn">${[
       [['salesforce','hubspot'],'Salesforce and HubSpot','AI added on top of generic fields. Deals get a score from 1 to 99 or a likelihood to close, and fields like “Champion” are free text the AI has to guess at.'],
       [['attio','clarify.png'],'Attio and Clarify','AI-native and flexible, but the sales method is something each team designs, builds and maintains itself.'],
-      [['dayai','reevo.png'],'Day.ai and Reevo','Strong at capturing activity and answering questions, with forecasting and scoring still manual or rolling out.'],
-      [['dreamhub'],'DreamHub','A fixed sales model, so the AI fills methodology fields itself. That autonomy is the reason the trust layer has to exist.']
+      [['dayai.png','reevo.png'],'Day.ai and Reevo','Strong at capturing activity and answering questions, with forecasting and scoring still manual or rolling out.'],
+      [['dreamhub.png'],'DreamHub','A fixed sales model, so the AI fills methodology fields itself. That autonomy is the reason the trust layer has to exist.']
     ].map(([logos,t,d])=>`<div><span class="dh-logos">${logos.map(f=>`<span class="dh-logo${f.endsWith('.png')?' full':''}">${f[0].toUpperCase()}<img src="images/dreamhub-logos/${f.includes('.')?f:f+'.svg'}" alt="" width="20" height="20" onerror="this.remove()"></span>`).join('')}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`)}
     <div class="og-quote"><small>From DreamHub’s blog</small><p>A wrong field is worse than an empty one, because the failure is invisible downstream.</p></div>
     ${section('What I learned', `<div class="learn">${insights.map(([t,d,l],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p><p class="dh-led">→ ${l}</p></div>`).join('')}</div>` + todo('Replace these with what you actually heard, with a quote from a rep or manager if you have one.'))}
