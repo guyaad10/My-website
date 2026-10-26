@@ -2700,6 +2700,12 @@ function renderCase(p){
 function setInert(v){ [thread, chat, composer, chips].forEach(n => { if (n) n.inert = v; }); }
 function inView(n){ if(!n) return false; const r=n.getBoundingClientRect(); return r.bottom>0 && r.top<innerHeight; }
 
+/* Each case study opens at its top. Safari keeps an in-flight momentum scroll alive through a plain
+   scrollTop write (so "Next" landed at the bottom); pausing overflow for a frame cancels it. */
+function toTop(){
+  caseEl.style.overflowY = 'hidden'; caseEl.scrollTop = 0;
+  requestAnimationFrame(() => { caseEl.style.overflowY = ''; caseEl.scrollTop = 0; });
+}
 function openCase(id, source, push=true, trigger){
   const p = byId[id]; if (!p) return;
   if (!started) start(null, true);
@@ -2708,7 +2714,7 @@ function openCase(id, source, push=true, trigger){
     wasOpen ? history.replaceState(st,'','#/'+id) : history.pushState(st,'','#/'+id); }
   if (!wasOpen) returnFocus = trigger || document.activeElement;
   current = id;
-  const swap = () => { renderCase(p); caseEl.hidden=false; html.classList.add('case-open'); setInert(true); caseEl.scrollTop=0; caseEl.classList.remove('scrolled'); caseEl.style.setProperty('--bar', $('.case-bar').offsetHeight + 'px'); spyToc(); };
+  const swap = () => { renderCase(p); caseEl.hidden=false; html.classList.add('case-open'); setInert(true); toTop(); caseEl.classList.remove('scrolled'); caseEl.style.setProperty('--bar', $('.case-bar').offsetHeight + 'px'); spyToc(); };
   const hero = () => document.getElementById('case-hero');
   if (canVT()){
     const useHero = !wasOpen && inView(source) && p.mock;
