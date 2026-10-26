@@ -2745,6 +2745,20 @@ function renderCase(p){
 function setInert(v){ [thread, chat, composer, chips].forEach(n => { if (n) n.inert = v; }); }
 function inView(n){ if(!n) return false; const r=n.getBoundingClientRect(); return r.bottom>0 && r.top<innerHeight; }
 
+/* Each case study opens at its top. A plain scrollTop write wasn't enough on its own: Safari could
+   carry the old position over to the new case ("Next" landed at the bottom). So pause overflow while
+   resetting, and for a moment after, undo any jump down the reader didn't make themselves. */
+let topGuard;
+function toTop(){
+  caseEl.style.overflowY = 'hidden'; caseEl.scrollTop = 0;
+  requestAnimationFrame(() => { caseEl.style.overflowY = ''; caseEl.scrollTop = 0; });
+  if (topGuard) topGuard();
+  const until = performance.now() + 1200, ev = ['wheel','touchstart','keydown','pointerdown'];
+  const hold = () => { if (performance.now() > until) return topGuard(); if (caseEl.scrollTop) caseEl.scrollTop = 0; };
+  topGuard = () => { caseEl.removeEventListener('scroll', hold); ev.forEach(t => caseEl.removeEventListener(t, topGuard)); topGuard = null; };
+  caseEl.addEventListener('scroll', hold, {passive:true});
+  ev.forEach(t => caseEl.addEventListener(t, topGuard, {passive:true, once:true}));
+}
 function openCase(id, source, push=true, trigger){
   const p = byId[id]; if (!p) return;
   if (!started) start(null, true);
@@ -2753,15 +2767,16 @@ function openCase(id, source, push=true, trigger){
     wasOpen ? history.replaceState(st,'','#/'+id) : history.pushState(st,'','#/'+id); }
   if (!wasOpen) returnFocus = trigger || document.activeElement;
   current = id;
-  const swap = () => { renderCase(p); caseEl.hidden=false; html.classList.add('case-open'); setInert(true); caseEl.scrollTop=0; caseEl.classList.remove('scrolled'); caseEl.style.setProperty('--bar', $('.case-bar').offsetHeight + 'px'); spyToc(); };
+  const swap = () => { renderCase(p); caseEl.hidden=false; html.classList.add('case-open'); setInert(true); toTop(); caseEl.classList.remove('scrolled'); caseEl.style.setProperty('--bar', $('.case-bar').offsetHeight + 'px'); spyToc(); };
   const hero = () => document.getElementById('case-hero');
-  if (canVT()){
+  /* Case to case (Next link, back/forward) swaps in place; the cross-fade only plays coming from the thread. */
+  if (canVT() && !wasOpen){
     const useHero = !wasOpen && inView(source) && p.mock;
     if (useHero) source.style.viewTransitionName = 'hero';
     const t = document.startViewTransition(() => { if (useHero) source.style.viewTransitionName=''; swap(); if (useHero && hero()) hero().style.viewTransitionName='hero'; });
     t.finished.finally(() => { if (hero()) hero().style.viewTransitionName=''; caseBack.focus({preventScroll:true}); });
   } else {
-    swap(); if (!wasOpen && !reduced.matches){ caseEl.classList.remove('fade-in'); void caseEl.offsetWidth; caseEl.classList.add('fade-in'); }
+    swap(); if (!reduced.matches){ caseEl.classList.remove('fade-in'); void caseEl.offsetWidth; caseEl.classList.add('fade-in'); }
     caseBack.focus({preventScroll:true});
   }
 }
