@@ -269,8 +269,13 @@ body.chat-view #thread{display:none}
 .btn.pri:hover{background:#2a2a2e}
 .reply-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
 /* About: a photo of Guy (placeholder until images/guy.webp exists) and a few quick facts */
-.about-photo{position:relative;width:min(280px,72%);aspect-ratio:4/5;margin:4px 0 28px;border-radius:22px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line)}
-.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* framed like an image attachment in a chat: the picture inset in a card, file name underneath */
+.about-photo{width:min(220px,62%);margin:4px 0 28px;padding:6px 6px 0}
+.about-img{position:relative;aspect-ratio:4/5;border-radius:16px;overflow:hidden;background:var(--surface-2)}
+.about-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about-photo .art-bar{padding:10px 8px 10px 6px}
+.art.about-photo:hover{border-color:var(--line);box-shadow:0 1px 2px rgba(20,20,40,.03);transform:none}
+html.theme-dark .art.about-photo:hover{box-shadow:none}
 .about-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-3);font-size:.875rem}
 .about-ph svg{width:40px;height:40px}
 .about-facts{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0;padding:0;list-style:none}
@@ -1530,6 +1535,7 @@ const visual = (p, cls='') => p.mock ? `<div class="visual ${cls}" data-visual="
 function el(markup){ const t=document.createElement('template'); t.innerHTML=markup.trim(); return t.content.firstElementChild; }
 function who(text, meta){ return `<div class="m-head"><span class="avatar" aria-hidden="true">${GHOST}</span><b>Guy</b>${typeof meta==='string'?`<time>${meta}</time>`:''}</div><div class="m-body">${[].concat(text).map((t,i)=>`<p class="m-text">${i?'':'<span class="sr">Guy: </span>'}${t}</p>`).join('')}</div>`; }
 
+const ICO_IMG = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="9" cy="9" r="1.6"/><path d="M21 15l-5-5L5 21"/></svg>`;
 const ICO_DOC = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg>`;
 function stamp(p){
   const latest = +PROJECTS[0].year;
@@ -1690,7 +1696,8 @@ function aboutHTML(){
   const [hi, ...rest] = ABOUT;
   return `${who(hi)}
     <div class="reply-body">
-      <figure class="about-photo"><span class="about-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M20.6 22c0-3.9-3.9-7-8.6-7s-8.6 3.1-8.6 7"/></svg>Photo coming soon</span><img src="images/guy.webp" alt="Guy, smiling, in a blue checked shirt" onerror="this.remove()"></figure>
+      <figure class="art about-photo"><div class="about-img"><span class="about-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M20.6 22c0-3.9-3.9-7-8.6-7s-8.6 3.1-8.6 7"/></svg>Photo coming soon</span><img src="images/guy.webp" alt="Guy, smiling, in a blue checked shirt" onerror="this.remove()"></div>
+        <figcaption class="art-bar"><span class="art-ico" aria-hidden="true">${ICO_IMG}</span><span class="art-t"><b>guy.jpg</b><small>Image</small></span></figcaption></figure>
       ${rest.map(t => `<p class="m-text">${rich(t)}</p>`).join('')}
       <ul class="about-facts">${ABOUT_FACTS.map(f => `<li>${f}</li>`).join('')}</ul>
       <div class="contact"><a class="btn pri" href="${url}" download="${CV_FILENAME}">Resume</a><button type="button" class="btn" data-nav="work">See my work</button></div></div>`;
