@@ -956,6 +956,7 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .visual.has-thumb{background:none;border-radius:0}  /* thumbs are collages: the gap between panels shows the card; the artwork carries its own grain */
 .mk-thumb{display:flex;gap:8px}  /* gap matches the card's 8px side padding */
 .mk-thumb span{position:relative;min-width:0;border-radius:var(--img-r);overflow:hidden}
+.mk-thumb span::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(16,24,40,.08)}  /* gentle edge so white screens don't melt into the card */
 .mk-thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .visual.has-thumb .mk-stage{transform:none}  /* zoom each panel inside its own frame so the corners stay round */
 @media (hover:hover){.visual.has-thumb:hover .mk-thumb span > img{transform:scale(1.015)}
