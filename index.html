@@ -1690,7 +1690,7 @@ function aboutHTML(){
   const [hi, ...rest] = ABOUT;
   return `${who(hi)}
     <div class="reply-body">
-      <figure class="about-photo"><span class="about-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M20.6 22c0-3.9-3.9-7-8.6-7s-8.6 3.1-8.6 7"/></svg>Photo coming soon</span><img src="images/guy.webp" alt="Guy" onerror="this.remove()"></figure>
+      <figure class="about-photo"><span class="about-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M20.6 22c0-3.9-3.9-7-8.6-7s-8.6 3.1-8.6 7"/></svg>Photo coming soon</span><img src="images/guy.webp" alt="Guy, smiling, in a blue checked shirt" onerror="this.remove()"></figure>
       ${rest.map(t => `<p class="m-text">${rich(t)}</p>`).join('')}
       <ul class="about-facts">${ABOUT_FACTS.map(f => `<li>${f}</li>`).join('')}</ul>
       <div class="contact"><a class="btn pri" href="${url}" download="${CV_FILENAME}">Resume</a><button type="button" class="btn" data-nav="work">See my work</button></div></div>`;
