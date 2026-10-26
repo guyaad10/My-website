@@ -268,6 +268,13 @@ body.chat-view #thread{display:none}
 .btn.pri{background:var(--ink);color:#fff}
 .btn.pri:hover{background:#2a2a2e}
 .reply-chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:16px}
+/* About: a photo of Guy (placeholder until images/guy.webp exists) and a few quick facts */
+.about-photo{position:relative;width:min(280px,72%);aspect-ratio:4/5;margin:4px 0 28px;border-radius:22px;overflow:hidden;background:var(--surface-2);border:1px solid var(--line)}
+.about-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.about-ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;color:var(--ink-3);font-size:.875rem}
+.about-ph svg{width:40px;height:40px}
+.about-facts{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 0;padding:0;list-style:none}
+.about-facts li{font-size:.875rem;color:var(--ink-2);background:var(--surface-2);border-radius:999px;padding:6px 12px}
 
 .reveal{opacity:0;transform:translateY(16px);transition:opacity .8s var(--ease), transform .8s var(--ease)}
 .reveal.in{opacity:1;transform:none}
@@ -1497,7 +1504,16 @@ const caseEl = $('#case'), caseInner = $('#case-inner'), caseBack = $('#case-bac
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const canVT = () => typeof document.startViewTransition === 'function' && !reduced.matches;
 const rich = s => s.replace(/\[\[(.+?)\]\]/g, '<span class="todo">To add: $1</span>');
-const ABOUT_TEXT = "Product Designer with 4+ years of experience designing digital products across B2B SaaS, CRM, fintech, healthcare, civic infrastructure, and consumer products. Experienced in owning the end-to-end design process, from user research and problem framing through UX, UI, prototyping, design systems, implementation, and QA. Strong background working as a solo designer in an early-stage SaaS environment, partnering directly with founders, product managers, and engineers to turn complex workflows into clear, usable products.";
+/* About: Guy talking, a few short messages instead of a CV summary */
+const ABOUT = [
+  "Hey, I’m Guy 👋 I’m a product designer in Tel Aviv.",
+  "I didn’t start in tech. I studied architecture at Tel Aviv University, and it taught me to design for the people who’ll actually live in a space, not for the drawing. I took that habit with me when I moved to product design.",
+  "My first design job was at 5ive, an agency, where one month I was on hospital wards watching nurses work and the next I was redesigning a system for water utilities. Then I joined Papaya Global, a payroll platform, where I got my first taste of designing for an AI agent.",
+  "Today I’m the only designer at DreamHub, an AI-native sales CRM. I talk to customers, design the flows, and lately I open the pull requests myself too.",
+  "What ties it all together: I like taking something complicated and making it feel simple to the person using it.",
+  "When I’m not designing: [[a few things you love outside work, like hobbies, food, places or a pet]]"
+];
+const ABOUT_FACTS = ['📍 Tel Aviv', '🏛️ B.Arch, Tel Aviv University', '💬 Hebrew & English'];
 const paras = arr => (arr||[]).map(p=>`<p>${rich(p)}</p>`).join('');
 
 const FLAT = [];
@@ -1670,8 +1686,14 @@ function cvURL(){ return CV_PATH; }
 
 function aboutHTML(){
   const url = cvURL();
-  return `${who(ABOUT_TEXT)}
-    <div class="reply-body"><div class="contact"><a class="btn pri" href="${url}" download="${CV_FILENAME}">Resume</a></div></div>`;
+  // drop the photo in as images/guy.webp and it replaces the placeholder
+  const [hi, ...rest] = ABOUT;
+  return `${who(hi)}
+    <div class="reply-body">
+      <figure class="about-photo"><span class="about-ph" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Z"/><path d="M20.6 22c0-3.9-3.9-7-8.6-7s-8.6 3.1-8.6 7"/></svg>Photo coming soon</span><img src="images/guy.webp" alt="Guy" onerror="this.remove()"></figure>
+      ${rest.map(t => `<p class="m-text">${rich(t)}</p>`).join('')}
+      <ul class="about-facts">${ABOUT_FACTS.map(f => `<li>${f}</li>`).join('')}</ul>
+      <div class="contact"><a class="btn pri" href="${url}" download="${CV_FILENAME}">Resume</a><button type="button" class="btn" data-nav="work">See my work</button></div></div>`;
 }
 function workCore(){
   const target = document.getElementById('m-' + PROJECTS[0].id);
