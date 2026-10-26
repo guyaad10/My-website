@@ -2400,6 +2400,36 @@ function renderWhatsappCase(p, next){
     t.addEventListener('pointermove', e => { if (t.classList.contains('drag')) t.scrollLeft = s0 - (e.clientX - x0); });
     const end = () => t.classList.remove('drag');
     t.addEventListener('pointerup', end); t.addEventListener('pointercancel', end);
+    /* Idle drift: the strip slowly scrolls on its own like a queue, looping through a second copy of the image.
+       It pauses while the pointer is over it, while it is dragged or focused, and for a moment after any manual scroll. */
+    if (reduced.matches) return;
+    const img = t.querySelector('img'), copy = img.cloneNode();
+    copy.alt = ''; copy.setAttribute('aria-hidden', 'true'); t.appendChild(copy);
+    const SPEED = 22; /* px per second */
+    let pos = 0, last = 0, hover = false, hold = 0, seen = false;
+    const period = () => copy.offsetLeft - img.offsetLeft;
+    const nudge = () => { hold = performance.now() + 2500; };
+    new IntersectionObserver(([en]) => { seen = en.isIntersecting; }).observe(t);
+    t.addEventListener('mouseenter', () => { hover = true; });
+    t.addEventListener('mouseleave', () => { hover = false; });
+    t.addEventListener('wheel', nudge, {passive: true});
+    t.addEventListener('touchstart', nudge, {passive: true});
+    t.addEventListener('touchmove', nudge, {passive: true});
+    const tick = now => {
+      if (!t.isConnected) return;
+      const dt = Math.min(now - (last || now), 100) / 1000; last = now;
+      const idle = seen && !hover && now > hold && !t.classList.contains('drag') && !t.contains(document.activeElement);
+      copy.style.marginLeft = Math.round(img.clientHeight * .135) + 'px'; /* same gap as between the screens */
+      if (!idle) pos = t.scrollLeft;
+      else {
+        const p = period();
+        pos += SPEED * dt;
+        if (p > 0 && pos >= p) pos -= p;
+        t.scrollLeft = pos;
+      }
+      requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
   });
   const gif = caseInner.querySelector('.wa-gif video');
   if (gif && reduced.matches) { gif.removeAttribute('autoplay'); gif.pause(); }
