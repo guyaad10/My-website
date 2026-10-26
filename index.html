@@ -955,10 +955,26 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .learn p.dh-led{margin-top:10px!important;color:var(--ink)!important;font-weight:500}
 .visual.has-thumb{background:none;border-radius:0}  /* thumbs are collages: the gap between panels shows the card; the artwork carries its own grain */
 .mk-thumb{display:flex;gap:8px}  /* gap matches the card's 8px side padding */
-.mk-thumb span{min-width:0;border-radius:var(--img-r);overflow:hidden}
+.mk-thumb span{position:relative;min-width:0;border-radius:var(--img-r);overflow:hidden}
 .mk-thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
 .visual.has-thumb .mk-stage{transform:none}  /* zoom each panel inside its own frame so the corners stay round */
-@media (hover:hover){.visual.has-thumb:hover .mk-thumb img{transform:scale(1.015)}}
+@media (hover:hover){.visual.has-thumb:hover .mk-thumb span > img{transform:scale(1.015)}
+  .visual.has-thumb:hover .thumb-screen{transform:translate(-.4cqw,-.4cqw)}}
+/* product window sitting on a gradient panel, bleeding off its bottom-right like a cropped screenshot */
+.thumb-screen{position:absolute;left:13%;top:20%;width:100%;height:100%;background:#fff;border-radius:1cqw 0 0 0;
+  box-shadow:0 .2cqw .6cqw rgba(10,20,40,.08),0 2cqw 5cqw rgba(10,20,40,.18);overflow:hidden;transition:transform .8s var(--ease)}
+.thumb-screen > img{display:block;width:100%;height:auto}
+.ts-bar{display:flex;gap:.6cqw;align-items:center;height:3.6cqw;padding:0 1.6cqw;border-bottom:1px solid #EEF0F3}
+.ts-bar i{width:.8cqw;height:.8cqw;border-radius:50%;background:#E3E6EB}
+.ts-body{display:flex;height:100%}
+.ts-side{width:22%;padding:1.8cqw 1.4cqw;border-right:1px solid #EEF0F3;display:flex;flex-direction:column;gap:1.1cqw}
+.ts-side i{height:.9cqw;border-radius:99px;background:#EDEFF2}
+.ts-side i:first-child{width:70%;background:#E1E4E9}
+.ts-main{flex:1;padding:2.2cqw 2.4cqw;display:flex;flex-direction:column;gap:1.1cqw}
+.ts-main b{width:46%;height:1.6cqw;border-radius:.4cqw;background:#E1E4E9;margin-bottom:.6cqw}
+.ts-main p{margin:0;width:88%;height:.9cqw;border-radius:99px;background:#EDEFF2}
+.ts-main p.s{width:60%}
+.ts-main small{margin-top:1.4cqw;font:500 1.05cqw/1.2 var(--sans);color:#A3A8B2;letter-spacing:.01em}
 .mk-og{background:#2F6B1F}
 .mk-og img{display:block;width:100%;height:100%;object-fit:cover}
 .mk-hs{background:#1749D1;display:grid;place-items:center}
@@ -1223,7 +1239,7 @@ body.started .scroll-cue, body.chat-view .scroll-cue{opacity:0;visibility:hidden
 const PROJECTS = [
   {
     id:'dreamhub', kind:'feature', wide:true, mock:'dreamhub', ar:'16/9',
-    __case:'dreamhub', thumb:[['dreamhub-card-a.webp',1444],['dreamhub-card-b.webp',897]],
+    __case:'dreamhub', thumb:[['dreamhub-card-a.webp',1444,true],['dreamhub-card-b.webp',897]],
     line:'At DreamHub, an AI-native sales CRM, I’m the only designer. Most of my work is deciding what the AI shows before anyone acts on it.',
     said:'Every CRM now ships AI that writes, fills and scores. I designed what happens between the AI’s output and the human’s action, so the AI stays visible, explainable and accountable, and the rep stays the author of record.',
     title:'DreamHub: AI that shows its work',
@@ -1233,7 +1249,7 @@ const PROJECTS = [
   },
   {
     id:'dh-contracts', kind:'feature', wide:true, mock:'dhContracts', ar:'16/9',
-    __case:'dh-contracts', thumb:[['dh-contracts-card-a.webp',982],['dh-contracts-card-b.webp',1372]],
+    __case:'dh-contracts', thumb:[['dh-contracts-card-a.webp',960],['dh-contracts-card-b.webp',1440,true]],
     line:'At DreamHub, my current work, I designed what a CRM does after the deal is won.',
     said:'Most CRMs stop at Closed Won. DreamHub models what actually happens next: the contract, its amendments and its renewal. The difference is in decisions users never see but constantly feel.',
     title:'DreamHub: Contract lifecycle',
@@ -1261,7 +1277,7 @@ const PROJECTS = [
   },
   {
     id:'lwf', kind:'feature', wide:true, mock:'lwf', ar:'16/9',
-    __case:'lwf', thumb:[['lwf-card-a.webp',1746],['lwf-card-b.webp',603]],
+    __case:'lwf', thumb:[['lwf-card-a.webp',1250],['lwf-card-b.webp',1150,true]],
     cover:['lwf-hero-photo.webp','Two engineers at a water treatment plant check LWF Observer on a tablet beside a large blue valve'],
     line:'At a UX/UI agency, I redesigned LWF Observer, the system water utilities use to catch leaks and water theft as they happen.',
     said:'The technology behind it was strong, but the system around it was complex and dated. I simplified its core, from the structure and the flows to the interface, so a team can see what is wrong, where, and what to do next.',
@@ -1515,9 +1531,12 @@ const metaDL = p => `<dl class="meta">
   <div><dt>Role</dt><dd>${p.role}</dd></div>
   <div><dt>Company</dt><dd>${p.company}</dd></div>
   <div><dt>Year</dt><dd>${p.year}</dd></div></dl>`;
-/* thumb: [[image, width], …] collage panels for the work-grid card only (the case page cover still uses the mock);
-   width sets each panel's share of the row */
-const visual = (p, cls='') => p.mock ? `<div class="visual ${cls}${p.thumb?' has-thumb':''}" data-visual="${p.id}" style="--ar:${p.ar}">${p.thumb ? `<div class="mk-stage mk-thumb">${p.thumb.map(([src,w])=>`<span style="flex:${w} 1 0"><img src="images/${src}" alt="" draggable="false"></span>`).join('')}</div>` : MOCKS[p.mock]()}</div>` : '';
+/* thumb: [[image, width, screen?], …] collage panels for the work-grid card only (the case page cover still uses the mock);
+   width sets each panel's share of the row; screen puts a product window on the panel: true for a placeholder, or an image file */
+const thumbScreen = s => `<div class="thumb-screen" aria-hidden="true"><div class="ts-bar"><i></i><i></i><i></i></div>${s===true
+  ? '<div class="ts-body"><div class="ts-side"><i></i><i></i><i></i><i></i></div><div class="ts-main"><b></b><p></p><p></p><p class="s"></p><small>Screen from the project</small></div></div>'
+  : `<img src="images/${s}" alt="" draggable="false">`}</div>`;
+const visual = (p, cls='') => p.mock ? `<div class="visual ${cls}${p.thumb?' has-thumb':''}" data-visual="${p.id}" style="--ar:${p.ar}">${p.thumb ? `<div class="mk-stage mk-thumb">${p.thumb.map(([src,w,scr])=>`<span style="flex:${w} 1 0"><img src="images/${src}" alt="" draggable="false">${scr?thumbScreen(scr):''}</span>`).join('')}</div>` : MOCKS[p.mock]()}</div>` : '';
 
 /* ================== Thread rendering ================== */
 function el(markup){ const t=document.createElement('template'); t.innerHTML=markup.trim(); return t.content.firstElementChild; }
