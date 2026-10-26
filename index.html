@@ -322,6 +322,26 @@ body.chat-view #thread{display:none}
 .art.sm .art-foot p{margin:2px 0 0;font-size:.8125rem;line-height:1.4}
 .art.sm .tags{margin-top:12px;flex-wrap:nowrap;gap:5px}
 .art.sm .tags li{font-size:.75rem;padding:3px 9px;white-space:nowrap}
+/* Work history: a compact chat-widget timeline in the Resume reply */
+.tl{padding:16px 18px 6px}
+.tl-h{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 12px}
+.tl-h b{font-weight:500;font-size:.9375rem;letter-spacing:-.01em}
+.tl ol{list-style:none;margin:0;padding:0}
+.tl li{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 16px;min-height:36px;padding:0 0 18px 48px}
+.tl li::after{content:"";position:absolute;left:16px;top:38px;bottom:4px;width:1px;background:var(--line)}
+.tl li:last-child::after{display:none}
+.tl-logo{position:absolute;left:0;top:0;width:32px;height:32px;border-radius:9px;border:1px solid var(--line);background:#fff;overflow:hidden;display:grid;place-items:center;font-size:.875rem;font-weight:600;color:var(--ink-2)}
+.tl-logo img{position:absolute;inset:-1px;width:calc(100% + 2px);height:calc(100% + 2px);object-fit:cover}
+.tl li.now .tl-logo{box-shadow:0 0 0 3px var(--accent-soft)}
+.tl-co{font-weight:500;font-size:.9375rem;letter-spacing:-.01em;line-height:1.45;padding-top:1px}
+.tl-role{grid-column:1;color:var(--ink-2);font-size:.8125rem;line-height:1.4}
+.tl time{grid-row:1;grid-column:2;color:var(--ink-3);font-size:.8125rem;line-height:1.7;padding-top:1px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl-tag{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.6875rem;font-weight:500;vertical-align:2px}
+.m-body .art + .art{margin-top:12px}
+.art.tl:hover{border-color:var(--line);box-shadow:0 1px 2px rgba(20,20,40,.03);transform:none}
+html.theme-dark .art.tl:hover{box-shadow:none}
+html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-3)}
+@media (max-width:760px){.tl{padding:14px 14px 4px}.tl li{grid-template-columns:1fr;padding-bottom:14px}.tl time{grid-row:auto;grid-column:1;line-height:1.4}}
 .art-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .art-h time{flex:none;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){
@@ -1660,6 +1680,21 @@ function workCore(){
   if (r.top > 140 || r.top < -140){ thread.append(el(`<article class="msg enter">${who("Here's my work.")}</article>`)); }
   scrollToEl(target);
 }
+const WORK = [
+  {co:'DreamHub', logo:'dreamhub.png', role:'Sole designer, AI-native sales CRM', when:'Apr 2025 – Now', now:true},
+  {co:'Papaya Global', logo:'papaya.png', role:'Global payroll & payments', when:'Nov 2024 – Mar 2025'},
+  {co:'5ive', logo:'5ive.png', role:'Agency for complex digital products', when:'Nov 2023 – Nov 2024'}
+];
+function workTimeline(){
+  return `<div class="art tl" role="group" aria-label="Work history">
+    <div class="tl-h"><b>Work history</b></div>
+    <ol>${WORK.map(w => `<li${w.now ? ' class="now"' : ''}>
+      <span class="tl-logo" aria-hidden="true">${w.co[0]}<img src="images/work-logos/${w.logo}" alt="" width="32" height="32" onerror="this.remove()"></span>
+      <span class="tl-co">${w.co}${w.now ? '<span class="tl-tag">Current</span>' : ''}</span>
+      <time>${w.when}</time>
+      <span class="tl-role">${w.role}</span></li>`).join('')}</ol>
+  </div>`;
+}
 function cvHTML(){
   const url = cvURL();
   return `${who("Here's my resume — the short version of everything above.")}
@@ -1668,7 +1703,7 @@ function cvHTML(){
         <span class="art-t"><b>${CV_FILENAME}</b><small>PDF, one page</small></span>
         <a class="art-open" href="${url}" target="_blank" rel="noopener">Open <span>→</span></a></div>
       <div class="art-foot" style="padding-top:0"><a class="btn" href="${url}" download="${CV_FILENAME}">Download PDF</a></div>
-    </div></div>`;
+    </div>${workTimeline()}</div>`;
 }
 /* A fresh chat: clears the chat pane, shows what you "sent" and Guy's reply — no scrolling through the feed. */
 function enterChat(label, botHTML){
