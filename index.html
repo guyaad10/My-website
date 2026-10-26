@@ -322,6 +322,25 @@ body.chat-view #thread{display:none}
 .art.sm .art-foot p{margin:2px 0 0;font-size:.8125rem;line-height:1.4}
 .art.sm .tags{margin-top:12px;flex-wrap:nowrap;gap:5px}
 .art.sm .tags li{font-size:.75rem;padding:3px 9px;white-space:nowrap}
+/* Work history: a compact chat-widget timeline in the Resume reply */
+.tl{padding:16px 18px 6px}
+.tl-h{display:flex;align-items:baseline;justify-content:space-between;margin:0 0 12px}
+.tl-h b{font-weight:500;font-size:.9375rem;letter-spacing:-.01em}
+.tl-h small{color:var(--ink-3);font-size:.8125rem}
+.tl ol{list-style:none;margin:0;padding:0}
+.tl li{position:relative;display:grid;grid-template-columns:1fr auto;gap:2px 16px;padding:0 0 16px 24px}
+.tl li::before{content:"";position:absolute;left:3px;top:7px;width:9px;height:9px;border-radius:50%;background:var(--surface);box-shadow:inset 0 0 0 1.5px var(--ink-3)}
+.tl li::after{content:"";position:absolute;left:7px;top:20px;bottom:2px;width:1px;background:var(--line)}
+.tl li:last-child::after{display:none}
+.tl li.now::before{background:var(--accent);box-shadow:0 0 0 4px var(--accent-soft)}
+.tl-co{font-weight:500;font-size:.9375rem;letter-spacing:-.01em;line-height:1.45}
+.tl-role{grid-column:1;color:var(--ink-2);font-size:.8125rem;line-height:1.4}
+.tl time{grid-row:1;grid-column:2;color:var(--ink-3);font-size:.8125rem;line-height:1.7;font-variant-numeric:tabular-nums;white-space:nowrap}
+.tl-tag{display:inline-block;margin-left:8px;padding:1px 8px;border-radius:999px;background:var(--accent-soft);color:var(--accent);font-size:.6875rem;font-weight:500;vertical-align:2px}
+.m-body .art + .art{margin-top:12px}
+.art.tl:hover{border-color:var(--line);box-shadow:0 1px 2px rgba(20,20,40,.03);transform:none}
+html.theme-dark .art.tl:hover{box-shadow:none}
+@media (max-width:760px){.tl{padding:14px 14px 4px}.tl li{grid-template-columns:1fr;padding-bottom:14px}.tl time{grid-row:auto;grid-column:1;line-height:1.4}}
 .art-h{display:flex;align-items:baseline;justify-content:space-between;gap:12px}
 .art-h time{flex:none;color:var(--ink-3);font-size:.8125rem;font-variant-numeric:tabular-nums}
 @media (max-width:760px){
@@ -1660,10 +1679,24 @@ function workCore(){
   if (r.top > 140 || r.top < -140){ thread.append(el(`<article class="msg enter">${who("Here's my work.")}</article>`)); }
   scrollToEl(target);
 }
+const WORK = [
+  {co:'DreamHub', role:'Product Designer · Sole designer, AI-native sales CRM', when:'Apr 2025 – Now', now:true},
+  {co:'Papaya Global', role:'Product Designer · Global payroll & payments', when:'Nov 2024 – Mar 2025'},
+  {co:'Take 5ive', role:'Product Designer · Agency for complex digital products', when:'Nov 2023 – Nov 2024'}
+];
+function workTimeline(){
+  return `<div class="art tl" role="group" aria-label="Work history">
+    <div class="tl-h"><b>Work history</b><small>${WORK.length} roles</small></div>
+    <ol>${WORK.map(w => `<li${w.now ? ' class="now"' : ''}>
+      <span class="tl-co">${w.co}${w.now ? '<span class="tl-tag">Current</span>' : ''}</span>
+      <time>${w.when}</time>
+      <span class="tl-role">${w.role}</span></li>`).join('')}</ol>
+  </div>`;
+}
 function cvHTML(){
   const url = cvURL();
   return `${who("Here's my resume — the short version of everything above.")}
-    <div class="m-body"><div class="art file">
+    <div class="m-body">${workTimeline()}<div class="art file">
       <div class="art-bar"><span class="art-ico" aria-hidden="true">${ICO_DOC}</span>
         <span class="art-t"><b>${CV_FILENAME}</b><small>PDF, one page</small></span>
         <a class="art-open" href="${url}" target="_blank" rel="noopener">Open <span>→</span></a></div>
