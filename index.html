@@ -1064,6 +1064,50 @@ html.theme-dark .dhg-risk{color:#F09A90}
 .dhg-plain .to b{font-weight:500;color:var(--d-ink)}
 .dhg-plain p{margin:0 0 .8em;font-size:1.12em;line-height:1.6;color:#D3D6DE}
 .dhg-conf{padding:.25em .75em;border-radius:99px;background:var(--d-raise);color:var(--d-ink-2);white-space:nowrap}
+/* Dreamer chat: the text steps scroll past one pinned chat frame, which swaps to the answer for each step (dark UI) */
+.dhc{max-width:var(--cw);margin:0 auto var(--sec);display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:56px}
+.dhc-steps{padding:12vh 0 18vh}
+.dhc-step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.32;transition:opacity .4s var(--ease)}
+.dhc-step.on{opacity:1}
+.dhc-step small{font-size:.8125rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3);margin-bottom:10px}
+.dhc-step h3{margin:0 0 8px;font:500 1.25rem/1.25 var(--sans);letter-spacing:-.025em;color:var(--ink)}
+.dhc-step p{margin:0;font-size:.9375rem;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
+.dhc-pin{position:sticky;top:max(96px,calc(50vh - 290px));align-self:start;height:min(580px,calc(100vh - 140px))}
+.dhc-frame{position:relative;height:100%;border-radius:20px;overflow:hidden;background:#0C0E12;color:#E9EBF1;box-shadow:0 2px 6px rgba(0,0,0,.08),0 30px 60px -30px rgba(10,10,30,.45);display:flex;flex-direction:column;font-family:var(--sans);
+  --d-bg:#111318;--d-panel:#181B22;--d-raise:#20242D;--d-line:rgba(255,255,255,.08);--d-ink:#E9EBF1;--d-ink-2:#9AA0AE;--d-ink-3:#5D6372;--d-ai:#9A8CFF;--d-ai-soft:rgba(140,124,255,.16)}
+.dhc-top{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--d-line);font-size:.875rem;font-weight:500}
+.dhc-top small{margin-left:auto;font-weight:400;font-size:.8125rem;color:var(--d-ink-2)}
+.dhc-av{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-size:.75rem;color:#fff;background:#6A57F0;flex:none}
+.dhc-body{position:relative;flex:1;min-height:0}
+.dhc-panel{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:flex-end;gap:12px;padding:18px;opacity:0;visibility:hidden;transition:opacity .35s var(--ease),visibility 0s .35s}
+.dhc-panel.on{opacity:1;visibility:visible;transition:opacity .35s var(--ease)}
+.dhc-me{align-self:flex-end;max-width:80%;padding:10px 14px;border-radius:16px 16px 4px 16px;background:#2A2F3A;font-size:.9375rem;line-height:1.45}
+.dhc-ai{display:flex;gap:10px;align-items:flex-start;transform:translateY(8px);opacity:0;transition:opacity .4s var(--ease) .25s,transform .4s var(--ease) .25s}
+.dhc-panel.on .dhc-ai{opacity:1;transform:none}
+.dhc-ai > div{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px}
+.dhc-ai > div > p{margin:0;font-size:.9375rem;line-height:1.5;color:#D3D6DE}
+.dhc-att{position:relative;aspect-ratio:16/10;border-radius:12px;overflow:hidden;background:#181B22;border:1px solid var(--d-line)}
+.dhc-att .dhg-by,.dhc-att .dhg-legend{color:var(--d-ink-2)}
+.dhc-att .dhg-legend b{color:var(--d-ink)}
+.dhc-att .dhg-f{border-color:#181B22}
+.dhc-att .dhg-msg{background:#111318}
+.dhc-att .dhg-risk{color:#F09A90;background:rgba(224,87,74,.14)}
+.dhc-in{margin:0 18px 18px;padding:12px 16px;border-radius:14px;border:1px solid var(--d-line);background:var(--d-bg);font-size:.875rem;color:var(--d-ink-3);display:flex;justify-content:space-between}
+.dhc-in b{width:22px;height:22px;border-radius:50%;background:var(--d-ink);color:var(--d-bg);display:grid;place-items:center;font-size:.75rem}
+.dhc-dots{display:flex;gap:6px;margin-left:auto;align-self:center}
+.dhc-dots i{width:6px;height:6px;border-radius:50%;background:var(--d-ink-3);transition:background .3s}
+.dhc-dots i.on{background:var(--d-ai)}
+@media (prefers-reduced-motion:reduce){.dhc-panel,.dhc-ai,.dhc-step{transition:none}}
+@media (max-width:760px){
+  .dhc{grid-template-columns:minmax(0,1fr);gap:0}
+  .dhc-pin{order:-1;top:132px;height:min(420px,54vh);z-index:2}
+  .dhc-steps{padding:0 0 10vh}
+  .dhc-step{min-height:66vh;justify-content:flex-end;padding-bottom:14vh}
+  .dhc-att{aspect-ratio:16/9}
+  .dhc-panel{padding:14px;gap:10px}
+  .dhc-frame{border-radius:16px}
+  .dhc-me,.dhc-ai > div > p{font-size:.875rem}
+}
 .dhg-legend{font-size:1.05em;color:var(--ink-3)}
 .dhg-legend b{font-weight:500;color:var(--ink-2)}
 html.theme-dark .dhg-f{border-color:var(--surface-2)}
@@ -2745,6 +2789,32 @@ function renderLwfCase(p, next){
 }
 /* Clean dark-mode mockups that fill the DreamHub "Design coming soon" frames, so each page shows how it
    will look with real screens. A real images/dreamhub-*.webp still covers its mockup once it exists. */
+/* Dreamer chat: one pinned chat frame; each text step that scrolls into the middle of the screen shows its answer */
+function dhChat(){
+  const steps = [
+    ['drafter','Draft','The rep asks for a follow-up','Dreamer drafts it from the call, with every promise and claim already marked for review.',
+      'Draft a follow-up to Northwind from today’s call.','Here’s a draft. I marked two promises and one claim I couldn’t find a source for.'],
+    ['provenance','Act','Dreamer acts, and signs its work','When Dreamer creates a task for the rep, it says so, and who the task is for.',
+      'Anything I should do after that call?','Marcus asked for the security review again, so I added a task for you.'],
+    ['autofill','Fill','Autofill starts small','Asked to fill every deal, Dreamer checks a sample first and asks before it goes further.',
+      'Fill in next steps on all my open deals.','I tried 50 deals first. 94% were right, so filling the other 1,240 is unlocked.'],
+    ['deal-score','Judge','Every score comes with a reason','Asked how a deal is doing, Dreamer answers with the fundamentals and the risk, not a percentage.',
+      'How healthy is Northwind?','3 of 4 fundamentals are in place. Path to close is missing, and there’s been no executive contact in 3 weeks.']
+  ];
+  return `<div class="dhc" data-dhc>
+    <div class="dhc-steps">${steps.map(([,k,t,d],i)=>`<div class="dhc-step${i?'':' on'}" data-i="${i}"><small>0${i+1} · ${k}</small><h3>${t}</h3><p>${d}</p></div>`).join('')}</div>
+    <div class="dhc-pin"><div class="dhc-frame" role="img" aria-label="A chat with Dreamer that changes with each step">
+      <div class="dhc-top"><span class="dhc-av">✦</span>Dreamer<span class="dhc-dots">${steps.map((_,i)=>`<i${i?'':' class="on"'}></i>`).join('')}</span></div>
+      <div class="dhc-body">${steps.map(([f,,,,me,ai],i)=>`<div class="dhc-panel${i?'':' on'}" aria-hidden="true"><div class="dhc-me">${me}</div><div class="dhc-ai"><span class="dhc-av">✦</span><div><p>${ai}</p><div class="dhc-att">${dhMock(f)}</div></div></div></div>`).join('')}</div>
+      <div class="dhc-in"><span>Ask Dreamer anything</span><b>↑</b></div></div></div></div>`;
+}
+function dhChatWire(root){
+  const box = root.querySelector('[data-dhc]'); if (!box) return;
+  const steps = [...box.querySelectorAll('.dhc-step')], panels = box.querySelectorAll('.dhc-panel'), dots = box.querySelectorAll('.dhc-dots i');
+  const show = i => { steps.forEach((s,k)=>s.classList.toggle('on',k===i)); panels.forEach((s,k)=>s.classList.toggle('on',k===i)); dots.forEach((s,k)=>s.classList.toggle('on',k===i)); };
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) show(+e.target.dataset.i); }), {rootMargin:'-45% 0px -45% 0px'});
+  steps.forEach(s => io.observe(s));
+}
 function dhMock(f){
   const cur = '<span class="dhg-cur"><span>You</span></span>';
   const mocks = {
@@ -2868,6 +2938,8 @@ function renderDreamhubCase(p, next){
     ]) + todo('Check these four against the real constraints, and add any from engineering or the model.'))}
     ${chapter(2)}
     <div class="og-quote"><small>The principle</small><p>The AI is visible, explainable and accountable, and the human stays the author of record.</p></div>
+    ${section('One conversation with Dreamer', '<p>Most reps meet Dreamer in chat. This is one conversation, from a call recap to a judgement on the deal, and what Dreamer shows at each step.</p>')}
+    ${dhChat()}
     ${surfaces.map(([f,label,t,d]) => feature(shot(f, label), t, `<p>${d}</p>`)).join('')}
     ${section('The four fundamentals', '<p>The Deal Score judges every deal on the same four things, drawn from the qualification methods sales teams already use, like MEDDPICC. Each one has a fixed definition, so the same deal always gets the same answer, and a level always says what is there and what is missing.</p>' + kv([
       ['Champion','Someone inside the account is actively pushing the deal forward.'],
@@ -2911,6 +2983,7 @@ function renderDreamhubCase(p, next){
     ${section('What I’d do next', '<ul class="wa-list"><li>Learn from the review: when reps edit a token or reject a flagged claim, use it so the next draft makes fewer of them.</li><li>Ground the Deal Score too: link each fundamental to the call or email that proved it.</li><li>Carry the trust layer into customer success, where Dreamer drafts outreach to at-risk accounts and health scores already promise to show which signal moved and why.</li></ul>' + todo('Draft ideas. Keep, change or replace them with what is really next.'))}
     <footer class="case-foot"><button class="back" type="button" data-back>← Back to work</button>
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
+  dhChatWire(caseInner);
   $('#case-bar-title').textContent = p.title;
 }
 function renderDhContractsCase(p, next){
