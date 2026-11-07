@@ -643,8 +643,8 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .lw-shot img{position:relative;z-index:1}
 .lw-ph{aspect-ratio:4/3;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:20px;text-align:center;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
 .lw-shot.ready .lw-ph{display:none}
-.lw-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.lw-ph b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);text-wrap:balance}
+.lw-ph > small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.lw-ph > b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);text-wrap:balance}
 .lw-shot figcaption{margin-top:14px;text-align:center;color:var(--ink-3);font-size:.9375rem}
 .lw-row{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:28px}
 .lw-shot img{display:block;width:100%;height:auto;border-radius:8px}
@@ -962,17 +962,14 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 @media (max-width:760px){.case-cover .mk-dh .dh-mail{top:6%;right:6%;width:88%;transform:none;zoom:1.7}.case-cover .mk-dh .dh-who{display:none}}
 /* placeholders until the screens arrive; a real image hides its placeholder once it loads */
 .dh-ph{aspect-ratio:var(--ph-ar,16/10);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;padding:24px;text-align:center;background:var(--surface-2);box-shadow:inset 0 0 0 1px var(--line)}
-.dh-ph small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
-.dh-ph b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);max-width:36ch;text-wrap:balance}
+.dh-ph > small{font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.dh-ph > b{font:500 1rem/1.25 var(--sans);letter-spacing:-.02em;color:var(--ink-2);max-width:36ch;text-wrap:balance}
 .dh-shot.ready .dh-ph{display:none}
 .cs-body .dh-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
 .learn p.dh-led{margin-top:10px!important;color:var(--ink)!important;font-weight:500}
-/* DreamHub Solution: 2x2 feature cards, each with a small dark-mode product mockup (screens are dark in DreamHub) */
-.dhg{max-width:var(--cw);margin:0 auto var(--sec);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.dhg-card{position:relative;display:flex;flex-direction:column;min-height:0;aspect-ratio:1.1/1;border-radius:24px;background:var(--surface-2);overflow:hidden;padding:28px 28px 0}
-.dhg-card h3{margin:0 0 6px;font:500 1.0625rem/1.35 var(--sans);letter-spacing:-.02em;color:var(--ink)}
-.dhg-card > p{margin:0;max-width:46ch;font-size:.9375rem;line-height:1.55;letter-spacing:-.012em;color:var(--ink-2);text-wrap:pretty}
-.dhg-stage{position:relative;flex:1;min-height:0;margin-top:28px;container-type:size;font-family:var(--sans);
+/* DreamHub placeholder frames: a clean dark-mode mockup inside each frame (DreamHub screens are dark) */
+.dh-ph.has-mock,.lw-ph.has-mock{position:relative;display:block;padding:0;overflow:hidden;box-shadow:none;border-radius:var(--img-r);text-align:left}
+.dhg-stage{position:absolute;inset:0;container-type:size;font-family:var(--sans);
   --d-bg:#111318;--d-panel:#181B22;--d-raise:#20242D;--d-line:rgba(255,255,255,.08);--d-ink:#E9EBF1;--d-ink-2:#9AA0AE;--d-ink-3:#5D6372;--d-ai:#9A8CFF;--d-ai-soft:rgba(140,124,255,.16)}
 .dhg-stage *{box-sizing:border-box}
 .dhg-mock{position:absolute;inset:0;font-size:calc(100cqw/44)}
@@ -984,10 +981,6 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .dhg-win{position:absolute;background:var(--d-panel);color:var(--d-ink);border:1px solid var(--d-line);border-radius:1em 1em 0 0;box-shadow:0 1.6em 4em rgba(0,0,0,.35);overflow:hidden}
 .dhg-dots{display:flex;gap:.45em;padding:.9em 1.1em;border-bottom:1px solid var(--d-line)}
 .dhg-dots i{width:.6em;height:.6em;border-radius:50%;background:var(--d-ink-3)}
-.dhg-real{display:none;position:absolute;left:12%;right:12%;top:12%;width:76%;border-radius:1em 1em 0 0;box-shadow:0 1.6em 4em rgba(0,0,0,.35)}
-.dhg-card.ready .dhg-mock{display:none}
-.dhg-card.ready .dhg-real{display:block}
-.dhg-card.ready .dhg-sky{display:block!important}
 /* 1 · Email Drafter */
 .dhg-frame{position:absolute;inset:0;border-radius:14px 14px 0 0;background:var(--d-bg);padding:1.3em 1.4em 0;display:flex;flex-direction:column}
 .dhg-frame header{display:flex;justify-content:space-between;align-items:flex-start;gap:1em;color:var(--d-ink);margin-bottom:1.2em}
@@ -1062,6 +1055,15 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 @media (prefers-reduced-motion:reduce){.dhg-typing i{animation:none}}
 .dhg-risk{display:inline-flex;align-items:center;gap:.5em;padding:.45em 1em;border-radius:99px;background:rgba(224,87,74,.12);color:#C2463A;font-size:1.1em}
 html.theme-dark .dhg-risk{color:#F09A90}
+.dhg-iter{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;gap:4%;padding:6% 5% 0}
+.dhg-col{position:relative;display:flex;flex-direction:column;gap:.8em}
+.dhg-col > small{font-size:1em;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--ink-3)}
+.dhg-plain{position:relative;flex:1;font-size:.85em}
+.dhg-plain .in{padding:1.2em 1.4em}
+.dhg-plain .to{display:flex;justify-content:space-between;align-items:center;gap:.6em;font-size:1.05em;color:var(--d-ink-2);margin-bottom:1em}
+.dhg-plain .to b{font-weight:500;color:var(--d-ink)}
+.dhg-plain p{margin:0 0 .8em;font-size:1.12em;line-height:1.6;color:#D3D6DE}
+.dhg-conf{padding:.25em .75em;border-radius:99px;background:var(--d-raise);color:var(--d-ink-2);white-space:nowrap}
 .dhg-legend{font-size:1.05em;color:var(--ink-3)}
 .dhg-legend b{font-weight:500;color:var(--ink-2)}
 html.theme-dark .dhg-f{border-color:var(--surface-2)}
@@ -1095,8 +1097,6 @@ html.theme-dark .dhg-f{border-color:var(--surface-2)}
 .dhg-arrow{font-size:1.1em;color:var(--ink-3);white-space:nowrap}
 .dhg-risk.ok{background:rgba(47,158,106,.12);color:#1F8A5B}
 html.theme-dark .dhg-risk.ok{color:#7FD8A8}
-@media (max-width:900px){.dhg{grid-template-columns:minmax(0,1fr);max-width:620px}}
-@media (max-width:560px){.dhg-card{aspect-ratio:auto;padding:24px 20px 0}.dhg-stage{flex:none;aspect-ratio:1.45/1;margin-top:22px}.dhg-card > p{font-size:.9375rem}.dhg-mock{font-size:calc(100cqw/36)}}
 .visual.has-thumb{background:none;border-radius:0}  /* thumbs are collages: the gap between panels shows the card; the artwork carries its own grain */
 .mk-thumb{display:flex;gap:8px}  /* gap matches the card's 8px side padding */
 .mk-thumb span{position:relative;min-width:0;border-radius:var(--img-r);overflow:hidden}
@@ -2743,9 +2743,9 @@ function renderLwfCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
-/* DreamHub Solution grid: a heading, one line and a small dark product mockup per card.
-   Drop images/dreamhub-<file>.webp in and the real screen replaces the coded mockup. */
-function dhGrid(surfaces, prefix='dreamhub-'){
+/* Clean dark-mode mockups that fill the DreamHub "Design coming soon" frames, so each page shows how it
+   will look with real screens. A real images/dreamhub-*.webp still covers its mockup once it exists. */
+function dhMock(f){
   const cur = '<span class="dhg-cur"><span>You</span></span>';
   const mocks = {
     drafter:`<div class="dhg-frame"><header><div><b>Email Drafter</b><span>Follow-up to Northwind, drafted from today’s call.</span></div><span class="dhg-pill">2 promises to review</span></header>
@@ -2766,6 +2766,16 @@ function dhGrid(surfaces, prefix='dreamhub-'){
         <div class="dhg-main"><div class="dhg-top"><div class="dhg-meter">Sample accuracy <b>94%</b><div><i></i></div></div><span class="dhg-btn">Fill 1,240 deals${cur}</span></div>
           <div class="dhg-rows"><div><span>Next step</span><b>Security review</b></div><div><span>Close date</span><b>Mar 14</b></div><div class="x"><span>Champion</span><b>Priya Shah</b></div><div><span>Budget owner</span><b>Marcus Lee</b></div><div><span>Seats</span><b>120</b></div></div></div>
       </div></div></div>`,
+    iterations:`<div class="dhg-iter">
+      <div class="dhg-col"><small>Before</small><div class="dhg-win dhg-plain"><div class="dhg-dots"><i></i><i></i><i></i></div><div class="in">
+        <div class="to"><span>To <b>Marcus Lee</b></span><span class="dhg-conf">Confidence 82%</span></div>
+        <p>Thanks for the time today. As discussed, we’ll send the security review by Friday and hold this pricing through Q1.</p>
+        <p>Our API already supports SSO with Okta, so your team can roll it out on day one.</p></div></div></div>
+      <div class="dhg-col"><small>After</small><div class="dhg-win dhg-plain"><div class="dhg-dots"><i></i><i></i><i></i></div><div class="in">
+        <div class="to"><span>To <b>Marcus Lee</b></span><span class="dhg-ai">Drafted by Dreamer</span></div>
+        <p>Thanks for the time today. As discussed, <span class="dhg-tk">we’ll send the security review by Friday</span> and <span class="dhg-tk">hold this pricing through Q1</span>.</p>
+        <p><span class="dhg-fl">Our API already supports SSO with Okta</span>, so your team can roll it out on day one.</p>
+        <div class="dhg-bar"><i style="flex:46;background:#8C7CFF"></i><i style="flex:32;background:#4FB98A"></i><i style="flex:22;background:#E0574A"></i></div></div></div></div></div>`,
     contract:`<div class="dhg-frame"><header><div><b>Contract record</b><span>Created from Northwind expansion when it closed.</span></div><span class="dhg-pill ok">Active</span></header>
       <div class="dhg-sky a"><div class="dhg-win dhg-mail"><div class="dhg-dots"><i></i><i></i><i></i></div><div class="in">
         <div class="to"><span><b>Northwind</b> · Annual subscription</span><span class="dhg-ai ok">Source of truth</span></div>
@@ -2793,17 +2803,14 @@ function dhGrid(surfaces, prefix='dreamhub-'){
       <span class="dhg-risk">⚠ Risk: no executive contact in 3 weeks</span>
       <div class="dhg-legend">Missing: <b>path to close</b></div></div>`
   };
-  return `<div class="dhg">${surfaces.map(([f,label,t,d]) => `<article class="dhg-card"><h3>${t}</h3><p>${d}</p>
-    <div class="dhg-stage" role="img" aria-label="${label}"><div class="dhg-mock" aria-hidden="true">${mocks[f]}</div>
-      <div class="dhg-sky ${f==='autofill'||f==='intercept'?'b':'a'}" style="display:none"></div>
-      <img class="dhg-real" src="images/${prefix}${f}.webp" alt="" loading="lazy" onload="this.closest('.dhg-card').classList.add('ready')" onerror="this.remove()"></div></article>`).join('')}</div>`;
+  return mocks[f] ? `<div class="dhg-stage" aria-hidden="true"><div class="dhg-mock">${mocks[f]}</div></div>` : '';
 }
 function renderDreamhubCase(p, next){
   /* Same order as every case study on the site: the answer first, then the research and process that prove it */
   const CH = ['Overview','Solution','Research','Design process','Takeaways'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* A placeholder until the screen arrives: drop images/dreamhub-<file>.webp in and it replaces itself. */
-  const shot = (file, label, cap='', ar='16/10') => `<figure class="shot dh-shot"><div class="shot-img"><div class="dh-ph" style="--ph-ar:${ar}"><small>Design coming soon</small><b>${label}</b></div><img src="images/dreamhub-${file}.webp" alt="${label}" loading="lazy" onload="this.closest('figure').classList.add('ready')" onerror="this.remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
+  const shot = (file, label, cap='', ar='16/10') => `<figure class="shot dh-shot"><div class="shot-img"><div class="dh-ph${dhMock(file)?' has-mock':''}" style="--ph-ar:${ar}">${dhMock(file)||`<small>Design coming soon</small><b>${label}</b>`}</div><img src="images/dreamhub-${file}.webp" alt="${label}" loading="lazy" onload="this.closest('figure').classList.add('ready')" onerror="this.remove()"></div>${cap?`<figcaption>${cap}</figcaption>`:''}</figure>`;
   const cards = arr => `<ol class="kd og-kd">${arr.map(([t,d],k)=>`<li><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></li>`).join('')}</ol>`;
   const kv = arr => `<div class="learn">${arr.map(([t,d],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p></div>`).join('')}</div>`;
   /* Notes for Guy to confirm or fill in */
@@ -2814,10 +2821,10 @@ function renderDreamhubCase(p, next){
     ['Scores with no reason','A win probability says a deal is at risk, but not why, so a manager cannot coach on it and a rep cannot fix it.']
   ];
   const surfaces = [
-    ['drafter','Email Drafter: commitment tokens, a flagged claim and the grounding bar','In the Email Drafter, review is the product','The draft arrives marked up. Every promise stands out, risky claims are flagged, and a bar shows where each line came from.'],
-    ['provenance','A task created by Dreamer, with its provenance line','Every task says who made it, and for whom','Anyone reading the pipeline can tell what a rep did and what Dreamer did on their behalf.'],
-    ['autofill','AI-Autofill: the sample review and the bulk unlock','Autofill earns trust before it acts in bulk','It fills a sample of deals first. Filling every deal unlocks only once the sample is right 90% of the time.'],
-    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','Every deal is judged on the same four fundamentals. Risks are listed on their own, so reps know exactly what to fix.']
+    ['drafter','Email Drafter: commitment tokens, a flagged claim and the grounding bar','In the Email Drafter, review is the product','The draft arrives already marked up for the rep. Every commitment is an inline token, every capability claim is flagged, and a grounding bar shows where each statement came from.'],
+    ['provenance','A task created by Dreamer, with its provenance line','Every task says who made it, and for whom','“Created by Dreamer · for Dana.” Anyone reading the pipeline can tell what a rep did and what the AI did on their behalf.'],
+    ['autofill','AI-Autofill: the sample review and the bulk unlock','Autofill earns trust before it acts in bulk','It runs on a sample first. Bulk deployment unlocks only once sample accuracy clears 90%.'],
+    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','One of four health levels, judged on four named fundamentals. Risks, like no executive engagement in three weeks, are listed separately and never silently lower the level.']
   ];
   const decisions = [
     {t:'Commitments become tokens',
@@ -2861,7 +2868,7 @@ function renderDreamhubCase(p, next){
     ]) + todo('Check these four against the real constraints, and add any from engineering or the model.'))}
     ${chapter(2)}
     <div class="og-quote"><small>The principle</small><p>The AI is visible, explainable and accountable, and the human stays the author of record.</p></div>
-    ${dhGrid(surfaces)}
+    ${surfaces.map(([f,label,t,d]) => feature(shot(f, label), t, `<p>${d}</p>`)).join('')}
     ${section('The four fundamentals', '<p>The Deal Score judges every deal on the same four things, drawn from the qualification methods sales teams already use, like MEDDPICC. Each one has a fixed definition, so the same deal always gets the same answer, and a level always says what is there and what is missing.</p>' + kv([
       ['Champion','Someone inside the account is actively pushing the deal forward.'],
       ['Economic buyer','The person who owns the budget is known and involved.'],
@@ -2910,15 +2917,15 @@ function renderDhContractsCase(p, next){
   const CH = ['Overview','Solution','Research','Design process','Takeaways'];
   const chapter = n => `<div class="chap" id="ch-${n}"><span>0${n}</span><h2>${CH[n-1]}</h2></div>`;
   /* Placeholders until the real screens land in images/dreamhub-contracts-<file>.webp */
-  const shot = (file, label) => `<figure class="lw-shot"><div class="lw-ph" aria-hidden="true"><small>Design coming soon</small><b>${label}</b></div><img src="images/dreamhub-contracts-${file}.webp" alt="${label}" loading="lazy" onload="this.parentNode.classList.add('ready')" onerror="this.remove()"></figure>`;
+  const shot = (file, label) => `<figure class="lw-shot"><div class="lw-ph${dhMock(file)?' has-mock':''}" aria-hidden="true">${dhMock(file)||`<small>Design coming soon</small><b>${label}</b>`}</div><img src="images/dreamhub-contracts-${file}.webp" alt="${label}" loading="lazy" onload="this.parentNode.classList.add('ready')" onerror="this.remove()"></figure>`;
   const kv = arr => `<div class="learn">${arr.map(([t,d,led],k)=>`<div><span class="kd-n">0${k+1}</span><b>${t}</b><p>${d}</p>${led?`<p class="dhc-led"><small>Led to →</small>${led}</p>`:''}</div>`).join('')}</div>`;
   const decisions = `<ol class="kd">${p.decisions.map((d,k)=>`<li><span class="kd-n">0${k+1}</span><b>${d.t}</b><p>${d.y}</p><p class="kd-why"><small>Why →</small>${d.w}</p></li>`).join('')}</ol>`;
   const led = k => `${String(k).padStart(2,'0')} ${p.decisions[k-1].t}`;
   /* Notes for Guy to confirm or rewrite in his own words */
   const todo = t => `<p class="lw-todo">${t}</p>`;
   const screens = [
-    ['contract','Contract record','Every won deal hands over to a contract','When a deal closes, its terms become a contract, the source of truth for what the customer signed.'],
-    ['terms-history','Terms History','The history reads like the account\'s story','Every change is one line on a timeline, named in plain words and backed by an ID that never changes.'],
+    ['contract','Contract record','Every won deal hands over to a contract','When a deal closes, its terms become a contract: seats, price, start and end dates. The deal records the sale. The contract becomes the source of truth for what the customer signed.'],
+    ['terms-history','Terms History','The history reads like the account\'s story','Every change appears on one timeline, named in plain words and backed by a reference ID that never changes. When someone asks why a number moved, the answer is one line on the timeline.'],
     ['intercept','Closed Won intercept','The CRM asks before it disagrees','Change the amount on a won deal and DreamHub asks what you mean, before the deal and the contract can split.'],
     ['renewal','Renewal','A renewal starts a new agreement','A renewal starts as a copy of the current contract and becomes its own agreement, linked to the one before it.']
   ];
@@ -2937,7 +2944,7 @@ function renderDhContractsCase(p, next){
     ]) + todo('Check these against the real constraints and swap any that don\'t fit.'))}
     ${chapter(2)}
     <div class="og-quote"><small>The model in one line</small><p>After Closed Won, the contract is the source of truth, and the CRM never quietly disagrees with it.</p></div>
-    ${dhGrid(screens, 'dreamhub-contracts-')}
+    ${screens.map(([f,n,t,d]) => feature(shot(f, n), t, `<p>${d}</p>`)).join('')}
     ${section('Key decisions', '<p>Four modelling decisions shaped everything above.</p>')}
     ${decisions}
     ${chapter(3)}
