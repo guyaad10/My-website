@@ -972,8 +972,10 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .mk-thumb span{position:relative;min-width:0;border-radius:var(--img-r);overflow:hidden}
 .mk-thumb span::after{content:"";position:absolute;inset:0;z-index:2;border-radius:inherit;pointer-events:none;box-shadow:inset 0 0 0 1px rgba(16,24,40,.08)}  /* gentle edge so white screens don't melt into the card */
 .mk-thumb img{display:block;width:100%;height:100%;object-fit:cover;transition:transform .8s var(--ease)}
+/* DreamHub orbit: the role labels drift around the logo (the art's rings stay baked into bg.webp); slice = object-fit:cover */
+.dh-orbit{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;transition:transform .8s var(--ease)}
 .visual.has-thumb .mk-stage{transform:none}  /* zoom each panel inside its own frame so the corners stay round */
-@media (hover:hover){.visual.has-thumb:hover .mk-thumb span > img{transform:scale(1.015)}
+@media (hover:hover){.visual.has-thumb:hover .mk-thumb span > img,.visual.has-thumb:hover .dh-orbit{transform:scale(1.015)}
   .visual.has-thumb:hover .thumb-screen{transform:translate(-.4cqw,-.4cqw)}}
 /* product window sitting on a gradient panel, bleeding off its bottom-right like a cropped screenshot */
 .thumb-screen{position:absolute;left:13%;top:20%;width:100%;height:100%;background:#fff;border-radius:1cqw 0 0 0;
@@ -1269,7 +1271,7 @@ const PROJECTS = [
   {
     id:'dh-contracts', kind:'feature', wide:true, mock:'dhContracts', ar:'16/9',
     icon:'images/dreamhub-logos/dreamhub.png',
-    __case:'dh-contracts', thumb:[['dh-contracts-card-a.webp',960],['dh-contracts-card-b.webp',1440,true]],
+    __case:'dh-contracts', thumb:[['dh-orbit/bg.webp',960,'orbit'],['dh-contracts-card-b.webp',1440,true]],
     line:'At DreamHub, my current work, I designed what a CRM does after the deal is won.',
     said:'Most CRMs stop at Closed Won. DreamHub models what actually happens next: the contract, its amendments and its renewal. The difference is in decisions users never see but constantly feel.',
     title:'DreamHub: Contract lifecycle',
@@ -1540,6 +1542,25 @@ addEventListener('resize', queueVeil);
 const caseEl = $('#case'), caseInner = $('#case-inner'), caseBack = $('#case-back');
 const reduced = matchMedia('(prefers-reduced-motion: reduce)');
 const canVT = () => typeof document.startViewTransition === 'function' && !reduced.matches;
+/* Orbit thumbnail motion: runs only while a card is on screen and the tab is visible; reduced motion keeps guy's original layout */
+(() => {
+  const live = new Set(), t0 = performance.now(); let raf = 0;
+  const place = (svg, t) => {
+    const logo = svg.querySelector('.o-logo'), byL = {}; svg.querySelectorAll('image[data-l]').forEach(n => byL[n.dataset.l] = n);
+    const ps = ORBIT.labels.map(l => ({n:byL[l[0]], p:orbitPos(l,t)}));
+    ps.forEach(o => o.n.setAttribute('transform', orbitTf(o.p)));
+    /* labels on the far half pass behind the logo, nearer ones paint over farther ones */
+    const order = [...ps.filter(o=>!o.p.front).sort((a,b)=>a.p.y-b.p.y).map(o=>o.n), logo, ...ps.filter(o=>o.p.front).sort((a,b)=>a.p.y-b.p.y).map(o=>o.n)];
+    if (order.some((n,i) => svg.children[i] !== n)) order.forEach(n => svg.appendChild(n));
+  };
+  const frame = now => { raf = 0; live.forEach(s => s.isConnected ? place(s, (now-t0)/1000) : live.delete(s)); kick(); };
+  const kick = () => { if (!raf && live.size && !reduced.matches && !document.hidden) raf = requestAnimationFrame(frame); };
+  const io = new IntersectionObserver(es => { es.forEach(e => e.isIntersecting ? live.add(e.target) : live.delete(e.target)); kick(); });
+  const scan = () => document.querySelectorAll('svg.dh-orbit:not([data-on])').forEach(s => { s.dataset.on = 1; io.observe(s); });
+  new MutationObserver(scan).observe(document.body, {childList:true, subtree:true}); scan();
+  document.addEventListener('visibilitychange', kick);
+  reduced.addEventListener('change', () => { if (reduced.matches) document.querySelectorAll('svg.dh-orbit').forEach(s => place(s, 0)); else kick(); });
+})();
 const rich = s => s.replace(/\[\[(.+?)\]\]/g, '<span class="todo">To add: $1</span>');
 /* About: Guy talking, a few short messages instead of a CV summary */
 const ABOUT = [
@@ -1563,8 +1584,28 @@ const metaDL = p => `<dl class="meta">
   <div><dt>Year</dt><dd>${p.year}</dd></div></dl>`;
 /* thumb: [[image, width, screen?], …] collage panels for the work-grid card only (the case page cover still uses the mock);
    width sets each panel's share of the row; screen puts a product window on the panel: true for a placeholder,
-   or {src, from:'right'} for a real screenshot (from:'right' bleeds it off the left edge instead, for right-to-left UIs) */
-const thumbScreen = s => s===true
+   or {src, from:'right'} for a real screenshot (from:'right' bleeds it off the left edge instead, for right-to-left UIs),
+   or 'orbit' for the DreamHub contracts art with its role labels orbiting the logo */
+/* Orbit art is 982×1350. Rings are ellipses around one centre; each label is a sprite whose dot rides its ring.
+   [file, ring, dot x, dot y, sprite x, sprite y, w, h] in art pixels, at the spot they sit in guy's artwork */
+const ORBIT = {c:[444.5,674.8], r:[[242.9,92.3],[407.4,175.2]], period:[70,110], logo:[373,556,144,162],
+  labels:[['vp',1,295,509.5,279,477,170,70],['sdr',0,204,662,188,643,124,42],['csm',1,850,662,834,643,124,42],
+          ['ae',0,686,692,669,672,97,42],['rev',1,141,798,124,765,119,70]]};
+ORBIT.labels.forEach(l => { const [rx,ry] = ORBIT.r[l[1]]; l.push(Math.atan2((l[3]-ORBIT.c[1])/ry, (l[2]-ORBIT.c[0])/rx)); });
+/* where a label sits t seconds in: slow, same direction for both rings, inner ring a little quicker; nearer (lower) labels a touch larger */
+function orbitPos(l, t){
+  const [rx,ry] = ORBIT.r[l[1]], a = l[8] + 2*Math.PI*t/ORBIT.period[l[1]], sn = Math.sin(a);
+  return {x:ORBIT.c[0]+rx*Math.cos(a), y:ORBIT.c[1]+ry*sn, s:.96+.04*sn, front:sn>0};
+}
+const orbitTf = p => `translate(${p.x.toFixed(2)} ${p.y.toFixed(2)}) scale(${p.s.toFixed(4)})`;
+const orbitSVG = () => {
+  const lab = l => { const p = orbitPos(l,0); return {p, html:`<image data-l="${l[0]}" href="images/dh-orbit/${l[0]}.webp" x="${l[4]-l[2]}" y="${l[5]-l[3]}" width="${l[6]}" height="${l[7]}" transform="${orbitTf(p)}"/>`}; };
+  const ls = ORBIT.labels.map(lab), [x,y,w,h] = ORBIT.logo;
+  return `<svg class="dh-orbit" viewBox="0 0 982 1350" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false">${
+    ls.filter(o=>!o.p.front).map(o=>o.html).join('')}<image class="o-logo" href="images/dh-orbit/logo.webp" x="${x}" y="${y}" width="${w}" height="${h}"/>${
+    ls.filter(o=>o.p.front).map(o=>o.html).join('')}</svg>`;
+};
+const thumbScreen = s => s==='orbit' ? orbitSVG() : s===true
   ? '<div class="thumb-screen" aria-hidden="true"><div class="ts-bar"><i></i><i></i><i></i></div><div class="ts-body"><div class="ts-side"><i></i><i></i><i></i><i></i></div><div class="ts-main"><b></b><p></p><p></p><p class="s"></p><small>Screen from the project</small></div></div></div>'
   : `<div class="thumb-screen shot${s.from==='right'?' from-right':''}" aria-hidden="true"><img src="images/${s.src}" alt="" draggable="false"></div>`;
 const visual = (p, cls='') => p.mock ? `<div class="visual ${cls}${p.thumb?' has-thumb':''}" data-visual="${p.id}" style="--ar:${p.ar}">${p.thumb ? `<div class="mk-stage mk-thumb">${p.thumb.map(([src,w,scr])=>`<span style="flex:${w} 1 0"><img src="images/${src}" alt="" draggable="false">${scr?thumbScreen(scr):''}</span>`).join('')}</div>` : MOCKS[p.mock]()}</div>` : '';
