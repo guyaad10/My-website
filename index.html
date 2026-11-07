@@ -967,6 +967,106 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .dh-shot.ready .dh-ph{display:none}
 .cs-body .dh-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
 .learn p.dh-led{margin-top:10px!important;color:var(--ink)!important;font-weight:500}
+/* DreamHub Solution: 2x2 feature cards, each with a small dark-mode product mockup (screens are dark in DreamHub) */
+.dhg{max-width:1120px;margin:0 auto var(--sec);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.dhg-card{position:relative;display:flex;flex-direction:column;min-height:0;aspect-ratio:1.5/1;border-radius:24px;background:var(--surface-2);overflow:hidden;padding:32px 32px 0}
+.dhg-card h3{margin:0 0 6px;font:500 1.0625rem/1.35 var(--sans);letter-spacing:-.02em;color:var(--ink)}
+.dhg-card > p{margin:0;max-width:46ch;font-size:1rem;line-height:1.55;letter-spacing:-.012em;color:var(--ink-2);text-wrap:pretty}
+.dhg-stage{position:relative;flex:1;min-height:0;margin-top:28px;container-type:size;font-family:var(--sans);
+  --d-bg:#111318;--d-panel:#181B22;--d-raise:#20242D;--d-line:rgba(255,255,255,.08);--d-ink:#E9EBF1;--d-ink-2:#9AA0AE;--d-ink-3:#5D6372;--d-ai:#9A8CFF;--d-ai-soft:rgba(140,124,255,.16)}
+.dhg-stage *{box-sizing:border-box}
+.dhg-mock{position:absolute;inset:0;font-size:calc(100cqw/44)}
+/* grainy gradient backdrop, like a photo behind the product window */
+.dhg-sky{position:absolute;inset:0;border-radius:14px 14px 0 0;overflow:hidden}
+.dhg-sky::after{content:"";position:absolute;inset:0;opacity:.55;mix-blend-mode:overlay;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='1 0 0 0 0 1 0 0 0 0 1 0 0 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E") 0 0/120px 120px}
+.dhg-sky.a{background:radial-gradient(70% 90% at 12% 30%,#E9B7A6 0%,transparent 60%),radial-gradient(60% 80% at 90% 80%,#1F5F63 0%,transparent 70%),linear-gradient(120deg,#B9C7B4,#5E8C86 55%,#173F4A)}
+.dhg-sky.b{background:linear-gradient(180deg,#3F6FB0 0%,#7F8FC0 45%,#E7A79A 85%,#F2B48E 100%)}
+.dhg-win{position:absolute;background:var(--d-panel);color:var(--d-ink);border:1px solid var(--d-line);border-radius:1em 1em 0 0;box-shadow:0 1.6em 4em rgba(0,0,0,.35);overflow:hidden}
+.dhg-dots{display:flex;gap:.45em;padding:.9em 1.1em;border-bottom:1px solid var(--d-line)}
+.dhg-dots i{width:.6em;height:.6em;border-radius:50%;background:var(--d-ink-3)}
+.dhg-real{display:none;position:absolute;left:12%;right:12%;top:12%;width:76%;border-radius:1em 1em 0 0;box-shadow:0 1.6em 4em rgba(0,0,0,.35)}
+.dhg-card.ready .dhg-mock{display:none}
+.dhg-card.ready .dhg-real{display:block}
+.dhg-card.ready .dhg-sky{display:block!important}
+/* 1 · Email Drafter */
+.dhg-frame{position:absolute;inset:0;border-radius:14px 14px 0 0;background:var(--d-bg);padding:1.3em 1.4em 0;display:flex;flex-direction:column}
+.dhg-frame header{display:flex;justify-content:space-between;align-items:flex-start;gap:1em;color:var(--d-ink);margin-bottom:1.2em}
+.dhg-frame header b{display:block;font-size:1.2em;font-weight:500;margin-bottom:.2em}
+.dhg-frame header span{font-size:1.1em;color:var(--d-ink-2)}
+.dhg-pill{flex:none;display:inline-flex;align-items:center;gap:.5em;padding:.35em .9em;border-radius:99px;font-size:1em;white-space:nowrap;background:rgba(233,169,58,.16);color:#F0B95A}
+.dhg-pill::before{content:"";width:.55em;height:.55em;border-radius:50%;background:currentColor}
+.dhg-frame .dhg-sky{position:relative;flex:1;border-radius:.8em .8em 0 0}
+.dhg-mail{left:10%;right:10%;top:10%;bottom:0;padding:0}
+.dhg-mail .in{padding:1.3em 1.6em}
+.dhg-mail .to{display:flex;justify-content:space-between;align-items:center;font-size:1.05em;color:var(--d-ink-2);margin-bottom:1.1em}
+.dhg-mail .to b{font-weight:500;color:var(--d-ink)}
+.dhg-ai{display:inline-flex;align-items:center;gap:.45em;padding:.25em .75em;border-radius:99px;background:var(--d-ai-soft);color:var(--d-ai);font-size:.95em;white-space:nowrap}
+.dhg-ai::before{content:"";width:.55em;height:.55em;border-radius:50%;background:currentColor}
+.dhg-mail p{margin:0 0 .8em;font-size:1.12em;line-height:1.6;color:#D3D6DE}
+.dhg-tk{padding:.05em .35em;border-radius:.3em;background:rgba(233,169,58,.16);box-shadow:inset 0 -.14em 0 #E9A93A;color:#F6DDB0}
+.dhg-fl{padding:.05em .35em;border-radius:.3em;background:rgba(224,87,74,.16);box-shadow:inset 0 -.14em 0 #E0574A;color:#F5C4BD}
+.dhg-cur{position:absolute;display:flex;flex-direction:column;align-items:center;gap:.15em;font-size:.85em;color:#fff}
+.dhg-cur::before{content:"";width:0;height:0;border-left:.5em solid transparent;border-right:.5em solid transparent;border-top:.8em solid #fff;transform:rotate(-30deg);filter:drop-shadow(0 1px 1px rgba(0,0,0,.5))}
+.dhg-cur span{padding:.1em .6em;border-radius:99px;background:#4B4F5A}
+.dhg-bar{display:flex;gap:.3em;height:.55em;margin:1.1em 0 .7em}
+.dhg-bar i{border-radius:99px}
+.dhg-leg{display:flex;gap:1.4em;font-size:.95em;color:var(--d-ink-2)}
+.dhg-leg span::before{content:"";display:inline-block;width:.6em;height:.6em;border-radius:.15em;margin-right:.4em;background:var(--c)}
+/* 2 · Provenance */
+.dhg-chat{position:absolute;inset:0 0 auto;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;gap:.7em;padding:0 4% 8%}
+.dhg-msg{width:min(100%,38em);padding:1em 1.3em;border-radius:1.1em;background:var(--d-panel);border:1px solid var(--d-line);color:#D3D6DE;font-size:1.25em;line-height:1.5}
+.dhg-task{display:flex;align-items:center;gap:.8em;color:var(--d-ink)}
+.dhg-task i{flex:none;width:1.1em;height:1.1em;border-radius:.3em;border:1.5px solid var(--d-ink-3)}
+.dhg-task small{margin-left:auto;font-size:.8em;color:var(--d-ink-2)}
+.dhg-by{margin-top:1.1em;display:flex;align-items:center;gap:.5em;font-size:1.15em;color:var(--ink-2)}
+.dhg-chip{display:inline-flex;align-items:center;gap:.45em;padding:.25em .75em .25em .3em;border-radius:99px;background:#1B1730;color:#B4A9FF}
+.dhg-chip b{width:1.2em;height:1.2em;border-radius:50%;display:grid;place-items:center;font-size:.7em;font-weight:600;color:#fff;background:#6A57F0}
+.dhg-chip.p{background:#13262B;color:#8FD3C4}
+.dhg-chip.p b{background:#2F9E8A}
+/* 3 · Autofill */
+.dhg-strip{position:absolute;inset:0;border-radius:14px 14px 0 0;border:1px solid var(--d-line);background:var(--d-bg);display:flex;flex-direction:column;overflow:hidden}
+.dhg-strip > header{display:flex;justify-content:space-between;padding:.75em 1.1em;font-size:1em;color:var(--d-ink-2)}
+.dhg-strip .dhg-sky{position:relative;flex:1;border-radius:0}
+.dhg-app{left:16%;right:14%;top:12%;bottom:0;display:grid;grid-template-columns:22% 1fr;grid-template-rows:auto 1fr}
+.dhg-app .dhg-dots{grid-column:1/-1}
+.dhg-side{border-right:1px solid var(--d-line);padding:1.1em .9em;display:flex;flex-direction:column;gap:.75em}
+.dhg-side i{height:.5em;border-radius:99px;background:var(--d-raise)}
+.dhg-side i:nth-child(2n){width:70%}
+.dhg-main{padding:1.1em 1.3em;min-width:0}
+.dhg-top{display:flex;align-items:center;justify-content:space-between;gap:1em;margin-bottom:1em}
+.dhg-meter{flex:1;font-size:.95em;color:var(--d-ink-2)}
+.dhg-meter b{color:#7FD8A8;font-weight:500}
+.dhg-meter div{margin-top:.4em;height:.45em;border-radius:99px;background:var(--d-raise);overflow:hidden}
+.dhg-meter div i{display:block;height:100%;width:94%;background:#5BC48F;border-radius:inherit}
+.dhg-meter div i::after{content:"";position:absolute}
+.dhg-btn{position:relative;flex:none;padding:.5em 1em;border-radius:.6em;background:var(--d-ink);color:var(--d-bg);font-size:1em;font-weight:500}
+.dhg-btn .dhg-cur{left:70%;top:85%}
+.dhg-rows{display:flex;flex-direction:column}
+.dhg-rows div{display:grid;grid-template-columns:1fr 1fr 1.2em;gap:1em;align-items:center;padding:.65em 0;border-top:1px solid var(--d-line);font-size:1em;color:var(--d-ink-2)}
+.dhg-rows div b{font-weight:400;color:var(--d-ink)}
+.dhg-rows div::after{content:"✓";color:#5BC48F;font-weight:600}
+.dhg-rows div.x::after{content:"✕";color:#E0574A}
+/* 4 · Deal Score */
+.dhg-score{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2em;padding-bottom:8%}
+.dhg-row{display:flex;align-items:center}
+.dhg-f{width:2.6em;height:2.6em;border-radius:50%;display:grid;place-items:center;font-size:1.05em;font-weight:600;color:#fff;border:.18em solid var(--surface-2);margin-left:-.5em}
+.dhg-f:first-child{margin-left:0}
+.dhg-f.ok{background:#2F9E6A}
+.dhg-f.no{background:#3A3F4A;color:#9AA0AE}
+.dhg-level{display:inline-flex;align-items:center;gap:.6em;margin:0 .4em;padding:.6em 1.2em;border-radius:99px;background:var(--d-bg);border:1px solid var(--d-line);color:var(--d-ink);font-size:1.25em;white-space:nowrap}
+.dhg-level small{font-size:.85em;color:var(--d-ink-2)}
+.dhg-typing{display:inline-flex;gap:.25em}
+.dhg-typing i{width:.4em;height:.4em;border-radius:50%;background:#7FD8A8;animation:dhg-dot 1.2s infinite}
+.dhg-typing i:nth-child(2){animation-delay:.15s}.dhg-typing i:nth-child(3){animation-delay:.3s}
+@keyframes dhg-dot{0%,60%,100%{opacity:.35}30%{opacity:1}}
+@media (prefers-reduced-motion:reduce){.dhg-typing i{animation:none}}
+.dhg-risk{display:inline-flex;align-items:center;gap:.5em;padding:.45em 1em;border-radius:99px;background:rgba(224,87,74,.12);color:#C2463A;font-size:1.1em}
+html.theme-dark .dhg-risk{color:#F09A90}
+.dhg-legend{font-size:1.05em;color:var(--ink-3)}
+.dhg-legend b{font-weight:500;color:var(--ink-2)}
+html.theme-dark .dhg-f{border-color:var(--surface-2)}
+@media (max-width:900px){.dhg{grid-template-columns:minmax(0,1fr);max-width:620px}}
+@media (max-width:560px){.dhg-card{aspect-ratio:auto;padding:24px 20px 0}.dhg-stage{flex:none;aspect-ratio:1.45/1;margin-top:22px}.dhg-card > p{font-size:.9375rem}.dhg-mock{font-size:calc(100cqw/36)}}
 .visual.has-thumb{background:none;border-radius:0}  /* thumbs are collages: the gap between panels shows the card; the artwork carries its own grain */
 .mk-thumb{display:flex;gap:8px}  /* gap matches the card's 8px side padding */
 .mk-thumb span{position:relative;min-width:0;border-radius:var(--img-r);overflow:hidden}
@@ -2542,6 +2642,39 @@ function renderLwfCase(p, next){
       <a class="next" href="#/${next.id}" data-next="${next.id}"><small>Next in the conversation</small><b>${next.title}</b></a></footer>`;
   $('#case-bar-title').textContent = p.title;
 }
+/* DreamHub Solution grid: a heading, one line and a small dark product mockup per card.
+   Drop images/dreamhub-<file>.webp in and the real screen replaces the coded mockup. */
+function dhGrid(surfaces){
+  const cur = '<span class="dhg-cur"><span>You</span></span>';
+  const mocks = {
+    drafter:`<div class="dhg-frame"><header><div><b>Email Drafter</b><span>Follow-up to Northwind, drafted from today’s call.</span></div><span class="dhg-pill">2 promises to review</span></header>
+      <div class="dhg-sky a"><div class="dhg-win dhg-mail"><div class="dhg-dots"><i></i><i></i><i></i></div><div class="in">
+        <div class="to"><span>To <b>Marcus Lee</b></span><span class="dhg-ai">Drafted by Dreamer</span></div>
+        <p>Thanks for the time today. As discussed, <span class="dhg-tk">we’ll send the security review by Friday</span> and <span class="dhg-tk">hold this pricing through Q1</span>.</p>
+        <p><span class="dhg-fl">Our API already supports SSO with Okta</span>, so your team can roll it out on day one.</p>
+        <div class="dhg-bar"><i style="flex:46;background:#8C7CFF"></i><i style="flex:32;background:#4FB98A"></i><i style="flex:22;background:#E0574A"></i></div>
+        <div class="dhg-leg"><span style="--c:#8C7CFF">Call notes</span><span style="--c:#4FB98A">CRM record</span><span style="--c:#E0574A">Not grounded</span></div>
+      </div></div></div></div>`,
+    provenance:`<div class="dhg-chat">
+      <div class="dhg-msg">Marcus asked for the security review again on today’s call. I added a task so it doesn’t slip past Friday.</div>
+      <div class="dhg-msg dhg-task"><i></i>Send security review to Northwind<small>Due Fri</small></div>
+      <div class="dhg-by">Created by <span class="dhg-chip"><b>✦</b>Dreamer</span> for <span class="dhg-chip p"><b>D</b>Dana</span></div></div>`,
+    autofill:`<div class="dhg-strip"><header><span>Autofill is checking a sample of 50 deals</span><span>×</span></header>
+      <div class="dhg-sky b"><div class="dhg-win dhg-app"><div class="dhg-dots"><i></i><i></i><i></i></div>
+        <div class="dhg-side"><i></i><i></i><i></i><i></i><i></i></div>
+        <div class="dhg-main"><div class="dhg-top"><div class="dhg-meter">Sample accuracy <b>94%</b><div><i></i></div></div><span class="dhg-btn">Fill 1,240 deals${cur}</span></div>
+          <div class="dhg-rows"><div><span>Next step</span><b>Security review</b></div><div><span>Close date</span><b>Mar 14</b></div><div class="x"><span>Champion</span><b>Priya Shah</b></div><div><span>Budget owner</span><b>Marcus Lee</b></div><div><span>Seats</span><b>120</b></div></div></div>
+      </div></div></div>`,
+    'deal-score':`<div class="dhg-score">
+      <div class="dhg-row"><span class="dhg-f ok">C</span><span class="dhg-f ok">E</span><span class="dhg-level"><span class="dhg-typing"><i></i><i></i><i></i></span>Northwind <small>3 of 4 fundamentals</small></span><span class="dhg-f ok">P</span><span class="dhg-f no">–</span></div>
+      <span class="dhg-risk">⚠ Risk: no executive contact in 3 weeks</span>
+      <div class="dhg-legend">Missing: <b>path to close</b></div></div>`
+  };
+  return `<div class="dhg">${surfaces.map(([f,label,t,d]) => `<article class="dhg-card"><h3>${t}</h3><p>${d}</p>
+    <div class="dhg-stage" role="img" aria-label="${label}"><div class="dhg-mock" aria-hidden="true">${mocks[f]}</div>
+      <div class="dhg-sky ${f==='autofill'?'b':'a'}" style="display:none"></div>
+      <img class="dhg-real" src="images/dreamhub-${f}.webp" alt="" loading="lazy" onload="this.closest('.dhg-card').classList.add('ready')" onerror="this.remove()"></div></article>`).join('')}</div>`;
+}
 function renderDreamhubCase(p, next){
   /* Same order as every case study on the site: the answer first, then the research and process that prove it */
   const CH = ['Overview','Solution','Research','Design process','Takeaways'];
@@ -2558,10 +2691,10 @@ function renderDreamhubCase(p, next){
     ['Scores with no reason','A win probability says a deal is at risk, but not why, so a manager cannot coach on it and a rep cannot fix it.']
   ];
   const surfaces = [
-    ['drafter','Email Drafter: commitment tokens, a flagged claim and the grounding bar','In the Email Drafter, review is the product','The draft arrives already marked up for the rep. Every commitment is an inline token, every capability claim is flagged, and a grounding bar shows where each statement came from.'],
-    ['provenance','A task created by Dreamer, with its provenance line','Every task says who made it, and for whom','“Created by Dreamer · for Dana.” Anyone reading the pipeline can tell what a rep did and what the AI did on their behalf.'],
-    ['autofill','AI-Autofill: the sample review and the bulk unlock','Autofill earns trust before it acts in bulk','It runs on a sample first. Bulk deployment unlocks only once sample accuracy clears 90%.'],
-    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','One of four health levels, judged on four named fundamentals. Risks, like no executive engagement in three weeks, are listed separately and never silently lower the level.']
+    ['drafter','Email Drafter: commitment tokens, a flagged claim and the grounding bar','In the Email Drafter, review is the product','The draft arrives marked up. Every promise stands out, risky claims are flagged, and a bar shows where each line came from.'],
+    ['provenance','A task created by Dreamer, with its provenance line','Every task says who made it, and for whom','Anyone reading the pipeline can tell what a rep did and what Dreamer did on their behalf.'],
+    ['autofill','AI-Autofill: the sample review and the bulk unlock','Autofill earns trust before it acts in bulk','It fills a sample of deals first. Filling every deal unlocks only once the sample is right 90% of the time.'],
+    ['deal-score','AI Deal Score: health level, the four fundamentals and the risks','Deals get a diagnosis, not a probability','Every deal is judged on the same four fundamentals. Risks are listed on their own, so reps know exactly what to fix.']
   ];
   const decisions = [
     {t:'Commitments become tokens',
@@ -2605,7 +2738,7 @@ function renderDreamhubCase(p, next){
     ]) + todo('Check these four against the real constraints, and add any from engineering or the model.'))}
     ${chapter(2)}
     <div class="og-quote"><small>The principle</small><p>The AI is visible, explainable and accountable, and the human stays the author of record.</p></div>
-    ${surfaces.map(([f,label,t,d]) => feature(shot(f, label), t, `<p>${d}</p>`)).join('')}
+    ${dhGrid(surfaces)}
     ${section('The four fundamentals', '<p>The Deal Score judges every deal on the same four things, drawn from the qualification methods sales teams already use, like MEDDPICC. Each one has a fixed definition, so the same deal always gets the same answer, and a level always says what is there and what is missing.</p>' + kv([
       ['Champion','Someone inside the account is actively pushing the deal forward.'],
       ['Economic buyer','The person who owns the budget is known and involved.'],
