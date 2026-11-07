@@ -1065,7 +1065,7 @@ html.theme-dark .dhg-risk{color:#F09A90}
 .dhg-plain p{margin:0 0 .8em;font-size:1.12em;line-height:1.6;color:#D3D6DE}
 .dhg-conf{padding:.25em .75em;border-radius:99px;background:var(--d-raise);color:var(--d-ink-2);white-space:nowrap}
 /* Dreamer chat: the text steps scroll past one pinned chat frame, which swaps to the answer for each step (dark UI) */
-.dhc{max-width:var(--cw);margin:0 auto var(--sec);display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:56px}
+.dhc{max-width:var(--cw);margin:0 auto var(--sec);display:grid;grid-template-columns:270px minmax(0,1fr);gap:56px}  /* mirrors .feat: the chat is as wide as the frames, on the right */
 .dhc-steps{padding:12vh 0 18vh}
 .dhc-step{min-height:72vh;display:flex;flex-direction:column;justify-content:center;opacity:.32;transition:opacity .4s var(--ease)}
 .dhc-step.on{opacity:1}
@@ -1073,7 +1073,7 @@ html.theme-dark .dhg-risk{color:#F09A90}
 .dhc-step h3{margin:0 0 8px;font:500 1.25rem/1.25 var(--sans);letter-spacing:-.025em;color:var(--ink)}
 .dhc-step p{margin:0;font-size:.9375rem;line-height:1.55;color:var(--ink-2);text-wrap:pretty}
 .dhc-pin{position:sticky;top:max(136px,calc(50vh - 250px));align-self:start;height:min(500px,calc(100vh - 160px))}
-.dhc-frame{position:relative;height:100%;border-radius:20px;overflow:hidden;background:#0C0E12;color:#E9EBF1;box-shadow:0 2px 6px rgba(0,0,0,.08),0 30px 60px -30px rgba(10,10,30,.45);display:flex;flex-direction:column;font-family:var(--sans);
+.dhc-frame{position:relative;height:100%;border-radius:var(--img-r);overflow:hidden;background:#0C0E12;color:#E9EBF1;box-shadow:0 2px 6px rgba(0,0,0,.08),0 30px 60px -30px rgba(10,10,30,.45);display:flex;flex-direction:column;font-family:var(--sans);
   --d-bg:#111318;--d-panel:#181B22;--d-raise:#20242D;--d-line:rgba(255,255,255,.08);--d-ink:#E9EBF1;--d-ink-2:#9AA0AE;--d-ink-3:#5D6372;--d-ai:#9A8CFF;--d-ai-soft:rgba(140,124,255,.16)}
 .dhc-top{display:flex;align-items:center;gap:10px;padding:14px 18px;border-bottom:1px solid var(--d-line);font-size:.875rem;font-weight:500}
 .dhc-top small{margin-left:auto;font-weight:400;font-size:.8125rem;color:var(--d-ink-2)}
