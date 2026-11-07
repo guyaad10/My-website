@@ -1065,6 +1065,36 @@ html.theme-dark .dhg-risk{color:#F09A90}
 .dhg-legend{font-size:1.05em;color:var(--ink-3)}
 .dhg-legend b{font-weight:500;color:var(--ink-2)}
 html.theme-dark .dhg-f{border-color:var(--surface-2)}
+.dhg-pill.ok{background:rgba(91,196,143,.16);color:#7FD8A8}
+.dhg-ai.ok{background:rgba(91,196,143,.14);color:#7FD8A8}
+.dhg-kv{display:grid;grid-template-columns:1fr 1fr;gap:1em 1.6em;margin:.4em 0 1.2em}
+.dhg-kv small{display:block;font-size:.95em;color:var(--d-ink-2);margin-bottom:.2em}
+.dhg-kv b{font-size:1.35em;font-weight:500;color:var(--d-ink)}
+.dhg-from{padding-top:1em;border-top:1px solid var(--d-line);font-size:1em;color:var(--d-ink-2)}
+.dhg-from b{font-weight:500;color:var(--d-ai)}
+.dhg-tl .dhg-msg{position:relative;padding-left:2.6em}
+.dhg-tl .dhg-msg::before{content:"";position:absolute;left:1.1em;top:1.15em;width:.6em;height:.6em;border-radius:50%;background:var(--d-ai)}
+.dhg-tl .dhg-msg + .dhg-msg::before{background:var(--d-ink-3)}
+.dhg-tl{font-size:.9em;gap:.6em}
+.dhg-ev{display:flex;flex-direction:column;gap:.15em}
+.dhg-ev b{font-weight:500;color:var(--d-ink)}
+.dhg-ev small{font-size:.8em;color:var(--d-ink-2)}
+.dhg-ask{left:18%;right:18%;top:14%;bottom:0}
+.dhg-ask .in{padding:1.5em 1.6em;display:flex;flex-direction:column;gap:.8em}
+.dhg-ask small{font-size:1em;color:var(--d-ink-2)}
+.dhg-ask small s{color:var(--d-ink-3)}
+.dhg-ask small b{font-weight:500;color:#F0B95A}
+.dhg-ask .q{font-size:1.4em;font-weight:500;line-height:1.3;color:var(--d-ink);margin-bottom:.2em}
+.dhg-opt{position:relative;display:flex;flex-direction:column;gap:.15em;padding:.8em 1em;border-radius:.7em;border:1px solid var(--d-line);font-size:1.1em;color:var(--d-ink)}
+.dhg-opt em{font-style:normal;font-size:.85em;color:var(--d-ink-2)}
+.dhg-opt.on{border-color:var(--d-ai);background:var(--d-ai-soft)}
+.dhg-opt .dhg-cur{left:78%;top:60%}
+.dhg-ren{gap:.6em}
+.dhg-ren .dhg-level{margin:0}
+.dhg-level.new{border-color:rgba(140,124,255,.5)}
+.dhg-arrow{font-size:1.1em;color:var(--ink-3);white-space:nowrap}
+.dhg-risk.ok{background:rgba(47,158,106,.12);color:#1F8A5B}
+html.theme-dark .dhg-risk.ok{color:#7FD8A8}
 @media (max-width:900px){.dhg{grid-template-columns:minmax(0,1fr);max-width:620px}}
 @media (max-width:560px){.dhg-card{aspect-ratio:auto;padding:24px 20px 0}.dhg-stage{flex:none;aspect-ratio:1.45/1;margin-top:22px}.dhg-card > p{font-size:.9375rem}.dhg-mock{font-size:calc(100cqw/36)}}
 .visual.has-thumb{background:none;border-radius:0}  /* thumbs are collages: the gap between panels shows the card; the artwork carries its own grain */
@@ -2644,7 +2674,7 @@ function renderLwfCase(p, next){
 }
 /* DreamHub Solution grid: a heading, one line and a small dark product mockup per card.
    Drop images/dreamhub-<file>.webp in and the real screen replaces the coded mockup. */
-function dhGrid(surfaces){
+function dhGrid(surfaces, prefix='dreamhub-'){
   const cur = '<span class="dhg-cur"><span>You</span></span>';
   const mocks = {
     drafter:`<div class="dhg-frame"><header><div><b>Email Drafter</b><span>Follow-up to Northwind, drafted from today’s call.</span></div><span class="dhg-pill">2 promises to review</span></header>
@@ -2665,6 +2695,28 @@ function dhGrid(surfaces){
         <div class="dhg-main"><div class="dhg-top"><div class="dhg-meter">Sample accuracy <b>94%</b><div><i></i></div></div><span class="dhg-btn">Fill 1,240 deals${cur}</span></div>
           <div class="dhg-rows"><div><span>Next step</span><b>Security review</b></div><div><span>Close date</span><b>Mar 14</b></div><div class="x"><span>Champion</span><b>Priya Shah</b></div><div><span>Budget owner</span><b>Marcus Lee</b></div><div><span>Seats</span><b>120</b></div></div></div>
       </div></div></div>`,
+    contract:`<div class="dhg-frame"><header><div><b>Contract record</b><span>Created from Northwind expansion when it closed.</span></div><span class="dhg-pill ok">Active</span></header>
+      <div class="dhg-sky a"><div class="dhg-win dhg-mail"><div class="dhg-dots"><i></i><i></i><i></i></div><div class="in">
+        <div class="to"><span><b>Northwind</b> · Annual subscription</span><span class="dhg-ai ok">Source of truth</span></div>
+        <div class="dhg-kv"><div><small>Seats</small><b>120</b></div><div><small>Price</small><b>$48,000 / yr</b></div><div><small>Starts</small><b>Jan 1, 2026</b></div><div><small>Ends</small><b>Dec 31, 2026</b></div></div>
+        <div class="dhg-from">From deal <b>Northwind expansion</b> · Closed Won</div>
+      </div></div></div></div>`,
+    'terms-history':`<div class="dhg-chat dhg-tl">
+      <div class="dhg-msg"><span class="dhg-ev"><b>Added 20 seats, extended to Dec 2026</b><small>Mar 4 · Dana · CT-0482</small></span></div>
+      <div class="dhg-msg"><span class="dhg-ev"><b>Price changed to $52,000 a year</b><small>Feb 12 · Omer · CT-0471</small></span></div>
+      <div class="dhg-msg"><span class="dhg-ev"><b>Signed: 100 seats, $48,000 a year</b><small>Jan 1 · Dana · CT-0455</small></span></div>
+      <div class="dhg-by">Renews into <span class="dhg-chip p"><b>↻</b>Northwind 2027</span></div></div>`,
+    intercept:`<div class="dhg-strip"><header><span>Northwind expansion · Closed Won</span><span>×</span></header>
+      <div class="dhg-sky b"><div class="dhg-win dhg-ask"><div class="in">
+        <small>Amount&nbsp; <s>$48,000</s> → <b>$56,000</b></small>
+        <b class="q">This deal is already won. What do you want to change?</b>
+        <span class="dhg-opt on">Amend the contract<em>Adds a change to Terms History</em>${cur}</span>
+        <span class="dhg-opt">Edit the deal only<em>The contract stays as signed</em></span>
+      </div></div></div></div>`,
+    renewal:`<div class="dhg-score">
+      <div class="dhg-row dhg-ren"><span class="dhg-level"><small>2026</small>Northwind</span><span class="dhg-arrow">Renews →</span><span class="dhg-level new"><span class="dhg-typing"><i></i><i></i><i></i></span>Northwind <small>2027 · Draft</small></span></div>
+      <span class="dhg-risk ok">Copied: 120 seats, $52,000 a year, same terms</span>
+      <div class="dhg-legend">Linked to <b>the agreement it renews</b></div></div>`,
     'deal-score':`<div class="dhg-score">
       <div class="dhg-row"><span class="dhg-f ok">C</span><span class="dhg-f ok">E</span><span class="dhg-level"><span class="dhg-typing"><i></i><i></i><i></i></span>Northwind <small>3 of 4 fundamentals</small></span><span class="dhg-f ok">P</span><span class="dhg-f no">–</span></div>
       <span class="dhg-risk">⚠ Risk: no executive contact in 3 weeks</span>
@@ -2672,8 +2724,8 @@ function dhGrid(surfaces){
   };
   return `<div class="dhg">${surfaces.map(([f,label,t,d]) => `<article class="dhg-card"><h3>${t}</h3><p>${d}</p>
     <div class="dhg-stage" role="img" aria-label="${label}"><div class="dhg-mock" aria-hidden="true">${mocks[f]}</div>
-      <div class="dhg-sky ${f==='autofill'?'b':'a'}" style="display:none"></div>
-      <img class="dhg-real" src="images/dreamhub-${f}.webp" alt="" loading="lazy" onload="this.closest('.dhg-card').classList.add('ready')" onerror="this.remove()"></div></article>`).join('')}</div>`;
+      <div class="dhg-sky ${f==='autofill'||f==='intercept'?'b':'a'}" style="display:none"></div>
+      <img class="dhg-real" src="images/${prefix}${f}.webp" alt="" loading="lazy" onload="this.closest('.dhg-card').classList.add('ready')" onerror="this.remove()"></div></article>`).join('')}</div>`;
 }
 function renderDreamhubCase(p, next){
   /* Same order as every case study on the site: the answer first, then the research and process that prove it */
@@ -2794,8 +2846,8 @@ function renderDhContractsCase(p, next){
   /* Notes for Guy to confirm or rewrite in his own words */
   const todo = t => `<p class="lw-todo">${t}</p>`;
   const screens = [
-    ['contract','Contract record','Every won deal hands over to a contract','When a deal closes, its terms become a contract: seats, price, start and end dates. The deal records the sale. The contract becomes the source of truth for what the customer signed.'],
-    ['terms-history','Terms History','The history reads like the account\'s story','Every change appears on one timeline, named in plain words and backed by a reference ID that never changes. When someone asks why a number moved, the answer is one line on the timeline.'],
+    ['contract','Contract record','Every won deal hands over to a contract','When a deal closes, its terms become a contract, the source of truth for what the customer signed.'],
+    ['terms-history','Terms History','The history reads like the account\'s story','Every change is one line on a timeline, named in plain words and backed by an ID that never changes.'],
     ['intercept','Closed Won intercept','The CRM asks before it disagrees','Change the amount on a won deal and DreamHub asks what you mean, before the deal and the contract can split.'],
     ['renewal','Renewal','A renewal starts a new agreement','A renewal starts as a copy of the current contract and becomes its own agreement, linked to the one before it.']
   ];
@@ -2814,7 +2866,7 @@ function renderDhContractsCase(p, next){
     ]) + todo('Check these against the real constraints and swap any that don\'t fit.'))}
     ${chapter(2)}
     <div class="og-quote"><small>The model in one line</small><p>After Closed Won, the contract is the source of truth, and the CRM never quietly disagrees with it.</p></div>
-    ${screens.map(([f,n,t,d]) => feature(shot(f, n), t, `<p>${d}</p>`)).join('')}
+    ${dhGrid(screens, 'dreamhub-contracts-')}
     ${section('Key decisions', '<p>Four modelling decisions shaped everything above.</p>')}
     ${decisions}
     ${chapter(3)}
