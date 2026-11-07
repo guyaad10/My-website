@@ -756,10 +756,10 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .chips li{padding:7px 14px;border-radius:999px;background:var(--surface-2);font-size:.9375rem;color:var(--body)}
 .learn{display:grid;grid-template-columns:1fr 1fr;gap:0}
 .dh-logos{display:flex;margin-bottom:20px}
-.dh-logo{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid var(--line);background:#fff;display:grid;place-items:center;font-size:.9375rem;font-weight:600;color:var(--ink-2)}
+.dh-logo{position:relative;width:40px;height:40px;border-radius:12px;border:1px solid rgba(255,255,255,.08);background:#0E0E10;display:grid;place-items:center;font-size:.9375rem;font-weight:600;color:#fff}
 .dh-logo + .dh-logo{margin-left:-8px}
 .dh-logo:last-child{box-shadow:0 4px 12px rgba(16,24,40,.10),0 1px 3px rgba(16,24,40,.06)}
-.dh-logo img{position:absolute;inset:0;width:100%;height:100%;padding:7px;box-sizing:border-box;border-radius:inherit;background:#fff;object-fit:contain}
+.dh-logo img{position:absolute;inset:0;width:100%;height:100%;padding:7px;box-sizing:border-box;border-radius:inherit;background:#0E0E10;object-fit:contain}
 .dh-logo.full{border:0}
 .dh-logo.full img{padding:0}
 .learn > div{padding:4px 28px 32px}
@@ -968,10 +968,10 @@ html.theme-dark .tl-logo{background:var(--surface-2);border-color:var(--surface-
 .cs-body .dh-todo{font-size:.9375rem;line-height:1.5;color:var(--ink-3);border-left:2px solid var(--line);padding-left:14px}
 .learn p.dh-led{margin-top:10px!important;color:var(--ink)!important;font-weight:500}
 /* DreamHub Solution: 2x2 feature cards, each with a small dark-mode product mockup (screens are dark in DreamHub) */
-.dhg{max-width:1120px;margin:0 auto var(--sec);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
-.dhg-card{position:relative;display:flex;flex-direction:column;min-height:0;aspect-ratio:1.5/1;border-radius:24px;background:var(--surface-2);overflow:hidden;padding:32px 32px 0}
+.dhg{max-width:var(--cw);margin:0 auto var(--sec);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px}
+.dhg-card{position:relative;display:flex;flex-direction:column;min-height:0;aspect-ratio:1.1/1;border-radius:24px;background:var(--surface-2);overflow:hidden;padding:28px 28px 0}
 .dhg-card h3{margin:0 0 6px;font:500 1.0625rem/1.35 var(--sans);letter-spacing:-.02em;color:var(--ink)}
-.dhg-card > p{margin:0;max-width:46ch;font-size:1rem;line-height:1.55;letter-spacing:-.012em;color:var(--ink-2);text-wrap:pretty}
+.dhg-card > p{margin:0;max-width:46ch;font-size:.9375rem;line-height:1.55;letter-spacing:-.012em;color:var(--ink-2);text-wrap:pretty}
 .dhg-stage{position:relative;flex:1;min-height:0;margin-top:28px;container-type:size;font-family:var(--sans);
   --d-bg:#111318;--d-panel:#181B22;--d-raise:#20242D;--d-line:rgba(255,255,255,.08);--d-ink:#E9EBF1;--d-ink-2:#9AA0AE;--d-ink-3:#5D6372;--d-ai:#9A8CFF;--d-ai-soft:rgba(140,124,255,.16)}
 .dhg-stage *{box-sizing:border-box}
