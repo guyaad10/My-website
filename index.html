@@ -1812,7 +1812,7 @@ function projectMsg(p){
     <div class="m-body">
       <a class="art" href="#/${p.id}" data-open="${p.id}" aria-label="Open ${p.title} case study">
         <div class="art-bar"><span class="art-ico${p.icon?' img':''}" aria-hidden="true">${p.icon?`<img src="${p.icon}" alt="">`:ICO_DOC}</span>
-          <span class="art-t"><b>${p.title}</b><small>Case study, ${p.role.toLowerCase()}</small></span>
+          <span class="art-t"><b>${p.title.replace(/^[^:]+:\s+/, '')}</b><small>${p.company.replace(/\s*\(.*\)/,'')}</small></span>
           <span class="art-open" aria-hidden="true">Open <span>→</span></span></div>
         ${visual(p)}
         <div class="art-foot">${metaDL(p)}<ul class="tags">${p.tags.map(t=>`<li>${t}</li>`).join('')}</ul></div>
