@@ -100,12 +100,20 @@ body{font-family:var(--sans);color:var(--ink);-webkit-font-smoothing:antialiased
 main{width:100%;max-width:400px}
 h1{font-size:clamp(1.75rem,5vw,2.25rem);font-weight:500;letter-spacing:-.03em;line-height:1.1;margin:0 0 12px}
 p{margin:0 0 28px;color:var(--ink-2);font-size:1rem;line-height:1.5}
-form{display:flex;gap:8px}
-input{flex:1;min-width:0;font:inherit;font-size:1rem;color:var(--ink);background:#fff;border:1px solid rgba(20,20,40,.1);
-  border-radius:999px;padding:12px 18px;outline:none;letter-spacing:.2em;transition:border-color .2s,box-shadow .2s}
-input::placeholder{letter-spacing:normal;color:#A0A0A8}
-input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(14,14,16,.08)}
-button{font:inherit;font-size:.9375rem;font-weight:500;border:0;border-radius:999px;padding:12px 22px;background:var(--ink);color:#fff;cursor:pointer}
+form{display:flex;gap:8px;align-items:center}
+/* One real input sits invisibly over a pill of four rounds, so typing, paste, autofill and the numeric keypad all just work. */
+.code{position:relative;flex:1;display:flex;align-items:center;justify-content:center;gap:16px;height:52px;padding:0 22px;
+  background:#fff;border:1px solid rgba(20,20,40,.1);border-radius:999px;transition:border-color .2s,box-shadow .2s}
+.code input{position:absolute;inset:0;width:100%;height:100%;margin:0;padding:0;border:0;border-radius:999px;opacity:0;font-size:16px;cursor:text;caret-color:transparent}
+.code.focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(14,14,16,.08)}
+.dot{width:16px;height:16px;border-radius:50%;border:1.5px solid #B4B4BC;transition:background-color .15s,border-color .15s,transform .15s}
+.dot.on{background:var(--ink);border-color:var(--ink);transform:scale(1.08)}
+.code.focus .dot.cur{border-color:var(--ink)}
+.code.bad{border-color:var(--warn)}
+.code.bad .dot{border-color:var(--warn)}
+.code.shake{animation:shake .4s}
+@keyframes shake{20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
+button{font:inherit;font-size:.9375rem;font-weight:500;border:0;border-radius:999px;padding:0 22px;height:52px;background:var(--ink);color:#fff;cursor:pointer}
 button:hover{background:#2a2a2e}
 .jf{--bob:-14;position:relative;width:52px;height:52px;margin:0 0 34px;cursor:pointer}
 .ghost{width:100%;height:100%;display:block;overflow:visible}
@@ -126,24 +134,45 @@ button:hover{background:#2a2a2e}
 @keyframes jf-blink{0%,91%,97%,100%{transform:scaleY(1)}94%{transform:scaleY(.1)}}
 @keyframes jf-shadow{0%,100%{transform:scale(1,1);opacity:.95}50%{transform:scale(.6,.6);opacity:.45}}
 @keyframes jf-hop{0%{transform:scale(1,1)}16%{transform:scale(1.14,.82)}40%{transform:translateY(-58px) scale(.9,1.12)}62%{transform:translateY(-58px) scale(1.02,.98) rotate(-4deg)}82%{transform:translateY(0) scale(1.1,.88)}92%{transform:scale(.97,1.03)}100%{transform:scale(1,1)}}
-@media (prefers-reduced-motion:reduce){.jf *{animation:none!important}}
-.err{margin:12px 0 0 18px;color:var(--warn);font-size:.875rem}
-${wrong ? 'input{border-color:var(--warn)}' : ''}
+@media (prefers-reduced-motion:reduce){.jf *,.code{animation:none!important}}
+.err{margin:12px 0 0 2px;color:var(--warn);font-size:.875rem}
 </style>
 </head>
 <body>
 <main>
   <div class="jf" aria-hidden="true"><svg class="ghost" viewBox="0 0 200 200" focusable="false"><g class="g-bob"><g class="g-squish"><path class="g-body" d="M44 0C19.6995 0 0 19.6995 0 44V184C0 192.837 7.16344 200 16 200H17C25.2843 200 32 193.284 32 185V182C32 175.373 37.3726 170 44 170C50.6274 170 56 175.373 56 182V185C56 193.284 62.7157 200 71 200H73C81.2843 200 88 193.284 88 185V182C88 175.373 93.3726 170 100 170C106.627 170 112 175.373 112 182V185C112 193.284 118.716 200 127 200H129C137.284 200 144 193.284 144 185V182C144 175.373 149.373 170 156 170C162.627 170 168 175.373 168 182V185C168 193.284 174.716 200 183 200H184C192.837 200 200 192.837 200 184V44C200 19.6995 180.301 0 156 0H44Z"/><g class="g-eyes"><g class="g-dots"><circle cx="115" cy="77" r="6"/><circle cx="172" cy="77" r="6"/></g><g class="g-smile"><path d="M99 83Q110 72 121 83"/><path d="M153 83Q164 72 175 83"/></g></g></g></g></svg><i class="jf-shadow" aria-hidden="true"></i></div>
   <h1>Hi, I'm Guy.</h1>
-  <p>This portfolio is password protected. Enter the password to view my work.</p>
+  <p>This portfolio is private. Enter the 4-digit code to view my work.</p>
   <form method="post" action="${UNLOCK_PATH}">
     <input type="hidden" name="next" value="${esc(next)}">
-    <input type="password" name="password" inputmode="numeric" autocomplete="current-password" placeholder="Password" aria-label="Password" required autofocus>
+    <div class="code${wrong ? ' bad shake' : ''}">
+      <input type="password" name="password" inputmode="numeric" pattern="[0-9]{4}" maxlength="4" autocomplete="one-time-code" aria-label="4-digit code" required autofocus>
+      <i class="dot" aria-hidden="true"></i><i class="dot" aria-hidden="true"></i><i class="dot" aria-hidden="true"></i><i class="dot" aria-hidden="true"></i>
+    </div>
     <button type="submit">Unlock</button>
   </form>
-  ${wrong ? '<div class="err" role="alert">That password isn\'t right. Try again.</div>' : ''}
+  ${wrong ? '<div class="err" role="alert">That code isn\'t right. Try again.</div>' : ''}
 </main>
 <script>
+// The code rounds: digits only, one round fills per digit typed, and it unlocks as soon as the fourth one is in.
+const code = document.querySelector('.code'), pin = code.querySelector('input'), dots = code.querySelectorAll('.dot');
+function paint() {
+  const n = pin.value.length;
+  dots.forEach((d, i) => { d.classList.toggle('on', i < n); d.classList.toggle('cur', i === n); });
+}
+pin.addEventListener('input', () => {
+  pin.value = pin.value.replace(/\\D/g, '').slice(0, 4);
+  code.classList.remove('bad', 'shake');
+  paint();
+  if (pin.value.length === 4) pin.form.requestSubmit ? pin.form.requestSubmit() : pin.form.submit();
+});
+pin.addEventListener('focus', () => code.classList.add('focus'));
+pin.addEventListener('blur', () => code.classList.remove('focus'));
+// Keep the caret at the end, so the rounds always fill left to right.
+['click', 'keyup', 'select'].forEach(t => pin.addEventListener(t, () => pin.setSelectionRange(pin.value.length, pin.value.length)));
+paint();
+if (document.activeElement === pin) code.classList.add('focus');
+
 // The same jellyfish as the home page: its eyes follow the pointer, and it hops when clicked.
 const jf = document.querySelector('.jf'), eyes = jf.querySelector('.g-eyes');
 addEventListener('pointermove', e => {
