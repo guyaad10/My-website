@@ -1,5 +1,8 @@
 {
   "name": "my-website",
   "private": true,
-  "type": "module"
+  "type": "module",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^1.8.0"
+  }
 }
