@@ -1647,10 +1647,10 @@ const REPLIES = {
   about: () => aboutHTML(),
   process: () => `${who("I start by finding the decision the team is actually stuck on, then prototype until the trade-offs are visible to everyone in the room.")}
     <div class="reply-body"><p class="reply-note">Each case study has a section called Key decisions. That's the clearest view of how I work.</p>
-    <div class="reply-chips"><a class="btn" href="#/ledger" data-open="ledger">Read the Ledger case study</a></div></div>`,
+    <div class="reply-chips"><a class="btn" href="#/dreamhub" data-open="dreamhub">Read the DreamHub case study</a></div></div>`,
   contact: () => `${who("The best way to reach me is email. I usually reply within a day.")}
     <div class="reply-body"><div class="contact"><a class="btn pri" href="mailto:guyaad10@gmail.com?subject=Hey%20Guy%2C%20just%20saw%20your%20portfolio">Email me</a><a class="btn" href="${CONTACT.linkedin}" target="_blank" rel="noopener noreferrer">LinkedIn</a><a class="btn" href="${CONTACT.whatsapp}">WhatsApp me</a></div></div>`,
-  fallback: () => `${who("I can only answer questions about my portfolio. Pick one of these, or type a project name like Clalit or Ledger.")}
+  fallback: () => `${who("Good question, but I’m a pretty small chat 🙈 I know my portfolio by heart and not much else. Pick one of these, or type a project name like Clalit or DreamHub.")}
     <div class="reply-body"><div class="reply-chips">
       <button type="button" class="chip" data-nav="work">Guy's work</button>
       <button type="button" class="chip" data-nav="about">About Guy</button>
@@ -1658,11 +1658,85 @@ const REPLIES = {
       <button type="button" class="chip" data-nav="contact">Get in touch</button>
     </div></div>`
 };
+/* Small talk: playful answers for the questions people actually type ("why should I hire Guy?").
+   Each topic has a few variants; asking again gives the next one. Keep every claim true to the case studies and About. */
+const MAIL = `mailto:${CONTACT.email}?subject=${encodeURIComponent(CONTACT.emailSubject)}`;
+const FUN_CTA = {
+  work: '<button type="button" class="btn" data-nav="work">See my work</button>',
+  about: '<button type="button" class="btn" data-nav="about">More about me</button>',
+  email: `<a class="btn pri" href="${MAIL}">Email me</a>`,
+  dreamhub: '<a class="btn" href="#/dreamhub" data-open="dreamhub">Start with DreamHub</a>'
+};
+const FUN = [
+  {key:'hire', re:/why (should|would|do|must)\b.*\bhire|why hire|should (i|we) hire|convince me|sell (me|yourself)|pitch yourself|what makes (you|guy) (different|special|stand out|the best|good)|why (you|guy)\b|why choose|\bhire (you|guy|him)\?|best candidate/,
+   cta:['email','work'], say:[
+    ["Short version: I make complicated things feel simple. Long version: I’m the only designer at DreamHub, so I talk to customers, design the flows and open the pull requests myself. Three hats, one head, zero drama 🎩",
+     "Water-leak detection, hospital patient records, contracts after the deal is won. If it’s tangled, I’m interested."],
+    ["Because I come with free extras: an architecture degree, a habit of watching real people work before I draw anything, and a jellyfish 🪼",
+     "Also, I don’t hand over a Figma file and vanish. I stick around until it ships, and lately I ship it myself."],
+    ["I could list adjectives, but my case studies brag better than I do. Start with DreamHub and judge for yourself 😌"]]},
+  {key:'strength', re:/strength|super ?power|what are you (good|great) at|good at|best at|skills?\b/,
+   cta:['dreamhub','work'], say:[
+    ["Taking something complicated and making it feel simple to the person using it. That’s the whole trick, I just do it on harder and harder things 🧶"],
+    ["Listening before designing. At Clalit I spent time on the wards with nurses before I drew a single screen. The screens were much better for it."],
+    ["Thinking about the boring parts nobody sees. At DreamHub I designed what a CRM does after the deal is won, which is where most CRMs get bored and leave."]]},
+  {key:'weakness', re:/weakness|weak spot|bad at|worst (thing|quality)|flaws?\b/,
+   cta:['work'], say:[
+    ["I can’t leave a 1px misalignment alone. I will notice it. I will fix it. I will tell no one 🤫"],
+    ["I get way too excited about edge cases. Ask me what happens to a contract after its third amendment. Actually, please don’t, we’ll be here a while."],
+    ["Honestly? Some of my student projects. I’d design most of them differently today, and I think that’s a good sign 😅"]]},
+  {key:'money', re:/salary|your rate|day rate|hourly|how much (do|would|will) (you|guy|he) (cost|charge|want|make|earn)|expensive|expectations/,
+   cta:['email'], say:[
+    ["Straight to business, I like it 😄 Let’s talk numbers over email. I promise I cost less than redesigning the redesign."],
+    ["Fewer than a fleet of designers, more than a jellyfish. Email me and we’ll find the right number 🪼"]]},
+  {key:'bot', re:/are you (a |an )?(bot|ai|robot|real|human|chat ?gpt|gpt|claude|llm)|is this (a bot|an ai|ai|real|chat ?gpt)|am i (talking|chatting|speaking) (to|with)|real guy/,
+   cta:['email'], say:[
+    ["Busted 🙈 I’m a few hundred lines of JavaScript doing my best Guy impression. No AI model, just pattern matching and good intentions.",
+     "The real Guy answers email, and he’s much better at follow-up questions."],
+    ["I’m the website version of Guy: same opinions, fewer coffee breaks. For the real one, email works best."]]},
+  {key:'hello', re:/^(hi+|hey+|hello+|hiya|yo|sup|shalom|howdy|good (morning|afternoon|evening))\b[\s!.,?👋🙂😊]*(there|guy)?[\s!.,?👋🙂😊]*$/,
+   cta:['work','about'], say:[
+    ["Hey! 👋 Nice to have you here. Want to see what I’ve been working on, or hear a bit about me first?"],
+    ["Hi again! Still here, still happy to chat 😊"]]},
+  {key:'howareyou', re:/how are (you|u)|how(’|')?s it going|how you doin|what(’|')?s up|whats up/,
+   cta:['work'], say:[
+    ["Doing great, thanks for asking! Even better now that someone’s reading my portfolio 😊"],
+    ["Living the dream: one design system, zero unread Slack messages. One of those is true."]]},
+  {key:'thanks', re:/^(thanks|thank you|thx|ty|cheers|tnx|toda)\b/,
+   cta:['work','email'], say:[
+    ["Anytime! Thanks for stopping by 🙏"],
+    ["My pleasure. The jellyfish says you’re welcome too 🪼"]]},
+  {key:'nice', re:/(love|like|nice|cool|great|beautiful|amazing|awesome|sick|fun|lovely|clean) (site|website|portfolio|page|chat|design|work)|this is (so )?(cool|nice|great|amazing|beautiful|awesome)|(site|website|portfolio) is (so )?(cool|nice|great|amazing|beautiful|awesome)/,
+   cta:['work'], say:[
+    ["Thank you, that made my day ☺️ I designed it like a chat because a portfolio should answer your questions, not make you hunt for answers."],
+    ["You’re too kind. Keep going, the case studies are even better than the compliments."]]},
+  {key:'joke', re:/\bjoke|make me laugh|something funny|be funny/,
+   cta:['work'], say:[
+    ["Why did the designer break up with the font? It just wasn’t their type."],
+    ["How many product designers does it take to change a light bulb? Does it have to be a light bulb? What problem are we really solving here? 💡"],
+    ["My favorite UX joke is the one I explained in user testing. Nobody laughed, but they all understood it."]]},
+  {key:'jelly', re:/jelly ?fish|\bjelly\b|🪼/,
+   cta:['work'], say:[
+    ["That’s my sidekick 🪼 It doesn’t do much, but it’s very supportive. Every time you send a message, it gets happy."],
+    ["No, it doesn’t sting. It’s a product designer too, it just floats between meetings."]]},
+  {key:'fun', re:/fun fact|hobb(y|ies)|free time|outside (of )?work|for fun|weekends?|spare time|interesting about (you|guy)/,
+   cta:['about'], say:[
+    ["Fun fact: before pixels, there were floor plans. I studied architecture at Tel Aviv University, and I still think of apps as buildings people live in 🏛️"],
+    ["Hobbies? Real Guy hasn’t filled that part in yet. I think he’s still choosing the one that sounds coolest."]]},
+  {key:'architecture', re:/architect|why (product )?design|why ux|how did you (get|start)|career change/,
+   cta:['about'], say:[
+    ["I studied architecture at Tel Aviv University. It taught me to design for the people who’ll actually live in a space, not for the drawing. Turns out apps have residents too 🏠"]]}
+];
+const funSeen = {};
+const funHTML = t => { const i = (funSeen[t.key] = (funSeen[t.key] ?? -1) + 1) % t.say.length;
+  return `${who(t.say[i])}<div class="reply-body"><div class="contact">${t.cta.map(c => FUN_CTA[c]).join('')}</div></div>`; };
+FUN.forEach(t => { REPLIES[t.key] = () => funHTML(t); });
 function route(q){
   const s = q.toLowerCase();
   for (const p of FLAT) if (s.includes(p.id) || s.includes(p.title.toLowerCase())) return {open:p.id};
   if (/\b(go to top|back to top|to the top|scroll to top|top of (the )?page)\b/.test(s)) return {top:true};
   if (/\b(lost|home|start over|go back)\b/.test(s)) return {home:true};
+  for (const t of FUN) if (t.re.test(s)) return {reply:t.key};
   if (/contact|email|hire|reach|touch|talk|call|whatsapp|linkedin/.test(s)) return {reply:'contact'};
   if (/archive|older|earlier/.test(s)) return {jump:'m-archive'};
   if (/process|approach|how does|how do|method/.test(s)) return {reply:'process'};
@@ -1899,7 +1973,7 @@ function send(){
       if (r.jump) later(() => scrollToEl(document.getElementById(r.jump)));
       return;
     }
-    if (r.reply === 'process' || r.reply === 'fallback'){ enterChat(q, REPLIES[r.reply]()); syncPrompt(); return; }
+    if (r.reply && r.reply !== 'about' && r.reply !== 'contact'){ enterChat(q, REPLIES[r.reply]()); syncPrompt(); return; }
     ask(q); syncPrompt();                                            // about, resume, contact
     return;
   }
