@@ -34,3 +34,11 @@ commit history and restore any earlier version.
 - Text and layout: edit `index.html`
 - Images: drop files into `images/`, then reference `<img src="images/name.png">`
 - Keep images as separate files — never paste them into the HTML as base64.
+
+---
+
+## Live chat answers
+Questions typed into the chat are answered by `api/chat.js` (a Vercel function that calls Claude) as Guy, using only the site's own text in `api/_portfolio.js` (About, resume, case studies). Each answer can add a button to the right place: a case study, the resume, About or contact.
+- Set `ANTHROPIC_API_KEY` in the Vercel project's environment variables. Optional: `CHAT_MODEL` to use a different Claude model (default `claude-opus-5-5`).
+- Without the key, or if a call fails, the chat uses its scripted answers instead.
+- When a case study, the About text or the resume changes, update the matching part of `api/_portfolio.js` too.
